@@ -49,6 +49,7 @@ export class TelemetryService {
       }
       this.pData = this.telemetryConfig.pdata
       this.addPlayerListener()
+      this.addCustomEventListener()
       this.addInteractListener()
       this.addFeedbackListener()
       this.addTimeSpentListener()
@@ -69,18 +70,22 @@ export class TelemetryService {
     return ''
   }
 
-  start(type: string, mode: string, id: string, data?: any) {
+  start(edata: any, data: any, pageContext?: WsEvents.ITelemetryPageContext) {
     try {
       if (this.telemetryConfig) {
         $t.start(
           this.telemetryConfig,
-          id,
+          (pageContext && pageContext.pageId) ?
+            pageContext.pageId
+            : '',
           '1.0',
           {
             // id,
-            type,
-            mode,
-            pageid: id,
+            type: edata.type,
+            mode: edata.mode,
+            pageid: (pageContext && pageContext.pageId) ?
+              pageContext.pageId
+              : '',
             duration: 1,
           },
           {
@@ -89,7 +94,7 @@ export class TelemetryService {
                 ...this.pData,
                 id: this.pData.id,
               },
-              env: 'home',
+              ...(pageContext && pageContext.module ? { env: pageContext.module } : null),
             },
             object: {
               ...(data) && data,
@@ -105,13 +110,15 @@ export class TelemetryService {
     }
   }
 
-  end(type: string, mode: string, id: string, data?: any) {
+  end(edata: any, data: any, pageContext?: WsEvents.ITelemetryPageContext) {
     try {
       $t.end(
         {
-          type,
-          mode,
-          pageid: id,
+          type: edata.type,
+          mode: edata.mode,
+          pageid: (pageContext && pageContext.pageId) ?
+            pageContext.pageId
+            : '',
         },
         {
           context: {
@@ -119,6 +126,7 @@ export class TelemetryService {
               ...this.pData,
               id: this.pData.id,
             },
+            ...(pageContext && pageContext.module ? { env: pageContext.module } : null),
           },
           object: {
             ...(data) && data,
@@ -286,16 +294,60 @@ export class TelemetryService {
       .subscribe(event => {
         if (event.data.state === WsEvents.EnumTelemetrySubType.Loaded) {
           this.start(
-            event.data.type || WsEvents.WsTimeSpentType.Page,
-            event.data.mode || WsEvents.WsTimeSpentMode.View,
-            event.data.pageId,
+            {
+              type: event.data.type || WsEvents.WsTimeSpentType.Player,
+              mode: event.data.mode || WsEvents.WsTimeSpentMode.Play,
+            },
+            {},
+            event.pageContext
           )
         }
         if (event.data.state === WsEvents.EnumTelemetrySubType.Unloaded) {
+          this.end({
+            type: event.data.type || WsEvents.WsTimeSpentType.Player,
+            mode: event.data.mode || WsEvents.WsTimeSpentMode.Play,
+          },
+                   {},
+                   event.pageContext
+          )
+        }
+      })
+  }
+
+  addCustomEventListener() {
+    this.eventsSvc.events$
+      .pipe(
+        filter(
+          event =>
+            event &&
+            event.eventType === WsEvents.WsEventType.Telemetry
+        ),
+      )
+      .subscribe(event => {
+        if (
+          event.data.state === WsEvents.EnumTelemetrySubType.Loaded &&
+          event.data.type !== WsEvents.WsTimeSpentType.Player
+        ) {
+          this.start(
+            {
+              type: event.data.type,
+              mode: event.data.mode || WsEvents.WsTimeSpentMode.Play,
+            },
+            event.data.object,
+            event.pageContext
+          )
+        }
+        if (
+          event.data.state === WsEvents.EnumTelemetrySubType.Unloaded &&
+          event.data.type !== WsEvents.WsTimeSpentType.Player
+        ) {
           this.end(
-            event.data.type || WsEvents.WsTimeSpentType.Page,
-            event.data.mode || WsEvents.WsTimeSpentMode.View,
-            event.data.pageId,
+            {
+              type: event.data.type || WsEvents.WsTimeSpentType.Player,
+              mode: event.data.mode || WsEvents.WsTimeSpentMode.Play,
+            },
+            event.data.object,
+            event.pageContext
           )
         }
       })
@@ -318,26 +370,33 @@ export class TelemetryService {
           event.data.state === WsEvents.EnumTelemetrySubType.Loaded &&
           (!content ||
             (content.isIframeSupported || '').toLowerCase() === 'maybe' ||
-            (content.isIframeSupported || '').toLowerCase() === 'yes')
+            (content.isIframeSupported || '').toLowerCase() === 'yes' ||
+            (content.mimeType === 'application/pdf' || 'application/json'))
         ) {
           this.start(
-            event.data.type || WsEvents.WsTimeSpentType.Player,
-            event.data.mode || WsEvents.WsTimeSpentMode.Play,
-            event.data.identifier,
-            event.data.object
+            {
+              type: event.data.type || WsEvents.WsTimeSpentType.Player,
+              mode: event.data.mode || WsEvents.WsTimeSpentMode.Play,
+            },
+            event.data.object,
+            event.pageContext
+
           )
         }
         if (
           event.data.state === WsEvents.EnumTelemetrySubType.Unloaded &&
           (!content ||
             (content.isIframeSupported || '').toLowerCase() === 'maybe' ||
-            (content.isIframeSupported || '').toLowerCase() === 'yes')
+            (content.isIframeSupported || '').toLowerCase() === 'yes' ||
+            (content.mimeType === 'application/pdf' || 'application/json'))
         ) {
           this.end(
-            event.data.type || WsEvents.WsTimeSpentType.Player,
-            event.data.mode || WsEvents.WsTimeSpentMode.Play,
-            event.data.identifier,
-            event.data.object
+            {
+              type: event.data.type || WsEvents.WsTimeSpentType.Player,
+              mode: event.data.mode || WsEvents.WsTimeSpentMode.Play,
+            },
+            event.data.object,
+            event.pageContext
           )
         }
       })

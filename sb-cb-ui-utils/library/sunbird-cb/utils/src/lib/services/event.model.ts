@@ -48,7 +48,8 @@ export namespace WsEvents {
     from: IWsEventsFromWidget | IWsEventsFromPage | string
     to: string
     data: T
-    passThroughData?: any
+    passThroughData?: any,
+    pageContext?: any
   }
 
   export enum EnumTelemetrySubType {
