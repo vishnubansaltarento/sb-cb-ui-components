@@ -1,3 +1,4 @@
+import { LeftMenuService } from './left-menu.service'
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { RouterModule } from '@angular/router'
@@ -33,5 +34,6 @@ import {
   exports: [
     LeftMenuComponent,
   ],
+  providers: [LeftMenuService],
 })
 export class LeftMenuModule { }
