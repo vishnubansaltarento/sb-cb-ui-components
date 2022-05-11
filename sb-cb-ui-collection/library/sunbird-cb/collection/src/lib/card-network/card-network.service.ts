@@ -35,10 +35,10 @@ export class CardNetWorkService {
       }),
     )
   }
-  fetchMyMdoUsers() {
-    let usrDept = 'igot'
+  fetchMyDepartmentUsers() {
+    let usrDept = 'cb'
     if (this.configSvc.userProfile) {
-      usrDept = this.configSvc.userProfile.departmentName || 'igot'
+      usrDept = this.configSvc.userProfile.departmentName || 'cb'
     }
     let req: any // NSNetworkDataV2.IRecommendedUserReq
     req = {

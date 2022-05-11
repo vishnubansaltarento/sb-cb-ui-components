@@ -11,7 +11,7 @@ import * as _ from 'lodash'
 import { ITableData, IColums } from '../interface/interfaces'
 import { Router, ActivatedRoute } from '@angular/router'
 import { UserPopupComponent } from '../user-popup/user-popup'
-import { CreateMDOService } from '../create-mdo.services'
+import { CreateDepartmentService } from '../create-department.services'
 
 @Component({
   selector: 'ws-widget-ui-user-table',
@@ -45,7 +45,7 @@ export class UIAdminUserTableComponent implements OnInit, AfterViewInit, OnChang
   constructor(
     private router: Router, public dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
-    private createMDOService: CreateMDOService,
+    private departmentService: CreateDepartmentService,
     private snackBar: MatSnackBar) {
     this.dataSource = new MatTableDataSource<any>()
     this.actionsClick = new EventEmitter()
@@ -133,8 +133,8 @@ export class UIAdminUserTableComponent implements OnInit, AfterViewInit, OnChang
     dialogRef.afterClosed().subscribe((response: any) => {
       response.data.forEach((user: { userId: string }) => {
         if (this.departmentId) {
-          const role = `MDO ADMIN`
-          this.createMDOService.assignAdminToDepartment(user.userId, this.departmentId, role).subscribe(res => {
+          const role = atob('TURPIEFETUlO')
+          this.departmentService.assignAdminToDepartment(user.userId, this.departmentId, role).subscribe(res => {
             if (res) {
               this.snackBar.open('Admin assigned Successfully')
               this.router.navigate(['/app/home/directory', { department: this.departmentRole }])
