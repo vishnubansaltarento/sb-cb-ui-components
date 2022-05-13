@@ -368,22 +368,22 @@ export class SearchServService {
     return name
   }
 
-  raiseSearchEvent(query: string, filters: any, locale: any) {
-    this.events.dispatchEvent<WsEvents.IWsEventTelemetryInteract>({
-      eventType: WsEvents.WsEventType.Telemetry,
-      eventLogLevel: WsEvents.WsEventLogLevel.Warn,
-      data: {
-        eventSubType: WsEvents.EnumTelemetrySubType.Interact,
-        object: {
-          query,
-          filters,
-          locale,
-        },
-        type: 'search',
-      },
-      from: 'search',
-      to: 'telemetry',
-    })
+  raiseSearchEvent(_query: string, _filters: any, _locale: any) {
+    // this.events.dispatchEvent<WsEvents.IWsEventTelemetryInteract>({
+    //   eventType: WsEvents.WsEventType.Telemetry,
+    //   eventLogLevel: WsEvents.WsEventLogLevel.Warn,
+    //   data: {
+    //     eventSubType: WsEvents.EnumTelemetrySubType.Interact,
+    //     object: {
+    //       query,
+    //       filters,
+    //       locale,
+    //     },
+    //     type: 'search',
+    //   },
+    //   from: 'search',
+    //   to: 'telemetry',
+    // })
   }
 
   raiseSearchResponseEvent(query: string, filters: any, totalHits: number, locale: any) {

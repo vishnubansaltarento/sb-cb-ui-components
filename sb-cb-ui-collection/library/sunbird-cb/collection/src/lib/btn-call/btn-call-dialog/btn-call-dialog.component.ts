@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { MatSnackBar, MAT_DIALOG_DATA } from '@angular/material'
-import { EventService } from '@sunbird-cb/utils'
+// import { EventService } from '@sunbird-cb/utils'
 
 export interface IWidgetBtnCallDialogData {
   name: string
@@ -16,7 +16,7 @@ export class BtnCallDialogComponent implements OnInit {
 
   constructor(
     private snackBar: MatSnackBar,
-    private events: EventService,
+    // private events: EventService,
     @Inject(MAT_DIALOG_DATA) public data: IWidgetBtnCallDialogData,
   ) { }
 
@@ -32,18 +32,18 @@ export class BtnCallDialogComponent implements OnInit {
     document.execCommand('copy')
     document.body.removeChild(textArea)
     this.snackBar.open(`${this.data.phone} : ${successMsg}`, 'X')
-    this.raiseTelemetry('copyToClipboard')
+    // this.raiseTelemetry('copyToClipboard')
   }
 
-  raiseTelemetry(subType: 'copyToClipboard' | 'callSME') {
-    this.events.raiseInteractTelemetry(
-      'call',
-      subType,
-      {
-        name: this.data.name,
-        phone: this.data.phone,
-      },
-    )
+  raiseTelemetry(_subType: 'copyToClipboard' | 'callSME') {
+    // this.events.raiseInteractTelemetry(
+    //   'call',
+    //   subType,
+    //   {
+    //     name: this.data.name,
+    //     phone: this.data.phone,
+    //   },
+    // )
   }
 
 }

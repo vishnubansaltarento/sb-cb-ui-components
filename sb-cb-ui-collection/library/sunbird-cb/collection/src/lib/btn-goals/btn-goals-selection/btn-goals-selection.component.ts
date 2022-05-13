@@ -7,7 +7,7 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core'
-import { TFetchStatus, EventService } from '@sunbird-cb/utils'
+import { TFetchStatus } from '@sunbird-cb/utils'
 import { NsGoal } from '../btn-goals.model'
 import { BtnGoalsService } from '../btn-goals.service'
 import { MatSnackBar, MatListOption } from '@angular/material'
@@ -36,7 +36,7 @@ export class BtnGoalsSelectionComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private goalsSvc: BtnGoalsService,
-    private eventSvc: EventService,
+    // private eventSvc: EventService,
   ) { }
 
   ngOnInit() {
@@ -98,10 +98,10 @@ export class BtnGoalsSelectionComponent implements OnInit {
     }
   }
 
-  raiseTelemetry(action: 'add' | 'remove', goalId: string, contentId: string) {
-    this.eventSvc.raiseInteractTelemetry('goal', `btn-goal-${action}`, {
-      goalId,
-      contentId,
-    })
+  raiseTelemetry(_action: 'add' | 'remove', _goalId: string, _contentId: string) {
+    // this.eventSvc.raiseInteractTelemetry('goal', `btn-goal-${action}`, {
+    //   goalId,
+    //   contentId,
+    // })
   }
 }

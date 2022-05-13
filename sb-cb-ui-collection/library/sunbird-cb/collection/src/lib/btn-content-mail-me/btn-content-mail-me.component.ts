@@ -3,7 +3,7 @@ import { switchMap, map, catchError } from 'rxjs/operators'
 import { of, Observable } from 'rxjs'
 import { MatDialog, MatSnackBar } from '@angular/material'
 import { NsWidgetResolver, WidgetBaseComponent } from '@sunbird-cb/resolver'
-import { ConfigurationsService, EventService } from '@sunbird-cb/utils'
+import { ConfigurationsService } from '@sunbird-cb/utils'
 import { NsContent } from '../_services/widget-content.model'
 import {
   BtnContentMailMeDialogComponent,
@@ -31,7 +31,7 @@ export class BtnContentMailMeComponent extends WidgetBaseComponent
   @Input() widgetData!: NsContent.IContent
   enabled = false
   constructor(
-    private events: EventService,
+    // private events: EventService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
     private shareSvc: WidgetContentShareService,
@@ -83,14 +83,14 @@ export class BtnContentMailMeComponent extends WidgetBaseComponent
         switchMap(
           (dialogResponse: IWidgetMailMeDialogComponentResponse): Observable<IMailMeResponseObj> => {
             if (dialogResponse && dialogResponse.send) {
-              this.events.raiseInteractTelemetry(
-                'mailMe',
-                undefined,
-                {
-                  contentId: this.widgetData.identifier,
-                  contentType: this.widgetData.contentType,
-                },
-              )
+              // this.events.raiseInteractTelemetry(
+              //   'mailMe',
+              //   undefined,
+              //   {
+              //     contentId: this.widgetData.identifier,
+              //     contentType: this.widgetData.contentType,
+              //   },
+              // )
               return this.shareSvc.shareContent(this.widgetData, [], dialogResponse.mailBody, 'attachment').pipe(
                 map(({ response }): boolean => response === 'Success'),
                 map(

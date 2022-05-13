@@ -56,7 +56,7 @@
   </section>
 
   <!-- portal links section-->
-  <section *ngIf="givenName !== 'Guest' portalLinks && portalLinks.length"
+  <section *ngIf="givenName !== 'Guest' && portalLinks && portalLinks.length"
     class="padding-top-xs padding-bottom-xs padding-left-s padding-right-s border-bottom">
     <div class="margin-top-s margin-bottom-s" *ngFor="let wdata of portalLinks">
       <div class="box-sizing-box" id="wdata.widgetData.actionBtn.id">

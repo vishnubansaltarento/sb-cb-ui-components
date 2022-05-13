@@ -1,7 +1,7 @@
 import { COMMA, ENTER, SEMICOLON } from '@angular/cdk/keycodes'
 import { Component, Inject, OnInit } from '@angular/core'
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material'
-import { ConfigurationsService, EventService } from '@sunbird-cb/utils'
+import { ConfigurationsService } from '@sunbird-cb/utils'
 import { NsAutoComplete } from '../../_common/user-autocomplete/user-autocomplete.model'
 import { WidgetContentShareService } from '../../_services/widget-content-share.service'
 import { NsContent } from '../../_services/widget-content.model'
@@ -27,7 +27,7 @@ export class BtnContentShareDialogComponent implements OnInit {
   isSocialMediaShareEnabled = false
   sendStatus: 'INVALID_IDS_ALL' | 'SUCCESS' | 'INVALID_ID_SOME' | 'ANY' | 'NONE' = 'NONE'
   constructor(
-    private events: EventService,
+    // private events: EventService,
     private snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<BtnContentShareDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: IContentShareData,
@@ -102,7 +102,7 @@ export class BtnContentShareDialogComponent implements OnInit {
 
   contentShare(txtBody: string, successToast: string) {
     this.sendInProgress = true
-    this.raiseTelemetry()
+    // this.raiseTelemetry()
     const req: NsShare.IShareRequest = {
       'event-id': 'share_content',
       'tag-value-pair': {
@@ -151,10 +151,10 @@ export class BtnContentShareDialogComponent implements OnInit {
     }
   }
 
-  raiseTelemetry() {
-    this.events.raiseInteractTelemetry('share', 'content', {
-      contentId: this.data.content.identifier,
-      contentType: this.data.content.contentType,
-    })
-  }
+  // raiseTelemetry() {
+  //   this.events.raiseInteractTelemetry('share', 'content', {
+  //     contentId: this.data.content.identifier,
+  //     contentType: this.data.content.contentType,
+  //   })
+  // }
 }

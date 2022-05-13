@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core'
-import { ConfigurationsService, EventService, WsEvents, TFetchStatus } from '@sunbird-cb/utils'
+import { ConfigurationsService, TFetchStatus } from '@sunbird-cb/utils'
 import { HttpClient } from '@angular/common/http'
 import { Observable, ReplaySubject } from 'rxjs'
 import { IFollowing } from './btn-follow.model'
@@ -19,7 +19,7 @@ const API_END_POINTS = {
 export class BtnFollowService {
   constructor(
     private http: HttpClient,
-    private events: EventService,
+    // private events: EventService,
     private configSvc: ConfigurationsService,
   ) { }
 
@@ -72,7 +72,7 @@ export class BtnFollowService {
   }
 
   follow(targetId: string, type: string = 'Knowledge Board') {
-    this.raiseTelemetry(targetId, type, 'follow')
+    // this.raiseTelemetry(targetId, type, 'follow')
     return this.http
       .post(API_END_POINTS.follow, {
         type,
@@ -90,7 +90,7 @@ export class BtnFollowService {
   }
 
   unfollow(targetId: string, type: string = 'Knowledge Board') {
-    this.raiseTelemetry(targetId, type, 'unfollow')
+    // this.raiseTelemetry(targetId, type, 'unfollow')
     return this.http
       .post(API_END_POINTS.unfollow, {
         type,
@@ -130,25 +130,25 @@ export class BtnFollowService {
     // )
   }
 
-  raiseTelemetry(targetId: string, type: string, action: string) {
-    this.events.dispatchEvent<WsEvents.IWsEventTelemetryInteract>({
-      eventType: WsEvents.WsEventType.Telemetry,
-      eventLogLevel: WsEvents.WsEventLogLevel.Warn,
-      data: {
-        eventSubType: WsEvents.EnumTelemetrySubType.Interact,
-        type: action,
-        subType: type,
-        object: {
-          id: targetId,
-        },
-      },
-      from: {
-        type: 'widget',
-        widgetType: 'actionButton',
-        widgetSubType: 'follow',
-      },
-      to: 'Telemetry',
-    })
-  }
+  // raiseTelemetry(targetId: string, type: string, action: string) {
+  //   this.events.dispatchEvent<WsEvents.IWsEventTelemetryInteract>({
+  //     eventType: WsEvents.WsEventType.Telemetry,
+  //     eventLogLevel: WsEvents.WsEventLogLevel.Warn,
+  //     data: {
+  //       eventSubType: WsEvents.EnumTelemetrySubType.Interact,
+  //       type: action,
+  //       subType: type,
+  //       object: {
+  //         id: targetId,
+  //       },
+  //     },
+  //     from: {
+  //       type: 'widget',
+  //       widgetType: 'actionButton',
+  //       widgetSubType: 'follow',
+  //     },
+  //     to: 'Telemetry',
+  //   })
+  // }
 
 }
