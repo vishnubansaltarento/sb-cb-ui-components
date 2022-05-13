@@ -21,6 +21,7 @@ export class OrgUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() actionsClick?: EventEmitter<any>
   @Output() eOnRowClick = new EventEmitter<any>()
   @Output() eOnCreateClick = new EventEmitter<any>()
+  @Output() searchByEnterKey = new EventEmitter<any>()
 
   bodyHeight = document.body.clientHeight - 125
   displayedColumns: IColums[] | undefined
@@ -130,5 +131,9 @@ export class OrgUserTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   onCreateClick() {
     this.eOnCreateClick.emit()
+  }
+
+  onSearchEnter(event: any) {
+    this.searchByEnterKey.emit(event.target.value)
   }
 }
