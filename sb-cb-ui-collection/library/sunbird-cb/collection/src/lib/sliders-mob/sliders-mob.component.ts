@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@sunbird-cb/resolver'
 import { interval, Subscription } from 'rxjs'
-import { EventService } from '@sunbird-cb/utils'
 import { ICarousel } from '../sliders/sliders.model'
 
 @Component({
@@ -16,7 +15,9 @@ export class SlidersMobComponent extends WidgetBaseComponent
   currentIndex = 0
   slideInterval: Subscription | null = null
 
-  constructor(private events: EventService) {
+  constructor(
+    // private events: EventService
+  ) {
     super()
   }
 
@@ -72,14 +73,14 @@ export class SlidersMobComponent extends WidgetBaseComponent
       window.open(currentData.redirectUrl)
     }
   }
-  raiseTelemetry(bannerUrl: string | undefined) {
+  raiseTelemetry(_bannerUrl: string | undefined) {
     this.openInNewTab()
-    const path = window.location.pathname.replace('/', '')
-    const url = path + window.location.search
+    // const path = window.location.pathname.replace('/', '')
+    // const url = path + window.location.search
 
-    this.events.raiseInteractTelemetry('click', 'banner', {
-      pageUrl: url,
-      bannerRedirectUrl: bannerUrl,
-    })
+    // this.events.raiseInteractTelemetry('click', 'banner', {
+    //   pageUrl: url,
+    //   bannerRedirectUrl: bannerUrl,
+    // })
   }
 }

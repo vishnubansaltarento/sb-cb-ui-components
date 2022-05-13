@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core'
 import { MatSnackBar } from '@angular/material'
 import { NsWidgetResolver, WidgetBaseComponent } from '@sunbird-cb/resolver'
-import { ConfigurationsService, EventService, UtilityService, NsInstanceConfig } from '@sunbird-cb/utils'
+import { ConfigurationsService, UtilityService, NsInstanceConfig } from '@sunbird-cb/utils'
 import { Subscription } from 'rxjs'
 import { NsGoal } from '../btn-goals/btn-goals.model'
 import { NsPlaylist } from '../btn-playlist/btn-playlist.model'
@@ -32,7 +32,7 @@ export class CardContentComponent extends WidgetBaseComponent
 
   isIntranetAllowedSettings = false
   constructor(
-    private events: EventService,
+    // private events: EventService,
     private configSvc: ConfigurationsService,
     private utilitySvc: UtilityService,
     private snackBar: MatSnackBar,
@@ -237,11 +237,11 @@ export class CardContentComponent extends WidgetBaseComponent
   }
 
   raiseTelemetry() {
-    this.events.raiseInteractTelemetry('click', `${this.widgetType}-${this.widgetSubType}`, {
-      contentId: this.widgetData.content.identifier,
-      contentType: this.widgetData.content.contentType,
-      context: this.widgetData.context,
-    })
+    // this.events.raiseInteractTelemetry('click', `${this.widgetType}-${this.widgetSubType}`, {
+    //   contentId: this.widgetData.content.identifier,
+    //   contentType: this.widgetData.content.contentType,
+    //   context: this.widgetData.context,
+    // })
   }
 
   get isGreyedImage() {

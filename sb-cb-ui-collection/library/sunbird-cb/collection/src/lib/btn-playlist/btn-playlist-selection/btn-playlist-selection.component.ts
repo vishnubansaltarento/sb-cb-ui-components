@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core'
 import { FormControl, Validators } from '@angular/forms'
 import { MatListOption, MatSnackBar } from '@angular/material'
-import { EventService, TFetchStatus } from '@sunbird-cb/utils'
+import { TFetchStatus } from '@sunbird-cb/utils'
 import { NsPlaylist } from '../btn-playlist.model'
 import { BtnPlaylistService } from '../btn-playlist.service'
 
@@ -34,7 +34,7 @@ export class BtnPlaylistSelectionComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private playlistSvc: BtnPlaylistService,
-    private eventSvc: EventService,
+    // private eventSvc: EventService,
   ) { }
 
   ngOnInit() {
@@ -108,10 +108,10 @@ export class BtnPlaylistSelectionComponent implements OnInit {
       )
   }
 
-  raiseTelemetry(action: 'add' | 'remove', playlistId: string, contentId: string) {
-    this.eventSvc.raiseInteractTelemetry('playlist', `btn-playlist-${action}`, {
-      playlistId,
-      contentId,
-    })
+  raiseTelemetry(_action: 'add' | 'remove', _playlistId: string, _contentId: string) {
+    // this.eventSvc.raiseInteractTelemetry('playlist', `btn-playlist-${action}`, {
+    //   playlistId,
+    //   contentId,
+    // })
   }
 }

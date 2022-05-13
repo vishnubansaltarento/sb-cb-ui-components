@@ -220,12 +220,12 @@ export class PlayerPdfComponent extends WidgetBaseComponent
       this.eventDispatcher(WsEvents.EnumTelemetrySubType.StateChange)
     }
   }
-  raiseTelemetry(action: string) {
-    if (this.identifier) {
-      this.eventSvc.raiseInteractTelemetry(action, 'click', {
-        contentId: this.identifier,
-      })
-    }
+  raiseTelemetry(_action: string) {
+    // if (this.identifier) {
+    //   this.eventSvc.raiseInteractTelemetry(action, 'click', {
+    //     contentId: this.identifier,
+    //   })
+    // }
   }
   saveContinueLearning(id: string) {
     if (this.activatedRoute.snapshot.queryParams.collectionType &&
@@ -356,6 +356,7 @@ export class PlayerPdfComponent extends WidgetBaseComponent
       },
       to: '',
       data: {
+        object: {},
         eventSubType: eventType,
         activityType: activity,
         currentPage: this.currentPage.value,

@@ -5,7 +5,7 @@ import {
   BtnCallDialogComponent,
   IWidgetBtnCallDialogData,
 } from './btn-call-dialog/btn-call-dialog.component'
-import { EventService, ConfigurationsService } from '@sunbird-cb/utils'
+import { ConfigurationsService } from '@sunbird-cb/utils'
 
 export interface IWidgetBtnCall {
   userName: string
@@ -22,7 +22,11 @@ export class BtnCallComponent extends WidgetBaseComponent
   @Input() widgetData!: IWidgetBtnCall
   isCallEnabled = false
 
-  constructor(private events: EventService, private dialog: MatDialog, private configSvc: ConfigurationsService) {
+  constructor(
+    // private events: EventService,
+    private dialog: MatDialog,
+    private configSvc: ConfigurationsService,
+  ) {
     super()
   }
 
@@ -43,13 +47,13 @@ export class BtnCallComponent extends WidgetBaseComponent
   }
 
   raiseTelemetry() {
-    this.events.raiseInteractTelemetry(
-      'call',
-      'openDialog',
-      {
-        name: this.widgetData.userName,
-        phone: this.widgetData.userPhone,
-      },
-    )
+    // this.events.raiseInteractTelemetry(
+    //   'call',
+    //   'openDialog',
+    //   {
+    //     name: this.widgetData.userName,
+    //     phone: this.widgetData.userPhone,
+    //   },
+    // )
   }
 }

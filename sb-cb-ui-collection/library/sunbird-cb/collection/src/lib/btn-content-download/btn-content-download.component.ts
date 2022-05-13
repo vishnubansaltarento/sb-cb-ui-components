@@ -1,7 +1,7 @@
-import { Platform } from '@angular/cdk/platform'
+// import { Platform } from '@angular/cdk/platform'
 import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@sunbird-cb/resolver'
-import { ConfigurationsService, EventService } from '@sunbird-cb/utils'
+import { ConfigurationsService } from '@sunbird-cb/utils'
 // import { MobileAppsService } from './mobile-apps.service'
 import { NsContent } from '../_services/widget-content.model'
 
@@ -30,8 +30,8 @@ export class BtnContentDownloadComponent extends WidgetBaseComponent
   downloadable = false
 
   constructor(
-    private platform: Platform,
-    private events: EventService,
+    // private platform: Platform,
+    // private events: EventService,
     // private mobAppSvc: MobileAppsService,
     private configSvc: ConfigurationsService,
   ) {
@@ -84,10 +84,10 @@ export class BtnContentDownloadComponent extends WidgetBaseComponent
   }
 
   raiseTelemetry() {
-    this.events.raiseInteractTelemetry('download', 'content', {
-      platform: this.platform,
-      contentId: this.widgetData.identifier,
-      contentType: this.widgetData.contentType,
-    })
+    // this.events.raiseInteractTelemetry('download', 'content', {
+    //   platform: this.platform,
+    //   contentId: this.widgetData.identifier,
+    //   contentType: this.widgetData.contentType,
+    // })
   }
 }

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core'
 import { Subscription } from 'rxjs'
-import { ConfigurationsService, EventService, UtilityService } from '@sunbird-cb/utils'
-import { NsContent } from '../_services/widget-content.model'
+import { ConfigurationsService, UtilityService } from '@sunbird-cb/utils'
+// import { NsContent } from '../_services/widget-content.model'
 import { IKBContentCard } from './card-knowledge.model'
 
 interface IKbCardData {
@@ -23,7 +23,11 @@ export class CardKnowledgeComponent implements OnInit, OnDestroy {
   defaultThumbnail: string | undefined = ''
   prefChangeSubscription: Subscription | null = null
   isIntranetAllowedSettings = false
-  constructor(private events: EventService, private configSvc: ConfigurationsService, private utilitySvc: UtilityService) {
+  constructor(
+    // private events: EventService,
+    private configSvc: ConfigurationsService,
+    private utilitySvc: UtilityService,
+  ) {
     const instanceConfig = this.configSvc.instanceConfig
     if (instanceConfig) {
       this.defaultThumbnail = instanceConfig.logos.defaultContent
@@ -53,13 +57,13 @@ export class CardKnowledgeComponent implements OnInit, OnDestroy {
   }
 
   raiseTelemetry() {
-    this.events.raiseInteractTelemetry(
-      'click',
-      NsContent.EContentTypes.KNOWLEDGE_BOARD,
-      {
-        contentId: this.widgetData.content.identifier,
-      },
-    )
+    // this.events.raiseInteractTelemetry(
+    //   'click',
+    //   NsContent.EContentTypes.KNOWLEDGE_BOARD,
+    //   {
+    //     contentId: this.widgetData.content.identifier,
+    //   },
+    // )
   }
 
   greyOut() {

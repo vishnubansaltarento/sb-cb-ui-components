@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core'
-import { ConfigurationsService, EventService } from '@sunbird-cb/utils'
+import { ConfigurationsService } from '@sunbird-cb/utils'
 import { WidgetContentService } from '../../_services/widget-content.service'
 
 @Component({
@@ -16,7 +16,7 @@ export class UserContentRatingComponent implements OnInit {
   averageRatings = 0
 
   constructor(
-    private events: EventService,
+    // private events: EventService,
     private contentSvc: WidgetContentService,
     private configSvc: ConfigurationsService,
   ) { }
@@ -41,10 +41,10 @@ export class UserContentRatingComponent implements OnInit {
       const previousRating = this.userRating
       if (this.userRating !== index + 1) {
         this.userRating = index + 1
-        this.events.raiseInteractTelemetry('rating', 'content', {
-          contentId: this.contentId,
-          rating: this.userRating,
-        })
+        // this.events.raiseInteractTelemetry('rating', 'content', {
+        //   contentId: this.contentId,
+        //   rating: this.userRating,
+        // })
         this.contentSvc.addContentRating(this.contentId, { rating: this.userRating }).subscribe(
           _ => {
             this.isRequesting = false

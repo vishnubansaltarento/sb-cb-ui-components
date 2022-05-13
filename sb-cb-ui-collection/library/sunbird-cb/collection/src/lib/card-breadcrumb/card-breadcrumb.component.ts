@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@sunbird-cb/resolver'
 import { IWidgetCardBreadcrumb, IBreadcrumbPath } from './card-breadcrumb.model'
-import { EventService } from '@sunbird-cb/utils'
+// import { EventService } from '@sunbird-cb/utils'
 
 @Component({
   selector: 'ws-widget-card-breadcrumb',
@@ -12,7 +12,9 @@ export class CardBreadcrumbComponent extends WidgetBaseComponent
   implements OnInit, NsWidgetResolver.IWidgetData<IWidgetCardBreadcrumb> {
   @Input() widgetData!: IWidgetCardBreadcrumb
 
-  constructor(private events: EventService) {
+  constructor(
+    // private events: EventService
+  ) {
     super()
   }
   ngOnInit() { }
@@ -30,14 +32,14 @@ export class CardBreadcrumbComponent extends WidgetBaseComponent
     return null
   }
 
-  raiseTelemetry(clickedItem: IBreadcrumbPath) {
-    this.events.raiseInteractTelemetry(
-      'click',
-      'breadcrumb',
-      {
-        clickedItem,
-        path: this.widgetData.path,
-      },
-    )
+  raiseTelemetry(_clickedItem: IBreadcrumbPath) {
+    // this.events.raiseInteractTelemetry(
+    //   'click',
+    //   'breadcrumb',
+    //   {
+    //     clickedItem,
+    //     path: this.widgetData.path,
+    //   },
+    // )
   }
 }
