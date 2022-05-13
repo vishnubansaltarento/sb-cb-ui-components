@@ -9,7 +9,8 @@
                         <div class=rsearch>
                             <mat-icon class="color-60 search-icon">search</mat-icon>
                             <input class="sinput color-60" type="Standard" label=""
-                                (input)="applyFilter($event.target.value)" placeholder="Search">
+                                (input)="applyFilter($event.target.value)" (keydown.enter)="onSearchEnter($event)"
+                                placeholder="Search">
                         </div>
                     </div>
                 </div>
