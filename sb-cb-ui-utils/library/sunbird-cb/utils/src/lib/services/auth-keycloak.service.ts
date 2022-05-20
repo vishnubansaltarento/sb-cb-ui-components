@@ -162,8 +162,8 @@ export class AuthKeycloakService {
 
     }
     storage.removeItem(storageKey)
-    await this.http.get('/apis/reset').toPromise()
     window.location.href = '/public/logout'
+    await this.http.get('/apis/reset').toPromise()
   }
   private addKeycloakEventListener() {
     this.keycloakSvc.keycloakEvents$.subscribe((event: KeycloakEvent) => {
