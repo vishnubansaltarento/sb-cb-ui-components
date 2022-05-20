@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { MatDialogRef } from '@angular/material'
-import { Router } from '@angular/router'
-// import { AuthKeycloakService } from '../../services/auth-keycloak.service'
+// import { Router } from '@angular/router'
+import { AuthKeycloakService } from '../../services/auth-keycloak.service'
 import { ConfigurationsService } from '../../services/configurations.service'
 import { UtilityService } from '../../services/utility.service'
 
@@ -17,10 +17,10 @@ export class LogoutComponent implements OnInit {
   isDownloadableAndroid = false
   constructor(
     public dialogRef: MatDialogRef<LogoutComponent>,
-    // private authSvc: AuthKeycloakService,
+    private authSvc: AuthKeycloakService,
     private configSvc: ConfigurationsService,
     private utilitySvc: UtilityService,
-    private router: Router,
+    // private router: Router,
   ) { }
 
   ngOnInit() {
@@ -33,7 +33,8 @@ export class LogoutComponent implements OnInit {
   confirmed() {
     this.disabled = true
     this.dialogRef.close()
-    this.router.navigate(['public', 'logout'])
+    this.authSvc.force_logout()
+    // this.router.navigate(['public', 'logout'])
     // this.router.logout()
   }
 

@@ -137,7 +137,9 @@ export class AuthKeycloakService {
       redirectUri: redirectUrl,
     })
   }
-
+  /**
+   * @deprecated this will be depricated
+   */
   async logout(_redirectUrl = this.defaultRedirectUrl) {
     window.location.href = `${_redirectUrl}apis/reset`
 
@@ -150,6 +152,16 @@ export class AuthKeycloakService {
     // }
   }
   async force_logout() {
+    if (storage.getItem('telemetrySessionId')) {
+      storage.removeItem('telemetrySessionId')
+    }
+    try {
+      sessionStorage.clear()
+      localStorage.clear()
+    } catch {
+
+    }
+    storage.removeItem(storageKey)
     await this.http.get('/apis/reset').toPromise()
   }
   private addKeycloakEventListener() {
