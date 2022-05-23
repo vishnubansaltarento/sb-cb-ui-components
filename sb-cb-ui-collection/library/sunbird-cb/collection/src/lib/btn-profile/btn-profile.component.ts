@@ -55,7 +55,7 @@ export class BtnProfileComponent extends WidgetBaseComponent
     this.btnAppsConfig = { ...this.basicBtnAppsConfig }
     this.btnSettingsConfig = { ... this.settingBtnConfig }
     if (this.configSvc.userProfile) {
-      this.givenName =  `${this.configSvc.userProfile.firstName} ${this.configSvc.userProfile.lastName}`
+      this.givenName = `${this.configSvc.userProfile.firstName} ${this.configSvc.userProfile.lastName}`
       this.profileImage = this.configSvc.userProfile.profileImage ||
         (this.configSvc.userProfile ? this.configSvc.userProfile.profileImage : null) || null
       if (localStorage.getItem(this.configSvc.userProfile.userId)) {
@@ -77,8 +77,8 @@ export class BtnProfileComponent extends WidgetBaseComponent
             featureWidgets: _.compact(group.featureIds.map(
               (id: string): NsWidgetResolver.IRenderConfigWithTypedData<NsPage.INavLink> | undefined => {
                 const permissions = _.get(appsConfig, `features[${id}].permission`)
-                if (!permissions || permissions.length === 0 || this.checkhasRole(permissions) ) {
-              return ({
+                if (!permissions || permissions.length === 0 || this.checkhasRole(permissions)) {
+                  return ({
                     widgetType: ROOT_WIDGET_CONFIG.actionButton._type,
                     widgetSubType: ROOT_WIDGET_CONFIG.actionButton.feature,
                     widgetHostClass: 'my-2 px-2 w-1/2 sm:w-1/3 md:w-1/6 w-lg-1-8 box-sizing-box',
@@ -166,10 +166,6 @@ export class BtnProfileComponent extends WidgetBaseComponent
   getPortalLinks() {
     this.featuresConfig.forEach((feature: any) => {
       if (feature.id === 'portal_admin' && feature.featureWidgets.length > 0) {
-        feature.featureWidgets.forEach((fw: any) => {
-          this.portalLinks.push(fw)
-        })
-      } else if (feature.id === 'portal_frac' && feature.featureWidgets.length > 0) {
         feature.featureWidgets.forEach((fw: any) => {
           this.portalLinks.push(fw)
         })

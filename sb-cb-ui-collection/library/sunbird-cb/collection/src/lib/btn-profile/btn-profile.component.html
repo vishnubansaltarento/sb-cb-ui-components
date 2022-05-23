@@ -59,13 +59,13 @@
   <section *ngIf="givenName !== 'Guest' && portalLinks && portalLinks.length"
     class="padding-top-xs padding-bottom-xs padding-left-s padding-right-s border-bottom">
     <div class="margin-top-s margin-bottom-s" *ngFor="let wdata of portalLinks">
-      <div class="box-sizing-box" id="wdata.widgetData.actionBtn.id">
-        <a class="inline-block" target="_blank" href="{{wdata.widgetData.actionBtn.url}}">
-          <img src="{{wdata.widgetData.actionBtn.icon}}" alt="wdata.widgetData.actionBtn.name">
+      <div class="box-sizing-box" [attr.id]="wdata.widgetData.actionBtn.id">
+        <a role="button" class="inline-block" target="_blank" href="{{wdata.widgetData.actionBtn.url}}">
+          <img src="{{wdata.widgetData.actionBtn.icon}}" [attr.alt]="wdata.widgetData.actionBtn.name">
           <div class="mb-2 mat-body-2 inline-block margin-left-s portal-name"
-            [attr.id]="wdata.widgetData.actionBtn.icon">{{ wdata.widgetData.actionBtn.name }} <span
-              *ngIf="wdata.widgetData.actionBtn.name !== 'Frac'">portal</span> <span
-              *ngIf="wdata.widgetData.actionBtn.name === 'Frac'">dictionary</span></div>
+            [attr.id]="wdata.widgetData.actionBtn.icon">
+            {{ wdata.widgetData.actionBtn.name }}
+          </div>
         </a>
       </div>
     </div>
@@ -85,6 +85,11 @@
       class="log-o">
       <!-- <mat-icon>power_settings_new</mat-icon>&nbsp; -->
       <span i18n>Sign-out</span>
+    </a>
+    <a *ngIf="givenName === 'Guest'" href="javascript:void(0)" mat-menu-item role="link" (click)="logout()"
+      class="log-o">
+      <!-- <mat-icon>power_settings_new</mat-icon>&nbsp; -->
+      <span i18n>Sign-in</span>
     </a>
   </section>
 </mat-menu>
