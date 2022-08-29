@@ -356,7 +356,7 @@ export class PlayerPdfComponent extends WidgetBaseComponent
       },
       to: '',
       data: {
-        object: {},
+        // object: {},
         eventSubType: eventType,
         activityType: activity,
         currentPage: this.currentPage.value,
