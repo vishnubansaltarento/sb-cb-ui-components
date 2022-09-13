@@ -44,7 +44,8 @@
   </section> -->
 
   <section class="padding-s border-bottom min-heig">
-    <a role="link" routerLink="/app/person-profile/me" class="all-features" id="viewprofile">
+    <a role="link" [routerLink]="disableViewProfile ? null: '/app/person-profile/me'" class="all-features"
+      id="viewprofile">
       <div class="float-left">
         <ws-widget-avatar-photo [name]="givenName" [size]="'m'" [photoUrl]="profileImage"></ws-widget-avatar-photo>
       </div>
