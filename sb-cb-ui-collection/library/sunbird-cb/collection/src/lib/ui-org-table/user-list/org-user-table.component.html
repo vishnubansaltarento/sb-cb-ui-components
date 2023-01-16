@@ -15,6 +15,10 @@
                     </div>
                 </div>
                 <div class="flex-2 right-align">
+                    <button type="button" mat-button class="upload-btn" *ngIf="isDownload"
+                        (click)="onButtonClick('download', $event)">
+                        <mat-icon>vertical_align_bottom</mat-icon> Download List
+                    </button>
                     <button type="button" mat-button class="upload-btn" *ngIf="isUpload"
                         (click)="onButtonClick('upload', $event)">
                         <mat-icon>vertical_align_top</mat-icon> File upload
