@@ -18,6 +18,7 @@ export class OrgUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() isUpload?: boolean
   @Input() isCreate?: boolean
   @Input() isDownload?: boolean
+  @Input() isConsumptionReport?: boolean
   @Output() clicked?: EventEmitter<any>
   @Output() actionsClick?: EventEmitter<any>
   @Output() eOnRowClick = new EventEmitter<any>()

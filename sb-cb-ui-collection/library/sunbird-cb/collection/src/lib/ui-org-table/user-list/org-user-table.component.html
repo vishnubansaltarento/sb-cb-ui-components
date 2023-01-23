@@ -17,7 +17,11 @@
                 <div class="flex-2 right-align">
                     <button type="button" mat-button class="upload-btn" *ngIf="isDownload"
                         (click)="onButtonClick('download', $event)">
-                        <mat-icon>vertical_align_bottom</mat-icon> Download Users
+                        <mat-icon>vertical_align_bottom</mat-icon> Users Report
+                    </button>
+                    <button type="button" mat-button class="upload-btn" *ngIf="isConsumptionReport"
+                        (click)="onButtonClick('consumptionReport', $event)">
+                        <mat-icon>vertical_align_bottom</mat-icon> Consumption Report
                     </button>
                     <!-- <button type="button" mat-button class="upload-btn" *ngIf="isUpload"
                         (click)="onButtonClick('upload', $event)">
