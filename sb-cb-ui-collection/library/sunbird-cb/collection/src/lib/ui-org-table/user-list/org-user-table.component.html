@@ -125,7 +125,7 @@
         </button> -->
         <!-- </div> -->
         <!-- <div mat-menu-item> -->
-        <button (click)="rowData && rowData.active ? buttonClick('deactive',rowData): buttonClick('active',rowData)"
+         <button *ngIf="userId != rowData.userId" (click)="rowData && rowData.active ? buttonClick('deactive',rowData): buttonClick('active',rowData)"
             mat-menu-item name="channel-analytics-button" class="ws-mat-primary-text" i18n-aria-label
             aria-label="Analytics">
             <mat-icon>toggle_off_sharp</mat-icon>
