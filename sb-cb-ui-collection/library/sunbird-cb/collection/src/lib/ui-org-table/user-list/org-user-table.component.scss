@@ -743,3 +743,9 @@ mat-header-row {
   font-size: 20px;
   left: 10px;
 }
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
