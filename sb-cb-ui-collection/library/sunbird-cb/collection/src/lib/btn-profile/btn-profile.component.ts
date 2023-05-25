@@ -55,7 +55,8 @@ export class BtnProfileComponent extends WidgetBaseComponent
     this.btnAppsConfig = { ...this.basicBtnAppsConfig }
     this.btnSettingsConfig = { ... this.settingBtnConfig }
     if (this.configSvc.userProfile) {
-      this.givenName = `${this.configSvc.userProfile.firstName} ${this.configSvc.userProfile.lastName}`
+      this.givenName = `${this.configSvc.userProfile.firstName}`
+      // this.givenName = `${this.configSvc.userProfile.firstName} ${this.configSvc.userProfile.lastName}`
       this.profileImage = this.configSvc.userProfile.profileImage ||
         (this.configSvc.userProfile ? this.configSvc.userProfile.profileImage : null) || null
       if (localStorage.getItem(this.configSvc.userProfile.userId)) {
