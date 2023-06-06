@@ -182,7 +182,7 @@ export class TelemetryService {
     try {
       const page = this.getPageDetails()
       if (data && data.pageContext) {
-        page.pageid = data.pageContext.pageId
+        // page.pageid = data.pageContext.pageId
         page.module = data.pageContext.module
       }
       const edata = {
