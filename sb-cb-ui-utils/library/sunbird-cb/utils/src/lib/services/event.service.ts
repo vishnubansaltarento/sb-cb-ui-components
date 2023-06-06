@@ -110,9 +110,9 @@ export class EventService {
         id: `${_.camelCase(data.label)}-tab`,
       },
       {
-        context: {
-          position: data.index,
-        },
+        // context: {
+        //   position: data.index,
+        // },
         ...object
       },
       {
@@ -120,10 +120,11 @@ export class EventService {
       })
 
     // raise a tab click impression event
+    // tslint:disable-next-line: no-console
     this.raiseCustomImpression({
-      context: {
-        position: data.index,
-      },
+      // context: {
+      //   position: data.index,
+      // },
       ...object
     }, {
       pageIdExt: `${_.camelCase(data.label)}-tab`,
