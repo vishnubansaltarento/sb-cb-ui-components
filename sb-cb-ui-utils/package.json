@@ -1,6 +1,6 @@
 {
   "name": "sb-cb-ui-utils",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "scripts": {
     "ng": "ng",
     "prebuild": "npm run lint:fix",
