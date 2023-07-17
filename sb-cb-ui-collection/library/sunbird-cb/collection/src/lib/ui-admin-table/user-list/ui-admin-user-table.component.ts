@@ -37,8 +37,8 @@ export class UIAdminUserTableComponent implements OnInit, AfterViewInit, OnChang
   length!: number
   departmentRole!: string
   departmentId!: string | undefined
-  pageSize = 5
-  pageSizeOptions = [5, 10, 20]
+  pageSize = 20
+  pageSizeOptions = [20, 30, 40]
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator
   @ViewChild(MatSort, { static: true }) sort?: MatSort
   selection = new SelectionModel<any>(true, [])

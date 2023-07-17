@@ -25,14 +25,15 @@ export class OrgUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() eOnRowClick = new EventEmitter<any>()
   @Output() eOnButtonClick = new EventEmitter<any>()
   @Output() searchByEnterKey = new EventEmitter<any>()
+  @Input() showEditOnCondition?: boolean
 
   bodyHeight = document.body.clientHeight - 125
   displayedColumns: IColums[] | undefined
   dataSource!: any
   widgetData: any
   length!: number
-  pageSize = 5
-  pageSizeOptions = [5, 10, 20]
+  pageSize = 20
+  pageSizeOptions = [20, 30, 40]
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator
   @ViewChild(MatSort, { static: false }) set matSort(sort: MatSort) {
     if (!this.dataSource.sort) {
