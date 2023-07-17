@@ -109,7 +109,11 @@
     <ng-template matMenuContent let-rowData="data">
         <!-- <div > -->
         <button (click)="buttonClick('editInfo',rowData)" mat-menu-item name="channel-analytics-button"
-            class="ws-mat-primary-text" i18n-aria-label aria-label="Analytics">
+            class="ws-mat-primary-text" i18n-aria-label aria-label="Analytics" *ngIf="rowData.allowEditUser && showEditOnCondition">
+            <mat-icon>edit</mat-icon> <span>Edit Info</span>
+        </button>
+        <button (click)="buttonClick('editInfo',rowData)" mat-menu-item name="channel-analytics-button"
+            class="ws-mat-primary-text" i18n-aria-label aria-label="Analytics" *ngIf="!showEditOnCondition">
             <mat-icon>edit</mat-icon> <span>Edit Info</span>
         </button>
         <button (click)="buttonClick('showOnKarma',rowData)" mat-menu-item name="channel-analytics-button"
