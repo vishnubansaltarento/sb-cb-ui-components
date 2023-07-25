@@ -17,8 +17,6 @@ export class OrgUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() data?: []
   @Input() isUpload?: boolean
   @Input() isCreate?: boolean
-  @Input() isDownload?: boolean
-  @Input() isConsumptionReport?: boolean
   @Input() userId?: any
   @Output() clicked?: EventEmitter<any>
   @Output() actionsClick?: EventEmitter<any>
@@ -26,6 +24,7 @@ export class OrgUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() eOnButtonClick = new EventEmitter<any>()
   @Output() searchByEnterKey = new EventEmitter<any>()
   @Input() showEditOnCondition?: boolean
+  @Input() isSearchBar = true
 
   bodyHeight = document.body.clientHeight - 125
   displayedColumns: IColums[] | undefined
@@ -53,10 +52,6 @@ export class OrgUserTableComponent implements OnInit, AfterViewInit, OnChanges {
     if (this.tableData) {
       this.displayedColumns = this.tableData.columns
     }
-    if (this.data) {
-      this.dataSource.data = this.data
-      this.dataSource.paginator = this.paginator
-    }
   }
 
   ngOnChanges(data: SimpleChanges) {
@@ -65,7 +60,12 @@ export class OrgUserTableComponent implements OnInit, AfterViewInit, OnChanges {
     this.paginator.firstPage()
   }
 
-  ngAfterViewInit() { }
+  ngAfterViewInit() {
+    if (this.data) {
+      this.dataSource.data = this.data
+      this.dataSource.paginator = this.paginator
+    }
+  }
 
   applyFilter(filterValue: any) {
     if (filterValue) {
