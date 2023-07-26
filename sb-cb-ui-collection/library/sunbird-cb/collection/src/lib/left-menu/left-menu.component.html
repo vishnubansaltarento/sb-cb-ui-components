@@ -9,7 +9,7 @@
       </span>
     </a>
   </div>
-  <mat-nav-list class="margin-top-m flex-1">
+  <mat-nav-list class="margin-top-m flex-1 custom-class">
     <ng-container *ngFor="let tab of widgetData.menus; let i = index">
       <ng-container *ngIf="isAllowed(tab)">
         <a mat-list-item disableRipple class="flex outline-1" [attr.data-index]="i" (click)="menuClick(tab)"
