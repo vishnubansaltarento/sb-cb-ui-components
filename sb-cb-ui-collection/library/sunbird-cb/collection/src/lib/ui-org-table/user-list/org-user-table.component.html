@@ -19,6 +19,14 @@
                         (click)="onButtonClick('upload', $event)">
                         <mat-icon>vertical_align_top</mat-icon> File upload
                     </button> -->
+                    <button type="button" mat-button class="upload-btn" *ngIf="isDownload"
+                        (click)="onButtonClick('download', $event)">
+                        <mat-icon>vertical_align_bottom</mat-icon> Users Report
+                    </button>
+                    <button type="button" mat-button class="upload-btn" *ngIf="isConsumptionReport"
+                        (click)="onButtonClick('consumptionReport', $event)">
+                        <mat-icon>vertical_align_bottom</mat-icon> Consumption Report
+                    </button>
                     <button type="button" mat-button class="create-btn" *ngIf="isCreate"
                         (click)="onButtonClick('createUser', $event)">
                         Create new
