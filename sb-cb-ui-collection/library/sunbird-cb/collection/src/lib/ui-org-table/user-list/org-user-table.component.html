@@ -47,8 +47,7 @@
                     <span *ngIf="col?.isList" class="h-400-r-14-l color-87 textclass">
                         <div innerHTML="{{element[col.key]}}"></div>
                     </span>
-                    <span *ngIf="!col?.isList" class="h-400-r-14-l color-87 textclass"
-                        [ngClass]="{'linkTextColor': col.key === 'fileName'}">
+                    <span *ngIf="!col?.isList" class="h-400-r-14-l color-87 textclass">
                         {{(col.key === 'dateCreatedOn' || col.key === 'dateUpdatedOn') ? (element[col.key] | date:'dd
                         MMM yyy h:mm a') : element[col.key]}} {{col?.isList}}
                     </span>
