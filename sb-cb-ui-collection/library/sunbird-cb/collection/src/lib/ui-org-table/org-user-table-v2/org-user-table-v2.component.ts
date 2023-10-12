@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit, OnChanges, SimpleChanges, AfterViewChecked, ChangeDetectorRef } from '@angular/core'
 import { SelectionModel } from '@angular/cdk/collections'
 import { MatTableDataSource } from '@angular/material/table'
-import { MatPaginator, PageEvent} from '@angular/material'
+import { MatPaginator, PageEvent } from '@angular/material'
 import { MatSort } from '@angular/material/sort'
 import * as _ from 'lodash'
 import { ITableData, IColums } from '../interface/interfaces'
@@ -9,7 +9,7 @@ import { ITableData, IColums } from '../interface/interfaces'
 @Component({
   selector: 'ws-widget-org-user-table-v2',
   templateUrl: './org-user-table-v2.component.html',
-  styleUrls: ['./org-user-table-v2.component.scss']
+  styleUrls: ['./org-user-table-v2.component.scss'],
 })
 export class OrgUserTableV2Component implements OnInit, AfterViewInit, OnChanges, AfterViewChecked {
   @Input() tableData!: ITableData | undefined
@@ -38,8 +38,8 @@ export class OrgUserTableV2Component implements OnInit, AfterViewInit, OnChanges
   pageLength?: number
   pageSize = 20
   pageSizeOptions = [20, 30, 40]
-  @Input()totalRecords? : any
-  //@ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator
+  @Input()totalRecords?: any
+  // @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator
   @ViewChild(MatPaginator, { static: false }) set matPaginator(paginator: MatPaginator) {
     this.paginator = paginator
@@ -62,7 +62,7 @@ export class OrgUserTableV2Component implements OnInit, AfterViewInit, OnChanges
     this.dataSource = new MatTableDataSource<any>()
     this.actionsClick = new EventEmitter()
     this.clicked = new EventEmitter()
-    //this.dataSource.paginator = this.paginator
+    // this.dataSource.paginator = this.paginator
   }
 
   ngOnInit() {
@@ -70,7 +70,7 @@ export class OrgUserTableV2Component implements OnInit, AfterViewInit, OnChanges
       this.displayedColumns = this.tableData.columns
     }
     this.dataSource.data = this.data
-    this.dataSource = new MatTableDataSource(this.data);
+    this.dataSource = new MatTableDataSource(this.data)
     this.pageLength = this.totalRecords
   }
 
@@ -79,7 +79,7 @@ export class OrgUserTableV2Component implements OnInit, AfterViewInit, OnChanges
     if (changes.data && changes.data.currentValue) {
       this.dataSource.data = _.get(changes, 'data.currentValue')
     }
-    //this.pageLength = this.totalRecord
+    // this.pageLength = this.totalRecord
   }
 
   ngAfterViewInit() {
@@ -91,7 +91,7 @@ export class OrgUserTableV2Component implements OnInit, AfterViewInit, OnChanges
   ngAfterViewChecked() {
     if (this.totalRecords !== undefined && this.totalRecords !== '') {
       if (this.dataSource && this.dataSource.paginator && this.dataSource.paginator.length !== this.totalRecords) {
-        this.dataSource.paginator.length = this.totalRecords;
+        this.dataSource.paginator.length = this.totalRecords
       }
       this.pageLength = this.totalRecords
       this.changeDetector.detectChanges()
@@ -175,7 +175,7 @@ export class OrgUserTableV2Component implements OnInit, AfterViewInit, OnChanges
     this.searchByEnterKey.emit(event.target.value)
   }
 
-  onPageChange(event:PageEvent) {
+  onPageChange(event: PageEvent) {
     this.pageSize = event.pageSize
     this.pageChangeClick.emit(event)
   }

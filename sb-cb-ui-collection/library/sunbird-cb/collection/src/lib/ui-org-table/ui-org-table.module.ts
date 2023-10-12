@@ -15,7 +15,7 @@ import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatButtonModule } from '@angular/material/button'
 import { MatCardModule } from '@angular/material'
 import { OrgUserTableComponent } from './user-list/org-user-table.component'
-import { OrgUserTableV2Component } from './org-user-table-v2/org-user-table-v2.component';
+import { OrgUserTableV2Component } from './org-user-table-v2/org-user-table-v2.component'
 @NgModule({
   declarations: [OrgUserTableComponent, OrgUserTableV2Component],
   imports: [
