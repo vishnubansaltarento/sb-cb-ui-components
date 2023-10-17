@@ -240,6 +240,7 @@ export namespace NsUser {
   export interface IUserProfile {
     userId: string
     email?: string
+    mobile?: string
     departmentName?: string
     userName?: string
     firstName?: string
