@@ -39,6 +39,7 @@ export class OrgUserTableV2Component implements OnInit, AfterViewInit, OnChanges
   pageSize = 20
   pageSizeOptions = [20, 30, 40]
   @Input()totalRecords?: any
+  @Input()tabChangeIndex?: any
   // @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator
   @ViewChild(MatPaginator, { static: false }) paginator!: MatPaginator
   @ViewChild(MatPaginator, { static: false }) set matPaginator(paginator: MatPaginator) {
@@ -75,7 +76,6 @@ export class OrgUserTableV2Component implements OnInit, AfterViewInit, OnChanges
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    // this.totalRecord = _.get(data, 'totalRecord.currentValue')
     if (changes.data && changes.data.currentValue) {
       this.dataSource.data = _.get(changes, 'data.currentValue')
     }
@@ -94,8 +94,8 @@ export class OrgUserTableV2Component implements OnInit, AfterViewInit, OnChanges
         this.dataSource.paginator.length = this.totalRecords
       }
       this.pageLength = this.totalRecords
-      this.changeDetector.detectChanges()
     }
+    this.changeDetector.detectChanges()
   }
 
   applyFilter(filterValue: any) {
