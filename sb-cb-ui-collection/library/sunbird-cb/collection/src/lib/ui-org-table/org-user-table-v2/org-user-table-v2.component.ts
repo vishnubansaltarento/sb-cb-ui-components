@@ -94,8 +94,9 @@ export class OrgUserTableV2Component implements OnInit, AfterViewInit, OnChanges
         this.dataSource.paginator.length = this.totalRecords
       }
       this.pageLength = this.totalRecords
+      this.changeDetector.detectChanges()
     }
-    this.changeDetector.detectChanges()
+    
   }
 
   applyFilter(filterValue: any) {
