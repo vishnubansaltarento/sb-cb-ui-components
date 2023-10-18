@@ -102,7 +102,7 @@
         </mat-card>
     </div>
     <mat-paginator [length]="pageLength" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" showFirstLastButtons="true"
-    (page)="onPageChange($event)"> </mat-paginator>
+    (page)="onPageChange($event)" [pageIndex]="tabChangeIndex"> </mat-paginator>
 </div>
 
 <mat-menu #cardMenu="matMenu">
