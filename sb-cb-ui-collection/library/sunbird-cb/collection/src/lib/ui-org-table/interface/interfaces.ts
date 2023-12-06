@@ -3,6 +3,7 @@ export interface IColums {
   key: String
   isList?: boolean
   prop?: string
+  imageUrl?: boolean
 }
 export interface IAction {
   name: String

@@ -47,7 +47,8 @@
     <a role="link" [routerLink]="disableViewProfile ? null: '/app/person-profile/me'" class="all-features"
       id="viewprofile">
       <div class="float-left">
-        <ws-widget-avatar-photo [name]="givenName" [size]="'m'" [photoUrl]="profileImage"></ws-widget-avatar-photo>
+        <ws-widget-avatar-photo [name]="givenName" [size]="'m'" class="appIcon-igot"
+          [photoUrl]="profileImage"></ws-widget-avatar-photo>
       </div>
       <div class="inline-block margin-left-s pfname margin-eight">
         <p class="mat-subheading-2">{{ givenName }}</p>
