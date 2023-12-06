@@ -641,7 +641,7 @@ $title-line-count: 2;
 }
 
 .sinput {
-  width: 45%;
+  width: 315px;
   border-radius: 4px;
   border: 1px solid #d5d0d0;
   padding: 9px 9px 9px 35px;
@@ -762,6 +762,16 @@ mat-header-row {
   font-weight: 400;
   font-size: 14px;
   min-width: 101px;
+}
+
+.position-rel {
+  position: relative;
+}
+
+.training-filter-btn {
+  position: absolute;
+  right: 0;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .pb-image {

@@ -14,8 +14,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex-2" *ngIf="isTrainingPlan && trainingTagList.length > 0">
-                    <a *ngFor="let item of trainingTagList">item</a>
+                <div class="flex-2 margin-left-l position-rel" *ngIf="isTrainingPlan && trainingTagList?.length > 0">
+                    <a class="training-tag mat-button" [ngClass]="{'margin-right-s': trainingTagList?.length > 0}"
+                        *ngFor="let item of trainingTagList">{{item}}</a>
+                    <button mat-icon-button class="training-filter-btn">
+                        <mat-icon>filter_list</mat-icon>
+                    </button>
                 </div>
                 <div class="flex-2 right-align" *ngIf="isDownload || isConsumptionReport || isCreate">
                     <!-- <button type="button" mat-button class="upload-btn" *ngIf="isUpload"
