@@ -2,7 +2,7 @@
     <div class="example-loading-shade"></div>
 
     <div class="example-table-container">
-        <div class="container-balanced">
+        <div class="container">
             <div class="flex flex-1 custom">
                 <div class="flex-1">
                     <div class="search" *ngIf="isSearchBar">
@@ -14,7 +14,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="flex-2 right-align">
+                <div class="flex-2" *ngIf="isTrainingPlan && trainingTagList.length > 0">
+                    <a *ngFor="let item of trainingTagList">item</a>
+                </div>
+                <div class="flex-2 right-align" *ngIf="isDownload || isConsumptionReport || isCreate">
                     <!-- <button type="button" mat-button class="upload-btn" *ngIf="isUpload"
                         (click)="onButtonClick('upload', $event)">
                         <mat-icon>vertical_align_top</mat-icon> File upload
