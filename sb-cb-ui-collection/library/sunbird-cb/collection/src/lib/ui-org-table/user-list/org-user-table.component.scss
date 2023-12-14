@@ -779,3 +779,18 @@ mat-header-row {
   width: 64px;
   margin: 10px 8px 10px 0px;
 }
+
+.no-cbp-data {
+  width: 250px;
+  margin: 0 auto;
+  text-align: center;
+
+  img {
+    width: 190px;
+  }
+
+  .small-text {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}

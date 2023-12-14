@@ -104,7 +104,16 @@
                 </mat-row>
             </div> -->
         </mat-table>
-        <mat-card class="flex-1" role="none" *ngIf="dataSource.filteredData.length == 0">
+        <div class="no-cbp-data" *ngIf="dataSource.filteredData.length == 0 && isTrainingPlan">
+            <div><img src="/assets/icons/no-data.svg"></div>
+            <div class="mat-subheading-1 margin-remove">No CBP plan created yet</div>
+            <div>Create a CBP plan to assign users.</div>
+            <div class="margin-top-m">
+                <button mat-button type="button" class="create-btn"
+                    (click)="onButtonClick('createCbpPlan', $event)">Create CBP</button>
+            </div>
+        </div>
+        <mat-card class="flex-1" role="none" *ngIf="dataSource.filteredData.length == 0 && !isTrainingPlan">
             <span class="mat-subtitle">No data found</span>
         </mat-card>
     </div>
