@@ -25,4 +25,5 @@ export interface ITableData {
   sortColumn?: string
   needUserMenus: boolean
   actionColumnName?: string
+  cbpPlanMenu?: boolean
 }

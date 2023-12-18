@@ -91,6 +91,17 @@
                     </button>
                 </mat-cell>
             </ng-container>
+            <ng-container matColumnDef="CBP Menu">
+                <mat-header-cell *matHeaderCellDef class="clr-darkish-blue action-header">
+                    <!-- {{'Actions'}} -->
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row" class="action-cell">
+                    <button type="button" mat-icon-button i18n-aria-label aria-label="action items"
+                        [matMenuTriggerFor]="cbpPlanCardMenu" [matMenuTriggerData]="{'data':row}" class="action-btn">
+                        <mat-icon>more_horiz</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
 
             <mat-header-row *matHeaderRowDef="getFinalColumns()"></mat-header-row>
 
@@ -162,5 +173,27 @@
             <mat-icon>delete</mat-icon><span>Delete User</span>
         </button> -->
         <!-- </div> -->
+    </ng-template>
+</mat-menu>
+
+<mat-menu #cbpPlanCardMenu="matMenu">
+    <ng-template matMenuContent let-rowData="data">
+        <button (click)="buttonClick('preivewContent',rowData)" mat-menu-item name="channel-analytics-button"
+            class="ws-mat-primary-text" i18n-aria-label aria-label="Analytics">
+            <mat-icon>remove_red_eye</mat-icon> <span>Preview</span>
+        </button>
+        <button (click)="buttonClick('editContent',rowData)" mat-menu-item name="channel-analytics-button"
+            class="ws-mat-primary-text" i18n-aria-label aria-label="Analytics">
+            <mat-icon>edit</mat-icon> <span>Edit</span>
+        </button>
+        <button (click)="buttonClick('deleteContent',rowData)" mat-menu-item name="channel-analytics-button"
+            class="ws-mat-primary-text" i18n-aria-label aria-label="Analytics">
+            <mat-icon>delete</mat-icon> <span>Delete</span>
+        </button>
+        <button (click)="buttonClick('publishContent',rowData)" mat-menu-item name="channel-analytics-button"
+            class="ws-mat-primary-text" i18n-aria-label aria-label="Analytics"
+            *ngIf="rowData.status.toLowerCase() === 'draft'">
+            <mat-icon>publish</mat-icon> <span>Publish</span>
+        </button>
     </ng-template>
 </mat-menu>
