@@ -105,6 +105,9 @@ export class OrgUserTableComponent implements OnInit, AfterViewInit, OnChanges {
       if (this.tableData.needUserMenus) {
         columns.push('Menu')
       }
+      if (this.tableData.cbpPlanMenu) {
+        columns.push('CBP Menu')
+      }
       return columns
     }
     return ''
