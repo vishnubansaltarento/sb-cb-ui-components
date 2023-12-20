@@ -15,11 +15,11 @@
                     </div>
                 </div>
                 <div class="flex-2 margin-left-l position-rel" *ngIf="isTrainingPlan && trainingTagList?.length > 0">
-                    <a class="training-tag mat-button" [ngClass]="{'margin-right-s': trainingTagList?.length > 0}"
-                        *ngFor="let item of trainingTagList">{{item}}</a>
-                    <button mat-icon-button class="training-filter-btn">
+                    <a class="training-tag mat-button margin-right-s" [ngClass]="{'selectTab': item.selected}"
+                        *ngFor="let item of trainingTagList" (click)="tagSelectedItem(item.value)">{{item.name}}</a>
+                    <!-- <button mat-icon-button class="training-filter-btn">
                         <mat-icon>filter_list</mat-icon>
-                    </button>
+                    </button> -->
                 </div>
                 <div class="flex-2 right-align" *ngIf="isDownload || isConsumptionReport || isCreate">
                     <!-- <button type="button" mat-button class="upload-btn" *ngIf="isUpload"
@@ -115,7 +115,7 @@
                 </mat-row>
             </div> -->
         </mat-table>
-        <div class="no-cbp-data" *ngIf="dataSource.filteredData.length == 0 && isTrainingPlan">
+        <div class="no-cbp-data" *ngIf="dataSource.filteredData.length === 0 && isTrainingPlan">
             <div><img src="/assets/icons/no-data.svg"></div>
             <div class="mat-subheading-1 margin-remove">No CBP plan created yet</div>
             <div>Create a CBP plan to assign users.</div>
@@ -124,13 +124,16 @@
                     (click)="onButtonClick('createCbpPlan', $event)">Create CBP</button>
             </div>
         </div>
-        <mat-card class="flex-1" role="none" *ngIf="dataSource.filteredData.length == 0 && !isTrainingPlan">
+        <mat-card class="flex-1" role="none" *ngIf="dataSource.filteredData.length === 0 && !isTrainingPlan">
             <span class="mat-subtitle">No data found</span>
         </mat-card>
     </div>
     <!-- <div *ngIf="dataSource.filteredData.length <= 0" class="h-600-s-20-m color-60 text-center">No result found
     </div> -->
-    <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
+    <mat-paginator *ngIf="dataSource.filteredData.length > 0 && isTrainingPlan" [length]="length" [pageSize]="pageSize"
+        [pageSizeOptions]="pageSizeOptions">
+    </mat-paginator>
+    <mat-paginator *ngIf="!isTrainingPlan" [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions">
     </mat-paginator>
 </div>
 
