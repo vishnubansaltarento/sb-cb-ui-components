@@ -27,6 +27,7 @@ export class OrgUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() eOnRowClick = new EventEmitter<any>()
   @Output() eOnButtonClick = new EventEmitter<any>()
   @Output() searchByEnterKey = new EventEmitter<any>()
+  @Output() tagSelectedData = new EventEmitter<any>()
   @Input() showEditOnCondition?: boolean
   @Input() isSearchBar = true
 
@@ -61,7 +62,9 @@ export class OrgUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   ngOnChanges(data: SimpleChanges) {
     this.dataSource.data = _.get(data, 'data.currentValue')
     this.length = this.dataSource.data.length
-    this.paginator.firstPage()
+    if (this.paginator) {
+      this.paginator.firstPage()
+    }
   }
 
   ngAfterViewInit() {
@@ -149,5 +152,9 @@ export class OrgUserTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   onSearchEnter(event: any) {
     this.searchByEnterKey.emit(event.target.value)
+  }
+
+  tagSelectedItem(_item: any) {
+    this.tagSelectedData.emit(_item)
   }
 }
