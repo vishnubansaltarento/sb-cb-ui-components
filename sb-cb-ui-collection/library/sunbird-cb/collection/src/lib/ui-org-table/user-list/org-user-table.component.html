@@ -116,7 +116,7 @@
             </div> -->
         </mat-table>
         <div class="no-cbp-data" *ngIf="dataSource.filteredData.length === 0 && isTrainingPlan">
-            <div><img src="/assets/icons/no-data.svg"></div>
+            <div><img src="/assets/images/no-content-data.svg"></div>
             <div class="mat-subheading-1 margin-remove">No CBP plan created yet</div>
             <div>Create a CBP plan to assign users.</div>
             <div class="margin-top-m">
@@ -181,22 +181,11 @@
 
 <mat-menu #cbpPlanCardMenu="matMenu">
     <ng-template matMenuContent let-rowData="data">
-        <button (click)="buttonClick('preivewContent',rowData)" mat-menu-item name="channel-analytics-button"
-            class="ws-mat-primary-text" i18n-aria-label aria-label="Analytics">
-            <mat-icon>remove_red_eye</mat-icon> <span>Preview</span>
-        </button>
-        <button (click)="buttonClick('editContent',rowData)" mat-menu-item name="channel-analytics-button"
-            class="ws-mat-primary-text" i18n-aria-label aria-label="Analytics">
-            <mat-icon>edit</mat-icon> <span>Edit</span>
-        </button>
-        <button (click)="buttonClick('deleteContent',rowData)" mat-menu-item name="channel-analytics-button"
-            class="ws-mat-primary-text" i18n-aria-label aria-label="Analytics">
-            <mat-icon>delete</mat-icon> <span>Delete</span>
-        </button>
-        <button (click)="buttonClick('publishContent',rowData)" mat-menu-item name="channel-analytics-button"
-            class="ws-mat-primary-text" i18n-aria-label aria-label="Analytics"
-            *ngIf="rowData.status.toLowerCase() === 'draft'">
-            <mat-icon>publish</mat-icon> <span>Publish</span>
-        </button>
+        <div *ngFor="let item of actionMenuItem">
+            <button (click)="buttonClick(item.key,rowData)" mat-menu-item name="channel-analytics-button"
+                class="ws-mat-primary-text" *ngIf="checkIfEnabled(rowData, item)">
+                <mat-icon>{{item.icon}}</mat-icon> <span>{{item.name}}</span>
+            </button>
+        </div>
     </ng-template>
 </mat-menu>

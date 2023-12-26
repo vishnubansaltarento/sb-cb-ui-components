@@ -202,7 +202,7 @@ export class TelemetryService {
           object: {
             id: page.objectId,
             // This will override above id if the data has object in it.
-            ...(data.object),
+            ...((data) ? data.object : {}),
           },
         }
         $t.impression(edata, config)
@@ -216,7 +216,7 @@ export class TelemetryService {
             env: page.module || '',
           },
           object: {
-            ...(data.object),
+            ...((data) ? data.object : {}),
           },
         })
       }
