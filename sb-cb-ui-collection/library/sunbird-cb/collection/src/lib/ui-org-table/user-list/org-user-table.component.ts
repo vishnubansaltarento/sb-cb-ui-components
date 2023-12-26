@@ -22,14 +22,15 @@ export class OrgUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() userId?: any
   @Input() isTrainingPlan?: boolean
   @Input() trainingTagList?: any[]
+  @Input() showEditOnCondition?: boolean
+  @Input() isSearchBar = true
+  @Input() actionMenuItem?: any
   @Output() clicked?: EventEmitter<any>
   @Output() actionsClick?: EventEmitter<any>
   @Output() eOnRowClick = new EventEmitter<any>()
   @Output() eOnButtonClick = new EventEmitter<any>()
   @Output() searchByEnterKey = new EventEmitter<any>()
   @Output() tagSelectedData = new EventEmitter<any>()
-  @Input() showEditOnCondition?: boolean
-  @Input() isSearchBar = true
 
   bodyHeight = document.body.clientHeight - 125
   displayedColumns: IColums[] | undefined
@@ -156,5 +157,18 @@ export class OrgUserTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   tagSelectedItem(_item: any) {
     this.tagSelectedData.emit(_item)
+  }
+
+  checkIfEnabled(_rowData: any, _item: any) {
+    if (_item.isMdoLeader) {
+      return true
+    }
+    if (_item.isMdoAdmin && _rowData.createdBy === this.userId) {
+      return true
+    }
+    if (_item.isMdoAdmin && _rowData.createdBy !== this.userId && _item.key === 'preivewContent') {
+      return true
+    }
+    return false
   }
 }
