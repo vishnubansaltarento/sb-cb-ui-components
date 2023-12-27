@@ -160,6 +160,9 @@ export class OrgUserTableComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   checkIfEnabled(_rowData: any, _item: any) {
+    if (_rowData.status.toLowerCase() === 'live' && _item.key === 'publishContent') {
+      return false
+    }
     if (_item.isMdoLeader) {
       return true
     }
