@@ -49,7 +49,7 @@
                         <div innerHTML="{{element[col.key]}}"></div>
                     </span>
                     <span *ngIf="!col?.isList" class="h-400-r-14-l color-87 textclass">
-                        {{(col.key === 'dateCreatedOn' || col.key === 'dateUpdatedOn') ? (element[col.key] | date:'dd
+                        {{(col.key === 'dateCreatedOn' || col.key === 'dateUpdatedOn' || col.key === 'requestedon') ? (element[col.key] | date:'dd
                         MMM yyy h:mm a') : element[col.key]}} {{col?.isList}}
                     </span>
                 </mat-cell>
