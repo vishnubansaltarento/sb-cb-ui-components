@@ -46,6 +46,7 @@ export class OrgUserTableComponent implements OnInit, AfterViewInit, OnChanges {
     }
   }
   selection = new SelectionModel<any>(true, [])
+  isSearchText = false
 
   constructor() {
     this.dataSource = new MatTableDataSource<any>()
@@ -77,10 +78,12 @@ export class OrgUserTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   applyFilter(filterValue: any) {
     if (filterValue) {
+      this.isSearchText = true
       let fValue = filterValue.trim()
       fValue = filterValue.toLowerCase()
       this.dataSource.filter = fValue
     } else {
+      this.isSearchText = false
       this.dataSource.filter = ''
     }
   }

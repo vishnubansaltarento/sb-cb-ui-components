@@ -118,7 +118,7 @@
                 </mat-row>
             </div> -->
         </mat-table>
-        <div class="no-cbp-data" *ngIf="dataSource.filteredData.length === 0 && isTrainingPlan">
+        <div class="no-cbp-data" *ngIf="dataSource.filteredData.length === 0 && isTrainingPlan && !isSearchText">
             <div><img src="/assets/images/no-content-data.svg"></div>
             <div class="mat-subheading-1 margin-remove">No CBP plan created yet</div>
             <div>Create a CBP plan to assign users.</div>
@@ -126,6 +126,11 @@
                 <button mat-button type="button" class="create-btn"
                     (click)="onButtonClick('createCbpPlan', $event)">Create CBP</button>
             </div>
+        </div>
+        <div class="no-cbp-data" *ngIf="dataSource.filteredData.length === 0 && isTrainingPlan && isSearchText">
+            <div><img src="/assets/images/no-content-data-search.svg"></div>
+            <div class="mat-subheading-1 margin-remove">No results found</div>
+            <div>Try adjusting your search to find what you are looking for.</div>
         </div>
         <mat-card class="flex-1" role="none" *ngIf="dataSource.filteredData.length === 0 && !isTrainingPlan">
             <span class="mat-subtitle">No data found</span>
