@@ -120,8 +120,8 @@
         </mat-table>
         <div class="no-cbp-data" *ngIf="dataSource.filteredData.length === 0 && isTrainingPlan && !isSearchText">
             <div><img src="/assets/images/no-content-data.svg"></div>
-            <div class="mat-subheading-1 margin-remove">No CBP plan created yet</div>
-            <div>Create a CBP plan to assign users.</div>
+            <!-- <div class="mat-subheading-1 margin-remove">No CBP plan created yet</div> -->
+            <div>Start creating a Capacity Building Plan (CBP).</div>
             <div class="margin-top-m">
                 <button mat-button type="button" class="create-btn"
                     (click)="onButtonClick('createCbpPlan', $event)">Create CBP</button>
