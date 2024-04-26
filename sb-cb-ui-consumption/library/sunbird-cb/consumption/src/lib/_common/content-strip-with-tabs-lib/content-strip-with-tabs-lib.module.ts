@@ -27,7 +27,7 @@ import {
   MatButtonToggleModule,
   MatTabsModule,
   MatAutocompleteModule} from '@angular/material';
-import { ContentStripWithTabsComponent } from './content-strip-with-tabs.component';
+import { ContentStripWithTabsLibComponent } from './content-strip-with-tabs-lib.component';
 import { HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -38,7 +38,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [ContentStripWithTabsComponent],
+  declarations: [ContentStripWithTabsLibComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -76,7 +76,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
     }),
   ],
-  entryComponents: [ContentStripWithTabsComponent],
-  exports: [ContentStripWithTabsComponent],
+  entryComponents: [ContentStripWithTabsLibComponent],
+  exports: [ContentStripWithTabsLibComponent],
 })
-export class ContentStripWithTabsModule { }
+export class ContentStripWithTabsLibModule { }
