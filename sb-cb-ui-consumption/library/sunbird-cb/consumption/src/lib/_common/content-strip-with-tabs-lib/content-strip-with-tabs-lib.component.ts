@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnDestroy, HostBinding, Inject } from '@angular/core';
 import { NsWidgetResolver, WidgetBaseComponent } from '@sunbird-cb/resolver';
-import { NsContentStripWithTabs } from './content-strip-with-tabs.model';
+import { NsContentStripWithTabs } from './content-strip-with-tabs-lib.model';
 // import { HttpClient } from '@angular/common/http'
 import { WidgetContentService } from '../../_services/widget-content.service';
 import { NsContent } from '../../_models/widget-content.model';
@@ -64,10 +64,10 @@ interface IStripUnitContentData {
 
 @Component({
   selector: 'sb-uic-content-strip-with-tabs',
-  templateUrl: './content-strip-with-tabs.component.html',
-  styleUrls: ['./content-strip-with-tabs.component.scss'],
+  templateUrl: './content-strip-with-tabs-lib.component.html',
+  styleUrls: ['./content-strip-with-tabs-lib.component.scss'],
 })
-export class ContentStripWithTabsComponent extends WidgetBaseComponent
+export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
   implements
   OnInit,
   OnDestroy,
