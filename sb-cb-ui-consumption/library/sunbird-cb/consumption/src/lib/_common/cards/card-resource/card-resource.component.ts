@@ -1,16 +1,20 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NsCardContent } from '@sunbird-cb/utils/lib/services/card-content.model';
+import { NsWidgetResolver, WidgetBaseComponent } from '@sunbird-cb/resolver';
+import { NsCardContent } from '../../../_models/card-content.model';
 
 @Component({
   selector: 'ws-cb-widget-card-resource',
   templateUrl: './card-resource.component.html',
   styleUrls: ['./card-resource.component.scss'],
 })
-export class CardResourceComponent implements OnInit {
+export class CardResourceComponent extends WidgetBaseComponent
+implements OnInit, NsWidgetResolver.IWidgetData<NsCardContent.ICard>  {
 
   @Input() widgetData!: NsCardContent.ICard;
 
-  constructor() { }
+  constructor() {
+    super();
+  }
 
   ngOnInit() {
   }

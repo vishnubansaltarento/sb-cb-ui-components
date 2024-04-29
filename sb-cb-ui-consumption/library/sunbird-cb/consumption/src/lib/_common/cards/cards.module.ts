@@ -3,9 +3,11 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule, MatCardModule, MatIconModule, MatTooltipModule } from '@angular/material';
 import { RouterModule } from '@angular/router';
 import { CardResourceComponent } from './card-resource/card-resource.component';
+import { CardsComponent } from './cards.component';
+import { CardPortraitComponent } from './card-portrait/card-portrait.component';
 
 @NgModule({
-  declarations: [CardResourceComponent],
+  declarations: [CardResourceComponent, CardsComponent,CardPortraitComponent],
   imports: [
     CommonModule,
     MatCardModule,
@@ -14,6 +16,7 @@ import { CardResourceComponent } from './card-resource/card-resource.component';
     MatTooltipModule,
     RouterModule,
   ],
-  exports: [CardResourceComponent],
+  entryComponents:[CardsComponent],
+  exports: [CardsComponent,CardResourceComponent,CardPortraitComponent],
 })
-export class CardModule { }
+export class CardsModule { }
