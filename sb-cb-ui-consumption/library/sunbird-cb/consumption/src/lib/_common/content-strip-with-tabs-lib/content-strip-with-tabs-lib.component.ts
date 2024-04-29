@@ -708,8 +708,8 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
   ) {
     return (contents || []).map((content, idx) => (
       content ? {
-        widgetType: 'card',
-        widgetSubType: 'cardContent',
+        widgetType: 'cardLib',
+        widgetSubType: 'cardContentLib',
         widgetHostClass: 'mb-2',
         widgetData: {
           content,
@@ -760,8 +760,8 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
     strip: any
   ) {
     return [1, 2, 3, 4, 5, 6, 7, 7, 8, 9, 10].map(_content => ({
-      widgetType: 'card',
-      widgetSubType: 'cardContent',
+      widgetType: 'cardLib',
+      widgetSubType: 'cardContentLib',
       widgetHostClass: 'mb-2',
       widgetData: {
         cardSubType: strip.loaderConfig && strip.loaderConfig.cardSubType || 'card-standard-skeleton',
