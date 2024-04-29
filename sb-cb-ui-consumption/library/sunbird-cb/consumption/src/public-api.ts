@@ -8,4 +8,5 @@ export * from './lib/consumption.module';
 
 
 export * from './lib/_common/content-strip-with-tabs-lib/content-strip-with-tabs-lib.module'
+export * from './lib/_common/sliders/sliders.module'
 export * from './lib/_common/data-points/data-points.module'
