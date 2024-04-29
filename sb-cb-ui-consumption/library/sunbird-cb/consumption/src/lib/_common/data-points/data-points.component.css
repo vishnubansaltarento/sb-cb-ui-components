@@ -1,0 +1,124 @@
+.white {
+    color: white;
+}
+.custom-opacity {
+    opacity: 0.7;
+}
+
+.black {
+    color: black;
+}
+.objIcon {
+    width: 32px;
+    height: 32px;
+}
+.mobjIcon {
+    width: 24px;
+    height: 24px;
+}
+.objHeader {
+    font-family: Montserrat;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 29.26px;
+    text-align: left;
+}
+.mobjHeader{
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19.5px;
+    text-align: left;
+}
+
+.objDescription {
+    font-family: Lato;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    text-align: left;
+}
+.mobjDescription {
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.8px;
+    text-align: left;
+}
+.empty-div {
+    min-width: 34px;
+}
+.mempty-div {
+    min-width: 27px;
+}
+.element-div {
+    padding: 25px 0px;
+    margin: 0 25px;    
+}
+
+.linebreak {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.16);
+}
+
+.melement-div {
+    padding: 16px;
+    border-radius: 15px;
+    width: 249px;
+}
+.banner-metrics {
+    background: linear-gradient(180deg, #F9CB97 -107.59%, #EF951E 110.74%);
+}
+
+.infra-element-div {
+    padding: 25px 0px;
+    margin: 0 25px;    
+}
+
+.infra-objIcon {
+    width: 32px;
+    height: 32px;
+}
+
+.infra-objHeader {
+    font-family: Montserrat;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 29.26px;
+    text-align: left;
+}
+
+.infra-objDescription {
+    font-family: Lato;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19.2px;
+    text-align: left;
+}
+
+.flex-container {
+    display: flex;   
+}
+
+.top-container {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    width: 100%; /* Optional: Set a width for the container */
+}
+
+.flex-item {
+    flex: 0 0 auto; /* Don't grow or shrink, use initial width */
+    white-space: nowrap; /* Prevent text wrapping */
+    min-width: 200px; /* Set a minimum width for each div */
+}
+
+@media screen and (max-width: 768px) { 
+    .infra-objIcon {
+        width: 24px;
+        height: 24px;
+    }
+    .infra-objHeader {
+        font-size: 24px;
+    }
+    .infra-empty-div {
+        min-width: 25px;
+    }
+}
