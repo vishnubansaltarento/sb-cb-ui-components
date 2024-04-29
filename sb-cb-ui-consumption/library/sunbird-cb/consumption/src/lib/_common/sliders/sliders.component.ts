@@ -1,6 +1,6 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@sunbird-cb/resolver'
-import { ICarousel } from './sliders.model'
+import { ICarousel, ICarouselStyle } from './sliders.model'
 import { Subscription, interval } from 'rxjs'
 import { EventService, WsEvents } from '@sunbird-cb/utils'
 
@@ -12,6 +12,7 @@ import { EventService, WsEvents } from '@sunbird-cb/utils'
 export class SlidersLibComponent extends WidgetBaseComponent
   implements OnInit, NsWidgetResolver.IWidgetData<ICarousel[]> {
   @Input() widgetData!: ICarousel[]
+  @Input() styleData!: ICarouselStyle
   @HostBinding('id')
   public id = `banner_${Math.random()}`
   currentIndex = 0

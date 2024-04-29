@@ -5,9 +5,15 @@ export interface ICarousel {
   banners: IBannerUnit,
   mailTo?: string,
   queryParams?: any,
-  bannerMetaClass?: "inline", 
+}
+
+
+export interface ICarouselStyle {
+  bannerMetaClass?: "inline-meta", 
   bannerMetaAlign?: "right" | "left",
-  navigationArrows?: "hidden"
+  navigationArrows?: "hidden",
+  borderRadius: string,
+  customHeight: string,
 }
 
 interface IBannerUnit {
