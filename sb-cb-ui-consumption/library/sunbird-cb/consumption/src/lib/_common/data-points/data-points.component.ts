@@ -15,7 +15,7 @@ export class DataPointsComponent implements OnInit {
 
   ngOnInit() {
     if (this.objectData && this.layoutType === 'gridLayout') {
-      this.customArray = this.createCustomArray(this.objectData.data)
+      this.customArray = this.createCustomArray(this.objectData.metrics)
     }
   }  
 
