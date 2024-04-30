@@ -16,18 +16,17 @@
 </div>
 
 <div class="w-full" *ngIf="layoutType === 'singleRow'">
-    <div class="flex gap-2">
-        <div *ngFor="let obj of objectData.data">
-            <div class="melement-div {{obj.background}}">
-                <div class="flex gap-3 items-top">
+    <div class="flex gap-4">
+        <div *ngFor="let obj of objectData" class="flex-container">
+            <div class="melement-div {{obj.background}} flex-item">
+                <div class="flex flex-row gap-3">
                     <div>
                         <img class="mobjIcon" [ngClass]="obj.iconColor" [src]="obj.icon">
                     </div>
-                    <div class="{{obj.headercolor}} mobjHeader" class="pb-3">{{obj.header}}</div>
-                </div>
-                <div class="flex gap-3 items-center">
-                    <div class="mempty-div"></div>
-                    <div class="{{obj.descriptionColor}} mobjDescription">{{obj.description}}</div>
+                    <div>
+                        <div class="{{obj.headercolor}} mobjHeader" class="pb-3">{{obj.header}}</div>
+                        <div class="{{obj.descriptionColor}} mobjDescription">{{obj.description}}</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -35,43 +34,14 @@
 </div>
 
 <div class="w-full" *ngIf="layoutType === 'gridLayout'">
-    <!-- <div class="grid grid-cols-{{objectData.dataColSpan}} grid-flow-row gap-2">
-        <div *ngFor="let obj of objectData.data">        
-            <div class="element-div" [ngClass]="{'linebreak': obj.linebreak}">
-                <div class="flex gap-6 items-flex-start">
-                    <div>
-                        <img class="objIcon" [ngClass]="obj.iconColor" [src]="obj.icon">
-                    </div>
-                    <div class="{{obj.headercolor}} infra-objHeader" class="pb-3">{{obj.header}}</div>
-                </div>
-                <div class="flex gap-6 items-center pb-1">
-                    <div class="empty-div"></div>
-                    <div class="{{obj.descriptionColor}} objDescription">{{obj.description}}</div>
-                </div>        
-            </div>
-        </div>
-    </div> -->
-
     <div class="w-full" *ngIf="layoutType === 'gridLayout'">
         <div class="top-container">
             <div class="flex-container" *ngFor="let chunk of customArray">
                 <div *ngFor="let item of chunk">
                     <div class="flex-item">
-                        <!-- <div class="infra-element-div" [ngClass]="{'linebreak': item.linebreak}">
-                            <div class="flex gap-6 items-flex-start">
-                                <div>
-                                    <img class="infra-objIcon" [ngClass]="item.iconColor" [src]="item.icon">
-                                </div>
-                                <div class="{{item.headercolor}} infra-objHeader" class="pb-3">{{item.header}}</div>
-                            </div>
-                            <div class="flex gap-6 items-center pb-1">
-                                <div class="infra-empty-div"></div>
-                                <div class="{{item.descriptionColor}} infra-objDescription ">{{item.description}}</div>
-                            </div>        
-                        </div> -->
                         <div class="flex flex-row gap-5 infra-element-div">
-                            <div class=""><img class="infra-objIcon" [ngClass]="item.iconColor" [src]="item.icon"></div>
-                            <div class="">
+                            <div><img class="infra-objIcon" [ngClass]="item.iconColor" [src]="item.icon"></div>
+                            <div>
                                <div class="{{item.headercolor}} infra-objHeader" class="pb-3">{{item.header}}</div>
                                 <div class="{{item.descriptionColor}} infra-objDescription padding-top-s">{{item.description}}</div>
                             </div>
