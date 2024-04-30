@@ -9,8 +9,8 @@
     color: black;
 }
 .objIcon {
-    width: 32px;
-    height: 32px;
+    width: 18px;
+    height: 18px;
 }
 .mobjIcon {
     width: 24px;
@@ -45,8 +45,12 @@
     line-height: 16.8px;
     text-align: left;
 }
+.metrics-web {
+    height: inherit;
+    overflow-y: auto;
+}
 .empty-div {
-    min-width: 34px;
+    min-width: 22px;
 }
 .mempty-div {
     min-width: 27px;
@@ -70,14 +74,16 @@
 }
 
 .infra-element-div {
-    padding: 25px 0px;
-    margin: 0 25px;    
+    min-width: 325px;
+    padding: 25px 0;
+    align-items: baseline;
 }
 
 .infra-objIcon {
     width: 32px;
     height: 32px;
 }
+
 
 .infra-objHeader {
     font-family: Montserrat;
@@ -118,7 +124,8 @@
     .infra-objHeader {
         font-size: 24px;
     }
-    .infra-empty-div {
-        min-width: 25px;
+    .infra-element-div {
+        min-width: 250px;
+        padding: 15px 0 25px 0;
     }
 }
