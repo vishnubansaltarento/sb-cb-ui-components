@@ -16,6 +16,7 @@ export namespace NsContentStripWithTabs {
     key: string;
     title: string;
     customeClass?: string;
+    nodataMsg?: string;
     stripTitleLink?: {
         link:  {
           queryParams: string
