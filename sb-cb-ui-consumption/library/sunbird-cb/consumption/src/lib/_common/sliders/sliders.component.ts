@@ -1,8 +1,8 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core'
+import { Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core'
 import { NsWidgetResolver, WidgetBaseComponent } from '@sunbird-cb/resolver'
 import { ICarousel, ICarouselStyle } from './sliders.model'
 import { Subscription, interval } from 'rxjs'
-import { EventService, WsEvents } from '@sunbird-cb/utils'
+import { EventService, WsEvents, ValueService } from '@sunbird-cb/utils'
 
 @Component({
   selector: 'sb-uic-sliders',
@@ -10,20 +10,29 @@ import { EventService, WsEvents } from '@sunbird-cb/utils'
   styleUrls: ['./sliders.component.scss'],
 })
 export class SlidersLibComponent extends WidgetBaseComponent
-  implements OnInit, NsWidgetResolver.IWidgetData<ICarousel[]> {
+  implements OnInit, OnDestroy, NsWidgetResolver.IWidgetData<ICarousel[]> {
   @Input() widgetData!: ICarousel[]
   @Input() styleData!: ICarouselStyle
   @HostBinding('id')
   public id = `banner_${Math.random()}`
+  private defaultMenuSubscribe: Subscription | null = null
+  isLtMedium$ = this.valueSvc.isLtMedium$
   currentIndex = 0
   slideInterval: Subscription | null = null
+  isMobile = false
 
-  constructor(private events: EventService) {
+  constructor(
+    private events: EventService,
+    private valueSvc: ValueService
+  ) {
     super()
   }
 
   ngOnInit() {
     this.reInitiateSlideInterval()
+    this.defaultMenuSubscribe = this.isLtMedium$.subscribe((isLtMedium: boolean) => {
+      this.isMobile = isLtMedium
+    })
   }
   reInitiateSlideInterval() {
     if (this.widgetData && this.widgetData.length > 1) {
@@ -85,5 +94,11 @@ export class SlidersLibComponent extends WidgetBaseComponent
         pageIdExt: 'banner',
         module: WsEvents.EnumTelemetrymodules.CONTENT,
     })
+  }
+
+  ngOnDestroy() {
+    if (this.defaultMenuSubscribe) {
+      this.defaultMenuSubscribe.unsubscribe()
+    }
   }
 }

@@ -11,9 +11,20 @@ export interface ICarousel {
 export interface ICarouselStyle {
   bannerMetaClass?: "inline-meta", 
   bannerMetaAlign?: "right" | "left",
-  navigationArrows?: "hidden",
-  borderRadius: string,
-  customHeight: string,
+  navigationArrows?: "hidden" | "visible",
+  dots?: "hidden" | "visible",
+  borderRadius?: string,
+  customHeight?: string,
+  arrowsPlacement?: "bottom-right" | "bottom-center" | "bottom-left" | "middle-inline",
+  responsive: {
+    bannerMetaClass?: "inline-meta", 
+    bannerMetaAlign?: "right" | "left",
+    navigationArrows?: "hidden" | "visible",
+    dots?: "hidden" | "visible",
+    borderRadius?: string,
+    customHeight?: string,
+    arrowsPlacement?: "bottom-right" | "bottom-center" | "bottom-left" | "middle-inline",
+  }
 }
 
 interface IBannerUnit {
