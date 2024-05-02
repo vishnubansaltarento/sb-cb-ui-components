@@ -15,7 +15,7 @@ $banner-min-height: 243px;
     padding-bottom: 0 !important;
   }
 
-  &.falt {
+  &.flat {
     // .banner-overlay {
       .banner {
         .banner-image{
@@ -189,8 +189,61 @@ $banner-min-height: 243px;
 .next {
   right: 0;
   margin-right: -16px;
- 
 }
+
+.navigation {
+  &.bottom-right {
+    .prev {
+      left: unset;
+      right: 45px;
+      bottom: -15px;
+      top: unset;
+    }
+    .next {
+      left: unset;
+      right: 15px;
+      bottom: -15px;
+      top: unset;
+    }
+  } 
+  &.bottom-center {
+    .prev {
+      left: calc(50% - 20px);
+      right: unset;
+      bottom: -15px;
+      top: unset;
+    }
+    .next {
+      left: calc(50% + 20px);
+      right: unset;
+      bottom: -15px;
+      top: unset;
+    }
+  } 
+  &.bottom-left{
+    .prev {
+      left: 15px;
+      right: unset;
+      bottom: -15px;
+      top: unset;
+    }
+    .next {
+      left: 60px;
+      right: unset;
+      bottom: -15px;
+      top: unset;
+    }
+  }
+  &.middle-inline {
+    .prev {
+      left: 30px;
+    }
+    .next {
+      right: 30px;
+    }
+  }
+}
+
 
 
 .banner-container-solo {
