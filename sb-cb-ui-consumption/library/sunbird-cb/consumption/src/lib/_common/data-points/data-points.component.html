@@ -1,16 +1,15 @@
 <div class="w-full metrics-web" *ngIf="layoutType === 'multipleRows'">
-    <div *ngFor="let obj of objectData">
+    <div *ngFor="let obj of objectData" class="">
         <div class="element-div" [ngClass]="{'linebreak': obj.linebreak}">
-            <div class="flex gap-5 items-center">
+            <div class="flex flex-row gap-3 items-top">
                 <div>
                     <img class="objIcon" [ngClass]="obj.iconColor" [src]="obj.icon">
                 </div>
-                <div class="{{obj.headercolor}} objHeader" class="pb-3">{{obj.header}}</div>
+                <div>
+                    <div class="{{obj.headercolor}} objHeader pb-1" class="pb-3">{{obj.header}}</div>
+                    <div class="{{obj.descriptionColor}} objDescription">{{obj.description}}</div>
+                </div>
             </div>
-            <div class="flex gap-5 items-center pb-1">
-                <div class="empty-div"></div>
-                <div class="{{obj.descriptionColor}} objDescription">{{obj.description}}</div>
-            </div>        
         </div>
     </div>
 </div>
@@ -24,7 +23,7 @@
                         <img class="mobjIcon" [ngClass]="obj.iconColor" [src]="obj.icon">
                     </div>
                     <div>
-                        <div class="{{obj.headercolor}} mobjHeader" class="pb-3">{{obj.header}}</div>
+                        <div class="{{obj.headercolor}} mobjHeader pb-1" class="pb-3">{{obj.header}}</div>
                         <div class="{{obj.descriptionColor}} mobjDescription">{{obj.description}}</div>
                     </div>
                 </div>
@@ -40,7 +39,6 @@
                 <div *ngFor="let item of chunk">
                     <div class="flex-item">
                         <div class="flex flex-row gap-5 infra-element-div">
-                            <div><img class="infra-objIcon" [ngClass]="item.iconColor" [src]="item.icon"></div>
                             <div>
                                <div class="{{item.headercolor}} infra-objHeader" class="pb-3">{{item.header}}</div>
                                 <div class="{{item.descriptionColor}} infra-objDescription padding-top-s">{{item.description}}</div>
