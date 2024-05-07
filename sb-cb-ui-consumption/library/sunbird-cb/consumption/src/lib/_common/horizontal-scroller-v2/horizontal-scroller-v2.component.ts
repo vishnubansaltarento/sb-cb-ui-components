@@ -159,7 +159,7 @@ export class HorizontalScrollerV2Component implements OnInit, OnChanges, OnDestr
       this.bottomDotsArray = [];
       let cardWidth;
       let arrLength;
-      // console.log('this.cardSubType-->',this.cardSubType)
+      console.log('this.cardSubType-->',this.cardSubType)
       if (this.cardSubType !== 'card-wide-v2') {
         cardWidth = this.cardSubType === 'standard' ? 245 :
         ((document.getElementsByClassName(this.cardSubType) &&
