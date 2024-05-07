@@ -9,7 +9,7 @@ export class PillsComponent implements OnInit {
 
   @Input() pillsData: any
   @Input() selectedValue: any
-  @Input() isLoading: boolean = true
+  @Input() isLoading: boolean = false
   @Output() pillClick = new EventEmitter<any>()
   constructor() { }
 
