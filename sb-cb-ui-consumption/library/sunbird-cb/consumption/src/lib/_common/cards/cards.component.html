@@ -6,12 +6,21 @@
       <ng-container *ngSwitchDefault [ngTemplateOutlet]="cardPortraitLib"></ng-container>
       <ng-container *ngSwitchCase="'card-portrait-lib-skeleton'" [ngTemplateOutlet]="cardPortraitLibSkeleton"></ng-container>
       <ng-container *ngSwitchCase="'card-portrait-lib'" [ngTemplateOutlet]="cardPortraitLib"></ng-container>
+      <ng-container *ngSwitchCase="'card-landscape-lib-skeleton'" [ngTemplateOutlet]="cardLandscapeLibSkeleton"></ng-container>
+      <ng-container *ngSwitchCase="'card-landscape-lib'" [ngTemplateOutlet]="cardLandscapeLib"></ng-container>
     </ng-container>
-  </div>
+</div>
 
-  <ng-template #cardPortraitLibSkeleton>
-    bbbbb
-  </ng-template>
-  <ng-template #cardPortraitLib>
-    <sb-uic-card-portrait [widgetData]="widgetData"></sb-uic-card-portrait>
-  </ng-template>
+<ng-template #cardPortraitLibSkeleton>
+  <sb-uic-card-portrait [widgetData]="widgetData" [isCardLoading]="true"></sb-uic-card-portrait>
+</ng-template>
+<ng-template #cardPortraitLib>
+  <sb-uic-card-portrait [widgetData]="widgetData" [isCardLoading]="false"></sb-uic-card-portrait>
+</ng-template>
+<ng-template #cardLandscapeLibSkeleton>
+  <sb-uic-card-landscape [widgetData]="widgetData" [isCardLoading]="true"></sb-uic-card-landscape>
+</ng-template>
+<ng-template #cardLandscapeLib>
+  <sb-uic-card-landscape [widgetData]="widgetData" [isCardLoading]="false"></sb-uic-card-landscape>
+</ng-template>
+

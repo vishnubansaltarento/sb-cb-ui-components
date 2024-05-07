@@ -1,4 +1,5 @@
-<mat-card class="card-standard-container mr-5 padding-remove cursor-pointer " [ngClass]="{
+<ng-container *ngIf="!isCardLoading">
+  <mat-card class="card-standard-container mr-5 padding-remove cursor-pointer " [ngClass]="{
     greyOut:
       widgetData.deletedMode === 'greyOut' && !isLiveOrMarkForDeletion
         ? true
@@ -135,3 +136,42 @@
     </ng-container>
   </div>
 </mat-card>
+</ng-container>
+
+<ng-container *ngIf="isCardLoading">
+  <mat-card class="card-standard-container mr-5 padding-remove" >
+    <div class="display-contents" >
+      <ng-container *ngIf="!isCardFlipped">
+        <mat-card-content class="min-top">
+          <div style="position: relative; z-index: 1;">
+            <ng-container>
+              <sb-uic-skeleton-loader [width]="'100%'" [height]="'140px'" [bindingClass]="'flex rounded'"></sb-uic-skeleton-loader>
+            </ng-container>
+          </div>
+          <div class="padding-m">
+            <div class="course_widget flex margin-remove">
+              <div class="flex flex-end">
+                <sb-uic-skeleton-loader [width]="'65px'" [height]="'16px'" [bindingClass]="'flex rounded br-8'"></sb-uic-skeleton-loader>
+              </div>
+            </div>
+            <div class="mat-subheading-1 title-text ws-mat-text-block-fade-gradient">
+              <sb-uic-skeleton-loader [width]="'100%'" [height]="'16px'" [bindingClass]="'flex rounded'"></sb-uic-skeleton-loader>
+              <sb-uic-skeleton-loader [width]="'111px'" [height]="'16px'" [bindingClass]="'flex rounded margin-top-s'"></sb-uic-skeleton-loader>
+            </div>
+            <div class="flex w-full flex-wrap flex-middle margin-top-m">
+              <div class="">
+                <sb-uic-skeleton-loader [width]="'28px'" [height]="'28px'" [bindingClass]="'flex rounded'"></sb-uic-skeleton-loader>
+              </div>
+              <span class="org-text"> <sb-uic-skeleton-loader [width]="'111px'" [height]="'16px'" [bindingClass]="'flex rounded'"></sb-uic-skeleton-loader></span>
+            </div>
+            <div class="flex flex-middle rating-session margin-top-m">
+              <div class="flex flex-middle">
+                <sb-uic-skeleton-loader [width]="'45px'" [height]="'12px'" [bindingClass]="'flex rounded margin-top-m'"></sb-uic-skeleton-loader>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </ng-container>
+    </div>
+  </mat-card>
+</ng-container>
