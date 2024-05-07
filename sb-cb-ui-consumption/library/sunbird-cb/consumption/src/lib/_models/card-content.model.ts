@@ -10,6 +10,7 @@ export namespace NsCardContent {
     likes?: number;
     contentTags?: IContentTags;
     stateData: any;
+    cardCustomeClass?: any;
   }
 
   export interface IContentTags {
@@ -35,5 +36,16 @@ export namespace NsCardContent {
     EXPIRED = 'Expired',
     DELETED = 'Deleted',
     MARK_FOR_DELETION = 'MarkedForDeletion',
+  }
+  export enum ACBPConst {
+    UPCOMING = 'upcoming',
+    ALL = 'All',
+    OVERDUE = 'overdue',
+    SUCCESS = 'success',
+  }
+
+  export enum IGOTConst {
+    COMPETENCIES = 'competencies_v5',
+    RETIRED = 'Retired',
   }
 }

@@ -5,13 +5,14 @@ import { ConfigurationsService, EventService } from '@sunbird-cb/utils';
 import * as _ from "lodash";
 import { TranslateService } from '@ngx-translate/core';
 import { MultilingualTranslationsService } from '../../../_services/multilingual-translations.service';
-
+ 
 @Component({
-  selector: 'sb-uic-card-portrait',
-  templateUrl: './card-portrait.component.html',
-  styleUrls: ['./card-portrait.component.scss']
+  selector: 'sb-uic-card-landscape',
+  templateUrl: './card-landscape.component.html',
+  styleUrls: ['./card-landscape.component.scss']
 })
-export class CardPortraitComponent implements OnInit {
+export class CardLandscapeComponent implements OnInit {
+
   @Input() widgetData!: NsCardContent.ICard;
   @Input() isLiveOrMarkForDeletion: any
   @Input() showIntranetContent: any
@@ -20,11 +21,15 @@ export class CardPortraitComponent implements OnInit {
   @Output() contentData = new EventEmitter<any>()
   isCardFlipped:boolean = false
   defaultThumbnail: any
+  acbpConstants = NsCardContent.ACBPConst
   sourceLogos: any
   defaultSLogo: any
   showFlip = false
   widgetType: any = 'df'
   widgetSubType: any ='sdf'
+  cbPlanMapData: any
+  cbPlanInterval: any
+  
   constructor(
     private snackBar: MatSnackBar,
     private events: EventService,
@@ -47,6 +52,9 @@ export class CardPortraitComponent implements OnInit {
       this.sourceLogos = instanceConfig.sources
       this.defaultSLogo = instanceConfig.logos.defaultSourceLogo || ''
     }
+    this.cbPlanInterval = setInterval(() => {
+      this.getCbPlanData()
+    },                                1000)
   }
 
   showSnackbar() {
@@ -81,5 +89,21 @@ export class CardPortraitComponent implements OnInit {
         module: _.camelCase(this.widgetData.content.primaryCategory),
       })
   }
+
+  getCbPlanData() {
+    let cbpList: any={}
+    if (localStorage.getItem('cbpData')) {
+      let cbpListArr = JSON.parse(localStorage.getItem('cbpData') || '')
+      if (cbpListArr && cbpListArr.length) {
+        cbpListArr.forEach((data: any) => {
+          cbpList[data.identifier] = data
+        })
+      }
+      this.cbPlanMapData = cbpList
+      // this.karmaPointLoading = false
+      clearInterval(this.cbPlanInterval)
+    }
+  }
+
 
 }

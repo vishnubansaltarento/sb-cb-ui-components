@@ -1,0 +1,18 @@
+<ng-container *ngIf="!isLoading">
+    <mat-chip-list >
+        <ng-container *ngFor="let pill of pillsData">
+            <mat-chip class="competency-chip" (click)="selectedPill(pill)" 
+            [ngClass]="{'active': selectedValue === pill?.name}">
+                <span class="pill-name">{{pill?.name | titlecase}} <span>{{pill?.count}}</span></span>
+            </mat-chip>
+        </ng-container>
+    </mat-chip-list>
+</ng-container>
+<ng-container *ngIf="isLoading">
+    <div class="flex gap-4">
+        <ng-container *ngFor="let pill of [0,1,2]">
+            <sb-uic-skeleton-loader [bindingClass]="'flex rounded'" [width]="'100px'"
+            [height]="'24px'"></sb-uic-skeleton-loader>
+        </ng-container>
+    </div>
+</ng-container>

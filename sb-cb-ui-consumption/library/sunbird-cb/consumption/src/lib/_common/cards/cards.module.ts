@@ -9,9 +9,11 @@ import { PipePublicURLModule } from '../../_pipes/pipe-public-URL/pipe-public-UR
 import { DisplayContentTypeLibModule } from '../display-content-type-lib/display-content-type-lib.module';
 import { DefaultThumbnailModule } from '../../_directives/default-thumbnail/default-thumbnail.module';
 import { PipeDurationTransformModule } from '../../_pipes/pipe-duration-transform/pipe-duration-transform.module';
+import { SkeletonLoaderLibModule } from '../skeleton-loader-lib/skeleton-loader-lib.module';
+import { CardLandscapeComponent } from './card-landscape/card-landscape.component';
 
 @NgModule({
-  declarations: [CardResourceComponent, CardsComponent,CardPortraitComponent],
+  declarations: [CardResourceComponent, CardsComponent,CardPortraitComponent, CardLandscapeComponent],
   imports: [
     CommonModule,
     MatCardModule,
@@ -22,7 +24,8 @@ import { PipeDurationTransformModule } from '../../_pipes/pipe-duration-transfor
     PipePublicURLModule,
     DisplayContentTypeLibModule,
     DefaultThumbnailModule,
-    PipeDurationTransformModule
+    PipeDurationTransformModule,
+    SkeletonLoaderLibModule
   ],
   entryComponents:[CardsComponent],
   exports: [CardsComponent,CardResourceComponent,CardPortraitComponent],

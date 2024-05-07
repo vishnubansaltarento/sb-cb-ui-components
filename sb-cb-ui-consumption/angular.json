@@ -38,5 +38,10 @@
         }
       }
     }},
-  "defaultProject": "consumption"
+  "defaultProject": "consumption",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }
