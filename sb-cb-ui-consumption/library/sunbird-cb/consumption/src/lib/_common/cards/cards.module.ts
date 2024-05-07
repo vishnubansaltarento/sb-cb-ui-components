@@ -9,9 +9,10 @@ import { PipePublicURLModule } from '../../_pipes/pipe-public-URL/pipe-public-UR
 import { DisplayContentTypeLibModule } from '../display-content-type-lib/display-content-type-lib.module';
 import { DefaultThumbnailModule } from '../../_directives/default-thumbnail/default-thumbnail.module';
 import { PipeDurationTransformModule } from '../../_pipes/pipe-duration-transform/pipe-duration-transform.module';
+import { CardUserComponent } from './card-user/card-user.component';
 
 @NgModule({
-  declarations: [CardResourceComponent, CardsComponent,CardPortraitComponent],
+  declarations: [CardResourceComponent, CardsComponent,CardPortraitComponent, CardUserComponent],
   imports: [
     CommonModule,
     MatCardModule,
@@ -25,6 +26,6 @@ import { PipeDurationTransformModule } from '../../_pipes/pipe-duration-transfor
     PipeDurationTransformModule
   ],
   entryComponents:[CardsComponent],
-  exports: [CardsComponent,CardResourceComponent,CardPortraitComponent],
+  exports: [CardsComponent,CardResourceComponent,CardPortraitComponent, CardUserComponent],
 })
 export class CardsModule { }

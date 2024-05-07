@@ -4,6 +4,7 @@
     : !((widgetData?.intranetMode || 'none') === 'hide' && !!showIntranetContent))"
       [ngSwitch]="( (widgetData && widgetData?.cardSubType) || 'cardPortraitLib')">
       <ng-container *ngSwitchDefault [ngTemplateOutlet]="cardPortraitLib"></ng-container>
+      <ng-container *ngSwitchCase="'user-card'" [ngTemplateOutlet]="cardUser"></ng-container>
       <ng-container *ngSwitchCase="'card-portrait-lib-skeleton'" [ngTemplateOutlet]="cardPortraitLibSkeleton"></ng-container>
       <ng-container *ngSwitchCase="'card-portrait-lib'" [ngTemplateOutlet]="cardPortraitLib"></ng-container>
     </ng-container>
@@ -14,4 +15,8 @@
   </ng-template>
   <ng-template #cardPortraitLib>
     <sb-uic-card-portrait [widgetData]="widgetData"></sb-uic-card-portrait>
+  </ng-template>
+
+  <ng-template #cardUser>
+    <sb-uic-card-user [widgetData]="widgetData"></sb-uic-card-user>
   </ng-template>

@@ -28,7 +28,8 @@ export namespace NsCardContent {
     | 'basic-info'
     | 'basic-details'
     | 'card-description-back'
-    | 'network-card';
+    | 'network-card'
+    | 'user-card';
 
   export enum EContentStatus {
     LIVE = 'Live',
