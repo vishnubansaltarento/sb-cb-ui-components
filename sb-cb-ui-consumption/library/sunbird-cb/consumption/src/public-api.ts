@@ -13,3 +13,5 @@ export * from './lib/_common/sliders/sliders.module'
 export * from './lib/_common/data-points/data-points.module'
 export * from './lib/_common/cards/cards.module'
 export * from './lib/_common/competency-passbook/competency-passbook.module'
+
+export * from './lib/_services/common-methods.service'

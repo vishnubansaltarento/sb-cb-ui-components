@@ -28,6 +28,6 @@ import { CardLandscapeComponent } from './card-landscape/card-landscape.componen
     SkeletonLoaderLibModule
   ],
   entryComponents:[CardsComponent],
-  exports: [CardsComponent,CardResourceComponent,CardPortraitComponent],
+  exports: [CardsComponent,CardResourceComponent,CardPortraitComponent, CardLandscapeComponent],
 })
 export class CardsModule { }
