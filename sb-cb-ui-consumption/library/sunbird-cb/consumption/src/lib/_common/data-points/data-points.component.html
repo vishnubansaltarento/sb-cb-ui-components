@@ -3,11 +3,11 @@
         <div class="element-div" [ngClass]="{'linebreak': obj?.linebreak}">
             <div class="flex flex-row gap-3 items-top">
                 <div>
-                    <img class="objIcon" [ngClass]="obj?.iconColor" [src]="obj.icon">
+                    <img class="objIcon" [src]="obj.icon" [style.color]="obj?.iconColor">
                 </div>
                 <div>
-                    <div class="{{obj?.valueColor}} objHeader pb-1" class="pb-3">{{obj?.value}}</div>
-                    <div class="{{obj?.labelColor}} objDescription">{{obj?.label}}</div>
+                    <div [style.color]="obj?.valueColor" class="objHeader pb-1" >{{obj?.value}}</div>
+                    <div [style.color]="obj?.labelColor" class="objDescription">{{obj?.label}}</div>
                 </div>
             </div>
         </div>
@@ -20,11 +20,11 @@
             <div class="melement-div {{obj?.background}} flex-item">
                 <div class="flex flex-row gap-3">
                     <div>
-                        <img class="mobjIcon" [ngClass]="obj?.iconColor" [src]="obj.icon">
+                        <img [style.color]="obj?.iconColor"  class="mobjIcon" [src]="obj.icon">
                     </div>
                     <div>
-                        <div class="{{obj?.valueColor}} mobjHeader pb-1" class="pb-3">{{obj?.value}}</div>
-                        <div class="{{obj?.labelColor}} mobjDescription">{{obj?.label}}</div>
+                        <div [style.color]="obj?.valueColor" class="mobjHeader pb-1">{{obj?.value}}</div>
+                        <div [style.color]="obj?.labelColor" class="mobjDescription">{{obj?.label}}</div>
                     </div>
                 </div>
             </div>
@@ -40,8 +40,8 @@
                     <div class="flex-item">
                         <div class="flex flex-row gap-5 infra-element-div">
                             <div>
-                               <div class="{{item?.valueColor}} infra-objHeader" class="pb-3">{{item?.value}}</div>
-                                <div class="{{item?.labelColor}} infra-objDescription padding-top-s">{{item?.label}}</div>
+                               <div [style.color]="item?.valueColor" class="infra-objHeader">{{item?.value}}</div>
+                                <div [style.color]="item?.labelColor" class="custom-opacity infra-objDescription padding-top-s">{{item?.label}}</div>
                             </div>
                         </div>
                     </div>
