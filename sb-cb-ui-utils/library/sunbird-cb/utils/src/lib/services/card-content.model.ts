@@ -1,4 +1,4 @@
-import { NsContent } from '../services/widget-content.model'
+import { NsContent } from './widget-content.model'
 
 export namespace NsCardContent {
   export interface ICard {
@@ -9,6 +9,7 @@ export namespace NsCardContent {
     deletedMode?: 'greyOut' | 'hide'
     likes?: number
     contentTags?: IContentTags
+    stateData: any
   }
 
   export interface IContentTags {

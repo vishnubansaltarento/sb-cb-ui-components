@@ -1,0 +1,31 @@
+<div class="widget-card-content-new">
+    <ng-container *ngIf="widgetData && (((widgetData?.deletedMode || 'none') === 'hide' && !!!isLiveOrMarkForDeletion)
+    ? false
+    : !((widgetData?.intranetMode || 'none') === 'hide' && !!showIntranetContent))"
+      [ngSwitch]="( (widgetData && widgetData?.cardSubType) || 'cardPortraitLib')">
+      <ng-container *ngSwitchDefault [ngTemplateOutlet]="cardPortraitLib"></ng-container>
+      <ng-container *ngSwitchCase="'user-card'" [ngTemplateOutlet]="cardUser"></ng-container>
+      <ng-container *ngSwitchCase="'card-portrait-lib-skeleton'" [ngTemplateOutlet]="cardPortraitLibSkeleton"></ng-container>
+      <ng-container *ngSwitchCase="'card-portrait-lib'" [ngTemplateOutlet]="cardPortraitLib"></ng-container>
+      <ng-container *ngSwitchCase="'card-landscape-lib-skeleton'" [ngTemplateOutlet]="cardLandscapeLibSkeleton"></ng-container>
+      <ng-container *ngSwitchCase="'card-landscape-lib'" [ngTemplateOutlet]="cardLandscapeLib"></ng-container>
+    </ng-container>
+</div>
+
+<ng-template #cardPortraitLibSkeleton>
+  <sb-uic-card-portrait [widgetData]="widgetData" [isCardLoading]="true"></sb-uic-card-portrait>
+</ng-template>
+<ng-template #cardPortraitLib>
+  <sb-uic-card-portrait [widgetData]="widgetData" [isCardLoading]="false"></sb-uic-card-portrait>
+</ng-template>
+<ng-template #cardLandscapeLibSkeleton>
+  <sb-uic-card-landscape [widgetData]="widgetData" [isCardLoading]="true"></sb-uic-card-landscape>
+</ng-template>
+<ng-template #cardLandscapeLib>
+  <sb-uic-card-landscape [widgetData]="widgetData" [isCardLoading]="false"></sb-uic-card-landscape>
+</ng-template>
+
+
+  <ng-template #cardUser>
+    <sb-uic-card-user [widgetData]="widgetData"></sb-uic-card-user>
+  </ng-template>

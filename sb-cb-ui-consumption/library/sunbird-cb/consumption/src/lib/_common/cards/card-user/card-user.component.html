@@ -1,0 +1,40 @@
+<mat-card class="card-users-container mr-5 padding-remove cursor-pointer">
+    <div class="display-contents">
+        <ng-container *ngIf="widgetData.user">
+            <a (click)="raiseTelemetry();$event.stopPropagation()" role="link"
+                i18n-aria-label>
+                <ng-container>
+                    <mat-card-content class="min-top">
+                        <div style="position: relative; z-index: 1;">
+                            <ng-container *ngIf="widgetData.user.profileImage">
+                                <img mat-card-image [src]="widgetData.user.profileImage"
+                                    loading="lazy" class="card-img ws-mat-primary-lite-background margin-remove"
+                                    [wsUtilsDefaultThumbnail]="defaultThumbnail" [alt]="widgetData.user.firstName" />
+                            </ng-container>
+                            <ng-container *ngIf="!widgetData.user.profileImage">
+                                <ng-template #defaultImg>
+                                    <img mat-card-image [src]="defaultThumbnail" loading="lazy"
+                                        class="card-img ws-mat-primary-lite-background margin-remove"
+                                        [alt]="widgetData.user.firstName" />
+                                </ng-template>
+                            </ng-container>
+                        </div>
+                        <div class="padding-m">
+                            <div class="user_widget flex margin-remove">
+                            </div>
+                            <div [id]="'m-c-'+ widgetData.user?.userId"
+                                class="mat-subheading-1 title-text ws-mat-text-block-fade-gradient">
+                                {{ widgetData?.user?.firstName }}
+                            </div>
+                            <div class="flex w-full flex-wrap flex-middle">
+                                <p>
+                                    {{ widgetData?.user?.description }}
+                                </p>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </ng-container>
+            </a>
+        </ng-container>
+    </div>
+</mat-card>
