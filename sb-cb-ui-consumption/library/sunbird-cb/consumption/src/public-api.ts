@@ -15,4 +15,3 @@ export * from './lib/_common/cards/cards.module'
 export * from './lib/_common/competency-passbook/competency-passbook.module'
 
 export * from './lib/_services/common-methods.service'
-export * from './lib/_services/form-service.service'
