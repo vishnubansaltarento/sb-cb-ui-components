@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ConfigurationsService, EventService } from '@sunbird-cb/utils';
 import { WidgetContentService } from '../../_services/widget-content.service';
 import { CompetencyPassbookService } from './competency-passbook.service';
@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 export class CompetencyPassbookComponent implements OnInit {
 
   @Input() objectData: any
+  @Input() providerId: any
+  @Output() emptyResponse = new EventEmitter<any>()
   loadCometency: boolean = false
   loadCompetencyArea: boolean = false
 
@@ -56,16 +58,21 @@ export class CompetencyPassbookComponent implements OnInit {
   }
 
   // to get competency area from facets
-  async getCompetencyArea(){
+  async getCompetencyArea(){let addfilter: any = {}
+  if(this.providerId) {
+    addfilter = {
+      "channel": [
+        this.providerId
+     ],
+    }
+  }
     this.loadCompetencyArea = true
     let request = {
         "request": {
             "query": "",
             "filters": {
                 "contentType":"Course",
-                "channel": [
-                   this.orgId
-                ],
+                ...addfilter,
                 "status": [
                     "Live"
                 ]
@@ -95,6 +102,8 @@ export class CompetencyPassbookComponent implements OnInit {
         }
       }
     } catch (error) {
+      this.loadCompetencyArea = false
+      this.emptyResponse.emit(true)
       // Handle errors
       // console.error('Error:', error);
     }
@@ -115,7 +124,16 @@ export class CompetencyPassbookComponent implements OnInit {
 
   // competency theam change
   competencyChange(e){
-    this.getcompetencyTheme(e.name)
+    let addfilter: any = {}
+    if(this.providerId) {
+      addfilter = {
+        "channel": [
+          this.providerId
+       ],
+      }
+    }
+    
+    this.getcompetencyTheme(e.name, addfilter)
     this.selectedValue = e.name
   }
   getAllCompetencies(){
@@ -136,15 +154,13 @@ export class CompetencyPassbookComponent implements OnInit {
     })
   }
 
-  async getcompetencyTheme(value: any) {
+  async getcompetencyTheme(value: any,addFilter?: any) {
     let request = {
       "request": {
           "query": "",
           "filters": {
               "contentType":"Course",
-              "channel": [
-                 this.orgId
-              ],
+              ...addFilter,
               "competencies_v5.competencyArea" : value,
               "status": [
                   "Live"
