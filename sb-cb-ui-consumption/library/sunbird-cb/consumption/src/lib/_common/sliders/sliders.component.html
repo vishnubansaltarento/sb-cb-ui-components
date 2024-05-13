@@ -56,3 +56,13 @@
   </button>
 
 </div> -->
+<ng-container *ngIf="!widgetData?.length">
+  <div class="slider default-slider h-full">
+    <div class="relative h-full">
+        <img class="h-full" src="assets/icons/home/default-slider-image.svg" alt="">
+        <div class="default-title">
+            <p>{{title}}</p>
+        </div>
+    </div>
+  </div>
+</ng-container>

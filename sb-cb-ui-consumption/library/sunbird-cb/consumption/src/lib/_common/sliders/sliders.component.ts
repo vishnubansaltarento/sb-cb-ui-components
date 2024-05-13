@@ -13,6 +13,7 @@ export class SlidersLibComponent extends WidgetBaseComponent
   implements OnInit, OnDestroy, NsWidgetResolver.IWidgetData<ICarousel[]> {
   @Input() widgetData!: ICarousel[]
   @Input() styleData!: ICarouselStyle
+  @Input() title: any = ''
   @HostBinding('id')
   public id = `banner_${Math.random()}`
   private defaultMenuSubscribe: Subscription | null = null
