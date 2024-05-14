@@ -1,0 +1,21 @@
+<div class="w-full p-3 event-day my-3" *ngFor="let obj of objectData" [style.backgroundColor]="obj?.backgroundColor" >
+    <div class="flex item-top gap-5">
+        <div class="date">
+            {{obj.eventDate}}
+        </div>
+        <div class="details" *ngIf="obj.events.length">
+            <div class="flex p-4 item-center events-list mb-{{obj.events.length === (i+1) ? '0' : '2'}}" [style.backgroundColor]="event?.backgroundColor"
+                 *ngFor="let event of obj.events; let i = index" >
+                <div class="">
+                    {{event.title}}
+                </div>
+                <div>
+                    Visit
+                </div>
+            </div>
+        </div>
+        <div class="details" *ngIf="!obj.events.length">
+            No trainings.
+        </div>
+    </div>
+</div>
