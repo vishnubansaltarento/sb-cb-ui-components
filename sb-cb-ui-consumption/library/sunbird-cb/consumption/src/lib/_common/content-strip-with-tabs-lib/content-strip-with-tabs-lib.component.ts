@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, HostBinding, Inject } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, HostBinding, Inject, EventEmitter, Output } from '@angular/core';
 import { NsWidgetResolver, WidgetBaseComponent } from '@sunbird-cb/resolver';
 import { NsContentStripWithTabs } from './content-strip-with-tabs-lib.model';
 // import { HttpClient } from '@angular/common/http'
@@ -73,6 +73,8 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
   OnDestroy,
   NsWidgetResolver.IWidgetData<NsContentStripWithTabs.IContentStripMultiple> {
   @Input() widgetData!: NsContentStripWithTabs.IContentStripMultiple;
+  @Output() emptyResponse = new EventEmitter<any>()
+  @Input() providerId : any = ''
   @HostBinding('id')
   public id = `ws-strip-miltiple_${Math.random()}`;
   stripsResultDataMap: { [key: string]: IStripUnitContentData } = {};
@@ -317,6 +319,8 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
     this.fetchFromSearchV6(strip, calculateParentStatus);
     this.fetchFromTrendingContent(strip, calculateParentStatus);
     this.fetchAllCbpPlans(strip, calculateParentStatus);
+    this.fetchAllTopContent(strip, calculateParentStatus);
+    this.fetchAllFeaturedContent(strip, calculateParentStatus);
     // this.enrollInterval = setInterval(() => {
     //   this.fetchAllCbpPlans(strip, calculateParentStatus)
     // },                                1000)
@@ -870,7 +874,9 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
         (strip.request.searchV6 && Object.keys(strip.request.searchV6).length) ||
         (strip.request.enrollmentList && Object.keys(strip.request.enrollmentList).length) ||
         (strip.request.cbpList && Object.keys(strip.request.cbpList).length) ||
-        (strip.request.trendingSearch && Object.keys(strip.request.trendingSearch).length)
+        (strip.request.trendingSearch && Object.keys(strip.request.trendingSearch).length)||
+        (strip.request.topContent && Object.keys(strip.request.topContent).length) ||
+        (strip.request.featureContent && Object.keys(strip.request.featureContent).length)
       )
     ) {
       return true;
@@ -1195,5 +1201,134 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
   tracker(index: number, item: any) {
     if (index >= 0) { }
     return _.get(item, 'widgetData.content.identifier')
+  }
+
+  async fetchAllTopContent(strip: NsContentStripWithTabs.IContentStripUnit, calculateParentStatus = true) {
+    if (strip.request && strip.request.topContent && Object.keys(strip.request.topContent).length) {
+      let originalFilters: any = [];
+      if (strip.request &&
+        strip.request.topContent &&
+        strip.request.topContent.request &&
+        strip.request.topContent.request.filters) {
+        originalFilters = strip.request.topContent.request.filters;
+        strip.request.topContent.request.filters = this.postMethodFilters(strip.request.topContent.request.filters);
+      }
+      try {
+        const response = await this.postRequestMethod(strip, strip.request.topContent, strip.request.apiUrl, calculateParentStatus);
+        // console.log('calling  after - response, ', response)
+        if (response && response.results) {
+          // console.log('calling  after-- ')
+          if (response.results.result.content) {
+            this.processStrip(
+              strip,
+              this.transformContentsToWidgets(response.results.result.content, strip),
+              'done',
+              calculateParentStatus,
+              response.viewMoreUrl,
+            );
+          } else {
+            this.processStrip(strip, [], 'error', calculateParentStatus, null);
+            this.emptyResponse.emit(true)
+          }
+
+        } else {
+          this.processStrip(strip, [], 'error', calculateParentStatus, null);
+          this.emptyResponse.emit(true)
+        }
+      } catch (error) {
+        // Handle errors
+        // console.error('Error:', error);
+      }
+    }
+  }
+
+  async fetchAllFeaturedContent(strip: NsContentStripWithTabs.IContentStripUnit, calculateParentStatus = true) {
+    if (strip.request && strip.request.featureContent && Object.keys(strip.request.featureContent).length) {
+      let originalFilters: any = [];
+      if (strip.request &&
+        strip.request.featureContent &&
+        strip.request.featureContent.request &&
+        strip.request.featureContent.request.filters) {
+        originalFilters = strip.request.featureContent.request.filters;
+        strip.request.featureContent.request.filters = this.checkForDateFilters(strip.request.featureContent.request.filters);
+        strip.request.featureContent.request.filters = this.getFiltersFromArray(
+          strip.request.featureContent.request.filters,
+        );
+      }
+      try {
+        const response = await this.postRequestMethod(strip, strip.request.featureContent.request, strip.request.featureContent.path, calculateParentStatus);
+        // console.log('calling  after - response, ', response)
+        if (response && response.results) {
+          // console.log('calling  after-- ')
+          if (response.results.result.content) {
+            this.processStrip(
+              strip,
+              this.transformContentsToWidgets(response.results.result.content, strip),
+              'done',
+              calculateParentStatus,
+              response.viewMoreUrl,
+            );
+          } else {
+            this.processStrip(strip, [], 'error', calculateParentStatus, null);
+          }
+
+        } else {
+          this.processStrip(strip, [], 'error', calculateParentStatus, null);
+        }
+      } catch (error) {
+        // Handle errors
+        // console.error('Error:', error);
+      }
+    }
+  }
+
+  async postRequestMethod(strip: NsContentStripWithTabs.IContentStripUnit,
+    request: NsContentStripWithTabs.IContentStripUnit['request'],
+    apiUrl: string,
+    calculateParentStatus: boolean
+  ): Promise<any> {
+    const originalFilters: any = [];
+    return new Promise<any>((resolve, reject) => {
+      if (request && request) {
+        this.contentSvc.postApiMethod(apiUrl,request).subscribe(results => {
+        const showViewMore = Boolean(
+        results.result.content && results.result.content.length > 5 && strip.stripConfig && strip.stripConfig.postCardForSearch,
+        );
+        const viewMoreUrl = showViewMore
+        ? {
+        path: strip.viewMoreUrl && strip.viewMoreUrl.path || '',
+        queryParams: {
+        tab: 'Learn',
+        q: strip.viewMoreUrl && strip.viewMoreUrl.queryParams,
+        f:
+        request &&
+        request.searchV6 &&
+        request.searchV6.request &&
+        request.searchV6.request.filters
+        ? JSON.stringify(
+          this.transformSearchV6FiltersV2(
+            originalFilters,
+          )
+        )
+        : {},
+        },
+        }
+        : null;
+        resolve({ results, viewMoreUrl });
+        },                                                   (error: any) => {
+        this.processStrip(strip, [], 'error', calculateParentStatus, null);
+        reject(error);
+        },
+        );
+      }
+    });
+  }
+  postMethodFilters(filters: any){
+    if (filters.organisation &&
+      filters.organisation.indexOf('<orgID>') >= 0
+    ) {
+      filters.organisation = this.providerId
+    }
+    return filters
   }
 }
