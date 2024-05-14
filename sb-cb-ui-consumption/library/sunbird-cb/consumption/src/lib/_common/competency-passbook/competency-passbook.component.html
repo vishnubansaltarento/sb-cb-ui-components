@@ -16,9 +16,9 @@
                     <div class="flex flex-row cursor-pointer">
                         <div class="flex flex-row gap-2 items-center">
                             <div class="name">{{allcompetencyTheme[obj?.name]?.name}}</div>
-                            <div class="flex items-baseline">
+                            <!-- <div class="flex items-baseline">
                                 <img src="assets/icons/competency/cp-arrow.svg" class="arrow-img cursor-pointer" alt="cp arrow img" (click)="navigateToCompetency(obj)" />
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="flex flex-row pt-3 pb-3 description">
@@ -49,7 +49,7 @@
         </div>
     </div>
 </div>
-<ng-container *ngIf="competencyTheme.length > 6">
+<ng-container *ngIf="competencyTheme.length > 6 && !loadCometency">
     <div class="flex items-center justify-center gap-8 mt-5 mb-5 competency-filters">
         <sb-uic-pills [pillsData]="showAllTheme" (pillClick)="displayAllTheme($event)"></sb-uic-pills>
     </div>
