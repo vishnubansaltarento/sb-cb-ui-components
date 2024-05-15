@@ -3,8 +3,43 @@
     border-radius: 15px;
 
 }
+.event-date {
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 16.8px;
+    text-align: center;
+    width: 10%;
+
+}
 
 .events-list {
     border: 1px solid #c3c3c3;
     border-radius: 15px;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.8px;
+}
+.row1 {
+    width: 235px;
+}
+
+.col1 {
+    align-items: center ;
+}
+.aliginCenter {
+    align-items: center;
+}
+.visit-link {
+    opacity: .7;
+    cursor: pointer;
+}
+.currentDay {
+    padding: 5px;
+    background: #1D8923;
+    border-radius: 20px;
+    color: white;
 }

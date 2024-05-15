@@ -14,9 +14,12 @@ export class CalenderComponent implements OnInit {
 
   @Input() objectData: any
 
+  toDay = new Date()
+
   ngOnInit() {
 
     console.log("data ===== ", this.objectData)
+    console.log("toDay ", this.toDay)
 
   }
   
