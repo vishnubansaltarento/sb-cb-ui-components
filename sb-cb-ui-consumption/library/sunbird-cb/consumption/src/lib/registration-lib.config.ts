@@ -1,4 +1,4 @@
-import { NsWidgetResolver } from '@sunbird-cb/resolver'
+import { NsWidgetResolver } from '@sunbird-cb/resolver-v2'
 import { ROOT_WIDGET_CONFIG } from './consumption.config'
 // Components
 import { CardsComponent } from './_common/cards/cards.component'

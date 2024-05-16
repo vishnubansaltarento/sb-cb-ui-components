@@ -3,8 +3,8 @@
   <!-- <div *ngIf="showParentLoader" class="text-center my-2">
     <mat-spinner class="inline-block"></mat-spinner>
   </div> -->
-  <ng-container *ngIf="showParentError" [wsResolverWidget]="widgetData.errorWidget"></ng-container>
-  <ng-container *ngIf="showParentNoData" [wsResolverWidget]="widgetData.noDataWidget"></ng-container>
+  <ng-container *ngIf="showParentError" [sbUiResolverWidget]="widgetData.errorWidget"></ng-container>
+  <ng-container *ngIf="showParentNoData" [sbUiResolverWidget]="widgetData.noDataWidget"></ng-container>
   <ng-container *ngFor="let key of stripsKeyOrder; let i = index; trackBy: identify">
     <ng-container *ngIf="isStripShowing(stripsResultDataMap[key])">
       <a name="{{stripsResultDataMap[key]?.stripTitle}}" [class]="key">
@@ -66,14 +66,14 @@
             </div>
 
             <div class="mb-4" *ngIf="checkVisible(stripsResultDataMap[key])">
-              <ng-container [wsResolverWidget]="getdata(stripsResultDataMap[key])">
+              <ng-container [sbUiResolverWidget]="getdata(stripsResultDataMap[key])">
               </ng-container>
             </div>
 
             <ng-container *ngIf="stripsResultDataMap[key]?.showOnNoData"
-              [wsResolverWidget]="stripsResultDataMap[key]?.noDataWidget"></ng-container>
+              [sbUiResolverWidget]="stripsResultDataMap[key]?.noDataWidget"></ng-container>
             <ng-container *ngIf="stripsResultDataMap[key]?.showOnError"
-              [wsResolverWidget]="stripsResultDataMap[key]?.errorWidget"></ng-container>
+              [sbUiResolverWidget]="stripsResultDataMap[key]?.errorWidget"></ng-container>
             <!-- IF no errors then proceed to show tabs or non tabs strip -->
             <ng-container *ngIf="!stripsResultDataMap[key]?.showOnNoData && !stripsResultDataMap[key]?.showOnError">
               <ng-container *ngIf="stripsResultDataMap[key].tabs && stripsResultDataMap[key].tabs.length">
@@ -94,7 +94,7 @@
                             <sb-uic-horizontal-scroller-v2 [sliderConfig]="stripsResultDataMap[key]?.sliderConfig"
                                     [loadStatus]="'fetching'" [stripConfig]="stripsResultDataMap[key]?.stripConfig">
                               <ng-container *ngFor="let widget of stripsResultDataMap[key]?.loaderWidgets; trackBy: tracker">
-                                <ng-container [wsResolverWidget]="widget"></ng-container>
+                                <ng-container [sbUiResolverWidget]="widget"></ng-container>
                               </ng-container>
                             </sb-uic-horizontal-scroller-v2>
                       </div>
@@ -123,7 +123,7 @@
                             stripsResultDataMap[key]?.sliderConfig?.maxWidgets || defaultMaxWidgets" [stripConfig]="stripsResultDataMap[key]?.stripConfig">
                             <ng-container *ngFor="let widget of tab?.widgets| slice:0:(tab?.maxWidgets ||
                             stripsResultDataMap[key]?.sliderConfig?.maxWidgets || defaultMaxWidgets); trackBy: tracker">
-                                <ng-container [wsResolverWidget]="widget"></ng-container>
+                                <ng-container [sbUiResolverWidget]="widget"></ng-container>
                             </ng-container>
                           </sb-uic-horizontal-scroller-v2>
                         </ng-container>
@@ -137,7 +137,7 @@
                       <sb-uic-horizontal-scroller-v2 [sliderConfig]="stripsResultDataMap[key]?.sliderConfig"
                               [loadStatus]="'fetching'" [stripConfig]="stripsResultDataMap[key]?.stripConfig">
                         <ng-container *ngFor="let widget of stripsResultDataMap[key]?.loaderWidgets; trackBy: tracker">
-                          <ng-container [wsResolverWidget]="widget"></ng-container>
+                          <ng-container [sbUiResolverWidget]="widget"></ng-container>
                         </ng-container>
                       </sb-uic-horizontal-scroller-v2>
                 </div>
@@ -147,8 +147,8 @@
                       <ng-container *ngFor="let widget of stripsResultDataMap[key]?.widgets| slice:0:(stripsResultDataMap[key].sliderConfig?.maxWidgets || defaultMaxWidgets); trackBy: tracker">
                       <!-- <ng-container *ngIf="widget.widgetData.context.pageSection === 'continueLearning' "> -->
                       <!-- <ng-container *ngIf="widget.widgetData.content.completionPercentage !== 100"
-                        [wsResolverWidget]="widget"></ng-container> -->
-                        <ng-container [wsResolverWidget]="widget"></ng-container>
+                        [sbUiResolverWidget]="widget"></ng-container> -->
+                        <ng-container [sbUiResolverWidget]="widget"></ng-container>
                       <!-- </ng-container> -->
                       </ng-container>
                   </sb-uic-horizontal-scroller-v2>

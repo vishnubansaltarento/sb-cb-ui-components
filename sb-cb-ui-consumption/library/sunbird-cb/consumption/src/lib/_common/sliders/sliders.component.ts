@@ -1,8 +1,8 @@
 import { Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core'
-import { NsWidgetResolver, WidgetBaseComponent } from '@sunbird-cb/resolver'
+import { NsWidgetResolver, WidgetBaseComponent } from '@sunbird-cb/resolver-v2'
 import { ICarousel, ICarouselStyle } from './sliders.model'
 import { Subscription, interval } from 'rxjs'
-import { EventService, WsEvents, ValueService } from '@sunbird-cb/utils'
+import { EventService, WsEvents, ValueService } from '@sunbird-cb/utils-v2'
 
 @Component({
   selector: 'sb-uic-sliders',
