@@ -4,8 +4,8 @@
   "lib": {
     "entryFile": "src/public-api.ts",
     "umdModuleIds": {
-      "@sunbird-cb/resolver": "@sunbird-cb/resolver",
-      "@sunbird-cb/utils": "@sunbird-cb/utils",
+      "@sunbird-cb/resolver-v2": "@sunbird-cb/resolver-v2",
+      "@sunbird-cb/utils-v2": "@sunbird-cb/utils-v2",
       "ngx-quill": "ngx-quill",
       "moment": "moment",
       "mustache": "mustache",

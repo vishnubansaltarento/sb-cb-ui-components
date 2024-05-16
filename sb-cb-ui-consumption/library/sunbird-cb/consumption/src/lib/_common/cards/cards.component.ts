@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { WidgetBaseComponent, NsWidgetResolver } from '@sunbird-cb/resolver';
+import { WidgetBaseComponent, NsWidgetResolver } from '@sunbird-cb/resolver-v2';
 import { NsCardContent } from '../../_models/card-content.model';
-import { UtilityService } from '@sunbird-cb/utils';
+import { UtilityService } from '@sunbird-cb/utils-v2';
 import { ConfigurationsService } from '../../_services/configurations.service';
 import { WidgetContentService } from '../../_services/widget-content.service';
 import { Router } from '@angular/router';

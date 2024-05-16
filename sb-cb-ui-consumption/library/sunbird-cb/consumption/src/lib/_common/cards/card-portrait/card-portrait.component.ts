@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NsCardContent } from '../../../_models/card-content.model';
 import { MatSnackBar } from '@angular/material';
-import { ConfigurationsService, EventService } from '@sunbird-cb/utils';
+import { ConfigurationsService, EventService } from '@sunbird-cb/utils-v2';
 import * as _ from "lodash";
 import { TranslateService } from '@ngx-translate/core';
 import { MultilingualTranslationsService } from '../../../_services/multilingual-translations.service';

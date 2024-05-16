@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy, HostBinding, Inject } from '@angular/core';
-import { NsWidgetResolver, WidgetBaseComponent } from '@sunbird-cb/resolver';
+import { NsWidgetResolver, WidgetBaseComponent } from '@sunbird-cb/resolver-v2';
 import { NsCommonStrip } from './common-strip.model';
 // import { HttpClient } from '@angular/common/http'
 import { WidgetContentService } from '../../_services/widget-content.service';
@@ -12,7 +12,7 @@ import {
   ConfigurationsService,
   UtilityService,
   WsEvents,
-} from '@sunbird-cb/utils';
+} from '@sunbird-cb/utils-v2';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { WidgetUserService } from '../../_services/widget-user.service';

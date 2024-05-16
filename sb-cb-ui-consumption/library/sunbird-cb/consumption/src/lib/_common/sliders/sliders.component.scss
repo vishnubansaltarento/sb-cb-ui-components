@@ -275,7 +275,9 @@ $banner-min-height: 243px;
       padding: 16px;
       gap: 8px;
       border-radius: 40px;
+      width: 500px;
       p{
+          word-break: break-word;
           margin: 0 !important;
       }
   }
