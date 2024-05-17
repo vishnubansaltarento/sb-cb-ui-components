@@ -8,7 +8,7 @@
     [isLoading]="loadCompetencyArea" (pillClick)="competencyChange($event)" [selectedValue]="selectedValue"></sb-uic-pills>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-3 w-full grid-flow-row gap-5" *ngIf="!loadCometency">
-    <div *ngFor="let obj of competencyTheme| slice:0:competencyThemeLength">
+    <div class="competency-card" *ngFor="let obj of competencyTheme| slice:0:competencyThemeLength">
         <div class="flex-1 flex-col">
             <div class="competency-theme"></div>
             <div class="details flex flex-col">
