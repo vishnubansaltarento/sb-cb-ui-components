@@ -144,7 +144,6 @@ NsWidgetResolver.IWidgetData<NsCommonStrip.ICommonStrip> {
     }
     // Fetch the data
     for (const strip of this.widgetData.strips) {
-      console.log('strip :: ',strip)
       this.processStrip(strip, [], 'fetching', false, null);
       if(strip.dataType === 'in-hand' && this.widgetData[strip.dataKey]){
         this.processStrip(
@@ -154,7 +153,6 @@ NsWidgetResolver.IWidgetData<NsCommonStrip.ICommonStrip> {
           true,
           strip.viewMoreUrl || '',
         );
-        console.log('=========================', this.commonMethodsSvc.transformContentsToWidgets(this.widgetData[strip.dataKey], strip))
       } else {
         if (this.checkForEmptyWidget(strip)) {
           // this.fetchStripFromRequestData(strip, false);
@@ -204,7 +202,6 @@ NsWidgetResolver.IWidgetData<NsCommonStrip.ICommonStrip> {
         data.showStrip = false;
       }
     }
-    // console.log('data.key', data, data.key, data.widgets);
     return data.showStrip;
   }
 

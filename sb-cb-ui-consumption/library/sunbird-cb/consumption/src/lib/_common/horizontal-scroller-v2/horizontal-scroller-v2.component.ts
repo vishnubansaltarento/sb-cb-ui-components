@@ -180,7 +180,6 @@ export class HorizontalScrollerV2Component implements OnInit, OnChanges, OnDestr
       let cardWidth;
       let arrLength;
       if (this.cardSubType !== 'card-wide-v2') {
-        console.log('inside if', document.getElementsByClassName(this.cardSubType), this.cardSubType )
         cardWidth = this.cardSubType === 'standard' ? 245 :
         ((document.getElementsByClassName(this.cardSubType) &&
          document.getElementsByClassName(this.cardSubType)[0] !== undefined)
@@ -188,7 +187,6 @@ export class HorizontalScrollerV2Component implements OnInit, OnChanges, OnDestr
         if (document.getElementById(`${this.id}`)) {
           const scrollerWidth = document.getElementById(`${this.id}`).clientWidth;
           const totalCardsLength = cardWidth * this.widgetsLength;
-          console.log('scrollerWidth', scrollerWidth, ' totalCardsLength', totalCardsLength, ' this.widgetsLength',  this.widgetsLength)
           if (totalCardsLength > scrollerWidth) {
             arrLength = (scrollerWidth / cardWidth);
             this.defaultMaxWidgets = this.defaultMaxWidgets ?  this.widgetsLength < this.defaultMaxWidgets ?
