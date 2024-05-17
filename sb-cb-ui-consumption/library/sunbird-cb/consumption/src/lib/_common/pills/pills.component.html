@@ -3,7 +3,7 @@
         <ng-container *ngFor="let pill of pillsData">
             <mat-chip class="competency-chip" (click)="selectedPill(pill)" 
             [ngClass]="{'active': selectedValue === pill?.name}">
-                <span class="pill-name">{{pill?.name | titlecase}} <span>{{pill?.count}}</span></span>
+                <span class="pill-name">{{pill?.name | titlecase}} <span *ngIf="pill?.count">({{pill?.count}})</span></span>
             </mat-chip>
         </ng-container>
     </mat-chip-list>

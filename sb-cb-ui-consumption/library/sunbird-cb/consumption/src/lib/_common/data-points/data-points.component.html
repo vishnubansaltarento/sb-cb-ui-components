@@ -6,7 +6,8 @@
                     <img class="objIcon" [src]="obj.icon"  [style.color]="obj?.iconColor">
                 </div>
                 <div>
-                    <div [style.color]="obj?.valueColor" class="objHeader pb-1" >{{obj?.value | number: '1.1-2'}}</div>
+                    <div [style.color]="obj?.valueColor" class="objHeader pb-1" >{{obj?.value | number: obj.value % 1 === 0 ? '1.0-0' : '1.1-2'}}
+                    </div>
                     <div [style.color]="obj?.labelColor" class="objDescription">{{obj?.label}}</div>
                 </div>
             </div>

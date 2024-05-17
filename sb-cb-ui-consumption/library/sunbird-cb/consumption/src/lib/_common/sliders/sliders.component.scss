@@ -272,13 +272,28 @@ $banner-min-height: 243px;
       z-index: 999;
       background: rgba(230, 239, 255, 1);
       width: fit-content;
-      padding: 16px;
-      gap: 8px;
-      border-radius: 40px;
+      padding: 32px;
       width: 500px;
       p{
           word-break: break-word;
           margin: 0 !important;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 4;
+          -webkit-box-orient: vertical;
+          text-transform: uppercase;
       }
+  }
+}
+
+
+@media screen and (max-width: 768px) { 
+  .default-slider{
+    height: 384px;
+    width: 100%;
+    .default-title {
+      width: unset !important;
+    }
   }
 }
