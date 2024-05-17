@@ -58,6 +58,59 @@ $spaceFromEnd: 0;
   right: $spaceFromEnd;
 }
 
+.navigation {
+  &.bottom-right {
+    .prevBtn {
+      left: unset;
+      right: 56px;
+      bottom: -44px;
+      top: unset;
+    }
+    .nextBtn {
+      left: unset;
+      right: 8px;
+      bottom: -44px;
+      top: unset;
+    }
+  } 
+  &.bottom-center {
+    .prevBtn {
+      left: calc(50% - 24px);
+      right: unset;
+      bottom: -44px;
+      top: unset;
+    }
+    .nextBtn {
+      left: calc(50% + 24px);
+      right: unset;
+      bottom: -44px;
+      top: unset;
+    }
+  } 
+  &.bottom-left{
+    .prevBtn {
+      left: 8px;
+      right: unset;
+      bottom: -44px;
+      top: unset;
+    }
+    .nextBtn {
+      left: 62px;
+      right: unset;
+      bottom: -44px;
+      top: unset;
+    }
+  }
+  &.middle-inline {
+    .prevBtn {
+      left: 30px;
+    }
+    .nextBtn {
+      right: 30px;
+    }
+  }
+}
+
 // Changing scrollbar
 .horizontal-scroll-content {
   // overflow-x: hidden;
@@ -86,6 +139,14 @@ $spaceFromEnd: 0;
   // @include breakpoint-xs {
   //   display: none;
   // }
+  &.left {
+    align-items: start;
+    justify-content: start;
+  }
+  &.right {
+    align-items: end;
+    justify-content: end;
+  }
 
   .dot {
     cursor: pointer;

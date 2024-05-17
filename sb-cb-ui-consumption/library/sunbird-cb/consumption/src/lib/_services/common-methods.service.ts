@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NsContent } from '../_models/widget-content.model';
 import { NsContentStripWithTabs } from '../_common/content-strip-with-tabs-lib/content-strip-with-tabs-lib.model';
+import { NsCommonStrip } from '../_common/common-strip/common-strip.model'
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class CommonMethodsService {
 
   transformContentsToWidgets(
     contents: NsContent.IContent[],
-    strip: NsContentStripWithTabs.IContentStripUnit,
+    strip: NsContentStripWithTabs.IContentStripUnit | NsCommonStrip.ICommonStripUnit,
   ) {
     return (contents || []).map((content, idx) => (
       content ? {

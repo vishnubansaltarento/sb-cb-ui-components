@@ -2,7 +2,7 @@ import { NsCardContent } from './card-content.model'
 
 export namespace NsCardUser {
   export interface ICard {
-    user: user | IUserProfile;
+    content: user | IUserProfile;
     cardSubType: NsCardContent.TCardSubType;
     context: { pageSection: string; position?: number };
     likes?: number;
@@ -14,13 +14,14 @@ export namespace NsCardUser {
     email?: string
     departmentName?: string
     userName?: string
+    name?:string
     firstName?: string
     surName?: string
     middleName?: string
     lastName?: string
     rootOrgId?: string
     rootOrgName?: string
-    profileImage?: string
+    image?: string
     givenName?: string
     country?: null | string
     unit?: string | null
@@ -41,9 +42,9 @@ export namespace NsCardUser {
 
   export interface user {
     userId: string,
-    firstName?: string
+    name?: string
     description?: string
-    profileImage?: string
+    image?: string
   }
 
 
