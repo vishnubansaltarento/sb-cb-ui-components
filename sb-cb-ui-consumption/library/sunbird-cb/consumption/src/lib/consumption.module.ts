@@ -4,6 +4,7 @@ import { ContentStripWithTabsLibModule } from './_common/content-strip-with-tabs
 import { SlidersLibModule } from '../lib/_common/sliders/sliders.module';
 import { DataPointsModule } from './_common/data-points/data-points.module';
 import { CalenderModule } from './_common/calender/calender.module';
+import { CommonStripModule } from './_common/common-strip/common-strip.module';
 
 
 
@@ -17,7 +18,8 @@ import { CalenderModule } from './_common/calender/calender.module';
     ContentStripWithTabsLibModule,
     SlidersLibModule,
     DataPointsModule,
-    CalenderModule
+    CalenderModule,
+    CommonStripModule
   ],
 })
 export class ConsumptionModule { }

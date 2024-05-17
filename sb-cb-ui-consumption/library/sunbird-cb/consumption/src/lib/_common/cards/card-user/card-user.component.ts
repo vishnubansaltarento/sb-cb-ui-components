@@ -54,10 +54,10 @@ export class CardUserComponent implements OnInit {
       {
         type: 'click',
         subType: `${this.widgetType}-${this.widgetSubType}`,
-        id: `${_.camelCase(this.widgetData.user.userId)}-card`,
+        id: `${_.camelCase(this.widgetData.content.userId)}-card`,
       },
       {
-        id: this.widgetData.user.userId,
+        id: this.widgetData.content.userId,
         // type: this.widgetData.user.primaryCategory,
         //context: this.widgetData.context,
         rollup: {},

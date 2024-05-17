@@ -28,7 +28,15 @@ export namespace NsContentStripWithTabs {
       showNavs: boolean,
       showDots: boolean,
       maxWidgets?: number
-      cerificateCardMargin?: boolean
+      cerificateCardMargin?: boolean,
+      dotsAlign?: "right" | "left",
+      arrowsPlacement?: "bottom-right" | "bottom-center" | "bottom-left" | "middle-inline",
+      responsive?: {
+        showNavs: boolean,
+        showDots: boolean,
+        dotsAlign?: "right" | "left",
+        arrowsPlacement?: "bottom-right" | "bottom-center" | "bottom-left" | "middle-inline",
+      };
     };
     tabs?: NsContentStripWithTabs.IContentStripTab[] | undefined;
     titleDescription?: string;

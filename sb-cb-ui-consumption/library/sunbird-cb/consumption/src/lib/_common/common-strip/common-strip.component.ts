@@ -11,7 +11,6 @@ import {
   EventService,
   ConfigurationsService,
   UtilityService,
-  WsEvents,
 } from '@sunbird-cb/utils-v2';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -20,9 +19,8 @@ import { WidgetUserService } from '../../_services/widget-user.service';
 // tslint:disable-next-line
 import * as _ from 'lodash'
 import { MatTabChangeEvent } from '@angular/material';
-import { NsCardContent } from '../../_models/card-content-v2.model';
-import { ITodayEvents } from '../../_models/event';
 import { TranslateService } from '@ngx-translate/core';
+import { CommonMethodsService } from '../../_services/common-methods.service';
 
 
 interface IStripUnitCommonData {
@@ -66,7 +64,7 @@ interface IStripUnitCommonData {
 @Component({
   selector: 'sb-uic-common-strip',
   templateUrl: './common-strip.component.html',
-  styleUrls: ['./common-strip.component.css']
+  styleUrls: ['./common-strip.component.scss']
 })
 export class CommonStripComponent extends WidgetBaseComponent
 implements
@@ -105,9 +103,11 @@ NsWidgetResolver.IWidgetData<NsCommonStrip.ICommonStrip> {
     // private searchServSvc: SearchServService,
     private userSvc: WidgetUserService,
     private translate: TranslateService,
-    private langtranslations: MultilingualTranslationsService
+    private langtranslations: MultilingualTranslationsService,
+    private commonMethodsSvc: CommonMethodsService
   ) {
     super();
+    this.environment = environment
   }
 
   ngOnInit() {
@@ -144,10 +144,23 @@ NsWidgetResolver.IWidgetData<NsCommonStrip.ICommonStrip> {
     }
     // Fetch the data
     for (const strip of this.widgetData.strips) {
-      if (this.checkForEmptyWidget(strip)) {
-        this.fetchStripFromRequestData(strip, false);
+      console.log('strip :: ',strip)
+      this.processStrip(strip, [], 'fetching', false, null);
+      if(strip.dataType === 'in-hand' && this.widgetData[strip.dataKey]){
+        this.processStrip(
+          strip,
+          this.commonMethodsSvc.transformContentsToWidgets(this.widgetData[strip.dataKey], strip),
+          'done',
+          true,
+          strip.viewMoreUrl || '',
+        );
+        console.log('=========================', this.commonMethodsSvc.transformContentsToWidgets(this.widgetData[strip.dataKey], strip))
       } else {
-        this.processStrip(strip, [], 'done', true, null);
+        if (this.checkForEmptyWidget(strip)) {
+          // this.fetchStripFromRequestData(strip, false);
+        } else {
+          this.processStrip(strip, [], 'done', true, null);
+        }
       }
     }
     // Subscription for changes
@@ -172,7 +185,7 @@ NsWidgetResolver.IWidgetData<NsCommonStrip.ICommonStrip> {
   private fetchStripFromKey(key: string, calculateParentStatus = true) {
     const stripData = this.widgetData.strips.find(strip => strip.key === key);
     if (stripData) {
-      this.fetchStripFromRequestData(stripData, calculateParentStatus);
+      // this.fetchStripFromRequestData(stripData, calculateParentStatus);
     }
   }
 
@@ -246,47 +259,7 @@ NsWidgetResolver.IWidgetData<NsCommonStrip.ICommonStrip> {
       return tabWithMaxWidgets.widgets ? tabWithMaxWidgets.widgets.length : 0;
     }
   }
-
-  private transformEventsToWidgets(
-    contents: ITodayEvents[],
-    strip: NsCommonStrip.ICommonStripUnit,
-  ) {
-    this.eventSvc.setEventListData(contents);
-    return (this.eventSvc.todaysEvents || []).map((content: any, idx: any) => (content ? {
-      widgetType: 'card',
-      widgetSubType: 'eventHubCard',
-      widgetHostClass: 'mb-2',
-      widgetData: {
-        content,
-        cardSubType: strip.stripConfig && strip.stripConfig.cardSubType,
-        cardCustomeClass: strip.customeClass ? strip.customeClass : '',
-        context: { pageSection: strip.key, position: idx },
-        intranetMode: strip.stripConfig && strip.stripConfig.intranetMode,
-        deletedMode: strip.stripConfig && strip.stripConfig.deletedMode,
-        contentTags: strip.stripConfig && strip.stripConfig.contentTags,
-      },
-    } : {
-      widgetType: 'card',
-      widgetSubType: 'eventHubCard',
-      widgetHostClass: 'mb-2',
-      widgetData: {},
-    }
-    ));
-  }
-  private transformSkeletonToWidgets(
-    strip: any
-  ) {
-    return [1, 2, 3, 4, 5, 6, 7, 7, 8, 9, 10].map(_content => ({
-      widgetType: 'cardLib',
-      widgetSubType: 'cardContentLib',
-      widgetHostClass: 'mb-2',
-      widgetData: {
-        cardSubType: strip.loaderConfig && strip.loaderConfig.cardSubType || 'card-standard-skeleton',
-        cardCustomeClass: strip.customeClass ? strip.customeClass : '',
-      },
-    }));
-  }
-
+  
   private async processStrip(
     strip: NsCommonStrip.ICommonStripUnit,
     results: NsWidgetResolver.IRenderConfigWithAnyData[] = [],
@@ -306,6 +279,8 @@ NsWidgetResolver.IWidgetData<NsCommonStrip.ICommonStrip> {
       stripInfo: strip.info,
       stripTitle: strip.title,
       stripTitleLink: strip.stripTitleLink,
+      dataType: strip.dataType,
+      dataKey: strip.dataKey,
       disableTranslate: strip.disableTranslate,
       sliderConfig: strip.sliderConfig,
       tabs: tabsResults ? tabsResults : strip.tabs,
@@ -359,6 +334,18 @@ NsWidgetResolver.IWidgetData<NsCommonStrip.ICommonStrip> {
       this.contentAvailable = true;
     }
   }
+
+  getSelectedIndex(stripsResultDataMap: any, key: any): number {
+    let returnValue = 0;
+    if (key === 'cbpPlan') {
+      if (stripsResultDataMap.tabs.length) {
+        const data = stripsResultDataMap.tabs.filter((ele: any) => ele.value === 'upcoming');
+        returnValue = data[0].widgets && data[0].widgets.length > 0 ? 1 : 0;
+      }
+    }
+    return returnValue;
+  }
+  
   private checkParentStatus(fetchStatus: TFetchStatus, stripWidgetsCount: number): void {
     if (fetchStatus === 'done' && !stripWidgetsCount) {
       this.noDataCount += 1;
