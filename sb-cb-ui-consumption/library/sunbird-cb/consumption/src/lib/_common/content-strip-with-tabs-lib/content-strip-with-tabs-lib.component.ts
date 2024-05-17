@@ -1250,13 +1250,10 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
         strip.request.featureContent.request &&
         strip.request.featureContent.request.filters) {
         originalFilters = strip.request.featureContent.request.filters;
-        strip.request.featureContent.request.filters = this.checkForDateFilters(strip.request.featureContent.request.filters);
-        strip.request.featureContent.request.filters = this.getFiltersFromArray(
-          strip.request.featureContent.request.filters,
-        );
+        strip.request.featureContent.request.filters = this.postMethodFilters(strip.request.featureContent.request.filters);
       }
       try {
-        const response = await this.postRequestMethod(strip, strip.request.featureContent.request, strip.request.featureContent.path, calculateParentStatus);
+        const response = await this.postRequestMethod(strip, strip.request.featureContent, strip.request.apiUrl, calculateParentStatus);
         // console.log('calling  after - response, ', response)
         if (response && response.results) {
           // console.log('calling  after-- ')
@@ -1270,12 +1267,15 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
             );
           } else {
             this.processStrip(strip, [], 'error', calculateParentStatus, null);
+            this.emptyResponse.emit(true)
           }
 
         } else {
-          this.processStrip(strip, [], 'error', calculateParentStatus, null);
+          this.processStrip(strip, [], 'error', calculateParentStatus, null);          
+          this.emptyResponse.emit(true)
         }
       } catch (error) {
+        this.emptyResponse.emit(true)
         // Handle errors
         // console.error('Error:', error);
       }
