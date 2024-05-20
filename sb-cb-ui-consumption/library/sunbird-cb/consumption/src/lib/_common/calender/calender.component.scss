@@ -34,12 +34,43 @@
     align-items: center;
 }
 .visit-link {
-    opacity: .7;
     cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+.visit-icon {
+    font-size: 17px;
+    height: 17px;
+    color: #1B4CA1;
+    ;
 }
 .currentDay {
     padding: 5px;
-    background: #1D8923;
     border-radius: 20px;
     color: white;
+}
+
+
+.mob-currentDay {
+    padding: 8px;
+    border-radius: 20px;
+    color: white;
+}
+
+.mob-events-list {
+    border: 1px solid #e8e6e5;
+    border-radius: 10px;
+    justify-content: space-between;
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.8px;
+}
+.mob-icon {
+    font-size: 17px;
+}
+
+.no-data {
+    display: flex;
+    align-items: center;
 }
