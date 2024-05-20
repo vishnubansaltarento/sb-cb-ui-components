@@ -1,4 +1,4 @@
-import { NsWidgetResolver } from '@sunbird-cb/resolver';
+import { NsWidgetResolver } from '@sunbird-cb/resolver-v2';
 import { NSSearch } from '../../_models/widget-search.model';
 import { NsContent } from '../../_models/widget-content.model';
 import { NsCardContent } from '../../_models/card-content.model';
@@ -15,6 +15,8 @@ export namespace NsCommonStrip {
     disableTranslate?: any;
     key: string;
     title: string;
+    dataType?: "in-hand" | ""
+    dataKey?: string
     customeClass?: string;
     nodataMsg?: string;
     stripTitleLink?: {
@@ -28,8 +30,16 @@ export namespace NsCommonStrip {
       showNavs: boolean,
       showDots: boolean,
       maxWidgets?: number
-      cerificateCardMargin?: boolean
-    };
+      cerificateCardMargin?: boolean,
+      dotsAlign?: "right" | "left",
+      arrowsPlacement?: "bottom-right" | "bottom-center" | "bottom-left" | "middle-inline",
+      responsive?: {
+        showNavs: boolean,
+        showDots: boolean,
+        dotsAlign?: "right" | "left",
+        arrowsPlacement?: "bottom-right" | "bottom-center" | "bottom-left" | "middle-inline",
+      };
+    }
     tabs?: NsCommonStrip.ICommonStripTab[] | undefined;
     titleDescription?: string;
     name?: string;

@@ -1,12 +1,13 @@
-<div class="w-full metrics-web" *ngIf="layoutType === 'multipleRows'">
+<div class="w-full metrics-web" *ngIf="layoutType === 'multipleRows' && !isDataLoading">
     <div *ngFor="let obj of objectData" class="">
         <div class="element-div" [ngClass]="{'linebreak': obj?.linebreak}">
             <div class="flex flex-row gap-3 items-top">
                 <div>
-                    <img class="objIcon" [src]="obj.icon" [style.color]="obj?.iconColor">
+                    <img class="objIcon" [src]="obj.icon"  [style.color]="obj?.iconColor">
                 </div>
                 <div>
-                    <div [style.color]="obj?.valueColor" class="objHeader pb-1" >{{obj?.value}}</div>
+                    <div [style.color]="obj?.valueColor" class="objHeader pb-1" >{{obj?.value | number: obj.value % 1 === 0 ? '1.0-0' : '1.1-2'}}
+                    </div>
                     <div [style.color]="obj?.labelColor" class="objDescription">{{obj?.label}}</div>
                 </div>
             </div>
@@ -23,7 +24,7 @@
                         <img [style.color]="obj?.iconColor"  class="mobjIcon" [src]="obj.icon">
                     </div>
                     <div>
-                        <div [style.color]="obj?.valueColor" class="mobjHeader pb-1">{{obj?.value}}</div>
+                        <div [style.color]="obj?.valueColor" class="mobjHeader pb-1">{{obj?.value  | number: '1.1-2'}}</div>
                         <div [style.color]="obj?.labelColor" class="mobjDescription">{{obj?.label}}</div>
                     </div>
                 </div>
@@ -51,3 +52,27 @@
         </div>
     </div>   
 </div>
+
+
+<!-- skeleton  loaders -->
+
+<ng-container>
+    <div class="w-full metrics-web" *ngIf="layoutType === 'multipleRows' && isDataLoading">
+        <div *ngFor="let obj of [0,1,2,3]" class="">
+            <div class="element-div linebreak" >
+                <div class="flex flex-row gap-3 items-top">
+                    <div>
+                        <sb-uic-skeleton-loader [bindingClass]="'flex rounded objIcon'" [width]="'32px'"
+                        [height]="'32px'"></sb-uic-skeleton-loader>
+                    </div>
+                    <div>
+                        <sb-uic-skeleton-loader [bindingClass]="'flex rounded mb-1'" [width]="'100px'"
+                        [height]="'24px'"></sb-uic-skeleton-loader>
+                        <sb-uic-skeleton-loader [bindingClass]="'flex rounded mb-1'" [width]="'150px'"
+                        [height]="'24px'"></sb-uic-skeleton-loader>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>

@@ -6,6 +6,9 @@ import {
 } from 'rxjs';
 import { debounceTime, throttleTime } from 'rxjs/operators';
 import { TFetchStatus } from '../../_constants/misc.constants';
+import { ValueService } from '@sunbird-cb/utils-v2';
+import { NsCommonStrip } from '../common-strip/common-strip.model';
+import { NsContentStripMultiple } from '../../_models/content-strip-multiple.model';
 
 @Component({
   selector: 'sb-uic-horizontal-scroller-v2',
@@ -16,8 +19,9 @@ import { TFetchStatus } from '../../_constants/misc.constants';
 export class HorizontalScrollerV2Component implements OnInit, OnChanges, OnDestroy {
 
   @Input() loadStatus: TFetchStatus = 'fetching';
+  @Input() id: string = '';
   @Input() onHover = false;
-  @Input() sliderConfig = {
+  @Input() sliderConfig: any = {
     showNavs: true,
     showDots: true,
     cerificateCardMargin: false,
@@ -35,8 +39,11 @@ export class HorizontalScrollerV2Component implements OnInit, OnChanges, OnDestr
   cardSubType = 'standard';
   bottomDotsArray: any = [];
   private scrollObserver: Subscription | null = null;
+  isMobile = false
+  private defaultMenuSubscribe: Subscription | null = null
+  isLtMedium$ = this.valueSvc.isLtMedium$
 
-  constructor() { }
+  constructor(private valueSvc: ValueService) { }
 
   ngOnInit() {
     this.cardSubType = this.stripConfig && this.stripConfig.cardSubType ? this.stripConfig.cardSubType : 'standard';
@@ -51,9 +58,13 @@ export class HorizontalScrollerV2Component implements OnInit, OnChanges, OnDestr
         this.updateNavigationBtnStatus(horizontalScrollElem
           .nativeElement as HTMLElement);
       });
-
-      this.getBottomDotsArray();
+      setTimeout(() => {
+        this.getBottomDotsArray();
+      }, 700);
     }
+    this.defaultMenuSubscribe = this.isLtMedium$.subscribe((isLtMedium: boolean) => {
+      this.isMobile = isLtMedium
+    })
   }
 
   ngOnChanges() {
@@ -63,12 +74,17 @@ export class HorizontalScrollerV2Component implements OnInit, OnChanges, OnDestr
           .nativeElement as HTMLElement);
       }
     });
-    this.getBottomDotsArray();
+    setTimeout(() => {
+      this.getBottomDotsArray();
+    }, 700);
   }
 
   ngOnDestroy() {
     if (this.scrollObserver) {
       this.scrollObserver.unsubscribe();
+    }
+    if (this.defaultMenuSubscribe) {
+      this.defaultMenuSubscribe.unsubscribe()
     }
   }
 
@@ -105,14 +121,18 @@ export class HorizontalScrollerV2Component implements OnInit, OnChanges, OnDestr
     this.enablePrev = true;
     this.enableNext = true;
     if (elem.scrollLeft === 0) {
-      this.enablePrev = false;
+      if(!this.sliderConfig.arrowsAlwaysOn) {
+        this.enablePrev = false;
+      }
       this.activeNav = 0;
     }
     if (elem.scrollWidth === Math.round(elem.clientWidth + elem.scrollLeft)) {
       if (this.loadStatus === 'hasMore') {
         this.loadNext.emit();
       } else {
-        this.enableNext = false;
+        if(!this.sliderConfig.arrowsAlwaysOn) {
+          this.enableNext = false;
+        }
         if (this.bottomDotsArray.length) {
           this.activeNav = this.bottomDotsArray.length - 1;
         }
@@ -159,15 +179,13 @@ export class HorizontalScrollerV2Component implements OnInit, OnChanges, OnDestr
       this.bottomDotsArray = [];
       let cardWidth;
       let arrLength;
-      console.log('this.cardSubType-->',this.cardSubType)
       if (this.cardSubType !== 'card-wide-v2') {
         cardWidth = this.cardSubType === 'standard' ? 245 :
         ((document.getElementsByClassName(this.cardSubType) &&
          document.getElementsByClassName(this.cardSubType)[0] !== undefined)
         ? document.getElementsByClassName(this.cardSubType)[0].clientWidth : 245);
-        if (document.getElementsByClassName('horizontal-scroll-container') &&
-        document.getElementsByClassName('horizontal-scroll-container')[0]) {
-          const scrollerWidth = document.getElementsByClassName('horizontal-scroll-container')[0].clientWidth;
+        if (document.getElementById(`${this.id}`)) {
+          const scrollerWidth = document.getElementById(`${this.id}`).clientWidth;
           const totalCardsLength = cardWidth * this.widgetsLength;
           if (totalCardsLength > scrollerWidth) {
             arrLength = (scrollerWidth / cardWidth);

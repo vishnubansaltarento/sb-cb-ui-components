@@ -1,4 +1,4 @@
-import { NsWidgetResolver } from '@sunbird-cb/resolver';
+import { NsWidgetResolver } from '@sunbird-cb/resolver-v2';
 import { NSSearch } from '../../_models/widget-search.model';
 import { NsContent } from '../../_models/widget-content.model';
 import { NsCardContent } from '../../_models/card-content.model';
@@ -28,7 +28,15 @@ export namespace NsContentStripWithTabs {
       showNavs: boolean,
       showDots: boolean,
       maxWidgets?: number
-      cerificateCardMargin?: boolean
+      cerificateCardMargin?: boolean,
+      dotsAlign?: "right" | "left",
+      arrowsPlacement?: "bottom-right" | "bottom-center" | "bottom-left" | "middle-inline",
+      responsive?: {
+        showNavs: boolean,
+        showDots: boolean,
+        dotsAlign?: "right" | "left",
+        arrowsPlacement?: "bottom-right" | "bottom-center" | "bottom-left" | "middle-inline",
+      };
     };
     tabs?: NsContentStripWithTabs.IContentStripTab[] | undefined;
     titleDescription?: string;
@@ -45,8 +53,11 @@ export namespace NsContentStripWithTabs {
     request?: {
       search?: NSSearch.ISearchRequest
       searchV6?: NSSearch.ISearchV6Request
+      topContent?: any
+      featureContent?: any
       enrollmentList?: any
-      cbpList?: any
+      cbpList?: any,
+      apiUrl: string
       searchRegionRecommendation?: NSSearch.ISearchOrgRegionRecommendationRequest
       api?: IStripRequestApi
       networkApi?: INetworkRequestApi

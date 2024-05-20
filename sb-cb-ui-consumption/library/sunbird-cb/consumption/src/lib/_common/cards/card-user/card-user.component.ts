@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NsCardUser } from '../../../_models/card-users.model';
 import { MatSnackBar } from '@angular/material';
-import { ConfigurationsService, EventService } from '@sunbird-cb/utils';
+import { ConfigurationsService, EventService } from '@sunbird-cb/utils-v2';
 import * as _ from "lodash";
 import { TranslateService } from '@ngx-translate/core';
 import { MultilingualTranslationsService } from '../../../_services/multilingual-translations.service';
@@ -54,10 +54,10 @@ export class CardUserComponent implements OnInit {
       {
         type: 'click',
         subType: `${this.widgetType}-${this.widgetSubType}`,
-        id: `${_.camelCase(this.widgetData.user.userId)}-card`,
+        id: `${_.camelCase(this.widgetData.content.userId)}-card`,
       },
       {
-        id: this.widgetData.user.userId,
+        id: this.widgetData.content.userId,
         // type: this.widgetData.user.primaryCategory,
         //context: this.widgetData.context,
         rollup: {},

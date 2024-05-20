@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ConfigurationsService, EventService } from '@sunbird-cb/utils';
+import { ConfigurationsService, EventService } from '@sunbird-cb/utils-v2';
 import { WidgetContentService } from '../../_services/widget-content.service';
 import { CompetencyPassbookService } from './competency-passbook.service';
 import { Router } from '@angular/router';
@@ -17,7 +17,6 @@ export class CompetencyPassbookComponent implements OnInit {
   loadCometency: boolean = false
   loadCompetencyArea: boolean = false
 
-  orgId: any
   competencyArea: any []
   selectedValue: any;
   competencyVersion:string = ''
@@ -41,9 +40,6 @@ export class CompetencyPassbookComponent implements OnInit {
 
  
   ngOnInit() {
-    if(this.configSvc && this.configSvc.userProfile.rootOrgId) {
-      this.orgId = this.configSvc.userProfile.rootOrgId
-    }
     this.getCompetencyArea()
     this.getAllCompetencies()
     // this.competencyData = this.objectData

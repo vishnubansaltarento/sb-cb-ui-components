@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HorizontalScrollerV2Module } from '../horizontal-scroller-v2/horizontal-scroller-v2.module';
-import { WidgetResolverModule } from '@sunbird-cb/resolver';
+
 import {
   MatToolbarModule,
   MatIconModule,
@@ -31,6 +31,7 @@ import { ContentStripWithTabsLibComponent } from './content-strip-with-tabs-lib.
 import { HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { SbUiResolverModule } from '@sunbird-cb/resolver-v2';
 
 // tslint:disable-next-line:function-name
 export function HttpLoaderFactory(http: HttpClient) {
@@ -40,10 +41,10 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [ContentStripWithTabsLibComponent],
   imports: [
+    SbUiResolverModule,
     CommonModule,
     RouterModule,
     HorizontalScrollerV2Module,
-    WidgetResolverModule,
     MatProgressSpinnerModule,
     MatToolbarModule,
     MatIconModule,

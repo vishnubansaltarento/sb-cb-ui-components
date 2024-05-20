@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, ReplaySubject, Subject } from 'rxjs';
-import { IPortalUrls, IUserPreference, NsAppsConfig, NsInstanceConfig, NsPage, NsUser } from '@sunbird-cb/utils';
+import { IPortalUrls, IUserPreference, NsAppsConfig, NsInstanceConfig, NsPage, NsUser } from '@sunbird-cb/utils-v2';
 import { NSProfileDataV3 } from '../_models/profile-v3.models';
 // const instanceConfigPath: string | null = window.location.host
 // const locationHost: string | null = window.location.host
