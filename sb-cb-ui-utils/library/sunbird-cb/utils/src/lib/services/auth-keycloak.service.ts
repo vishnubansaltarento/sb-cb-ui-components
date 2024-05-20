@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { KeycloakEvent, KeycloakEventType, KeycloakInitOptions, KeycloakService } from 'keycloak-angular'
 import { fromEvent, ReplaySubject } from 'rxjs'
@@ -152,6 +152,11 @@ export class AuthKeycloakService {
     // }
   }
   async force_logout() {
+    const headers = new HttpHeaders({
+      'Cache-Control':  'no-cache, no-store, must-revalidate, post-check=0, pre-check=0',
+      Pragma: 'no-cache',
+      Expires: '0',
+    })
     if (storage.getItem('telemetrySessionId')) {
       storage.removeItem('telemetrySessionId')
     }
@@ -163,7 +168,7 @@ export class AuthKeycloakService {
     }
     storage.removeItem(storageKey)
     window.location.href = '/public/logout'
-    await this.http.get('/apis/reset').toPromise()
+    await this.http.get('/apis/reset', { headers }).toPromise()
   }
   private addKeycloakEventListener() {
     this.keycloakSvc.keycloakEvents$.subscribe((event: KeycloakEvent) => {
