@@ -30,7 +30,7 @@ export class CalenderComponent implements OnInit {
     setTimeout(() => {
       this.isDataLoading = false
       // tslint:disable-next-line: align
-    }, 5000)
+    }, 10000)
   }
   
  
