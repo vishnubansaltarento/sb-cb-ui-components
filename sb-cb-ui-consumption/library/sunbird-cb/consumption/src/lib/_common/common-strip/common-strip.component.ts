@@ -142,22 +142,25 @@ NsWidgetResolver.IWidgetData<NsCommonStrip.ICommonStrip> {
     if (this.widgetData.loader && this.widgetData.strips.length) {
       this.showParentLoader = true;
     }
-    // Fetch the data
-    for (const strip of this.widgetData.strips) {
-      this.processStrip(strip, [], 'fetching', false, null);
-      if(strip.dataType === 'in-hand' && this.widgetData[strip.dataKey]){
-        this.processStrip(
-          strip,
-          this.commonMethodsSvc.transformContentsToWidgets(this.widgetData[strip.dataKey], strip),
-          'done',
-          true,
-          strip.viewMoreUrl || '',
-        );
-      } else {
-        if (this.checkForEmptyWidget(strip)) {
-          // this.fetchStripFromRequestData(strip, false);
+    // null check if in case no strips key in config
+    if(this.widgetData && this.widgetData.strips) {
+      // Fetch the data
+      for (const strip of this.widgetData.strips) {
+        this.processStrip(strip, [], 'fetching', false, null);
+        if(strip.dataType === 'in-hand' && this.widgetData[strip.dataKey]){
+          this.processStrip(
+            strip,
+            this.commonMethodsSvc.transformContentsToWidgets(this.widgetData[strip.dataKey], strip),
+            'done',
+            true,
+            strip.viewMoreUrl || '',
+          );
         } else {
-          this.processStrip(strip, [], 'done', true, null);
+          if (this.checkForEmptyWidget(strip)) {
+            // this.fetchStripFromRequestData(strip, false);
+          } else {
+            this.processStrip(strip, [], 'done', true, null);
+          }
         }
       }
     }
