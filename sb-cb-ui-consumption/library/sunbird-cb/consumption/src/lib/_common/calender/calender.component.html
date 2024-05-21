@@ -1,20 +1,24 @@
+<div class="calendar-header flex flex-col c-padding" *ngIf="showHeader">
+    <div>{{ objectData?.title }}</div>
+</div>
 <div *ngIf="layoutType==='grid'">
-    <div *ngFor="let obj of objectData?.training;  let i = index">
-        <sb-uic-calender-day [day]="obj"
+    <div *ngFor="let obj of getKeys(trainings);  let i = index">
+        <sb-uic-calender-day [day]="trainings[obj]"
             [layoutType]="layoutType"
             [objectData]="objectData"
             [dataLoading]="isDataLoading"
+            [eventDate]="obj"
             [rowId]="i">
         </sb-uic-calender-day>
     </div>    
 </div>
-
 <div *ngIf="layoutType==='row'">
-    <div *ngFor="let obj of objectData?.training; let j = index">
-        <sb-uic-calender-day [day]="obj"
+    <div *ngFor="let obj of getKeys(trainings); let j = index">
+        <sb-uic-calender-day [day]="trainings[obj]"
             [layoutType]="layoutType"
             [objectData]="objectData"
             [dataLoading]="isDataLoading"
+            [eventDate]="obj"
             [rowId]="j">
         </sb-uic-calender-day>
     </div>

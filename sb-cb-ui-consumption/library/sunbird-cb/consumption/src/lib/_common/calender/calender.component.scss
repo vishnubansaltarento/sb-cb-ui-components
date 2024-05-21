@@ -1,0 +1,18 @@
+ .calendar-header {
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19.5px;
+    text-align: left;
+ }
+
+ .c-padding {
+    padding: 2rem 1.25rem 1rem 0rem;
+ }
+
+
+ @media screen and (max-width: 768px) {
+    .c-padding {
+        padding: 2rem 1.25rem 1rem 1.25rem;
+     }
+  }

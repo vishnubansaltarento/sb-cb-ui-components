@@ -10,7 +10,7 @@
     line-height: 16.8px;
     text-align: center;
     width: 10%;
-
+    text-transform: uppercase;
 }
 
 .events-list {
@@ -25,6 +25,14 @@
 }
 .row1 {
     width: 235px;
+}
+.icon-web {
+    font-size: 17px;
+    height: 17px;
+}
+
+.upcase {
+    text-transform: uppercase;
 }
 
 .col1 {
@@ -47,14 +55,12 @@
 .currentDay {
     padding: 5px;
     border-radius: 20px;
-    color: white;
 }
 
 
 .mob-currentDay {
     padding: 8px;
     border-radius: 20px;
-    color: white;
 }
 
 .mob-events-list {
@@ -68,6 +74,7 @@
 }
 .mob-icon {
     font-size: 17px;
+    height: 17px;
 }
 
 .no-data {
