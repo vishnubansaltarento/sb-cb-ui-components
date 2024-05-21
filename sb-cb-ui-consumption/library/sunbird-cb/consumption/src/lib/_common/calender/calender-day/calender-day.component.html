@@ -23,7 +23,7 @@
                             <div class="flex item-center col1">{{event.title}}</div>
                         </div>
                         <div class="flex flex-row item-center gap-10">
-                            <div class="flex item-center gap-1 row1 col1" *ngIf="event.startDate && event.endDate">
+                            <div class="flex item-center gap-1 row1 col1" *ngIf="event.startDate && event.endDate && event.startDate !== event.endDate">
                                 <div><mat-icon class="icon-web">date_range</mat-icon> </div>
                                 <div class="upcase">{{event.startDate}} - {{event.endDate}}</div>
                             </div>
@@ -71,7 +71,7 @@
                             <div><mat-icon class="mob-icon">schedule</mat-icon> </div>
                             <div>{{event.startTime}} to {{event.endTime}}</div>
                         </div>
-                        <div class="flex pb-1" *ngIf="event.startDate && event.endDate">
+                        <div class="flex pb-1" *ngIf="event.startDate && event.endDate && event.startDate !== event.endDate">
                             <div><mat-icon class="mob-icon">date_range</mat-icon> </div>
                             <div class="upcase">{{event.startDate}} - {{event.endDate}}</div>
                         </div>
