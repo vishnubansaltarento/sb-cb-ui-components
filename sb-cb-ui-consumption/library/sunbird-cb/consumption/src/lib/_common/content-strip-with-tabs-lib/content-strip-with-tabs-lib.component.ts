@@ -23,6 +23,7 @@ import { MatTabChangeEvent } from '@angular/material';
 import { NsCardContent } from '../../_models/card-content-v2.model';
 import { ITodayEvents } from '../../_models/event';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 interface IStripUnitContentData {
   key: string;
@@ -74,7 +75,9 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
   NsWidgetResolver.IWidgetData<NsContentStripWithTabs.IContentStripMultiple> {
   @Input() widgetData!: NsContentStripWithTabs.IContentStripMultiple;
   @Output() emptyResponse = new EventEmitter<any>()
+  @Output() viewAllResponse = new EventEmitter<any>()
   @Input() providerId : any = ''
+  @Input() emitViewAll : boolean = false
   @HostBinding('id')
   public id = `ws-strip-miltiple_${Math.random()}`;
   stripsResultDataMap: { [key: string]: IStripUnitContentData } = {};
@@ -105,6 +108,7 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
     public utilitySvc: UtilityService,
     // private http: HttpClient,
     // private searchServSvc: SearchServService,
+    public router: Router,
     private userSvc: WidgetUserService,
     private translate: TranslateService,
     private langtranslations: MultilingualTranslationsService
@@ -1330,5 +1334,12 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
       filters.organisation = this.providerId
     }
     return filters
+  }
+  redirectViewAll(stripData: any, path: string, queryParamsData: any) {
+    if(this.emitViewAll) {
+      this.viewAllResponse.emit(stripData)
+    } else {
+      this.router.navigate([path], {  queryParams: queryParamsData })
+    }
   }
 }

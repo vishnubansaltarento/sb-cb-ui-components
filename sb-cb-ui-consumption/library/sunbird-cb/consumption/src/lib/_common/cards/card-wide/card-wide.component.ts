@@ -7,11 +7,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { MultilingualTranslationsService } from '../../../_services/multilingual-translations.service';
 
 @Component({
-  selector: 'sb-uic-card-portrait',
-  templateUrl: './card-portrait.component.html',
-  styleUrls: ['./card-portrait.component.scss']
+  selector: 'sb-uic-card-wide',
+  templateUrl: './card-wide.component.html',
+  styleUrls: ['./card-wide.component.scss']
 })
-export class CardPortraitComponent implements OnInit {
+export class CardWideComponent implements OnInit {
   @Input() widgetData!: NsCardContent.ICard;
   @Input() isLiveOrMarkForDeletion: any
   @Input() showIntranetContent: any
@@ -39,26 +39,19 @@ export class CardPortraitComponent implements OnInit {
         }
       })
     }
-
+    
   ngOnInit() {
     const instanceConfig = this.configSvc.instanceConfig
     if (instanceConfig) {
       this.defaultThumbnail = instanceConfig.logos.defaultContent || ''
       this.sourceLogos = instanceConfig.sources
-      this.defaultSLogo = instanceConfig.logos.defaultSourceLogo || ''
+      this.defaultSLogo = instanceConfig.logos.defaultSourceLogo || '/assets/instances/eagle/app_logos/KarmayogiBharat_Logo.svg'
     } else {
       this.defaultThumbnail = '/assets/instances/eagle/app_logos/default.png'
       this.defaultSLogo =  '/assets/instances/eagle/app_logos/KarmayogiBharat_Logo.svg'
     }
   }
 
-  showSnackbar() {
-    if (this.showIntranetContent) {
-      this.snackBar.open('Content is only available in intranet', 'X', { duration: 2000 })
-    } else if (!this.isLiveOrMarkForDeletion) {
-      this.snackBar.open('Content may be expired or deleted', 'X', { duration: 2000 })
-    }
-  }
   getRedirectUrlData(contentData: any){
     this.contentData.emit(contentData)
   }
