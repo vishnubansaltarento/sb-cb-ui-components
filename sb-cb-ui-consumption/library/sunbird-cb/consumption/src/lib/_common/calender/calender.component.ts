@@ -25,20 +25,29 @@ export class CalenderComponent implements OnInit {
   trainings: any = {}
   currentMonthAndYear: any
   isDataLoading: boolean = false
-  currentDate = new Date()
+  currentDate: any = new Date()
   endDate: any
   startDate: any
+  allMonths = ["January", "February", "March",
+    "April", "May", "June", "July",
+    "August", "September", "October",
+    "November", "December"
+  ]
+  monthsDropdown: any = []
+  selectedMonth: any
   constructor(private datePipe: DatePipe, public insightSvc: InsiteDataService) { }
 
   ngOnInit() {
-    this.currentMonthAndYear = this.datePipe.transform( this.currentDate, 'MMMM y')
+    this.currentMonthAndYear = this.datePipe.transform(this.currentDate, 'MMMM y')
+    this.selectedMonth = this.datePipe.transform(this.currentDate, 'LLLL yyyy')
     if (this.fullCalendor) {
+      console.log("this.currentDate ", this.currentDate)
       this.days = this.getDaysInMonth(this.currentDate.getFullYear(), this.currentDate.getMonth())
+      this.getMonthsDropdownData()
     }
     if (!this.fullCalendor) {
       this.days = this.getDays(this.currentDate, +this.defaultDays)
     }
-    console.log("days ", this.days)
     this.startDate = this.days[0]
     this.endDate = this.days[this.days.length - 1]
     if(this.fetchDataFromApi) {
@@ -146,6 +155,7 @@ export class CalenderComponent implements OnInit {
   getDaysInMonth(year: number, month: number): Date[] {
     const date = new Date(year, month, 1)
     const days: any = []
+    this.trainings = {}
     while (date.getMonth() === month) {
       let myDate: any = new Date(date)
       myDate = this.datePipe.transform(myDate, 'y-MM-dd')
@@ -154,5 +164,22 @@ export class CalenderComponent implements OnInit {
       date.setDate(date.getDate() + 1)
     }
     return days
+  }
+
+  getMonthsDropdownData() {
+    this.allMonths.forEach((month: any) => {
+      this.monthsDropdown.push(`${month} ${this.currentDate.getFullYear()}`)
+    })
+  }
+
+  selectMonth(event: any) {
+    const selectedMonth: any = new Date(event)
+    this.currentDate = selectedMonth
+    this.days = []
+    this.days = this.getDaysInMonth(this.currentDate.getFullYear(), this.currentDate.getMonth())
+    this.startDate = this.days[0]
+    this.endDate = this.days[this.days.length - 1]
+    this.isDataLoading = true
+    this.getInsiteData()
   }
 }

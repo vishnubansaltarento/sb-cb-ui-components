@@ -1,5 +1,14 @@
-<div class="calendar-header flex flex-col c-padding" *ngIf="showHeader">
-    <div>{{ objectData?.title }}</div>
+<div class="calendar-header flex flex-row c-padding center gap-2" *ngIf="showHeader">
+    <div class="pt-3">{{ objectData?.title }}:</div>
+    <div class="choose-month">
+        <mat-form-field class="custom-month">
+            <mat-select matNativeControl panelClass="custom-select" [ngModel]="selectedMonth" (ngModelChange)="selectMonth($event)" class="month-select">
+                <span *ngFor="let month of monthsDropdown">
+                    <mat-option [value]="month">{{month}}</mat-option>
+                </span>
+            </mat-select>
+        </mat-form-field>
+    </div>
 </div>
 <div *ngIf="layoutType==='grid'">
     <div *ngFor="let obj of getKeys(trainings);  let i = index">
