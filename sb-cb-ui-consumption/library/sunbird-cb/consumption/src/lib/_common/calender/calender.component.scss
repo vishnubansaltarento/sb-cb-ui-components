@@ -1,45 +1,42 @@
-.event-day {
-    border: 1px solid #c3c3c3;
-    border-radius: 15px;
+ .calendar-header {
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19.5px;
+    text-align: left;
+ }
 
-}
-.event-date {
-    font-family: Lato;
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 16.8px;
-    text-align: center;
-    width: 10%;
+ .c-padding {
+    padding: 0;
+ }
 
-}
+ .center {
+   align-items: center;
+ }
 
-.events-list {
-    border: 1px solid #c3c3c3;
-    border-radius: 15px;
-    justify-content: space-between;
-    align-items: center;
-    font-family: Lato;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 16.8px;
+ 
+::ng-deep .custom-month .mat-form-field-wrapper {
+   padding-bottom: 0!important;
+   width: 110px;
 }
-.row1 {
-    width: 235px;
+::ng-deep .custom-month .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+   color: black!important;
 }
 
-.col1 {
-    align-items: center ;
+
+::ng-deep .custom-month .mat-select-value {
+   width: 89%;
 }
-.aliginCenter {
-    align-items: center;
-}
-.visit-link {
-    opacity: .7;
-    cursor: pointer;
-}
-.currentDay {
-    padding: 5px;
-    background: #1D8923;
-    border-radius: 20px;
-    color: white;
-}
+
+ ::ng-deep .custom-month .mat-select-value-text {
+   font-weight: 600;
+ }
+
+ @media screen and (max-width: 768px) {
+    .c-padding {
+        padding: 0rem 1.25rem 1rem 1.25rem;
+     }
+     .calendar-header {
+      font-size: 15px;
+     }
+  }

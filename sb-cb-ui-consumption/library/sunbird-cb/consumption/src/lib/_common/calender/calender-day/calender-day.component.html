@@ -1,0 +1,201 @@
+<div *ngIf="layoutType==='grid' && !dataLoading">
+    <div class="p-3 event-day my-3"
+        [style.backgroundColor]="objectData?.webBackgroundColor"
+        [style.borderColor]="currentDate === eventDate ? objectData?.activeBackgroudColor: ''">
+    
+        <div class="flex item-top gap-8 {{ day.length ? '' : 'aliginCenter'}}">
+            <div class="event-date">
+                <div class="currentDay"
+                    [style.backgroundColor]="currentDate === eventDate ? objectData?.activeBackgroudColor: ''"
+                    [style.color]="currentDate === eventDate ? objectData?.activeColor: ''">
+                    {{formatDate(eventDate, 'web')}}
+                </div>
+            </div>
+            <div class="details w-full" *ngIf="day.length">
+                <div class="flex p-4 item-center events-list mb-{{day.length === (i+1) ? '0' : '2'}} gap-20" [style.backgroundColor]="objectData?.eventBackgroundColor"
+                    *ngFor="let event of day; let i = index" >
+                    <div>
+                        <div class="flex flex-row item-center gap-10 pb-2">
+                            <div class="flex item-center gap-1 row1 col1">
+                                <div><mat-icon class="icon-web">schedule</mat-icon> </div>
+                                <div>{{event.startTime}} to {{event.endTime}}</div>
+                            </div>
+                            <div class="flex item-center col1">{{event.title}}</div>
+                        </div>
+                        <div class="flex flex-row item-center gap-10">
+                            <div class="flex item-center gap-1 row1 col1" *ngIf="event.startDate && event.endDate && event.startDate !== event.endDate">
+                                <div><mat-icon class="icon-web">date_range</mat-icon> </div>
+                                <div class="upcase">{{event.startDate}} - {{event.endDate}}</div>
+                            </div>
+                            <div class="flex item-center col1">
+                                <div><mat-icon class="icon-web">location_on</mat-icon> </div>
+                                <div class="flex item-center">{{event.location}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="visit-link flex gap-2"
+                        *ngIf="event?.registrationLink">
+                        <div (click)="openLink(event?.registrationLink)">Visit</div>
+                        <div (click)="openLink(event?.registrationLink)"><mat-icon class="visit-icon">open_in_new</mat-icon> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="details w-full" *ngIf="!day.length">
+                No trainings.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="layoutType==='row' && !dataLoading">
+    <div class="p-5 mb-{{day?.length === (rowId+1) ? '0' : '3'}}"
+        [style.backgroundColor]="objectData?.mobileBackground">
+        <div class="flex item-center gap-4">
+            <div class="event-date">
+                <div class="flex flex-col">
+                    <div> {{formatDate(eventDate, 'mob').split(' ')[0]}}</div>
+                    <div class="mob-currentDay"
+                        [style.backgroundColor]="currentDate === eventDate ? objectData?.activeBackgroudColor: ''"
+                        [style.color]="currentDate === eventDate ? objectData?.activeColor: ''">
+                        {{formatDate(eventDate, 'mob').split(' ')[1]}}
+                    </div>
+                    <div> {{formatDate(eventDate, 'mob').split(' ')[2]}}</div>
+                </div>
+            </div>
+            <div class="details w-full" *ngIf="day.length">
+                <div class="flex flex-col mob-events-list p-3 mb-{{day.length === (i+1) ? '0' : '2'}}"
+                    *ngFor="let event of day; let i = index" [style.backgroundColor]="objectData?.eventBackgroundColor">
+                    <div>
+                        <div class="flex pb-2">{{event.title}}</div>
+                        <div class="flex pb-1">
+                            <div><mat-icon class="mob-icon">schedule</mat-icon> </div>
+                            <div>{{event.startTime}} to {{event.endTime}}</div>
+                        </div>
+                        <div class="flex pb-1" *ngIf="event.startDate && event.endDate && event.startDate !== event.endDate">
+                            <div><mat-icon class="mob-icon">date_range</mat-icon> </div>
+                            <div class="upcase">{{event.startDate}} - {{event.endDate}}</div>
+                        </div>
+                        <div class="flex">
+                            <div><mat-icon class="mob-icon">location_on</mat-icon> </div>
+                            <div class="flex item-center">{{event.location}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="details w-full flex no-data" *ngIf="!day.length">
+                No trainings.
+            </div>
+        </div>        
+    </div>    
+</div>
+
+<!-- skeleton  loaders -->
+<div *ngIf="dataLoading">
+    <div *ngIf="layoutType==='grid'">
+        <div class="hidden md:block">
+            <div class="p-3 event-day my-3"
+                [style.backgroundColor]="'#FFF'">
+                <div class="flex item-top gap-8">
+                    <div class="event-date">
+                        <div class="currentDay">
+                            <sb-uic-skeleton-loader [bindingClass]="'flex rounded objIcon'" [width]="'90px'"
+                                [height]="'32px'"></sb-uic-skeleton-loader>    
+                        </div>
+                    </div>
+                    <div class="details w-full">
+                        <div class="flex p-4 item-center events-list mb-2 gap-20">
+                            <div>
+                                <div class="flex flex-row item-center gap-20 pb-2">
+                                    <div class="flex item-center gap-2 row1 col1">
+                                        <div>
+                                            <sb-uic-skeleton-loader [bindingClass]="'flex rounded objIcon'" [width]="'50px'"
+                                            [height]="'32px'"></sb-uic-skeleton-loader>
+                                        </div>
+                                        <div>
+                                            <sb-uic-skeleton-loader [bindingClass]="'flex rounded objIcon'" [width]="'250px'"
+                                            [height]="'32px'"></sb-uic-skeleton-loader>
+                                        </div>
+                                    </div>
+                                    <div class="flex item-center col1">
+                                        <sb-uic-skeleton-loader [bindingClass]="'flex rounded objIcon'" [width]="'250px'"
+                                        [height]="'32px'"></sb-uic-skeleton-loader> </div>
+                                </div>
+                                <div class="flex flex-row item-center gap-20 pb-2">
+                                    <div class="flex item-center gap-2 row1 col1">
+                                        <div>
+                                            <sb-uic-skeleton-loader [bindingClass]="'flex rounded objIcon'" [width]="'50px'"
+                                            [height]="'32px'"></sb-uic-skeleton-loader>
+                                        </div>
+                                        <div>
+                                            <sb-uic-skeleton-loader [bindingClass]="'flex rounded objIcon'" [width]="'250px'"
+                                            [height]="'32px'"></sb-uic-skeleton-loader>
+                                        </div>
+                                    </div>
+                                    <div class="flex item-center col1">
+                                        <sb-uic-skeleton-loader [bindingClass]="'flex rounded objIcon'" [width]="'250px'"
+                                        [height]="'32px'"></sb-uic-skeleton-loader> </div>
+                                </div>
+                            </div>
+                            <div class="visit-link flex gap-2">
+                                <div><sb-uic-skeleton-loader [bindingClass]="'flex rounded objIcon'" [width]="'200px'"
+                                    [height]="'32px'"></sb-uic-skeleton-loader> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="layoutType==='row'">
+        <div class="block md:hidden">
+            <div class="p-5" 
+            [style.backgroundColor]="'#FFFFFF'">
+            <div class="flex item-center gap-4">
+                <div class="event-date">
+                    <div class="flex flex-col">
+                        <sb-uic-skeleton-loader [bindingClass]="'flex rounded objIcon'" [width]="'30px'"
+                                [height]="'90px'"></sb-uic-skeleton-loader> 
+                    </div>
+                </div>
+                <div class="details w-full">
+                    <div class="flex flex-col mob-events-list p-3 mb-2">
+                        <div>
+                            <div class="flex pb-2">
+                                <sb-uic-skeleton-loader [bindingClass]="'flex rounded objIcon'" [width]="'265px'"
+                                [height]="'32px'"></sb-uic-skeleton-loader> 
+                            </div>
+                            <div class="flex pb-1 gap-2">
+                                <div>
+                                    <sb-uic-skeleton-loader [bindingClass]="'flex rounded objIcon'" [width]="'30px'"
+                                    [height]="'32px'"></sb-uic-skeleton-loader>
+                                </div>
+                                <div><sb-uic-skeleton-loader [bindingClass]="'flex rounded objIcon'" [width]="'230px'"
+                                    [height]="'32px'"></sb-uic-skeleton-loader>
+                                </div>
+                            </div>
+                            <div class="flex pb-1 gap-2">
+                                <div>
+                                    <sb-uic-skeleton-loader [bindingClass]="'flex rounded objIcon'" [width]="'30px'"
+                                    [height]="'32px'"></sb-uic-skeleton-loader>
+                                </div>
+                                <div>
+                                    <sb-uic-skeleton-loader [bindingClass]="'flex rounded objIcon'" [width]="'230px'"
+                                    [height]="'32px'"></sb-uic-skeleton-loader>
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                <div><sb-uic-skeleton-loader [bindingClass]="'flex rounded objIcon'" [width]="'30px'"
+                                    [height]="'32px'"></sb-uic-skeleton-loader>
+                                </div>
+                                <div class="flex item-center">
+                                    <sb-uic-skeleton-loader [bindingClass]="'flex rounded objIcon'" [width]="'230px'"
+                                [height]="'32px'"></sb-uic-skeleton-loader> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
