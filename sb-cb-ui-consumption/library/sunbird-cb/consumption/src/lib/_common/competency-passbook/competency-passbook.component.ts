@@ -93,7 +93,12 @@ export class CompetencyPassbookComponent implements OnInit {
           this.competencyArea = response.results.result.facets[0].values
           this.competencyStrength = this.competencyArea.reduce((partialSum: any, data: any) => partialSum +  data.count, 0) 
           this.selectedValue  = this.competencyArea[0].name.toLowerCase()
-          this.getcompetencyTheme(this.competencyArea[0].name)
+          let addFilter = {
+            "channel": [
+              this.providerId
+           ]
+          }
+          this.getcompetencyTheme(this.competencyArea[0].name, addFilter)
           this.loadCompetencyArea = false
         }
       }
@@ -181,6 +186,7 @@ export class CompetencyPassbookComponent implements OnInit {
     if (response && response.results) {
       if(response.results.result.facets){
         this.competencyTheme = response.results.result.facets[0].values 
+        this.resetViewMore()
       }
       this.loadCometency = false
     }
@@ -189,8 +195,15 @@ export class CompetencyPassbookComponent implements OnInit {
     // console.error('Error:', error);
   }
   }
+
+  resetViewMore(){
+    Object.keys(this.allcompetencyTheme).forEach((comp: any) => {
+      this.allcompetencyTheme[comp]['viewMore'] = false
+    })
+  }
   viewMoreChildren(data: any) {
     data.viewMore = !data.viewMore
+    this.allcompetencyTheme[data.name.toLowerCase()].viewMore = data.viewMore
   }
   displayAllTheme(event: any) {
     this.showAllTheme[0]['showAll'] = !event.showAll 

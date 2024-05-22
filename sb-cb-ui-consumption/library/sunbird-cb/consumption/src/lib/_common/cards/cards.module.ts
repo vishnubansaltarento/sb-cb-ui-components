@@ -12,9 +12,10 @@ import { PipeDurationTransformModule } from '../../_pipes/pipe-duration-transfor
 import { CardUserComponent } from './card-user/card-user.component';
 import { SkeletonLoaderLibModule } from '../skeleton-loader-lib/skeleton-loader-lib.module';
 import { CardLandscapeComponent } from './card-landscape/card-landscape.component';
+import { CardWideComponent } from './card-wide/card-wide.component';
 
 @NgModule({
-  declarations: [CardResourceComponent, CardsComponent,CardPortraitComponent, CardUserComponent, CardLandscapeComponent],
+  declarations: [CardResourceComponent, CardsComponent,CardPortraitComponent, CardUserComponent, CardLandscapeComponent, CardWideComponent],
   imports: [
     CommonModule,
     MatCardModule,
@@ -34,7 +35,8 @@ import { CardLandscapeComponent } from './card-landscape/card-landscape.componen
     CardResourceComponent,
     CardPortraitComponent, 
     CardLandscapeComponent,
-    CardUserComponent
+    CardUserComponent,
+    CardWideComponent
   ],
 })
 export class CardsModule { }
