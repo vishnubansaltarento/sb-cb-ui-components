@@ -115,9 +115,6 @@
     background: #cccc; 
     border-radius: 10px;
 }
-  
-
-
 
 .flex-item {
     flex: 0 0 auto; /* Don't grow or shrink, use initial width */
