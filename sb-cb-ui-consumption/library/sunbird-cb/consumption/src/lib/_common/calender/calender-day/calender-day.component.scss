@@ -1,0 +1,83 @@
+.event-day {
+    border: 1px solid #c3c3c3;
+    border-radius: 15px;
+
+}
+.event-date {
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 16.8px;
+    text-align: center;
+    width: 10%;
+    text-transform: uppercase;
+}
+
+.events-list {
+    border: 1px solid #c3c3c3;
+    border-radius: 15px;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.8px;
+}
+.row1 {
+    width: 235px;
+}
+.icon-web {
+    font-size: 17px;
+    height: 17px;
+}
+
+.upcase {
+    text-transform: uppercase;
+}
+
+.col1 {
+    align-items: center ;
+}
+.aliginCenter {
+    align-items: center;
+}
+.visit-link {
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+.visit-icon {
+    font-size: 17px;
+    height: 17px;
+    color: #1B4CA1;
+    ;
+}
+.currentDay {
+    padding: 5px;
+    border-radius: 20px;
+}
+
+
+.mob-currentDay {
+    padding: 8px;
+    border-radius: 20px;
+}
+
+.mob-events-list {
+    border: 1px solid #e8e6e5;
+    border-radius: 10px;
+    justify-content: space-between;
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.8px;
+}
+.mob-icon {
+    font-size: 17px;
+    height: 17px;
+}
+
+.no-data {
+    display: flex;
+    align-items: center;
+}

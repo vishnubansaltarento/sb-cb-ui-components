@@ -33,3 +33,11 @@ export interface IProfile {
   // showCertificationDetails: boolean
   // showUserSkills: boolean
 }
+export interface IPortalUrls {
+  igot: string,
+  spv: string,
+  mdo: string,
+  cbc: string,
+  cbp: string,
+  frac: string
+}
