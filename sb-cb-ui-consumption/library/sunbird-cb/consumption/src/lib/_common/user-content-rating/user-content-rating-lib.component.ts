@@ -58,9 +58,9 @@ export class UserContentRatingLibComponent implements OnInit {
     this.handleScrollClick(indexValue)
   }
 
-  handleScrollClick(day: string) {
-    const item = this.scrollableItems.find(x => x.key === day)
-    item.scrollIntoView();
+  handleScrollClick(dataValue: string) {
+    const item = this.scrollableItems.find(x => x.key === dataValue)
+    item.scrollIntoView("nearest");
   }
 
 }
