@@ -87,6 +87,11 @@ $banner-min-height: 243px;
     left: 100%;
     transform: translateX(-100%);
   }
+  &.top-center{
+    left: 0;
+    bottom: 100%;
+    transform: translateX(-100%);
+  }
 
   .banner-title {
     color: #f2f2f2;

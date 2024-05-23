@@ -15,13 +15,14 @@ export class SlidersNgContentLibComponent extends WidgetBaseComponent
   @Input() styleData!: ICarouselStyle
   @Input() title: any = ''
   @Input() loadNgContentData: boolean = false
+  @Input() autoScroll: boolean = false
   @Output() currentIndexValue = new EventEmitter<any>()
   
   @HostBinding('id')
   public id = `banner_${Math.random()}`
   private defaultMenuSubscribe: Subscription | null = null
   isLtMedium$ = this.valueSvc.isLtMedium$
-  currentIndex = 0
+  @Input()  currentIndex = 0
   slideInterval: Subscription | null = null
   isMobile = false
 
@@ -33,7 +34,9 @@ export class SlidersNgContentLibComponent extends WidgetBaseComponent
   }
 
   ngOnInit() {
-    this.reInitiateSlideInterval()
+    if(this.autoScroll) {
+      this.reInitiateSlideInterval()
+    }
     this.defaultMenuSubscribe = this.isLtMedium$.subscribe((isLtMedium: boolean) => {
       this.isMobile = isLtMedium
     })
@@ -69,7 +72,9 @@ export class SlidersNgContentLibComponent extends WidgetBaseComponent
       this.currentIndex = this.widgetData.length + index
       this.currentIndexValue.emit(this.currentIndex)
     }
-    this.reInitiateSlideInterval()
+    if(this.autoScroll) {
+      this.reInitiateSlideInterval()
+    }
   }
 
   get isOpenInNewTab() {
