@@ -101,8 +101,19 @@
 }
 
 .top-container {
-    overflow-x: auto; /* Enable horizontal scrolling */
-    width: 100%; /* Optional: Set a width for the container */
+    overflow-x: auto;
+    width: 100%;
+}
+::-webkit-scrollbar {
+    height: 4px;
+}
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: #000
+}
+::-webkit-scrollbar-thumb {
+    background: #cccc; 
+    border-radius: 10px;
 }
 
 .flex-item {
