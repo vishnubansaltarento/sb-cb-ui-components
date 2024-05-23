@@ -14,6 +14,7 @@ export class AvatarPhotoLibComponent implements OnInit, OnChanges {
   @Input()
   public name!: string
   @Input() public size = ''
+  @Input() public defaulfColor = ''
   @Input() randomColor = false
   @Input() initials?: string
   @Input() showBadge = false
@@ -48,9 +49,15 @@ export class AvatarPhotoLibComponent implements OnInit, OnChanges {
         this.createInititals()
       }
       if (this.datalen === 1) {
-        this.randomcolors = [
-          '#006400', // green
-        ]
+        if(this.defaulfColor) {
+          this.randomcolors = [
+           this.defaulfColor
+          ]
+        } else {
+          this.randomcolors = [
+            '#006400', // green
+          ]
+        }
       }
       const randomIndex = Math.floor(Math.random() * Math.floor(this.colors.length))
       this.circleColor = this.colors[randomIndex]

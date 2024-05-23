@@ -26,7 +26,19 @@
     <!-- <div class="banner WidgetInstanceId" *ngFor="let slide of widgetData; let i = index" [hidden]="i !== currentIndex"> -->
       <ng-content select="[sliderbody]"></ng-content>
     <!-- </div> -->
-    
+    <ng-container *ngIf="isMobile && styleData?.responsive?.dots !== 'hidden' || !isMobile && styleData?.dots !== 'hidden'">
+      <div class="banner-meta {{isMobile? styleData?.responsive?.bannerMetaAlign : styleData?.bannerMetaAlign}}">
+        <a [routerLink]=" !isOpenInNewTab && widgetData[currentIndex].redirectUrl? widgetData[currentIndex].redirectUrl : null" class="banner-title text-truncate"
+          *ngIf="widgetData[currentIndex].title" [title]="widgetData[currentIndex].title">
+          {{ widgetData[currentIndex].title }}
+        </a>
+        <div class="dots-container" *ngIf="widgetData?.length > 1">
+          <span class="dot" [ngClass]="{ active: j === currentIndex }" *ngFor="let slide of widgetData; let j = index"
+            (click)="slideTo(j)"></span>
+            <ng-content select="[sliderMeta]"></ng-content>
+        </div>
+      </div>
+    </ng-container>
   </ng-container>
   <div class="navigation {{isMobile? styleData?.responsive?.arrowsPlacement : styleData?.arrowsPlacement}}" 
   *ngIf="isMobile && styleData?.responsive?.navigationArrows !== 'hidden' || !isMobile && styleData?.navigationArrows !== 'hidden'">

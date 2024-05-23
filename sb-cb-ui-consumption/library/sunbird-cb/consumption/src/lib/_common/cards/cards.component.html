@@ -28,7 +28,7 @@
 </ng-template>
 
 <ng-template #cardWideLib>
-  <sb-uic-card-wide [widgetData]="widgetData"></sb-uic-card-wide>
+  <sb-uic-card-wide (contentData)="getRedirectUrlData($event)"  [widgetData]="widgetData"></sb-uic-card-wide>
 </ng-template>
 <ng-template #cardWideLibSkeleton>
   <sb-uic-card-wide [widgetData]="widgetData"></sb-uic-card-wide>

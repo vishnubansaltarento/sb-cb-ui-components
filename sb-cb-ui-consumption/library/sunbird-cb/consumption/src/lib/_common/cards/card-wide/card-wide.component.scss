@@ -71,3 +71,11 @@ $secondary-color: #EF951E;
         -webkit-box-orient: vertical;
       }
 }
+
+@media screen and (max-width: 768px) { 
+    .card-wide-img {
+        width: 167px;
+        height: 117px;
+        border-radius: 12px;
+    }
+  }
