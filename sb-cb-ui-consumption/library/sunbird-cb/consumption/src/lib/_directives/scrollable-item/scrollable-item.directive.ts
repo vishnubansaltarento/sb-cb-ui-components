@@ -8,8 +8,8 @@ export class ScrollableItemDirective {
   @Input('sbUicScrollableItem') public key: string
   constructor(private el: ElementRef<HTMLElement>) {}
 
-  public scrollIntoView() {
-    this.el.nativeElement.scrollIntoView({ behavior: 'smooth', block: "nearest"});
+  public scrollIntoView(blockValue: any) {
+    this.el.nativeElement.scrollIntoView({ behavior: 'smooth', block: blockValue });
   }
 
 
