@@ -9,7 +9,7 @@ export class ScrollableItemDirective {
   constructor(private el: ElementRef<HTMLElement>) {}
 
   public scrollIntoView() {
-    this.el.nativeElement.scrollIntoView({ behavior: 'smooth'});
+    this.el.nativeElement.scrollIntoView({ behavior: 'smooth', block: "nearest"});
   }
 
 
