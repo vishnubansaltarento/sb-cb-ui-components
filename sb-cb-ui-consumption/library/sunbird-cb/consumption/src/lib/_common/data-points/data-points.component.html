@@ -6,7 +6,9 @@
                     <img class="objIcon" [src]="obj.icon"  [style.color]="obj?.iconColor">
                 </div>
                 <div>
-                    <div [style.color]="obj?.valueColor" class="objHeader pb-1" >{{obj?.value | number: obj.value % 1 === 0 ? '1.0-0' : '1.1-2'}}
+                    <div [style.color]="obj?.valueColor" class="objHeader pb-1" *ngIf="!(obj && obj.value)">0</div>
+                    <div [style.color]="obj?.valueColor" class="objHeader pb-1" *ngIf="(obj && obj.value)">
+                        {{obj.value | number: obj.value % 1 === 0 ? '1.0-0' : '1.1-2'}}
                     </div>
                     <div [style.color]="obj?.labelColor" class="objDescription">{{obj?.label}}</div>
                 </div>
@@ -24,7 +26,10 @@
                         <img [style.color]="obj?.iconColor"  class="mobjIcon" [src]="obj.icon">
                     </div>
                     <div>
-                        <div [style.color]="obj?.valueColor" class="mobjHeader pb-1">{{obj?.value  | number: '1.1-2'}}</div>
+                        <div [style.color]="obj?.valueColor" class="mobjHeader pb-1" *ngIf="!(obj && obj.value)">0</div>
+                        <div [style.color]="obj?.valueColor" class="mobjHeader pb-1" *ngIf="(obj && obj.value)">
+                            {{obj?.value  | number: obj.value % 1 === 0 ? '1.0-0' : '1.1-2'}}
+                        </div>
                         <div [style.color]="obj?.labelColor" class="mobjDescription">{{obj?.label}}</div>
                     </div>
                 </div>
@@ -41,7 +46,10 @@
                     <div class="flex-item">
                         <div class="flex flex-row gap-5 infra-element-div">
                             <div>
-                               <div [style.color]="item?.valueColor" class="infra-objHeader">{{item?.value}}</div>
+                                <div [style.color]="item?.valueColor" class="infra-objHeader" *ngIf="!(item && item.value)">0</div>
+                                <div [style.color]="item?.valueColor" class="infra-objHeader"  *ngIf="(item && item.value)">
+                                    {{item?.value  | number: item.value % 1 === 0 ? '1.0-0' : '1.1-2'}}
+                                </div>
                                 <div [style.color]="item?.labelColor" class="custom-opacity infra-objDescription padding-top-s">{{item?.label}}</div>
                             </div>
                         </div>
