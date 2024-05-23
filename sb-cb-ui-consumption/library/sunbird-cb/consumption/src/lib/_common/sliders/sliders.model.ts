@@ -16,6 +16,9 @@ export interface ICarouselStyle {
   borderRadius?: string,
   customHeight?: string,
   arrowsPlacement?: "bottom-right" | "bottom-center" | "bottom-left" | "middle-inline",
+  imageBorderWidth: number
+  imageBorderColor: string
+  imageBorderStyle: string
   responsive: {
     bannerMetaClass?: "inline-meta", 
     bannerMetaAlign?: "right" | "left",
@@ -24,6 +27,9 @@ export interface ICarouselStyle {
     borderRadius?: string,
     customHeight?: string,
     arrowsPlacement?: "bottom-right" | "bottom-center" | "bottom-left" | "middle-inline",
+    imageBorderWidth: number
+    imageBorderColor: string
+    imageBorderStyle: string
   }
 }
 
