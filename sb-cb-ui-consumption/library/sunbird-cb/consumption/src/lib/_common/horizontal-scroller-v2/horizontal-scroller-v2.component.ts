@@ -98,8 +98,11 @@ export class HorizontalScrollerV2Component implements OnInit, OnChanges, OnDestr
         left: this.horizontalScrollElem.nativeElement.scrollLeft - clientWidth,
         behavior: 'smooth',
       });
-
-      this.activeNav -= 1;
+      
+      const elem = this.horizontalScrollElem.nativeElement
+      if (elem.scrollLeft !== 0 && (elem.scrollWidth !== elem.clientWidth + elem.scrollLeft)) {
+        this.activeNav -= 1;
+      }
     }
   }
 
@@ -113,7 +116,10 @@ export class HorizontalScrollerV2Component implements OnInit, OnChanges, OnDestr
         left: this.horizontalScrollElem.nativeElement.scrollLeft + clientWidth,
         behavior: 'smooth',
       });
-      this.activeNav += 1;
+      const elem = this.horizontalScrollElem.nativeElement
+      if (elem.scrollLeft !== 0 && (elem.scrollWidth !== elem.clientWidth + elem.scrollLeft)) {
+        this.activeNav += 1;
+      }
     }
   }
 
