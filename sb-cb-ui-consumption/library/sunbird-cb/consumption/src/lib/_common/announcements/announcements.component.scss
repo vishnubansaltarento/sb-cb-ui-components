@@ -1,0 +1,90 @@
+.key-logo {
+    align-items: center;
+    justify-content: center;
+}
+
+
+.key-list-container {
+    border: 1px solid #ccc;
+    padding: 45px 15px 15px 15px;
+    border-radius: 12px;
+    margin-top: -20px;
+}
+.key-list {
+    max-height: 600px;
+    overflow: auto;
+}
+.key-list::-webkit-scrollbar {
+    display: none;
+  }
+.key-list-item {
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    min-height: 56px;
+}
+::ng-deep .key-list-item-content a {
+    color: rgb(27, 76, 161) !important;
+}
+
+
+.key-list-item-content {
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+    white-space: initial;
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;    
+    -webkit-box-orient: vertical;
+}
+
+
+.expand {
+    -webkit-line-clamp: 3;
+}
+.un-expand {
+    -webkit-line-clamp: 0;
+}
+.more-or-less {
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    font-weight: 600;
+}
+
+
+.key-heading {
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19.5px;
+    text-align: center;
+    padding: 10px 50px;
+    border-radius: 20px;
+    margin-top: -3px;
+    animation: paddingAnimation 900ms infinite ease;
+}
+
+
+@keyframes paddingAnimation {
+    0% {
+        padding: 10px 50px;
+    }
+    25% {
+        padding: 10px 55px;
+    }
+    50% {
+        padding: 10px 60px;
+    }
+    75% {
+        padding: 10px 55px;
+    }
+    100% {
+        padding: 10px 50px;
+    }
+}
