@@ -5,6 +5,7 @@ import { SlidersLibModule } from '../lib/_common/sliders/sliders.module';
 import { DataPointsModule } from './_common/data-points/data-points.module';
 import { CalenderModule } from './_common/calender/calender.module';
 import { CommonStripModule } from './_common/common-strip/common-strip.module';
+import { AnnouncementsModule } from './_common/announcements/announcements.module';
 
 
 
@@ -19,7 +20,8 @@ import { CommonStripModule } from './_common/common-strip/common-strip.module';
     SlidersLibModule,
     DataPointsModule,
     CalenderModule,
-    CommonStripModule
+    CommonStripModule,
+    AnnouncementsModule
   ],
 })
 export class ConsumptionModule { }

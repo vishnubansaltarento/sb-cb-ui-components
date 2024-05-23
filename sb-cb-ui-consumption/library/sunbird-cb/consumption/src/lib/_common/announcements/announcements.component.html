@@ -1,0 +1,30 @@
+<p>announcements works!</p>
+<div class="w-full">
+    <div class="flex item-center key-logo">
+        <img class="" [src]="objectData?.logoUrl">
+    </div>
+    <div class="flex item-center key-logo ">
+        <div class="key-heading"
+            [style.backgroundColor]="objectData?.header?.background"
+            [style.color]="objectData?.header?.color">
+            {{objectData?.title}}
+        </div>
+    </div>
+    <div class="key-list-container"
+        [style.borderColor]="objectData?.panelborder"
+        [style.backgroundColor]="objectData?.panelBackground">
+        <div class="key-list">
+            <div *ngFor="let item of objectData?.list; let i = index">
+                <div class="key-list-item mb-{{ objectData?.list?.length === (i+1) ? '' : '4'}}" 
+                    [style.borderColor]="objectData?.listItem?.border"
+                    [style.backgroundColor]="objectData?.listItem?.background">
+                    <div class="key-list-item-content {{item?.value?.length > 152 && !item?.expanded ? 'expand' : 'un-expand'}}" [innerHTML]="item?.value"></div>
+                    <div class="more-or-less" *ngIf="item?.value?.length > 152" [style.color]="objectData?.panelborder">
+                        <div class="cursor-pointer" (click)="viewMoreOrLess(item)" *ngIf="!item?.expanded">View more</div>
+                        <div class="cursor-pointer" (click)="viewMoreOrLess(item)" *ngIf="item?.expanded">View less</div>
+                    </div>
+                </div>
+            </div>                        
+        </div>        
+    </div>
+</div>
