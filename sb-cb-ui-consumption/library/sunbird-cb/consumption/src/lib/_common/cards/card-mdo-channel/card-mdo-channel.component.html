@@ -1,7 +1,8 @@
 <mat-card class="channels-card card-channels-container mr-5 padding-remove cursor-pointer">
     <div class="display-contents">
         <ng-container *ngIf="widgetData.content">
-            <a (click)="raiseTelemetry();$event.stopPropagation()" role="link"
+            <a (click)="raiseTelemetry();$event.stopPropagation()" 
+                [routerLink]="['/app/learn/mdo-channels/asdfghj/123456/micro-sites']" role="link"
                 i18n-aria-label>
                 <ng-container>
                     <mat-card-content class="min-top">
