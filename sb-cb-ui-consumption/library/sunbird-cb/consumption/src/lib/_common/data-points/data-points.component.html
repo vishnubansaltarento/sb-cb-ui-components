@@ -1,6 +1,6 @@
 <div class="w-full metrics-web" *ngIf="layoutType === 'multipleRows' && !isDataLoading">
     <div *ngFor="let obj of objectData; let last = last" class="">
-        <div class="element-div" [ngClass]="{'linebreak': obj?.linebreak }">
+        <div class="element-div" [ngClass]="{'linebreak': obj?.linebreak && !last}">
             <div class="flex flex-row gap-3 items-top">
                 <div>
                     <img class="objIcon" [src]="obj.icon"  [style.color]="obj?.iconColor">
