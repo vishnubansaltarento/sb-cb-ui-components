@@ -13,9 +13,17 @@ import { CardUserComponent } from './card-user/card-user.component';
 import { SkeletonLoaderLibModule } from '../skeleton-loader-lib/skeleton-loader-lib.module';
 import { CardLandscapeComponent } from './card-landscape/card-landscape.component';
 import { CardWideComponent } from './card-wide/card-wide.component';
+import { CardMDOChannelComponent } from './card-mdo-channel/card-mdo-channel.component';
 
 @NgModule({
-  declarations: [CardResourceComponent, CardsComponent,CardPortraitComponent, CardUserComponent, CardLandscapeComponent, CardWideComponent],
+  declarations: [
+    CardResourceComponent,
+    CardsComponent,CardPortraitComponent,
+    CardUserComponent,
+    CardLandscapeComponent,
+    CardWideComponent,
+    CardMDOChannelComponent
+  ],
   imports: [
     CommonModule,
     MatCardModule,
@@ -36,7 +44,8 @@ import { CardWideComponent } from './card-wide/card-wide.component';
     CardPortraitComponent, 
     CardLandscapeComponent,
     CardUserComponent,
-    CardWideComponent
+    CardWideComponent,
+    CardMDOChannelComponent
   ],
 })
 export class CardsModule { }

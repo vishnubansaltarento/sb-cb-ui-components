@@ -1,0 +1,40 @@
+<mat-card class="channels-card card-channels-container mr-5 padding-remove cursor-pointer">
+    <div class="display-contents">
+        <ng-container *ngIf="widgetData.content">
+            <a (click)="raiseTelemetry();$event.stopPropagation()" role="link"
+                i18n-aria-label>
+                <ng-container>
+                    <mat-card-content class="min-top">
+                        <div class="flex flex-col h-full">
+                            <div class="image-container">
+                                <ng-container *ngIf="widgetData.content.posterImage">
+                                    <img mat-card-image [src]="widgetData.content.posterImage | pipePublicURL" loading="lazy"
+                                    class="card-img ws-mat-primary-lite-background margin-remove" [wsUtilsDefaultThumbnail]="defaultThumbnail"
+                                    [alt]="widgetData.content.name" />
+                                  </ng-container>
+                                  <ng-container *ngIf="!widgetData.content.posterImage">
+                                    <ng-container *ngIf="widgetData.content.appIcon; else defaultImg">
+                                      <img mat-card-image [src]="widgetData.content.appIcon | pipePublicURL" loading="lazy"
+                                      class="card-img ws-mat-primary-lite-background margin-remove"  [wsUtilsDefaultThumbnail]="defaultThumbnail"
+                                      [alt]="widgetData.content.name" />
+                                    </ng-container>
+                                    <ng-template #defaultImg>
+                                      <img mat-card-image [src]="defaultThumbnail" loading="lazy"
+                                      class="card-img ws-mat-primary-lite-background margin-remove"
+                                      [alt]="widgetData.content.name" />
+                                    </ng-template>
+                                  </ng-container>
+                            </div>
+                            <div class="flex  title-container px-2">
+                                <div [id]="'m-c-'+ widgetData.content?.identifier"
+                                    class="flex-1 text-center  mat-subheading-2 title-text ws-mat-black-text">
+                                    {{ widgetData.content.name }}
+                                </div>
+                            </div>
+                        </div>
+                    </mat-card-content>
+                </ng-container>
+            </a>
+        </ng-container>
+    </div>
+</mat-card>
