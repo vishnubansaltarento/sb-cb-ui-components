@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren
 import { RatingService } from '../../_services/rating.service';
 import { ScrollableItemDirective } from './../../_directives/scrollable-item/scrollable-item.directive';
 import { UserContentRatingLibService } from './user-content-rating-lib.service';
+
 @Component({
   selector: 'sb-uic-user-content-rating',
   templateUrl: './user-content-rating-lib.component.html',
@@ -43,6 +44,8 @@ export class UserContentRatingLibComponent implements OnInit {
         } else {
             this.emptyResponse.emit(true)
         }
+    },(_error: any)=> {
+      this.emptyResponse.emit(true)
     })
   }
 
