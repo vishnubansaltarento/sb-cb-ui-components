@@ -59,6 +59,31 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.16);
 }
 
+.singleFlexeRow-div {
+    padding: 16px;
+    border-radius: 15px;
+}
+
+.singleFlexeRowHeader{
+    font-family: Montserrat;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 24.38px;
+    text-align: left;
+}
+.singleFlexeRowDescription {
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.8px;
+    text-align: left;
+}
+
+.singleFlexeRowIcon {
+    width: 24px;
+    height: 24px;
+}
+
 .melement-div {
     padding: 16px;
     border-radius: 15px;
