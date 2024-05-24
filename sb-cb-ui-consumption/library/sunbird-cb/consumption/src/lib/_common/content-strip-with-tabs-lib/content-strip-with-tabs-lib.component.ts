@@ -1222,7 +1222,7 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
         // console.log('calling  after - response, ', response)
         if (response && response.results) {
           // console.log('calling  after-- ')
-          if (response.results.result.content) {
+          if (response.results.result.content && response.results.result.content.length) {
             this.processStrip(
               strip,
               this.transformContentsToWidgets(response.results.result.content, strip),
@@ -1261,7 +1261,7 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
         // console.log('calling  after - response, ', response)
         if (response && response.results) {
           // console.log('calling  after-- ')
-          if (response.results.result.content) {
+          if (response.results.result.content && response.results.result.content.length) {
             this.processStrip(
               strip,
               this.transformContentsToWidgets(response.results.result.content, strip),
