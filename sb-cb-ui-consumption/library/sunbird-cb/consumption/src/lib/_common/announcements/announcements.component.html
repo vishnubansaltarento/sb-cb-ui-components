@@ -1,4 +1,4 @@
-<div class="w-full">
+<div class="w-full" *ngIf="layoutType === 'web'">
     <div class="flex item-center key-logo">
         <img class="" [src]="objectData?.logoUrl">
     </div>
@@ -25,5 +25,21 @@
                 </div>
             </div>                        
         </div>        
+    </div>
+</div>
+
+<div class="w-full" *ngIf="layoutType === 'mobile'">
+    <div class="flex item-center key-logo ">
+        <div class="mob-key-heading" (click)="openAnnouncements()"
+            [style.backgroundColor]="objectData?.header?.background"
+            [style.color]="objectData?.header?.color">
+            <div class="flex key-button gap-3">
+                <div>
+                    <img [src]="objectData?.mobileIcon">
+                </div>
+                <div>{{objectData?.title}}</div>                
+                <div><mat-icon class="key-mob-icon">arrow_forward_ios</mat-icon></div>
+            </div>            
+        </div>
     </div>
 </div>
