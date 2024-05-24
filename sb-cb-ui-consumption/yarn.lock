@@ -1137,17 +1137,22 @@
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
   integrity sha512-9NET910DNaIPngYnLLPeg+Ogzqsi9uM4mSboU5y6p8S5DzMTVEsJZrawi+BoDNUVBa2DhJqQYUFvMDfgU062LQ==
 
-"@sunbird-cb/resolver@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@sunbird-cb/resolver/-/resolver-1.0.0.tgz#30e5350cbd54af259cdb279ed79bdacad6fd2650"
-  integrity sha512-UJkXVT4LurSVcOg/M/mHdYagfsvLl9n1iLFnn8mzD7jwrjcGQorc2Cmrj1WBvKQuve7me3zMCcATD8UMCHv4Ug==
+"@sunbird-cb/design-system@0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@sunbird-cb/design-system/-/design-system-0.0.2.tgz#54793a7d5c5b6942319b6c1f3e4f63ef60548545"
+  integrity sha512-oTZMfeNu+fi2muVbZUN9vw0mF28e/MvqFgYzgrLJ6vvw3JDxW3814U00x4Fym7Rm0tYc7vpckDFGSKXR3EFMaQ==
+
+"@sunbird-cb/resolver-v2@0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@sunbird-cb/resolver-v2/-/resolver-v2-0.0.7.tgz#fd22ab879e5cdd4ac3db5d1ae0ec1cdd59e5e28a"
+  integrity sha512-0FHW0/zLbqlBLgZdeEXP2QBiO+euDhYWAQwX+mJ6uCd5SsvBOe27ikvjCICX7W2QR7LruFRolp1j6wAvYNVW1Q==
   dependencies:
     tslib "^1.9.0"
 
-"@sunbird-cb/utils@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@sunbird-cb/utils/-/utils-0.0.6.tgz#84707090d4ac58f5cc76c481f625d1ad4de87831"
-  integrity sha512-c0CeEkjodarlaWdlE6Ndr+XBxHBpmzolarbxolJzjjLEtxMWnlnXiogg7bSh5t3ezHdYttGrh6BVr3VMU8KCsA==
+"@sunbird-cb/utils-v2@0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@sunbird-cb/utils-v2/-/utils-v2-0.0.1.tgz#3f1ba45a32b7c51a9d3bc54b79a450d3f144449e"
+  integrity sha512-G6BaS01Ll2knR+B3iTWFXf+g8jczSxhLYR50Ekhltf0RYAy90o4vzJcq8gCwLKHIj6fBWTb5o7kCF0N7f9xJ0Q==
   dependencies:
     tslib "^1.9.0"
 
@@ -4357,6 +4362,11 @@ gzip-size@^5.0.0:
   dependencies:
     duplexer "^0.1.1"
     pify "^4.0.1"
+
+hammerjs@^2.0.8:
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/hammerjs/-/hammerjs-2.0.8.tgz#04ef77862cff2bb79d30f7692095930222bf60f1"
+  integrity sha512-tSQXBXS/MWQOn/RKckawJ61vvsDpCom87JgxiYdGwHdOa0ht0vzUWDlfioofFCRU0L+6NGDt6XzbgoJvZkMeRQ==
 
 handle-thing@^2.0.0:
   version "2.0.1"
