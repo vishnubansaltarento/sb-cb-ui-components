@@ -13,6 +13,7 @@ export class CompetencyPassbookComponent implements OnInit {
 
   @Input() objectData: any
   @Input() providerId: any
+  @Input() cardDisplayCount: any = 3
   @Output() emptyResponse = new EventEmitter<any>()
   loadCometency: boolean = false
   loadCompetencyArea: boolean = false
@@ -206,6 +207,7 @@ export class CompetencyPassbookComponent implements OnInit {
     this.allcompetencyTheme[data.name.toLowerCase()].viewMore = data.viewMore
   }
   displayAllTheme(event: any) {
+    debugger
     this.showAllTheme[0]['showAll'] = !event.showAll 
     this.competencyThemeLength = event.showAll ?  this.competencyTheme.length : 6
     this.showAllTheme[0]['name'] = event.showAll ? 'Show less' : 'Show all'
