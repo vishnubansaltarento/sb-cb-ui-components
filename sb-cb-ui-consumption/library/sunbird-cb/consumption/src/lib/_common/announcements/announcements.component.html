@@ -1,4 +1,4 @@
-<div class="w-full" *ngIf="layoutType === 'web'">
+<div class="w-full" *ngIf="layoutType === 'web' && !isLoading">
     <div class="flex item-center key-logo">
         <img class="" [src]="objectData?.logoUrl">
     </div>
@@ -12,7 +12,7 @@
     <div class="key-list-container"
         [style.borderColor]="objectData?.panelborder"
         [style.backgroundColor]="objectData?.panelBackground">
-        <div class="key-list">
+        <div class="{{mobileHeight ? 'mob-key-list' : 'key-list'}}" >
             <div *ngFor="let item of objectData?.list; let i = index">
                 <div class="key-list-item mb-{{ objectData?.list?.length === (i+1) ? '' : '4'}}" 
                     [style.borderColor]="objectData?.listItem?.border"
@@ -41,5 +41,37 @@
                 <div><mat-icon class="key-mob-icon">arrow_forward_ios</mat-icon></div>
             </div>            
         </div>
+    </div>
+</div>
+
+<div class="w-full" *ngIf="layoutType === 'web' && isLoading">
+    <div class="flex item-center key-logo">
+        <sb-uic-skeleton-loader [bindingClass]="'flex rounded objIcon'" [width]="'50px'" [height]="'35px'">
+        </sb-uic-skeleton-loader>
+    </div>
+    <div class="flex item-center key-logo pt-1">
+        <sb-uic-skeleton-loader [bindingClass]="'flex rounded objIcon'" [width]="'200px'" [height]="'32px'">
+        </sb-uic-skeleton-loader>
+    </div>
+    <div class="key-list-container"
+        [style.borderColor]="objectData?.panelborder"
+        [style.backgroundColor]="objectData?.panelBackground">
+        <div class="{{mobileHeight ? 'mob-key-list' : 'key-list'}}" >            
+            <div class="key-list-item mb-4" 
+                *ngFor="let item of[0,1,2,3,4]; let i = index"
+                [style.borderColor]="objectData?.listItem?.border"
+                [style.backgroundColor]="objectData?.listItem?.background">
+                <div class="key-list-item-content un-expand">
+                    <div class="py-1">
+                        <sb-uic-skeleton-loader [bindingClass]="'flex rounded objIcon '" [width]="'350px'" [height]="'24px'">
+                        </sb-uic-skeleton-loader>
+                    </div>
+                    <div class="py-1">
+                        <sb-uic-skeleton-loader [bindingClass]="'flex rounded objIcon '" [width]="'350px'" [height]="'24px'">
+                        </sb-uic-skeleton-loader>
+                    </div>
+                </div>
+            </div>
+        </div>        
     </div>
 </div>
