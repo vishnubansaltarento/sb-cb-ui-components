@@ -11,6 +11,8 @@
       <ng-container *ngSwitchCase="'card-landscape-lib'" [ngTemplateOutlet]="cardLandscapeLib"></ng-container>
       <ng-container *ngSwitchCase="'card-wide-lib-skeleton'" [ngTemplateOutlet]="cardWideLibSkeleton"></ng-container>
       <ng-container *ngSwitchCase="'card-wide-lib'" [ngTemplateOutlet]="cardWideLib"></ng-container>
+      <ng-container *ngSwitchCase="'card-wide-v2'" [ngTemplateOutlet]="cardWideV2"></ng-container>
+      <ng-container *ngSwitchCase="'card-wide-v2-skelton'" [ngTemplateOutlet]="cardWideV2Skelton"></ng-container>
     </ng-container>
 </div>
 
@@ -32,6 +34,13 @@
 </ng-template>
 <ng-template #cardWideLibSkeleton>
   <sb-uic-card-wide [widgetData]="widgetData"></sb-uic-card-wide>
+</ng-template>
+
+<ng-template #cardWideV2Skelton>
+  <sb-uic-card-wide-v2 [widgetData]="widgetData" ></sb-uic-card-wide-v2>
+</ng-template>
+<ng-template #cardWideV2>
+  <sb-uic-card-wide-v2 [widgetData]="widgetData" ></sb-uic-card-wide-v2>
 </ng-template>
 
   <ng-template #cardUser>

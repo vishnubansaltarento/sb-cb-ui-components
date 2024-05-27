@@ -1,10 +1,10 @@
- <div class="competency-title">{{objectData?.title}} 
+ <div class="competency-title" *ngIf="objectData?.title">{{objectData?.title}} 
     <span class="competency-count">
         ({{competencyStrength}})
     </span>
 </div>
-<div class="flex items-center justify-center gap-8 mt-5 mb-5 competency-filters">
-    <sb-uic-pills [pillsData]="competencyArea" 
+<div class="flex items-center justify-{{dynamicAlignPills}} gap-8 mt-5 mb-5 competency-filters">
+    <sb-uic-pills [pillsData]="competencyArea" [dynamicColor]="dynamicColor"
     [isLoading]="loadCompetencyArea" (pillClick)="competencyChange($event)" [selectedValue]="selectedValue"></sb-uic-pills>
 </div>
 <div class="grid grid-cols-1 md:grid-cols-{{cardDisplayCount}} w-full grid-flow-row gap-5" *ngIf="!loadCometency">
@@ -51,13 +51,13 @@
 </div>
 <ng-container *ngIf="competencyTheme.length > 6 && !loadCometency">
     <div class="flex items-center justify-center gap-8 mt-5 mb-5 competency-filters">
-        <sb-uic-pills [pillsData]="showAllTheme" (pillClick)="displayAllTheme($event)"></sb-uic-pills>
+        <sb-uic-pills [pillsData]="showAllTheme" [requiredTitlecase]="false" [dynamicColor]="dynamicColor" (pillClick)="displayAllTheme($event)"></sb-uic-pills>
     </div>
 </ng-container> 
 
 <ng-container *ngIf="loadCometency">
 
-<div class="grid grid-cols-1 md:grid-cols-3 w-full grid-flow-row gap-5">
+<div class="grid grid-cols-1 md:grid-cols-{{cardDisplayCount}} w-full grid-flow-row gap-5">
     <div *ngFor="let obj of [0,1,2,3,4,5]">
         <div class="flex-1 flex-col">
             <div class="competency-theme"></div>

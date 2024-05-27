@@ -11,6 +11,10 @@ export class PillsComponent implements OnInit {
   @Input() selectedValue: any
   @Input() isLoading: boolean = false
   @Output() pillClick = new EventEmitter<any>()
+  @Input() dynamicClass: any = ''
+  @Input() dynamicColor: any = ''
+  @Input() requiredTitlecase: boolean = true
+
   constructor() { }
 
   ngOnInit() {
