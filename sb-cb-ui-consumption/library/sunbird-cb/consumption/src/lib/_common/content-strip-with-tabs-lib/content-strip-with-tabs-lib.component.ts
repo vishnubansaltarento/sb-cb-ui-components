@@ -61,6 +61,7 @@ interface IStripUnitContentData {
   stripBackground?: string;
   secondaryHeading?: any;
   viewMoreUrl: any;
+  request?: any
 }
 
 @Component({

@@ -1,9 +1,10 @@
 <ng-container *ngIf="!isLoading">
     <mat-chip-list >
         <ng-container *ngFor="let pill of pillsData">
-            <mat-chip class="competency-chip" (click)="selectedPill(pill)" 
+            <mat-chip class="competency-chip" (click)="selectedPill(pill)" [style.color]="dynamicColor"   [style.borderColor]="'#999999'"
             [ngClass]="{'active': selectedValue === pill?.name}">
-                <span class="pill-name">{{pill?.name | titlecase}} <span *ngIf="pill?.count">({{pill?.count}})</span></span>
+                <span [style.color]="dynamicColor" class="pill-name" *ngIf="requiredTitlecase">{{pill?.name | titlecase}} <span *ngIf="pill?.count">({{pill?.count}})</span></span>
+                <span [style.color]="dynamicColor" class="pill-name" *ngIf="!requiredTitlecase">{{pill?.name }} <span *ngIf="pill?.count">({{pill?.count}})</span></span>
             </mat-chip>
         </ng-container>
     </mat-chip-list>

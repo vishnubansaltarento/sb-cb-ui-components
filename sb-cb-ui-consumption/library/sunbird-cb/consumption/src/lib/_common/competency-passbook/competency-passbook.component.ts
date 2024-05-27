@@ -14,10 +14,13 @@ export class CompetencyPassbookComponent implements OnInit {
   @Input() objectData: any
   @Input() providerId: any
   @Input() cardDisplayCount: any = 3
+  @Input() dynamicClass: any
+  @Input() dynamicColor: any
+  @Input() dynamicAlignPills: any = 'center'
   @Output() emptyResponse = new EventEmitter<any>()
   loadCometency: boolean = false
   loadCompetencyArea: boolean = false
-
+  originalCompetencyArray: any
   competencyArea: any []
   selectedValue: any;
   competencyVersion:string = ''
@@ -41,7 +44,6 @@ export class CompetencyPassbookComponent implements OnInit {
 
  
   ngOnInit() {
-    this.getCompetencyArea()
     this.getAllCompetencies()
     // this.competencyData = this.objectData
     // this.filter(this.currentFilter)
@@ -144,6 +146,9 @@ export class CompetencyPassbookComponent implements OnInit {
     this.competencySvc.getCompetencyList(request).subscribe((response: any) => {
       this.allcompetencyTheme = {}
       if(response && response.result && response.result.competency) {
+        this.originalCompetencyArray = response.result.competency
+
+        this.getCompetencyArea()
         response.result.competency.forEach(element => {
           element.children.forEach((childEle) => {
             let name = childEle.name.toLowerCase()
@@ -186,7 +191,16 @@ export class CompetencyPassbookComponent implements OnInit {
     const response = await this.callCompetencySearch(request);
     if (response && response.results) {
       if(response.results.result.facets){
-        this.competencyTheme = response.results.result.facets[0].values 
+        let competencyThemeData : any = response.results.result.facets[0].values 
+        this.originalCompetencyArray.forEach((element: any) => {
+          if(element.name.toLowerCase() === value) {
+            this.competencyTheme = competencyThemeData.filter((ele1: any) => {
+              return  element.children.find((ele2: any) => ele2.name.toLowerCase() === ele1.name.toLowerCase())
+            })
+            this.showAllTheme = [{name:'Show all', showAll: false}]
+            this.competencyThemeLength = 6
+          }
+        });
         this.resetViewMore()
       }
       this.loadCometency = false
@@ -207,7 +221,6 @@ export class CompetencyPassbookComponent implements OnInit {
     this.allcompetencyTheme[data.name.toLowerCase()].viewMore = data.viewMore
   }
   displayAllTheme(event: any) {
-    debugger
     this.showAllTheme[0]['showAll'] = !event.showAll 
     this.competencyThemeLength = event.showAll ?  this.competencyTheme.length : 6
     this.showAllTheme[0]['name'] = event.showAll ? 'Show less' : 'Show all'
