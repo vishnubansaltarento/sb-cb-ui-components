@@ -9,11 +9,19 @@ export class AnnouncementsComponent implements OnInit {
 
   @Input() objectData: any
   @Input() layoutType:  any
+  @Input() mobileHeight: boolean = false
   @Output() openDialog = new EventEmitter<any>()
+  isLoading: boolean = false
 
-  constructor() { }
+  constructor() { 
+    this.isLoading = true
+  }
 
   ngOnInit() {
+
+    setTimeout(() => {
+      this.isLoading = false
+    }, 10000);
   }
 
   viewMoreOrLess(item: any) {
