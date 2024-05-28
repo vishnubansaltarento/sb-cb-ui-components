@@ -11,6 +11,7 @@ export class DataPointsComponent implements OnInit {
   @Input() layoutType: string = ''
   @Input() fetchDataFromApi: boolean = false
   @Input() providerId : any = ''
+  @Input() pageLayout: any = ''
   customArray: any[][] = []
   isDataLoading: boolean = false
 
@@ -36,13 +37,27 @@ export class DataPointsComponent implements OnInit {
   }
 
   getInsiteData(){
-    let request: any = {
+    let request: any = {}
+    request  = {
       "request": {
           "filters": {
               "organisations": [
                   this.providerId
               ]
           }
+      }
+    }
+    if (this.pageLayout && this.pageLayout === 'mdo') {
+      request  = {
+        "request": {
+            "filters": {
+              "requestType": "MDO_INSIGHT",
+                "organisations": [
+                    //this.providerId
+                    "123456"
+                ]
+            }
+        }
       }
     }
     this.insightSvc.fetchSearchData(request).subscribe((res: any)=> {
