@@ -2,7 +2,7 @@
     <div class="flex item-center key-logo">
         <img class="" [src]="objectData?.logoUrl">
     </div>
-    <div class="flex item-center key-logo ">
+    <div class="flex item-center key-logo">
         <div class="key-heading"
             [style.backgroundColor]="objectData?.header?.background"
             [style.color]="objectData?.header?.color">
@@ -46,12 +46,14 @@
 
 <div class="w-full" *ngIf="layoutType === 'web' && isLoading">
     <div class="flex item-center key-logo">
-        <sb-uic-skeleton-loader [bindingClass]="'flex rounded objIcon'" [width]="'50px'" [height]="'35px'">
-        </sb-uic-skeleton-loader>
+        <img class="" [src]="objectData?.logoUrl">
     </div>
     <div class="flex item-center key-logo pt-1">
-        <sb-uic-skeleton-loader [bindingClass]="'flex rounded objIcon'" [width]="'200px'" [height]="'32px'">
-        </sb-uic-skeleton-loader>
+        <div class="key-heading"
+            [style.backgroundColor]="objectData?.header?.background"
+            [style.color]="objectData?.header?.color">
+            {{objectData?.title}}
+        </div>
     </div>
     <div class="key-list-container"
         [style.borderColor]="objectData?.panelborder"
