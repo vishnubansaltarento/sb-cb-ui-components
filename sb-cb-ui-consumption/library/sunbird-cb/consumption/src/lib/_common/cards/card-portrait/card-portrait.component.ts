@@ -5,6 +5,7 @@ import { ConfigurationsService, EventService } from '@sunbird-cb/utils-v2';
 import * as _ from "lodash";
 import { TranslateService } from '@ngx-translate/core';
 import { MultilingualTranslationsService } from '../../../_services/multilingual-translations.service';
+import { WidgetContentService } from '../../../_services/widget-content.service';
 
 @Component({
   selector: 'sb-uic-card-portrait',
@@ -27,10 +28,10 @@ export class CardPortraitComponent implements OnInit {
   widgetSubType: any ='sdf'
   constructor(
     private snackBar: MatSnackBar,
-    private events: EventService,
     private translate: TranslateService,
     private langtranslations: MultilingualTranslationsService,
-    private configSvc: ConfigurationsService,) { 
+    private configSvc: ConfigurationsService,
+    private contSvc: WidgetContentService,) { 
       this.langtranslations.languageSelectedObservable.subscribe(() => {
         if (localStorage.getItem('websiteLanguage')) {
           this.translate.setDefaultLang('en')
@@ -60,29 +61,7 @@ export class CardPortraitComponent implements OnInit {
     }
   }
   getRedirectUrlData(contentData: any){
+    this.contSvc.changeTelemetryData(contentData)
     this.contentData.emit(contentData)
   }
-  raiseTelemetry() {
-    // if(this.forPreview){
-    //   return
-    // }
-    this.events.raiseInteractTelemetry(
-      {
-        type: 'click',
-        subType: `${this.widgetType}-${this.widgetSubType}`,
-        id: `${_.camelCase(this.widgetData.content.primaryCategory)}-card`,
-      },
-      {
-        id: this.widgetData.content.identifier,
-        type: this.widgetData.content.primaryCategory,
-        //context: this.widgetData.context,
-        rollup: {},
-        ver: `${this.widgetData.content.version}${''}`,
-      },
-      {
-        pageIdExt: `${_.camelCase(this.widgetData.content.primaryCategory)}-card`,
-        module: _.camelCase(this.widgetData.content.primaryCategory),
-      })
-  }
-
 }
