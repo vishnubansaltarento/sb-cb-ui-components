@@ -17,9 +17,11 @@ export class CardWideV2Component implements OnInit {
   @Input() isLiveOrMarkForDeletion: any
   @Input() showIntranetContent: any
   @Input() isIntranetAllowedSettings: any
+  @Input() cbPlanMapData: any
   @Input() isCardLoading: boolean = false
   @Output() contentData = new EventEmitter<any>()
   isCardFlipped:boolean = false
+  acbpConstants = NsCardContent.ACBPConst
   defaultThumbnail: any
   sourceLogos: any
   defaultSLogo: any

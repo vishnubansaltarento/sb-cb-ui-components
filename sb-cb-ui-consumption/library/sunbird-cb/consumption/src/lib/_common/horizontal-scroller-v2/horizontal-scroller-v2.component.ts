@@ -102,6 +102,16 @@ export class HorizontalScrollerV2Component implements OnInit, OnChanges, OnDestr
       const elem = this.horizontalScrollElem.nativeElement
       if (elem.scrollLeft !== 0 && (elem.scrollWidth !== elem.clientWidth + elem.scrollLeft)) {
         this.activeNav -= 1;
+      } else {
+        if(this.sliderConfig.arrowsAlwaysOn) {
+          if(this.horizontalScrollElem.nativeElement.scrollLeft === 0){
+            this.horizontalScrollElem.nativeElement.scrollTo({
+              left: elem.scrollWidth,
+              behavior: 'smooth',
+            });
+            this.activeNav = this.bottomDotsArray.length - 1;
+          }
+        }
       }
     }
   }
@@ -119,11 +129,22 @@ export class HorizontalScrollerV2Component implements OnInit, OnChanges, OnDestr
       const elem = this.horizontalScrollElem.nativeElement
       if (elem.scrollLeft !== 0 && (elem.scrollWidth !== elem.clientWidth + elem.scrollLeft)) {
         this.activeNav += 1;
+      } else {
+        if(this.sliderConfig.arrowsAlwaysOn) {
+          if(this.horizontalScrollElem.nativeElement.scrollLeft !== 0 && elem.clientWidth + elem.scrollLeft >= elem.scrollWidth ){
+            this.horizontalScrollElem.nativeElement.scrollTo({
+              left: 0,
+              behavior: 'smooth',
+            });
+            this.activeNav = 0;
+          }
+        }
       }
     }
   }
 
   private updateNavigationBtnStatus(elem: HTMLElement) {
+    debugger
     this.enablePrev = true;
     this.enableNext = true;
     if (elem.scrollLeft === 0) {
