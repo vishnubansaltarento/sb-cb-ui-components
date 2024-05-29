@@ -11,11 +11,11 @@
     box-sizing: border-box;
     box-shadow: 0px 10px 30px #99999933;
     overflow: hidden;
-    min-height: 156px;
-    height: 156px;
-    max-height: 156px;
+    min-height: 208px;
+    height: 208px;
+    max-height: 208px;
     margin: 0px 8px;
-    background: #7FAEFF !important;
+    background: #1a4ca1 !important;
     border-radius: 12px;
     padding: 4px !important;
 
@@ -30,8 +30,8 @@
     .image-container {
         background-color: #fff;
         width: inherit;
-        height: 86px;
-        max-height: 86px;
+        height: 124px;
+        max-height: 124px;
         overflow: hidden;
         display: flex;
         align-items: center;
@@ -58,7 +58,7 @@
         background: inherit;
     }
   
-    $title-line-count: 2;
+    $title-line-count: 1;
     $title-line-height: 24px;
   
     .title-text {

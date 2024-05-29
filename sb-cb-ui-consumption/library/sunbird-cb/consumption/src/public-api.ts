@@ -18,4 +18,7 @@ export * from './lib/_common/calender/calender.module'
 export * from './lib/_common/user-content-rating/user-content-rating-lib.module'
 export * from './lib/_common/announcements/announcements.module'
 
+
+export * from './lib/_services/widget-content.service'
+
 export * from './lib/_services/common-methods.service'
