@@ -53,8 +53,7 @@ export class DataPointsComponent implements OnInit {
             "filters": {
               "requestType": "MDO_INSIGHT",
                 "organisations": [
-                    //this.providerId
-                    "123456"
+                    this.providerId
                 ]
             }
         }
