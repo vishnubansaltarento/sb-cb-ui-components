@@ -15,6 +15,8 @@
       <ng-container *ngSwitchCase="'card-wide-v2-skeleton'" [ngTemplateOutlet]="cardWideV2Skeleton"></ng-container>
       <ng-container *ngSwitchCase="'card-mdo-lib'" [ngTemplateOutlet]="cardMdo"></ng-container>
       <ng-container *ngSwitchCase="'card-mdo-lib-skeleton'" [ngTemplateOutlet]="cardMdoSkeleton"></ng-container>
+      <ng-container *ngSwitchCase="'card-karma-program-lib'" [ngTemplateOutlet]="cardKarmaProgram"></ng-container>
+      <ng-container *ngSwitchCase="'card-karma-program-lib-skeleton'" [ngTemplateOutlet]="cardKarmaProgram"></ng-container>
     </ng-container>
 </div>
 
@@ -28,7 +30,7 @@
   <sb-uic-card-landscape [widgetData]="widgetData" [isCardLoading]="true"></sb-uic-card-landscape>
 </ng-template>
 <ng-template #cardLandscapeLib>
-  <sb-uic-card-landscape [widgetData]="widgetData" [isCardLoading]="false"></sb-uic-card-landscape>
+  <sb-uic-card-landscape (contentData)="getRedirectUrlData($event)"  [widgetData]="widgetData" [isCardLoading]="false"></sb-uic-card-landscape>
 </ng-template>
 
 <ng-template #cardWideLib>
@@ -42,7 +44,7 @@
   <sb-uic-card-wide-v2 [widgetData]="widgetData" [isCardLoading]="true" ></sb-uic-card-wide-v2>
 </ng-template>
 <ng-template #cardWideV2>
-  <sb-uic-card-wide-v2 [cbPlanMapData]="cbPlanMapData" [isCardLoading]="false" [widgetData]="widgetData" ></sb-uic-card-wide-v2>
+  <sb-uic-card-wide-v2 (contentData)="getRedirectUrlData($event)"  [cbPlanMapData]="cbPlanMapData" [isCardLoading]="false" [widgetData]="widgetData" ></sb-uic-card-wide-v2>
 </ng-template>
 
 <ng-template #cardUser>
@@ -53,4 +55,7 @@
 </ng-template>
 <ng-template #cardMdoSkeleton>
   <sb-uic-card-mdo-channel [widgetData]="widgetData"></sb-uic-card-mdo-channel>
+</ng-template>
+<ng-template #cardKarmaProgram>
+  <sb-uic-card-karma-programs [randomColorApply]="true" [widgetData]="widgetData"></sb-uic-card-karma-programs>
 </ng-template>

@@ -1,4 +1,4 @@
-<mat-card class="channels-card card-channels-container mr-5 padding-remove cursor-pointer">
+<mat-card class="channels-card card-channels-container mr-5 padding-remove cursor-pointer" [ngStyle]="{'background': widgetData?.content?.bgColor}">
     <div class="display-contents">
         <ng-container *ngIf="widgetData.content">
             <a (click)="raiseTelemetry();$event.stopPropagation()" 
@@ -26,16 +26,18 @@
                                     </ng-template>
                                   </ng-container>
                             </div>
-                            <div class="flex  title-container px-2">
-                                <div [id]="'m-c-'+ widgetData.content?.identifier"
-                                    class="flex-1 text-start  mat-subheading-2 title-text ws-mat-white-text">
-                                    {{ widgetData?.content?.name }}
+                            <div class="title-container">
+                                <div class="flex   px-2">
+                                    <div [id]="'m-c-'+ widgetData.content?.identifier"
+                                        class="flex-1 text-start  mat-subheading-2 title-text ws-mat-white-text">
+                                        {{ widgetData?.content?.name }}
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="flex  title-container px-2">
-                                <div [id]="'m-c-'+ widgetData?.content?.identifier"
-                                    class="flex-1 text-start  mat-subheading-2 title-text ws-mat-white-text">
-                                    {{ widgetData?.content?.programCount}} Programs
+                                <div class="flex  px-2">
+                                    <div [id]="'m-c-'+ widgetData?.content?.identifier"
+                                        class="flex-1 text-start  mat-subheading-2 title-text ws-mat-white-text">
+                                        {{ widgetData?.content?.programCount}} Programs
+                                    </div>
                                 </div>
                             </div>
                         </div>
