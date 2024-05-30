@@ -11,12 +11,22 @@ import { ConfigurationsService, EventService, MultilingualTranslationsService, N
 export class CardKarmaProgramsComponent implements OnInit {
 
   @Input() widgetData!: NsContent.IContent;
+  @Input() randomColorApply: boolean = false
   @Output() userData = new EventEmitter<any>()
   defaultThumbnail: any
   sourceLogos: any
   defaultSLogo: any
   widgetType: any = ''
   widgetSubType: any =''
+  randomColors: any = [
+    '#EF941D',
+    '#F97440',
+    '#35B5B0',
+    '#9988FF',
+    '#254092',
+    '#926525',
+    '#4F72DF'
+  ]
 
   constructor(
     private events: EventService,
@@ -42,6 +52,19 @@ export class CardKarmaProgramsComponent implements OnInit {
       this.defaultThumbnail = '/assets/instances/eagle/app_logos/default.png'
       this.defaultSLogo =  '/assets/instances/eagle/app_logos/KarmayogiBharat_Logo.svg'
     }
+    this.setRandomColor()
+  }
+
+  setRandomColor(){
+    if(this.widgetData && this.widgetData.content) {
+      if(this.randomColorApply){
+        const randomIndex1 = Math.floor(Math.random() * Math.floor(this.randomColors.length))
+        this.widgetData.content['bgColor'] = this.randomColors[randomIndex1]
+      }else {
+        this.widgetData.content['bgColor'] = '#1a4ca1'
+      }
+    }
+    console.log( this.widgetData.content, this.randomColorApply)
   }
 
   raiseTelemetry() {
@@ -65,5 +88,10 @@ export class CardKarmaProgramsComponent implements OnInit {
         pageIdExt: `${_.camelCase('user')}-card`,
         module: _.camelCase('user'),
       })
+  }
+
+  get getRandomColors(){
+    const randomIndex1 = Math.floor(Math.random() * Math.floor(this.randomColors.length))
+    return this.randomColors[randomIndex1]
   }
 }

@@ -14,10 +14,10 @@
     min-height: 208px;
     height: 208px;
     max-height: 208px;
-    margin: 0px 8px;
-    background: #1a4ca1 !important;
+    // margin: 0px 8px;
+    background: #1a4ca1 ;
     border-radius: 12px;
-    padding: 4px !important;
+    // padding: 4px !important; 
 
   
     .min-top {
@@ -36,16 +36,17 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 12px;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
     }
   
     .card-img {
           /* min-width: 62px; */
-        max-height: 62px;
-        min-height: 62px;
+        max-height: 100%;
+        min-height: 100%;
         display: block;
         -o-object-fit: fill;
-        object-fit: contain;
+        object-fit: fill;
         /* border-top-left-radius: 8px; */
         /* border-top-right-radius: 8px; */
         /* width: 100%; */
@@ -89,3 +90,5 @@
     $description-line-count: 3;
     $description-line-height: 21px;
 }
+
+

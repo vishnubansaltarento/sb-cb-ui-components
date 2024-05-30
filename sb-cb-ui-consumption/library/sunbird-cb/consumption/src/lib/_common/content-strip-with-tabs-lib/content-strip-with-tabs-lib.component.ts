@@ -326,6 +326,8 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
     this.fetchAllCbpPlans(strip, calculateParentStatus);
     this.fetchAllTopContent(strip, calculateParentStatus);
     this.fetchAllFeaturedContent(strip, calculateParentStatus);
+    this.fetchAllChannela(strip, calculateParentStatus);
+    
     // this.enrollInterval = setInterval(() => {
     //   this.fetchAllCbpPlans(strip, calculateParentStatus)
     // },                                1000)
@@ -881,7 +883,8 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
         (strip.request.cbpList && Object.keys(strip.request.cbpList).length) ||
         (strip.request.trendingSearch && Object.keys(strip.request.trendingSearch).length)||
         (strip.request.topContent && Object.keys(strip.request.topContent).length) ||
-        (strip.request.featureContent && Object.keys(strip.request.featureContent).length)
+        (strip.request.featureContent && Object.keys(strip.request.featureContent).length)||
+        (strip.request.channels && Object.keys(strip.request.channels).length)
       )
     ) {
       return true;
@@ -1342,5 +1345,112 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
     } else {
       this.router.navigate([path], {  queryParams: queryParamsData })
     }
+  }
+
+  async fetchAllChannela(strip: NsContentStripWithTabs.IContentStripUnit, calculateParentStatus = true) {
+    if (strip.request && strip.request.channels && Object.keys(strip.request.channels).length) {
+      let originalFilters: any = [];
+      if (strip.request &&
+        strip.request.channels &&
+        strip.request.channels.request &&
+        strip.request.channels.request.filters) {
+        originalFilters = strip.request.channels.request.filters;
+        strip.request.channels.request.filters = this.postMethodFilters(strip.request.channels.request.filters);
+      }
+      try {
+        let data = [
+          {
+              // tslint:disable-next-line: max-line-length
+              posterImage: 'https://portal.karmayogi.nic.in/content-store/content/do_114051411119235072127/artifact/do_114051411119235072127_1715260168985_default-provider.svg',
+              appIcon: '',
+              name: 'Ministry of Consumer Affairs, Food and Public Distribution',
+              programCount: '10',
+          },
+          {
+              // tslint:disable-next-line: max-line-length
+                posterImage: 'https://portal.karmayogi.nic.in/content-store/content/do_114051411119235072127/artifact/do_114051411119235072127_1715260168985_default-provider.svg',
+                appIcon: '',
+                name: 'Ministry of Railways',
+                programCount: '10',
+          },
+          {
+              // tslint:disable-next-line: max-line-length
+                posterImage: 'https://portal.karmayogi.nic.in/content-store/content/do_114051411119235072127/artifact/do_114051411119235072127_1715260168985_default-provider.svg',
+                appIcon: '',
+                name: 'Department of Post',
+                programCount: '10',
+          },
+          {
+              // tslint:disable-next-line: max-line-length
+                posterImage: 'https://portal.karmayogi.nic.in/content-store/content/do_114051411119235072127/artifact/do_114051411119235072127_1715260168985_default-provider.svg',
+                appIcon: '',
+                name: 'NLC India Limited',
+                programCount: '30',
+          },
+          {
+              // tslint:disable-next-line: max-line-length
+                posterImage: 'https://portal.karmayogi.nic.in/content-store/content/do_114051411119235072127/artifact/do_114051411119235072127_1715260168985_default-provider.svg',
+                appIcon: '',
+                name: 'Mission Karmayogi',
+                programCount: '24',
+          },
+          {
+              // tslint:disable-next-line: max-line-length
+                posterImage: 'https://portal.karmayogi.nic.in/content-store/content/do_114051411119235072127/artifact/do_114051411119235072127_1715260168985_default-provider.svg',
+                appIcon: '',
+                name: 'Mission Karmayogi',
+                programCount: '50',
+          },
+    
+        ]
+        const response = await data
+        // console.log('calling  after - response, ', response)
+        if (response) {
+          this.processStrip(
+            strip,
+            this.transformAllContentsToWidgets(response, strip),
+            'done',
+            calculateParentStatus,
+            response,
+          );
+
+        } else {
+          this.processStrip(strip, [], 'error', calculateParentStatus, null);          
+          this.emptyResponse.emit(true)
+        }
+      } catch (error) {
+        this.emptyResponse.emit(true)
+        // Handle errors
+        // console.error('Error:', error);
+      }
+    }
+  }
+
+  private transformAllContentsToWidgets(
+    contents: any,
+    strip: NsContentStripWithTabs.IContentStripUnit,
+  ) {
+    return (contents || []).map((content, idx) => (
+      content ? {
+        widgetType: 'cardLib',
+        widgetSubType: 'cardContentLib',
+        widgetHostClass: 'mb-2',
+        widgetData: {
+          content,
+          ...(content.batch && { batch: content.batch }),
+          cardSubType: strip.stripConfig && strip.stripConfig.cardSubType,
+          cardCustomeClass: strip.customeClass ? strip.customeClass : '',
+          context: { pageSection: strip.key, position: idx },
+          intranetMode: strip.stripConfig && strip.stripConfig.intranetMode,
+          deletedMode: strip.stripConfig && strip.stripConfig.deletedMode,
+          contentTags: strip.stripConfig && strip.stripConfig.contentTags,
+        },
+      } : {
+        widgetType: 'card',
+        widgetSubType: 'cardContent',
+        widgetHostClass: 'mb-2',
+        widgetData: {},
+      }
+    ));
   }
 }
