@@ -1349,7 +1349,7 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
     }
   }
 
-  raiseTelemetryInteratEvent(event) {
-    this.telemtryResponse.emit(event)
+  raiseTelemetry(stripData: any){
+    this.telemtryResponse.emit(stripData)
   }
 }

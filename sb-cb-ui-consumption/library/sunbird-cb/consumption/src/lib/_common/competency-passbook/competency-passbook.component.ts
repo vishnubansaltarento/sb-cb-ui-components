@@ -18,6 +18,7 @@ export class CompetencyPassbookComponent implements OnInit {
   @Input() dynamicColor: any
   @Input() dynamicAlignPills: any = 'center'
   @Output() emptyResponse = new EventEmitter<any>()
+  @Output() temeletryResponse = new EventEmitter<any>()
   loadCometency: boolean = false
   loadCompetencyArea: boolean = false
   originalCompetencyArray: any
@@ -136,6 +137,8 @@ export class CompetencyPassbookComponent implements OnInit {
        ],
       }
     }
+
+    this.temeletryResponse.emit(e.name)
     
     this.getcompetencyTheme(e.name, addfilter)
     this.selectedValue = e.name
