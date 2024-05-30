@@ -77,6 +77,7 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
   @Input() widgetData!: NsContentStripWithTabs.IContentStripMultiple;
   @Output() emptyResponse = new EventEmitter<any>()
   @Output() viewAllResponse = new EventEmitter<any>()
+  @Output() telemtryResponse = new EventEmitter<any>()
   @Input() providerId : any = ''
   @Input() emitViewAll : boolean = false
   @HostBinding('id')
@@ -128,6 +129,10 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
   ngOnInit() {
     // const url = window.location.href
     this.initData();
+
+    this.contentSvc.telemetryData$.subscribe((data: any) => {
+      this.telemtryResponse.emit(data)
+    })
   }
 
   ngOnDestroy() {
@@ -1452,5 +1457,8 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
         widgetData: {},
       }
     ));
+  }
+  raiseTelemetryInteratEvent(event) {
+    this.telemtryResponse.emit(event)
   }
 }
