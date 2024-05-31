@@ -227,6 +227,7 @@ export class CompetencyPassbookComponent implements OnInit {
     this.showAllTheme[0]['showAll'] = !event.showAll 
     this.competencyThemeLength = event.showAll ?  this.competencyTheme.length : 6
     this.showAllTheme[0]['name'] = event.showAll ? 'Show less' : 'Show all'
+    this.temeletryResponse.emit(event.name)
   }
 
   navigateToCompetency(compData: any){
