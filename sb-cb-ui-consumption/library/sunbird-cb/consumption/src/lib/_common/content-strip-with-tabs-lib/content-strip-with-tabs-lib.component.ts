@@ -1295,6 +1295,10 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
     }
   }
 
+  raiseTelemetry(stripData: any){
+    this.telemtryResponse.emit(stripData)
+  }
+
   async postRequestMethod(strip: NsContentStripWithTabs.IContentStripUnit,
     request: NsContentStripWithTabs.IContentStripUnit['request'],
     apiUrl: string,
@@ -1457,8 +1461,5 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
         widgetData: {},
       }
     ));
-  }
-  raiseTelemetryInteratEvent(event) {
-    this.telemtryResponse.emit(event)
-  }
+  }  
 }

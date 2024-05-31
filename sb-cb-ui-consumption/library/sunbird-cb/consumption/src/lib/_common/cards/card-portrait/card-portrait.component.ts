@@ -61,7 +61,12 @@ export class CardPortraitComponent implements OnInit {
     }
   }
   getRedirectUrlData(contentData: any){
+    // for telemetry
+    if (this.widgetData && this.widgetData.context && this.widgetData.context.pageSection) {
+      contentData['typeOfTelemetry'] = this.widgetData.context.pageSection
+    }
     this.contSvc.changeTelemetryData(contentData)
+    // for redirection
     this.contentData.emit(contentData)
   }
 }
