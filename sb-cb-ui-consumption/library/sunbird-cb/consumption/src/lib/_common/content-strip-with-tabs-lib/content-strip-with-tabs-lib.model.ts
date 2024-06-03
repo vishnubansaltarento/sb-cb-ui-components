@@ -55,7 +55,7 @@ export namespace NsContentStripWithTabs {
       searchV6?: NSSearch.ISearchV6Request
       topContent?: any
       featureContent?: any
-      channels?: any
+      bookmarkRead?: any
       enrollmentList?: any
       cbpList?: any,
       apiUrl: string

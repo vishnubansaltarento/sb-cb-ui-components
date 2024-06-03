@@ -123,7 +123,6 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
       this.translate.use(lang);
     }
     this.environment = environment
-    console.log('plugin')
   }
 
   ngOnInit() {
@@ -308,12 +307,17 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
     } else if (filters.organisation &&
       filters.organisation.indexOf('<orgID>') >= 0
     ) {
-      filters.organisation = userData && userData.rootOrgId;
+      if(this.providerId) {
+        filters.organisation = this.providerId;
+      } else {
+        filters.organisation = userData && userData.rootOrgId;
 
-      if (filters && filters.hasOwnProperty('designation')) {
-        filters.designation = userData.professionalDetails.length > 0 ?
-          userData.professionalDetails[0].designation : '';
+        if (filters && filters.hasOwnProperty('designation')) {
+          filters.designation = userData.professionalDetails.length > 0 ?
+            userData.professionalDetails[0].designation : '';
+        }
       }
+      
     }
     return filters;
   }
@@ -331,7 +335,7 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
     this.fetchAllCbpPlans(strip, calculateParentStatus);
     this.fetchAllTopContent(strip, calculateParentStatus);
     this.fetchAllFeaturedContent(strip, calculateParentStatus);
-    this.fetchAllChannela(strip, calculateParentStatus);
+    this.fetchAllBookMarkData(strip, calculateParentStatus);
     
     // this.enrollInterval = setInterval(() => {
     //   this.fetchAllCbpPlans(strip, calculateParentStatus)
@@ -889,7 +893,7 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
         (strip.request.trendingSearch && Object.keys(strip.request.trendingSearch).length)||
         (strip.request.topContent && Object.keys(strip.request.topContent).length) ||
         (strip.request.featureContent && Object.keys(strip.request.featureContent).length)||
-        (strip.request.channels && Object.keys(strip.request.channels).length)
+        (strip.request.bookmarkRead && Object.keys(strip.request.bookmarkRead).length)
       )
     ) {
       return true;
@@ -1340,6 +1344,35 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
       }
     });
   }
+
+  async getRequestMethod(strip: NsContentStripWithTabs.IContentStripUnit,
+    request: NsContentStripWithTabs.IContentStripUnit['request'],
+    apiUrl: string,
+    calculateParentStatus: boolean
+  ): Promise<any> {
+    const originalFilters: any = [];
+    return new Promise<any>((resolve, reject) => {
+      if (request && request) {
+        this.contentSvc.getApiMethod(apiUrl).subscribe(results => {
+          console.log(results,'results=========')
+        const showViewMore = Boolean(
+        results.result.data && results.result.data.orgList.length > 5 && strip.stripConfig && strip.stripConfig.postCardForSearch,
+        );
+        const viewMoreUrl = showViewMore
+        ? {
+        path: strip.viewMoreUrl && strip.viewMoreUrl.path || '',
+        }
+        : null;
+        resolve({ results, viewMoreUrl });
+        },                                                   (error: any) => {
+        this.processStrip(strip, [], 'error', calculateParentStatus, null);
+        reject(error);
+        },
+        );
+      }
+    });
+  }
+
   postMethodFilters(filters: any){
     if (filters.organisation &&
       filters.organisation.indexOf('<orgID>') >= 0
@@ -1348,6 +1381,14 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
     }
     return filters
   }
+  getFullUrl(apiUrl: any, id:string){
+    let formedUrl: string = ''
+    if (apiUrl.indexOf('<bookmarkId>') >= 0) {
+      formedUrl = apiUrl.replace('<bookmarkId>', this.environment.mdoChannelsBookmarkId) 
+    }
+    return formedUrl
+  }
+
   redirectViewAll(stripData: any, path: string, queryParamsData: any) {
     if(this.emitViewAll) {
       this.viewAllResponse.emit(stripData)
@@ -1356,68 +1397,22 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
     }
   }
 
-  async fetchAllChannela(strip: NsContentStripWithTabs.IContentStripUnit, calculateParentStatus = true) {
-    if (strip.request && strip.request.channels && Object.keys(strip.request.channels).length) {
+  async fetchAllBookMarkData(strip: NsContentStripWithTabs.IContentStripUnit, calculateParentStatus = true) {
+    if (strip.request && strip.request.bookmarkRead && Object.keys(strip.request.bookmarkRead).length) {
       let originalFilters: any = [];
       if (strip.request &&
-        strip.request.channels &&
-        strip.request.channels.request &&
-        strip.request.channels.request.filters) {
-        originalFilters = strip.request.channels.request.filters;
-        strip.request.channels.request.filters = this.postMethodFilters(strip.request.channels.request.filters);
+        strip.request.bookmarkRead &&
+        strip.request.bookmarkRead.bookmarkId) {
+        strip.request.apiUrl = this.getFullUrl(strip.request.apiUrl, strip.request.bookmarkRead.bookmarkId);
       }
       try {
-        let data = [
-          {
-              // tslint:disable-next-line: max-line-length
-              posterImage: 'https://portal.karmayogi.nic.in/content-store/content/do_114051411119235072127/artifact/do_114051411119235072127_1715260168985_default-provider.svg',
-              appIcon: '',
-              name: 'Ministry of Consumer Affairs, Food and Public Distribution',
-              programCount: '10',
-          },
-          {
-              // tslint:disable-next-line: max-line-length
-                posterImage: 'https://portal.karmayogi.nic.in/content-store/content/do_114051411119235072127/artifact/do_114051411119235072127_1715260168985_default-provider.svg',
-                appIcon: '',
-                name: 'Ministry of Railways',
-                programCount: '10',
-          },
-          {
-              // tslint:disable-next-line: max-line-length
-                posterImage: 'https://portal.karmayogi.nic.in/content-store/content/do_114051411119235072127/artifact/do_114051411119235072127_1715260168985_default-provider.svg',
-                appIcon: '',
-                name: 'Department of Post',
-                programCount: '10',
-          },
-          {
-              // tslint:disable-next-line: max-line-length
-                posterImage: 'https://portal.karmayogi.nic.in/content-store/content/do_114051411119235072127/artifact/do_114051411119235072127_1715260168985_default-provider.svg',
-                appIcon: '',
-                name: 'NLC India Limited',
-                programCount: '30',
-          },
-          {
-              // tslint:disable-next-line: max-line-length
-                posterImage: 'https://portal.karmayogi.nic.in/content-store/content/do_114051411119235072127/artifact/do_114051411119235072127_1715260168985_default-provider.svg',
-                appIcon: '',
-                name: 'Mission Karmayogi',
-                programCount: '24',
-          },
-          {
-              // tslint:disable-next-line: max-line-length
-                posterImage: 'https://portal.karmayogi.nic.in/content-store/content/do_114051411119235072127/artifact/do_114051411119235072127_1715260168985_default-provider.svg',
-                appIcon: '',
-                name: 'Mission Karmayogi',
-                programCount: '50',
-          },
-    
-        ]
-        const response = await data
-        // console.log('calling  after - response, ', response)
+        const response = await this.getRequestMethod(strip, strip.request.bookmarkRead, strip.request.apiUrl, calculateParentStatus);
+        console.log('calling  after - response, ', response)
+        let content  = response.results.result.data.orgList
         if (response) {
           this.processStrip(
             strip,
-            this.transformAllContentsToWidgets(response, strip),
+            this.transformAllContentsToWidgets(content, strip),
             'done',
             calculateParentStatus,
             response,

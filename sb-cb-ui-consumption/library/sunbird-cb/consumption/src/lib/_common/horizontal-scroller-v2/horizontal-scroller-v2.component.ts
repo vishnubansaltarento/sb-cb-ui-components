@@ -144,7 +144,6 @@ export class HorizontalScrollerV2Component implements OnInit, OnChanges, OnDestr
   }
 
   private updateNavigationBtnStatus(elem: HTMLElement) {
-    debugger
     this.enablePrev = true;
     this.enableNext = true;
     if (elem.scrollLeft === 0) {
