@@ -4,11 +4,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfigurationsService, EventService, MultilingualTranslationsService, NsContent } from '@sunbird-cb/utils-v2';
 
 @Component({
-  selector: 'sb-uic-card-karma-programs',
-  templateUrl: './card-karma-programs.component.html',
-  styleUrls: ['./card-karma-programs.component.scss']
+  selector: 'sb-uic-card-karma-programs-v2',
+  templateUrl: './card-karma-programs-v2.component.html',
+  styleUrls: ['./card-karma-programs-v2.component.scss']
 })
-export class CardKarmaProgramsComponent implements OnInit {
+export class CardKarmaProgramsV2Component implements OnInit {
 
   @Input() widgetData!: NsContent.IContent;
   @Input() randomColorApply: boolean = false

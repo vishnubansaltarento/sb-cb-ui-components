@@ -41,7 +41,6 @@ export class CalenderComponent implements OnInit {
     this.currentMonthAndYear = this.datePipe.transform(this.currentDate, 'MMMM y')
     this.selectedMonth = this.datePipe.transform(this.currentDate, 'LLLL yyyy')
     if (this.fullCalendor) {
-      console.log("this.currentDate ", this.currentDate)
       this.days = this.getDaysInMonth(this.currentDate.getFullYear(), this.currentDate.getMonth())
       this.getMonthsDropdownData()
     }

@@ -10,7 +10,7 @@ import { ConfigurationsService, EventService, MultilingualTranslationsService, N
 })
 export class CardMDOChannelComponent implements OnInit {
   @Input() widgetData!: NsContent.IContent;
-  @Output() userData = new EventEmitter<any>()
+  @Output() channelData = new EventEmitter<any>()
   defaultThumbnail: any
   sourceLogos: any
   defaultSLogo: any
@@ -64,6 +64,9 @@ export class CardMDOChannelComponent implements OnInit {
         pageIdExt: `${_.camelCase('user')}-card`,
         module: _.camelCase('user'),
       })
+  }
+  channelClick(channeldata:any) {
+    this.channelData.emit(channeldata)
   }
 
 }

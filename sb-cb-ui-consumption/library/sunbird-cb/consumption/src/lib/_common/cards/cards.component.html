@@ -17,6 +17,8 @@
       <ng-container *ngSwitchCase="'card-mdo-lib-skeleton'" [ngTemplateOutlet]="cardMdoSkeleton"></ng-container>
       <ng-container *ngSwitchCase="'card-karma-program-lib'" [ngTemplateOutlet]="cardKarmaProgram"></ng-container>
       <ng-container *ngSwitchCase="'card-karma-program-lib-skeleton'" [ngTemplateOutlet]="cardKarmaProgram"></ng-container>
+      <ng-container *ngSwitchCase="'card-karma-program-lib-v2'" [ngTemplateOutlet]="cardKarmaProgramV2"></ng-container>
+      <ng-container *ngSwitchCase="'card-karma-program-lib-v2-skeleton'" [ngTemplateOutlet]="cardKarmaProgramV2"></ng-container>
     </ng-container>
 </div>
 
@@ -58,4 +60,7 @@
 </ng-template>
 <ng-template #cardKarmaProgram>
   <sb-uic-card-karma-programs [randomColorApply]="true" [widgetData]="widgetData"></sb-uic-card-karma-programs>
+</ng-template>
+<ng-template #cardKarmaProgramV2>
+  <!-- <sb-uic-card-karma-programs-v2 [widgetData]="widgetData"><sb-uic-card-karma-programs-v2> -->
 </ng-template>

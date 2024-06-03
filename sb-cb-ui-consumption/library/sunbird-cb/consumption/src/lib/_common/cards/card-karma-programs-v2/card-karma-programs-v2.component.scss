@@ -1,0 +1,116 @@
+@import '~@sunbird-cb/design-system/src/styles/ws-common';
+@import '~@sunbird-cb/design-system/src/styles/ws-vars';
+@import '~@sunbird-cb/design-system/src/styles/ws-mixins';
+
+.card-channels-container {
+    $card-padding: $size-m;
+    $action-btn-size: 2.5 * $size-m;
+    // $card-standard-width-: 331px;
+    position: relative;
+    width: 282px;
+    box-sizing: border-box;
+    box-shadow: 0px 10px 30px #99999933;
+    overflow: hidden;
+    min-height: 233px;
+    height: 233px;
+    max-height: 233px;
+    margin: 0px 8px;
+    // margin: 0px 8px;
+    background: #1a4ca1 ;
+    border-radius: 12px;
+    // padding: 4px !important; 
+
+  
+    .min-top {
+      // margin: 0 -0.25 * $card-padding;
+      background: inherit;
+      margin-bottom: 0;
+      height: inherit;  
+    }
+
+    .image-container {
+        background-color: #fff;
+        width: inherit;
+        height: 156px;
+        max-height: 156px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+    }
+  
+    .card-img {
+          /* min-width: 62px; */
+        max-height: 100%;
+        min-height: 100%;
+        display: block;
+        -o-object-fit: fill;
+        object-fit: fill;
+        /* border-top-left-radius: 8px; */
+        /* border-top-right-radius: 8px; */
+        /* width: 100%; */
+    }
+    .mat-subheading-1 {
+      font: 600 14px/24px Montserrat;
+    }
+
+    .title-container {
+        background: inherit;
+    }
+  
+    $title-line-count: 1;
+    $title-line-height: 24px;
+  
+    .title-text {
+        margin: 12px 0;
+        position: relative;
+        overflow: hidden;
+      }
+    
+      .description-text {
+        position: relative;
+        overflow: hidden;
+        height: 51px;
+      }
+  
+    .title-text {
+      word-break: break-all;
+      white-space: initial;
+      margin: 8px 0;
+      position: relative;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: $title-line-count;
+      -webkit-box-orient: vertical;
+      min-height: $title-line-count * $title-line-height;
+    }
+  
+    $description-line-count: 3;
+    $description-line-height: 21px;
+}
+
+
+
+@media screen  and (max-width: '768px') {
+    .card-channels-container {
+        width: 100%;
+        box-sizing: border-box;
+        box-shadow: 0px 10px 30px #99999933;
+        overflow: hidden;
+        min-height: unset;
+        height: unset;
+        max-height: unset;
+        margin: 0px 0px;
+        padding: 8px !important;
+    }
+    .image-container {
+        background-color: #fff;
+        width: 190px;
+        height: 106px;
+        max-height: 106px;
+        border-radius: 12px;
+    }
+}
