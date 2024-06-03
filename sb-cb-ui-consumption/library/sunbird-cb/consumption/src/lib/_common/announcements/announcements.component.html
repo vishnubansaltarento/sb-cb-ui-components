@@ -12,7 +12,7 @@
     <div class="key-list-container"
         [style.borderColor]="objectData?.panelborder"
         [style.backgroundColor]="objectData?.panelBackground">
-        <div class="{{mobileHeight ? 'mob-key-list' : 'key-list'}}" >
+        <div class="{{mobileHeight ? 'mob-key-list' : 'key-list'}}" *ngIf="objectData?.list?.length">
             <div *ngFor="let item of objectData?.list; let i = index">
                 <div class="key-list-item mb-{{ objectData?.list?.length === (i+1) ? '' : '4'}}" 
                     [style.borderColor]="objectData?.listItem?.border"
@@ -24,7 +24,10 @@
                     </div>
                 </div>
             </div>                        
-        </div>        
+        </div>
+        <div class="{{mobileHeight ? 'mob-key-list' : 'key-list'}}" *ngIf="!objectData?.list?.length">
+            <div class="text-center">No announcements yet!</div>
+        </div>
     </div>
 </div>
 

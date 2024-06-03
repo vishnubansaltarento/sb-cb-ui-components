@@ -58,6 +58,10 @@ export class AnnouncementsComponent implements OnInit {
       }
       this.objectData.list = this.announcements
       this.isLoading = false
+    }, error => {
+      console.log(error)
+      this.objectData.list = []
+      this.isLoading = false
     })
   }
 
