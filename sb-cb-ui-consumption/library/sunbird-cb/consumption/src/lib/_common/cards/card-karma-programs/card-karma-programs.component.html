@@ -2,7 +2,7 @@
     <div class="display-contents">
         <ng-container *ngIf="widgetData.content">
             <a (click)="raiseTelemetry();$event.stopPropagation()" 
-                [routerLink]="['/app/learn/karma-programs/asdfghj/123456/micro-sites']" role="link"
+            [routerLink]="'/app/learn/karma-programs/'+ widgetData?.content?.title+ '/' + widgetData?.content?.playListKey+ '/' +widgetData?.content?.orgId+'/micro-sites'" role="link"
                 i18n-aria-label>
                 <ng-container>
                     <mat-card-content class="min-top">
@@ -17,12 +17,12 @@
                                     <ng-container *ngIf="widgetData.content.appIcon; else defaultImg">
                                       <img mat-card-image [src]="widgetData.content.appIcon | pipePublicURL" loading="lazy"
                                       class="card-img ws-mat-primary-lite-background margin-remove"  [wsUtilsDefaultThumbnail]="defaultThumbnail"
-                                      [alt]="widgetData.content.name" />
+                                      [alt]="widgetData?.content?.title" />
                                     </ng-container>
                                     <ng-template #defaultImg>
                                       <img mat-card-image [src]="defaultThumbnail" loading="lazy"
                                       class="card-img ws-mat-primary-lite-background margin-remove"
-                                      [alt]="widgetData.content.name" />
+                                      [alt]="widgetData?.content?.title" />
                                     </ng-template>
                                   </ng-container>
                             </div>
@@ -30,13 +30,13 @@
                                 <div class="flex   px-2">
                                     <div [id]="'m-c-'+ widgetData.content?.identifier"
                                         class="flex-1 text-start  mat-subheading-2 title-text ws-mat-white-text">
-                                        {{ widgetData?.content?.name }}
+                                        {{ widgetData?.content?.title }}
                                     </div>
                                 </div>
                                 <div class="flex  px-2">
                                     <div [id]="'m-c-'+ widgetData?.content?.identifier"
                                         class="flex-1 text-start margin-remove  margin-top-xxs mat-subheading-2 title-text ws-mat-white-text">
-                                        {{ widgetData?.content?.programCount}} Programs
+                                        {{ widgetData?.content?.children?.length}} Programs
                                     </div>
                                 </div>
                             </div>

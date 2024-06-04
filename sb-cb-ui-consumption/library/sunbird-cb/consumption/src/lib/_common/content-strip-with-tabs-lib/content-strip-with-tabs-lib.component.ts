@@ -336,6 +336,8 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
     this.fetchAllTopContent(strip, calculateParentStatus);
     this.fetchAllFeaturedContent(strip, calculateParentStatus);
     this.fetchAllBookMarkData(strip, calculateParentStatus);
+    this.fetchAllPlaylistSearch(strip, calculateParentStatus);
+    this.fetchPlaylistReadData(strip, calculateParentStatus);
     
     // this.enrollInterval = setInterval(() => {
     //   this.fetchAllCbpPlans(strip, calculateParentStatus)
@@ -893,7 +895,9 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
         (strip.request.trendingSearch && Object.keys(strip.request.trendingSearch).length)||
         (strip.request.topContent && Object.keys(strip.request.topContent).length) ||
         (strip.request.featureContent && Object.keys(strip.request.featureContent).length)||
-        (strip.request.bookmarkRead && Object.keys(strip.request.bookmarkRead).length)
+        (strip.request.bookmarkRead && Object.keys(strip.request.bookmarkRead).length)||
+        (strip.request.playlistSearch && Object.keys(strip.request.playlistSearch).length)||
+        (strip.request.playlistRead && Object.keys(strip.request.playlistRead).length)
       )
     ) {
       return true;
@@ -1385,6 +1389,9 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
     let formedUrl: string = ''
     if (apiUrl.indexOf('<bookmarkId>') >= 0) {
       formedUrl = apiUrl.replace('<bookmarkId>', this.environment.mdoChannelsBookmarkId) 
+    } else if (apiUrl.indexOf('<playlistKey>') >= 0 && apiUrl.indexOf('<orgID>') >= 0) {
+      formedUrl = apiUrl.replace('<playlistKey>', this.providerId + id) 
+      formedUrl = formedUrl.replace('<orgID>', this.providerId) 
     }
     return formedUrl
   }
@@ -1456,5 +1463,79 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
         widgetData: {},
       }
     ));
-  }  
+  }
+  
+  async fetchAllPlaylistSearch(strip: NsContentStripWithTabs.IContentStripUnit, calculateParentStatus = true) {
+    if (strip.request && strip.request.playlistSearch && Object.keys(strip.request.playlistSearch).length) {
+      let originalFilters: any = [];
+      if (strip.request &&
+        strip.request.playlistSearch &&
+        strip.request.playlistSearch.request &&
+        strip.request.playlistSearch.request.filters) {
+        originalFilters = strip.request.playlistSearch.request.filters;
+        strip.request.playlistSearch.request.filters = this.postMethodFilters(strip.request.playlistSearch.request.filters);
+      }
+      try {
+        const response = await this.postRequestMethod(strip, strip.request.playlistSearch.request, strip.request.apiUrl, calculateParentStatus);
+        // console.log('calling  after - response, ', response)
+        if (response && response.results) {
+          // console.log('calling  after-- ')
+          if (response.results.result.data && response.results.result.data.length) {
+            this.processStrip(
+              strip,
+              this.transformContentsToWidgets(response.results.result.data, strip),
+              'done',
+              calculateParentStatus,
+              response.viewMoreUrl,
+            );
+          } else {
+            this.processStrip(strip, [], 'error', calculateParentStatus, null);
+            this.emptyResponse.emit(true)
+          }
+
+        } else {
+          this.processStrip(strip, [], 'error', calculateParentStatus, null);          
+          this.emptyResponse.emit(true)
+        }
+      } catch (error) {
+        this.emptyResponse.emit(true)
+        // Handle errors
+        // console.error('Error:', error);
+      }
+    }
+  }
+
+  async fetchPlaylistReadData(strip: NsContentStripWithTabs.IContentStripUnit, calculateParentStatus = true) {
+    if (strip.request && strip.request.playlistRead && Object.keys(strip.request.playlistRead).length) {
+      let originalFilters: any = [];
+      if (strip.request &&
+        strip.request.playlistRead &&
+        strip.request.playlistRead.type) {
+        strip.request.apiUrl = this.getFullUrl(strip.request.apiUrl, strip.request.playlistRead.type);
+      }
+      try {
+        const response = await this.getRequestMethod(strip, strip.request.playlistRead, strip.request.apiUrl, calculateParentStatus);
+        console.log('calling  after - response, ', response)
+      
+        if (response && response.results.result.content) {  
+          let content  = response.results.result.content
+          this.processStrip(
+            strip,
+            this.transformAllContentsToWidgets(content, strip),
+            'done',
+            calculateParentStatus,
+            response,
+          );
+
+        } else {
+          this.processStrip(strip, [], 'error', calculateParentStatus, null);          
+          this.emptyResponse.emit(true)
+        }
+      } catch (error) {
+        this.emptyResponse.emit(true)
+        // Handle errors
+        // console.error('Error:', error);
+      }
+    }
+  }
 }
