@@ -30,8 +30,8 @@ export class AnnouncementsComponent implements OnInit {
   fetchData() {
     let request = {
       filterCriteriaMap: {
-        //channel: [this.channelId]
-        channel: ["01381906916850892825"],
+        channel: [this.channelId],
+        //channel: ["01381906916850892825"],
       },
       requestedFields: [
         "name",

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { WidgetBaseComponent, NsWidgetResolver } from '@sunbird-cb/resolver-v2';
 import { NsCardContent } from '../../_models/card-content.model';
 import { UtilityService } from '@sunbird-cb/utils-v2';
@@ -15,6 +15,7 @@ export class CardsComponent  extends WidgetBaseComponent
 implements OnInit, NsWidgetResolver.IWidgetData<NsCardContent.ICard>  {
 
   @Input() widgetData!: NsCardContent.ICard;
+  @Output() triggerTelemetry = new EventEmitter<any>()
   isIntranetAllowedSettings = false
   cbPlanMapData: any
   cbPlanInterval: any
@@ -70,5 +71,9 @@ implements OnInit, NsWidgetResolver.IWidgetData<NsCardContent.ICard>  {
       // this.karmaPointLoading = false
       clearInterval(this.cbPlanInterval)
     }
+  }
+
+  raiseCardClick(data: any) {
+    this.triggerTelemetry.emit(data)
   }
 }
