@@ -5,21 +5,24 @@ import { ConfigurationsService, EventService } from '@sunbird-cb/utils-v2';
 import * as _ from "lodash";
 import { TranslateService } from '@ngx-translate/core';
 import { MultilingualTranslationsService } from '../../../_services/multilingual-translations.service';
-import { WidgetContentService } from '../../../_services/widget-content.service';
 
 @Component({
-  selector: 'sb-uic-card-portrait',
-  templateUrl: './card-portrait.component.html',
-  styleUrls: ['./card-portrait.component.scss']
+  selector: 'sb-uic-card-wide-v2',
+  templateUrl: './card-wide-v2.component.html',
+  styleUrls: ['./card-wide-v2.component.scss']
 })
-export class CardPortraitComponent implements OnInit {
+export class CardWideV2Component implements OnInit {
+
   @Input() widgetData!: NsCardContent.ICard;
   @Input() isLiveOrMarkForDeletion: any
   @Input() showIntranetContent: any
   @Input() isIntranetAllowedSettings: any
+  @Input() cbPlanMapData: any
   @Input() isCardLoading: boolean = false
   @Output() contentData = new EventEmitter<any>()
+  @Output() triggerTelemetry = new EventEmitter<any>()
   isCardFlipped:boolean = false
+  acbpConstants = NsCardContent.ACBPConst
   defaultThumbnail: any
   sourceLogos: any
   defaultSLogo: any
@@ -28,10 +31,10 @@ export class CardPortraitComponent implements OnInit {
   widgetSubType: any ='sdf'
   constructor(
     private snackBar: MatSnackBar,
+    private events: EventService,
     private translate: TranslateService,
     private langtranslations: MultilingualTranslationsService,
-    private configSvc: ConfigurationsService,
-    private contSvc: WidgetContentService,) { 
+    private configSvc: ConfigurationsService,) { 
       this.langtranslations.languageSelectedObservable.subscribe(() => {
         if (localStorage.getItem('websiteLanguage')) {
           this.translate.setDefaultLang('en')
@@ -61,12 +64,10 @@ export class CardPortraitComponent implements OnInit {
     }
   }
   getRedirectUrlData(contentData: any){
-    // for telemetry
-    if (this.widgetData && this.widgetData.context && this.widgetData.context.pageSection) {
-      contentData['typeOfTelemetry'] = this.widgetData.context.pageSection
-    }
-    this.contSvc.changeTelemetryData(contentData)
-    // for redirection
     this.contentData.emit(contentData)
   }
+  raiseTelemetry(contentData: any) {
+   this.triggerTelemetry.emit(contentData)
+  }
+
 }

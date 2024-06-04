@@ -14,6 +14,9 @@ import { SkeletonLoaderLibModule } from '../skeleton-loader-lib/skeleton-loader-
 import { CardLandscapeComponent } from './card-landscape/card-landscape.component';
 import { CardWideComponent } from './card-wide/card-wide.component';
 import { CardMDOChannelComponent } from './card-mdo-channel/card-mdo-channel.component';
+import { CardWideV2Component } from './card-wide-v2/card-wide-v2.component';
+import { CardKarmaProgramsComponent } from './card-karma-programs/card-karma-programs.component';
+import { CardKarmaProgramsV2Component } from './card-karma-programs-v2/card-karma-programs-v2.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { CardMDOChannelComponent } from './card-mdo-channel/card-mdo-channel.com
     CardUserComponent,
     CardLandscapeComponent,
     CardWideComponent,
-    CardMDOChannelComponent
+    CardMDOChannelComponent,
+    CardWideV2Component,
+    CardKarmaProgramsComponent,
+    CardKarmaProgramsV2Component
   ],
   imports: [
     CommonModule,
@@ -45,7 +51,10 @@ import { CardMDOChannelComponent } from './card-mdo-channel/card-mdo-channel.com
     CardLandscapeComponent,
     CardUserComponent,
     CardWideComponent,
-    CardMDOChannelComponent
+    CardMDOChannelComponent,
+    CardWideV2Component,
+    CardKarmaProgramsComponent,
+    CardKarmaProgramsV2Component
   ],
 })
 export class CardsModule { }

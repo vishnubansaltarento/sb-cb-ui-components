@@ -51,10 +51,13 @@ export namespace NsContentStripWithTabs {
     filters?: any[];
     selectAll?: boolean | null;
     request?: {
+      playlistRead: any;
+      playlistSearch?: any;
       search?: NSSearch.ISearchRequest
       searchV6?: NSSearch.ISearchV6Request
       topContent?: any
       featureContent?: any
+      bookmarkRead?: any
       enrollmentList?: any
       cbpList?: any,
       apiUrl: string

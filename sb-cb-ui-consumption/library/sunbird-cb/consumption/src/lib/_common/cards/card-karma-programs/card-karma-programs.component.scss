@@ -7,17 +7,18 @@
     $action-btn-size: 2.5 * $size-m;
     // $card-standard-width-: 331px;
     position: relative;
-    width: 282px;
+    width: 245px;
     box-sizing: border-box;
     box-shadow: 0px 10px 30px #99999933;
     overflow: hidden;
-    min-height: 156px;
-    height: 156px;
-    max-height: 156px;
+    min-height: 217px;
+    height: 217px;
+    max-height: 217px;
     margin: 0px 8px;
-    background: #7FAEFF !important;
+    // margin: 0px 8px;
+    background: #1a4ca1 ;
     border-radius: 12px;
-    padding: 4px !important;
+    // padding: 4px !important; 
 
   
     .min-top {
@@ -30,22 +31,23 @@
     .image-container {
         background-color: #fff;
         width: inherit;
-        height: 86px;
-        max-height: 86px;
+        height: 139px;
+        max-height: 139px;
         overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 12px;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
     }
   
     .card-img {
           /* min-width: 62px; */
-        max-height: 62px;
-        min-height: 62px;
+        max-height: 100%;
+        min-height: 100%;
         display: block;
         -o-object-fit: fill;
-        object-fit: contain;
+        object-fit: fill;
         /* border-top-left-radius: 8px; */
         /* border-top-right-radius: 8px; */
         /* width: 100%; */
@@ -58,7 +60,7 @@
         background: inherit;
     }
   
-    $title-line-count: 2;
+    $title-line-count: 1;
     $title-line-height: 24px;
   
     .title-text {
@@ -89,3 +91,5 @@
     $description-line-count: 3;
     $description-line-height: 21px;
 }
+
+

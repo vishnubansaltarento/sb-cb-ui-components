@@ -1,11 +1,12 @@
-<mat-card class="channels-card card-channels-container mr-5 padding-remove cursor-pointer">
+<mat-card class="channels-card card-channels-container mr-5 padding-remove cursor-pointer" [ngStyle]="{'background': widgetData?.content?.bgColor}">
     <div class="display-contents">
         <ng-container *ngIf="widgetData.content">
-            <a (click)="raiseTelemetry(widgetData.content); redirectTo(widgetData.content); $event.stopPropagation()"
+            <a (click)="raiseTelemetry();$event.stopPropagation()" 
+                [routerLink]="['/app/learn/karma-programs/asdfghj/123456/micro-sites']" role="link"
                 i18n-aria-label>
                 <ng-container>
                     <mat-card-content class="min-top">
-                        <div class="flex flex-col h-full">
+                        <div class="flex flex-row md:flex-col h-full">
                             <div class="image-container">
                                 <ng-container *ngIf="widgetData.content.posterImage">
                                     <img mat-card-image [src]="widgetData.content.posterImage | pipePublicURL" loading="lazy"
@@ -13,8 +14,8 @@
                                     [alt]="widgetData.content.name" />
                                   </ng-container>
                                   <ng-container *ngIf="!widgetData.content.posterImage">
-                                    <ng-container *ngIf="widgetData.content.imgUrl; else defaultImg">
-                                      <img mat-card-image [src]="widgetData.content.imgUrl | pipePublicURL" loading="lazy"
+                                    <ng-container *ngIf="widgetData.content.appIcon; else defaultImg">
+                                      <img mat-card-image [src]="widgetData.content.appIcon | pipePublicURL" loading="lazy"
                                       class="card-img ws-mat-primary-lite-background margin-remove"  [wsUtilsDefaultThumbnail]="defaultThumbnail"
                                       [alt]="widgetData.content.name" />
                                     </ng-container>
@@ -25,10 +26,20 @@
                                     </ng-template>
                                   </ng-container>
                             </div>
-                            <div class="flex  title-container px-2">
-                                <div [id]="'m-c-'+ widgetData.content?.identifier"
-                                    class="flex-1 text-center  mat-subheading-2 title-text ws-mat-black-text">
-                                    {{ widgetData?.content?.orgName }}
+                            <div class="flex items-center">
+                                <div class="title-container">
+                                    <div class="flex   px-2">
+                                        <div [id]="'m-c-'+ widgetData.content?.identifier"
+                                            class="flex-1 text-start  mat-subheading-2 title-text ws-mat-white-text">
+                                            {{ widgetData?.content?.name }}
+                                        </div>
+                                    </div>
+                                    <div class="flex  px-2">
+                                        <div [id]="'m-c-'+ widgetData?.content?.identifier"
+                                            class="flex-1 text-start margin-remove  margin-top-xxs mat-subheading-2 title-text ws-mat-white-text">
+                                            {{ widgetData?.content?.programCount}} Programs
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

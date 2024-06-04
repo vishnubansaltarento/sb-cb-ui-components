@@ -151,7 +151,11 @@
       height: $description-line-count * $description-line-height;
       white-space: normal;
       text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
       // line-height: $description-line-height;
+
     }
   }
 

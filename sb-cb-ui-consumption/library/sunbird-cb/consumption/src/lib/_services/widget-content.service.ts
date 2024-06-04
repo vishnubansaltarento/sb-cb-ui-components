@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ConfigurationsService } from '@sunbird-cb/utils-v2';
-import { Observable, of, EMPTY, BehaviorSubject } from 'rxjs';
+import { Observable, of, EMPTY, BehaviorSubject, Subject } from 'rxjs';
 import { catchError, retry, map, shareReplay } from 'rxjs/operators';
 import { NsContentStripMultiple } from '../_models/content-strip-multiple.model';
 import { NsContent } from '../_models/widget-content.model';
@@ -72,11 +72,18 @@ export class WidgetContentService {
 
   tocConfigData: any = new BehaviorSubject<any>({});
   tocConfigData$  = this.tocConfigData.asObservable();
+
+  private telemetryData: any = new Subject<any>()
+  public telemetryData$ = this.telemetryData.asObservable()
   currentMetaData!: NsContent.IContent;
   currentContentReadMetaData!: NsContent.IContent;
   currentBatchEnrollmentList!: NsContent.ICourse[];
   programChildCourseResumeData = new BehaviorSubject<any>({});
   programChildCourseResumeData$ = this.programChildCourseResumeData.asObservable();
+
+  changeTelemetryData(message: string) {
+    this.telemetryData.next(message);
+  }
   isResource(primaryCategory: string) {
     if (primaryCategory) {
       const isResource = (primaryCategory === NsContent.EResourcePrimaryCategories.LEARNING_RESOURCE) ||
@@ -568,5 +575,9 @@ export class WidgetContentService {
   postApiMethod(apiUrl: any, req: any): Observable<NsContent.IContent> {
     req.query = req.query || '';
     return this.http.post<NsContent.IContent>(apiUrl, req);
+  }
+  getApiMethod(apiUrl: any): Observable<NsContent.IContent> {
+    // req.query = req.query || '';
+    return this.http.get<NsContent.IContent>(apiUrl);
   }
 }

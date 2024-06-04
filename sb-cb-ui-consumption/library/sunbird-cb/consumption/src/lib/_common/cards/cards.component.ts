@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { WidgetBaseComponent, NsWidgetResolver } from '@sunbird-cb/resolver-v2';
 import { NsCardContent } from '../../_models/card-content.model';
 import { UtilityService } from '@sunbird-cb/utils-v2';
@@ -15,7 +15,10 @@ export class CardsComponent  extends WidgetBaseComponent
 implements OnInit, NsWidgetResolver.IWidgetData<NsCardContent.ICard>  {
 
   @Input() widgetData!: NsCardContent.ICard;
+  @Output() triggerTelemetry = new EventEmitter<any>()
   isIntranetAllowedSettings = false
+  cbPlanMapData: any
+  cbPlanInterval: any
   constructor(private utilitySvc: UtilityService,
     private configSvc: ConfigurationsService,
     private contSvc: WidgetContentService,
@@ -25,7 +28,9 @@ implements OnInit, NsWidgetResolver.IWidgetData<NsCardContent.ICard>  {
   }
 
   ngOnInit() {
-   
+    this.cbPlanInterval = setInterval(() => {
+      this.getCbPlanData()
+    },                                1000)
   }
 
   get isLiveOrMarkForDeletion() {
@@ -52,5 +57,23 @@ implements OnInit, NsWidgetResolver.IWidgetData<NsCardContent.ICard>  {
       {
         queryParams: urlData.queryParams
       })
+  }
+  getCbPlanData() {
+    let cbpList: any={}
+    if (localStorage.getItem('cbpData')) {
+      let cbpListArr = JSON.parse(localStorage.getItem('cbpData') || '')
+      if (cbpListArr && cbpListArr.length) {
+        cbpListArr.forEach((data: any) => {
+          cbpList[data.identifier] = data
+        })
+      }
+      this.cbPlanMapData = cbpList
+      // this.karmaPointLoading = false
+      clearInterval(this.cbPlanInterval)
+    }
+  }
+
+  raiseCardClick(data: any) {
+    this.triggerTelemetry.emit(data)
   }
 }
