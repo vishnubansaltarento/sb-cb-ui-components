@@ -82,6 +82,7 @@ $secondary-color: #EF951E;
   
     $title-line-count: 2;
     $title-line-height: 20px;
+    background-color: white;
   
     .title-text {
       // font-size: 18px;
@@ -393,4 +394,9 @@ $secondary-color: #EF951E;
     background-color: #ef951e !important;
     color: rgba(255,255,255,1) !important;
     opacity: 1;
+  }
+
+  .min-width-763 {
+    min-width: 763px;
+    background-color: white;
   }

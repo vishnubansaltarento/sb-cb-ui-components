@@ -1,5 +1,5 @@
 <ng-container *ngIf="!isCardLoading">
-  <mat-card class="card-wide-v2 padding-remove position-relative flex">
+  <mat-card class="card-wide-v2 padding-remove position-relative flex {{widgetData?.cardCustomeClass}}">
       <div class="imageholder ">
         <img mat-card-image class="margin-remove"
         [src]="widgetData?.content?.posterImage || widgetData?.content?.appIcon  | pipePublicURL" [wsUtilsDefaultThumbnail]="defaultThumbnail"
@@ -73,7 +73,6 @@
     </div>
   </ng-template>
 </ng-container>
-
   <ng-container *ngIf="isCardLoading">
     <mat-card class="card-wide-v2 padding-remove position-relative flex">
       <div class="">
