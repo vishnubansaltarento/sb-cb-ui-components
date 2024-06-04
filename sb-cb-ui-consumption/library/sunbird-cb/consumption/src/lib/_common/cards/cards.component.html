@@ -46,7 +46,13 @@
   <sb-uic-card-wide-v2 [widgetData]="widgetData" [isCardLoading]="true" ></sb-uic-card-wide-v2>
 </ng-template>
 <ng-template #cardWideV2>
-  <sb-uic-card-wide-v2 (contentData)="getRedirectUrlData($event)"  [cbPlanMapData]="cbPlanMapData" [isCardLoading]="false" [widgetData]="widgetData" ></sb-uic-card-wide-v2>
+  <sb-uic-card-wide-v2
+    (contentData)="getRedirectUrlData($event)"
+    (triggerTelemetry)="raiseCardClick($event)"
+    [cbPlanMapData]="cbPlanMapData"
+    [isCardLoading]="false"
+    [widgetData]="widgetData">
+  </sb-uic-card-wide-v2>
 </ng-template>
 
 <ng-template #cardUser>

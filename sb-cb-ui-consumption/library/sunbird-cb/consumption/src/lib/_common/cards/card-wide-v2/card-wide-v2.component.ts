@@ -20,6 +20,7 @@ export class CardWideV2Component implements OnInit {
   @Input() cbPlanMapData: any
   @Input() isCardLoading: boolean = false
   @Output() contentData = new EventEmitter<any>()
+  @Output() triggerTelemetry = new EventEmitter<any>()
   isCardFlipped:boolean = false
   acbpConstants = NsCardContent.ACBPConst
   defaultThumbnail: any
@@ -65,27 +66,8 @@ export class CardWideV2Component implements OnInit {
   getRedirectUrlData(contentData: any){
     this.contentData.emit(contentData)
   }
-  raiseTelemetry() {
-    // if(this.forPreview){
-    //   return
-    // }
-    this.events.raiseInteractTelemetry(
-      {
-        type: 'click',
-        subType: `${this.widgetType}-${this.widgetSubType}`,
-        id: `${_.camelCase(this.widgetData.content.primaryCategory)}-card`,
-      },
-      {
-        id: this.widgetData.content.identifier,
-        type: this.widgetData.content.primaryCategory,
-        //context: this.widgetData.context,
-        rollup: {},
-        ver: `${this.widgetData.content.version}${''}`,
-      },
-      {
-        pageIdExt: `${_.camelCase(this.widgetData.content.primaryCategory)}-card`,
-        module: _.camelCase(this.widgetData.content.primaryCategory),
-      })
+  raiseTelemetry(contentData: any) {
+   this.triggerTelemetry.emit(contentData)
   }
 
 }

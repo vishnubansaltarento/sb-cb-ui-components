@@ -33,7 +33,7 @@
 
         <div class="flex main_title_box">
           <p class="mat-subheading-1 title-text font-bold-imp cursor-pointer content-title">
-            <a (click)="raiseTelemetry();getRedirectUrlData(widgetData?.content); $event.stopPropagation()">
+            <a (click)="raiseTelemetry(widgetData?.content);getRedirectUrlData(widgetData?.content); $event.stopPropagation()">
               {{widgetData?.content?.name}}
             </a>
         </p>
