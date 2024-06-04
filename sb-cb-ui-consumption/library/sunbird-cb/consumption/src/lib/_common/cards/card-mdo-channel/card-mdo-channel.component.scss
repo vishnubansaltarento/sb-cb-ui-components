@@ -89,3 +89,9 @@
     $description-line-count: 3;
     $description-line-height: 21px;
 }
+@media screen  and (max-width: '768px') {
+  .card-channels-container {
+    width: 100%;
+    margin: 0;
+  }
+}
