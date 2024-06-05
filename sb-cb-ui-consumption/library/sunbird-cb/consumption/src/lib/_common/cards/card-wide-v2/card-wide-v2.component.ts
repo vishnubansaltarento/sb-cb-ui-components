@@ -13,7 +13,6 @@ import { MultilingualTranslationsService } from '../../../_services/multilingual
 })
 export class CardWideV2Component implements OnInit {
 
-  
   @Input() widgetData!: NsCardContent.ICard;
   @Input() isLiveOrMarkForDeletion: any
   @Input() showIntranetContent: any
