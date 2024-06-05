@@ -11,7 +11,7 @@
                                 <ng-container *ngIf="widgetData.content.posterImage">
                                     <img mat-card-image [src]="widgetData.content.posterImage | pipePublicURL" loading="lazy"
                                     class="card-img ws-mat-primary-lite-background margin-remove" [wsUtilsDefaultThumbnail]="defaultThumbnail"
-                                    [alt]="widgetData.content.name" />
+                                    [alt]="widgetData.content.title" />
                                   </ng-container>
                                   <ng-container *ngIf="!widgetData.content.posterImage">
                                     <ng-container *ngIf="widgetData.content.appIcon; else defaultImg">
