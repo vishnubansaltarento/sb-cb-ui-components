@@ -152,20 +152,36 @@ export class HorizontalScrollerV2Component implements OnInit, OnChanges, OnDestr
       }
       this.activeNav = 0;
     }
-    if (elem.scrollWidth === Math.round(elem.clientWidth + elem.scrollLeft)) {
+    // if (elem.scrollWidth === Math.round(elem.clientWidth + elem.scrollLeft)) {
+    //   if (this.loadStatus === 'hasMore') {
+    //     this.loadNext.emit();
+    //   } else {
+    //     if(!this.sliderConfig.arrowsAlwaysOn) {
+    //       this.enableNext = false;
+    //     }
+    //     if (this.bottomDotsArray.length) {
+    //       this.activeNav = this.bottomDotsArray.length - 1;
+    //     }
+    //   }
+    // }
+    // if (elem.scrollLeft !== 0 && (elem.scrollWidth !== elem.clientWidth + elem.scrollLeft)) {
+    //   this.activeNav = Math.ceil(elem.scrollLeft / elem.clientWidth);
+    // }
+
+
+    const widthDiff = Math.abs(elem.scrollWidth - Math.round(elem.clientWidth + elem.scrollLeft))
+    if (widthDiff === 0 || widthDiff === 1) {
       if (this.loadStatus === 'hasMore') {
-        this.loadNext.emit();
+        this.loadNext.emit()
       } else {
-        if(!this.sliderConfig.arrowsAlwaysOn) {
-          this.enableNext = false;
-        }
+        this.enableNext = false
         if (this.bottomDotsArray.length) {
-          this.activeNav = this.bottomDotsArray.length - 1;
+          this.activeNav = this.bottomDotsArray.length - 1
         }
       }
     }
     if (elem.scrollLeft !== 0 && (elem.scrollWidth !== elem.clientWidth + elem.scrollLeft)) {
-      this.activeNav = Math.ceil(elem.scrollLeft / elem.clientWidth);
+      this.activeNav = Math.ceil(elem.scrollLeft / elem.clientWidth)
     }
   }
 
