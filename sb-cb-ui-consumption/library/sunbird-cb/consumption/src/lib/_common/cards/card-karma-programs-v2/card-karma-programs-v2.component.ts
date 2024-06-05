@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import * as _ from "lodash";
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigurationsService, EventService, MultilingualTranslationsService, NsContent } from '@sunbird-cb/utils-v2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'sb-uic-card-karma-programs-v2',
@@ -13,6 +14,7 @@ export class CardKarmaProgramsV2Component implements OnInit {
   @Input() widgetData!: NsContent.IContent;
   @Input() randomColorApply: boolean = false
   @Output() userData = new EventEmitter<any>()
+  @Output() raiseTemeletry = new EventEmitter<any>()
   defaultThumbnail: any
   sourceLogos: any
   defaultSLogo: any
@@ -32,7 +34,8 @@ export class CardKarmaProgramsV2Component implements OnInit {
     private events: EventService,
     private translate: TranslateService,
     private langtranslations: MultilingualTranslationsService,
-    private configSvc: ConfigurationsService,) { 
+    private configSvc: ConfigurationsService,
+    private router : Router,) { 
       this.langtranslations.languageSelectedObservable.subscribe(() => {
         if (localStorage.getItem('websiteLanguage')) {
           this.translate.setDefaultLang('en')
@@ -66,27 +69,10 @@ export class CardKarmaProgramsV2Component implements OnInit {
     }
   }
 
-  raiseTelemetry() {
-    // if(this.forPreview){
-    //   return
-    // }
-    this.events.raiseInteractTelemetry(
-      {
-        type: 'click',
-        subType: `${this.widgetType}-${this.widgetSubType}`,
-        id: `${_.camelCase(this.widgetData.content.userId)}-card`,
-      },
-      {
-        id: this.widgetData.content.userId,
-        // type: this.widgetData.user.primaryCategory,
-        //context: this.widgetData.context,
-        rollup: {},
-        // ver: `${this.widgetData.user.version}${''}`,
-      },
-      {
-        pageIdExt: `${_.camelCase('user')}-card`,
-        module: _.camelCase('user'),
-      })
+  redirectTo(content: any) {
+    this.raiseTemeletry.emit(content)
+    //this.router.navigate([`/app/learn/karma-programs/${content.identifier}/${content.identifier}/micro-sites`])
+    this.router.navigate(['/app/learn/karma-programs/India%20post/0132593267437813768program/0132593267437813768/micro-sites'])
   }
 
   get getRandomColors(){
