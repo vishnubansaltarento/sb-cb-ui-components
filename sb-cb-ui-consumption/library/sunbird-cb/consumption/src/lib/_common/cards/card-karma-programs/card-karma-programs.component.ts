@@ -2,6 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import * as _ from "lodash";
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigurationsService, EventService, MultilingualTranslationsService, NsContent } from '@sunbird-cb/utils-v2';
+import { Router } from '@angular/router';
+import { WidgetContentService } from '../../../_services/widget-content.service';
 
 @Component({
   selector: 'sb-uic-card-karma-programs',
@@ -32,7 +34,9 @@ export class CardKarmaProgramsComponent implements OnInit {
     private events: EventService,
     private translate: TranslateService,
     private langtranslations: MultilingualTranslationsService,
-    private configSvc: ConfigurationsService,) { 
+    private configSvc: ConfigurationsService,
+    private contSvc: WidgetContentService,
+    private router: Router) {
       this.langtranslations.languageSelectedObservable.subscribe(() => {
         if (localStorage.getItem('websiteLanguage')) {
           this.translate.setDefaultLang('en')
@@ -66,31 +70,20 @@ export class CardKarmaProgramsComponent implements OnInit {
     }
   }
 
-  raiseTelemetry() {
-    // if(this.forPreview){
-    //   return
-    // }
-    this.events.raiseInteractTelemetry(
-      {
-        type: 'click',
-        subType: `${this.widgetType}-${this.widgetSubType}`,
-        id: `${_.camelCase(this.widgetData.content.userId)}-card`,
-      },
-      {
-        id: this.widgetData.content.userId,
-        // type: this.widgetData.user.primaryCategory,
-        //context: this.widgetData.context,
-        rollup: {},
-        // ver: `${this.widgetData.user.version}${''}`,
-      },
-      {
-        pageIdExt: `${_.camelCase('user')}-card`,
-        module: _.camelCase('user'),
-      })
-  }
+ 
 
   get getRandomColors(){
     const randomIndex1 = Math.floor(Math.random() * Math.floor(this.randomColors.length))
     return this.randomColors[randomIndex1]
+  }
+
+  redirectTo(data: any) {
+    if (this.widgetData && this.widgetData.context && this.widgetData.context.pageSection) {
+      data['typeOfTelemetry'] = 'karma-programs'
+    }
+    this.contSvc.changeTelemetryData(data)
+    this.router.navigate(
+      [`/app/learn/karma-programs/${data.title}/${data.playListKey}/${data.orgId}/micro-sites`],
+    )
   }
 }

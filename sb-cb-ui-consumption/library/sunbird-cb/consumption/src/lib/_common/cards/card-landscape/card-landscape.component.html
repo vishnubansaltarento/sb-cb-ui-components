@@ -1,5 +1,5 @@
 <ng-container *ngIf="!isCardLoading">
-    <a class="cursor-pointer" (click)="raiseTelemetry();getRedirectUrlData(widgetData?.content); $event.stopPropagation()" 
+    <a class="cursor-pointer" (click)="raiseTelemetry(widgetData?.content);getRedirectUrlData(widgetData?.content); $event.stopPropagation()" 
   role="link" i18n-aria-label>
   <mat-card class="card-portrait mr-2 card-portrait-clickable min-height-remove" [ngClass]="widgetData.cardCustomeClass ? widgetData.cardCustomeClass : ''">
      <div class="course_widget portrait_widget flex  margin-bottom-xs">
