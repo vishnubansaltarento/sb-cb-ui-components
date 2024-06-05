@@ -1,5 +1,5 @@
 <ng-container *ngIf="!isCardLoading">
-  <mat-card class="card-standard-container mr-5 padding-remove cursor-pointer " [ngClass]="{
+  <mat-card class="card-standard-container mr-5 padding-remove cursor-pointer  {{widgetData?.cardCustomeClass}}" [ngClass]="{
     greyOut:
       widgetData.deletedMode === 'greyOut' && !isLiveOrMarkForDeletion
         ? true
