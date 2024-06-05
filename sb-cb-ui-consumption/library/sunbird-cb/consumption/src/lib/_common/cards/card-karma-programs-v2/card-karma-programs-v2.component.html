@@ -1,9 +1,7 @@
 <mat-card class="channels-card card-channels-container mr-5 padding-remove cursor-pointer" [ngStyle]="{'background': widgetData?.content?.bgColor}">
     <div class="display-contents">
         <ng-container *ngIf="widgetData.content">
-            <a (click)="raiseTelemetry();$event.stopPropagation()" 
-                [routerLink]="['/app/learn/karma-programs/asdfghj/123456/micro-sites']" role="link"
-                i18n-aria-label>
+            <a (click)="redirectTo(widgetData?.content);$event.stopPropagation()">
                 <ng-container>
                     <mat-card-content class="min-top">
                         <div class="flex flex-row md:flex-col h-full">
