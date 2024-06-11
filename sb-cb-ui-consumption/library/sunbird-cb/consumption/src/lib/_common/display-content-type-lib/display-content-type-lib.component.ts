@@ -8,7 +8,7 @@ import { MultilingualTranslationsService } from '../../_services/multilingual-tr
   styleUrls: ['./display-content-type-lib.component.scss'],
 })
 export class DisplayContentTypeLibComponent implements OnInit {
-
+  @Input() useTranslation: boolean = true
   @Input() displayContentType: NsContent.EDisplayContentTypes = NsContent.EDisplayContentTypes.DEFAULT
   displayContentTypeEnum = NsContent.EDisplayContentTypes
   constructor(private langtranslations: MultilingualTranslationsService) { }

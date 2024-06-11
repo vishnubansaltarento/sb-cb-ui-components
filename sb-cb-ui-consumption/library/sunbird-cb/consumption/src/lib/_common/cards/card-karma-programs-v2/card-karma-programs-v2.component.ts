@@ -71,8 +71,9 @@ export class CardKarmaProgramsV2Component implements OnInit {
 
   redirectTo(content: any) {
     this.raiseTemeletry.emit(content)
-    //this.router.navigate([`/app/learn/karma-programs/${content.identifier}/${content.identifier}/micro-sites`])
-    this.router.navigate(['/app/learn/karma-programs/India%20post/0132593267437813768program/0132593267437813768/micro-sites'])
+    this.router.navigate(
+      [`/app/learn/karma-programs/${content.title}/${content.playListKey}/${content.orgId}/micro-sites`],
+    )
   }
 
   get getRandomColors(){
