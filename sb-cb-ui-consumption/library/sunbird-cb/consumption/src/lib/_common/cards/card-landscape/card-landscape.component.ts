@@ -20,6 +20,7 @@ export class CardLandscapeComponent implements OnInit {
   @Input() isCardLoading: boolean = false
   @Output() contentData = new EventEmitter<any>()
   @Output() triggerTelemetry = new EventEmitter<any>()
+  @Input()  cbPlanMapData: any
   isCardFlipped:boolean = false
   defaultThumbnail: any
   acbpConstants = NsCardContent.ACBPConst
@@ -28,7 +29,6 @@ export class CardLandscapeComponent implements OnInit {
   showFlip = false
   widgetType: any = 'df'
   widgetSubType: any ='sdf'
-  cbPlanMapData: any
   cbPlanInterval: any
   
   constructor(
@@ -85,7 +85,7 @@ export class CardLandscapeComponent implements OnInit {
           cbpList[data.identifier] = data
         })
       }
-      this.cbPlanMapData = cbpList
+      // this.cbPlanMapData = cbpList
       // this.karmaPointLoading = false
       clearInterval(this.cbPlanInterval)
     }
