@@ -36,6 +36,9 @@ export * from './lib/pipes/pipe-html-tag-removal/pipe-html-tag-removal.pipe'
 export * from './lib/pipes/pipe-filter/pipe-filter.module'
 export * from './lib/pipes/pipe-filter/pipe-filter.pipe'
 
+export * from './lib/pipes/pipe-ordinal/pipe-ordinal.module'
+export * from './lib/pipes/pipe-ordinal/pipe-ordinal.pipe'
+
 export * from './lib/pipes/pipe-email/pipe-email.module'
 export * from './lib/pipes/pipe-email/pipe-email.pipe'
 
@@ -99,7 +102,9 @@ export * from './lib/services/user-preference.service'
 export * from './lib/services/utility.service'
 export * from './lib/services/value.service'
 export * from './lib/services/multilingual-translations.service'
+export * from './lib/services/nps-grid.service'
 
 export * from './lib/services/widget-content.service'
 export * from './lib/services/subapplication-respond.service'
 export * from './lib/services/widget-content.model'
+export * from './lib/services/widget-resolver.model'

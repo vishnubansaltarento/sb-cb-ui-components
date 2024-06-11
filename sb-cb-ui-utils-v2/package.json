@@ -1,10 +1,10 @@
 {
   "name": "sb-cb-ui-utils-v2",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "ng": "ng",
     "prebuild": "npm run lint:fix",
-    "build": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build",
+    "build": "node --max_old_space_size=8000 ./node_modules/@angular/cli/bin/ng build --watch=true",
     "test": "ng test",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
