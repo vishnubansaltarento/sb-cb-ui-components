@@ -12,8 +12,8 @@
                                     [alt]="widgetData?.content?.title" />
                                   </ng-container>
                                   <ng-container *ngIf="!widgetData?.content?.posterImage">
-                                    <ng-container *ngIf="widgetData?.content?.imgSource; else defaultImg">
-                                      <img mat-card-image [src]="widgetData?.content?.imgSource | pipePublicURL" loading="lazy"
+                                    <ng-container *ngIf="widgetData?.content?.imgSource && widgetData?.content?.imgSource?.length; else defaultImg">
+                                      <img mat-card-image [src]="widgetData?.content?.imgSource[0] | pipePublicURL" loading="lazy"
                                       class="card-img ws-mat-primary-lite-background margin-remove"  [wsUtilsDefaultThumbnail]="defaultThumbnail"
                                       [alt]="widgetData?.content?.title" />
                                     </ng-container>
