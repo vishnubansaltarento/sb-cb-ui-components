@@ -61,6 +61,7 @@
                  <img [src]="widgetData?.content?.creatorLogo | pipePublicURL " class="source-icon"  loading="lazy" [wsUtilsDefaultThumbnail]="defaultSLogo"
                  [alt]="(widgetData?.content?.sourceName + '_' + widgetData?.content?.identifier)" />
               </div>
+              <span class="portrait-org-name font-normal mat-caption">By {{ (widgetData.content.organisation && widgetData.content.organisation[0]) ? widgetData.content.organisation[0] : 'Karmayogi Bharat' }}</span>
               <!-- <span class="portrait-org-name font-normal mat-caption">{{'cardcontentv2.by' | translate}} {{ (widgetData.content.organisation && widgetData.content.organisation[0]) ? widgetData.content.organisation[0] : 'Karmayogi Bharat' }}</span> -->
            </div>
 

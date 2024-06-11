@@ -19,7 +19,9 @@ export class CardPortraitComponent implements OnInit {
   @Input() isIntranetAllowedSettings: any
   @Input() isCardLoading: boolean = false
   @Output() contentData = new EventEmitter<any>()
+  @Input()  cbPlanMapData: any
   isCardFlipped:boolean = false
+  acbpConstants = NsCardContent.ACBPConst
   defaultThumbnail: any
   sourceLogos: any
   defaultSLogo: any
