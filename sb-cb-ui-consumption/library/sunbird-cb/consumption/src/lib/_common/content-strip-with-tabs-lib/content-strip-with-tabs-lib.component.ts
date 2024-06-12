@@ -639,11 +639,16 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
               calculateParentStatus,
               response.viewMoreUrl || '',
             );
+            if(!content.length) {
+              this.emptyResponse.emit(true)
+            }
           } else {
+            this.emptyResponse.emit(true)
             this.processStrip(strip, [], 'done', calculateParentStatus, null);
           }
         } catch (error) {
           // Handle errors
+          this.emptyResponse.emit(true)
           this.processStrip(strip, [], 'error', calculateParentStatus, null);
         }
       }
