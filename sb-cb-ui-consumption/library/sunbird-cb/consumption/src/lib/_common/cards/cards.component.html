@@ -19,6 +19,8 @@
       <ng-container *ngSwitchCase="'card-karma-program-lib-skeleton'" [ngTemplateOutlet]="cardKarmaProgram"></ng-container>
       <ng-container *ngSwitchCase="'card-karma-program-lib-v2'" [ngTemplateOutlet]="cardKarmaProgramV2"></ng-container>
       <ng-container *ngSwitchCase="'card-karma-program-lib-v2-skeleton'" [ngTemplateOutlet]="cardKarmaProgramV2"></ng-container>
+      <ng-container *ngSwitchCase="'card-portrait-ext-lib-skeleton'" [ngTemplateOutlet]="cardPortraitExtLibSkeleton"></ng-container>
+      <ng-container *ngSwitchCase="'card-portrait-ext-lib'" [ngTemplateOutlet]="cardPortraitExtLib"></ng-container>
     </ng-container>
 </div>
 
@@ -78,4 +80,14 @@
 </ng-template>
 <ng-template #cardKarmaProgramV2>
   <!-- <sb-uic-card-karma-programs-v2 [widgetData]="widgetData"><sb-uic-card-karma-programs-v2> -->
+</ng-template>
+
+<!-- cios card -->
+<ng-template #cardPortraitExtLibSkeleton>
+  <sb-uic-card-portrait-ext [widgetData]="widgetData" [isCardLoading]="true"></sb-uic-card-portrait-ext>
+</ng-template>
+<ng-template #cardPortraitExtLib>
+  <sb-uic-card-portrait-ext 
+  [cbPlanMapData]="cbPlanMapData"
+  (contentData)="getRedirectUrlData($event)" [widgetData]="widgetData" [isCardLoading]="false"></sb-uic-card-portrait-ext>
 </ng-template>

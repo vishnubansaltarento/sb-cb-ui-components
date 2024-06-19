@@ -1,8 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { WidgetBaseComponent, NsWidgetResolver } from '@sunbird-cb/resolver-v2';
 import { NsCardContent } from '../../_models/card-content.model';
-import { UtilityService } from '@sunbird-cb/utils-v2';
-import { ConfigurationsService } from '../../_services/configurations.service';
+import { UtilityService, ConfigurationsService } from '@sunbird-cb/utils-v2';
 import { WidgetContentService } from '../../_services/widget-content.service';
 import { Router } from '@angular/router';
 
@@ -31,6 +30,7 @@ implements OnInit, NsWidgetResolver.IWidgetData<NsCardContent.ICard>  {
     this.cbPlanInterval = setInterval(() => {
       this.getCbPlanData()
     },                                1000)
+    
   }
 
   get isLiveOrMarkForDeletion() {
@@ -51,12 +51,27 @@ implements OnInit, NsWidgetResolver.IWidgetData<NsCardContent.ICard>  {
     return false
   }
   async getRedirectUrlData(content: any){
-    let urlData = await this.contSvc.getResourseLink(content)
-    this.router.navigate(
-      [urlData.url],
-      {
-        queryParams: urlData.queryParams
-      })
+
+    const userProfile = this.configSvc.userProfile
+    if(content.externalId) {
+      let extUrl: string = content.redirectUrl.replace('<username>',userProfile.userId)
+      // const url = this.router.serializeUrl(
+      //   this.router.createUrlTree([extUrl])
+      // );
+      this.router.navigate(
+        [`app/toc/${content.contentId}/overview`])
+      
+      // window.open(extUrl, '_blank');
+      // window.open(content.redirectUrl)
+    } else {
+      let urlData = await this.contSvc.getResourseLink(content)
+      this.router.navigate(
+        [urlData.url],
+        {
+          queryParams: urlData.queryParams
+        })
+    }
+    
   }
   getCbPlanData() {
     let cbpList: any={}

@@ -74,8 +74,8 @@ $secondary-color: #EF951E;
 
 @media screen and (max-width: 768px) { 
     .card-wide-img {
-        width: 147px;
-        height: 117px;
-        border-radius: 12px;
+        width: 147px !important;
+        height: 117px !important;
+        border-radius: 12px !important;
     }
   }
