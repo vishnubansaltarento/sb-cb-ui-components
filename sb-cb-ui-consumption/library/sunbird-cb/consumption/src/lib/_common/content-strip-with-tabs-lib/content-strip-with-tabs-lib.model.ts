@@ -53,6 +53,7 @@ export namespace NsContentStripWithTabs {
     request?: {
       playlistRead: any;
       playlistSearch?: any;
+      ciosContent?:any;
       search?: NSSearch.ISearchRequest
       searchV6?: NSSearch.ISearchV6Request
       topContent?: any

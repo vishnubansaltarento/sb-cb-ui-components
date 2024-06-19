@@ -17,6 +17,7 @@ import { CardMDOChannelComponent } from './card-mdo-channel/card-mdo-channel.com
 import { CardWideV2Component } from './card-wide-v2/card-wide-v2.component';
 import { CardKarmaProgramsComponent } from './card-karma-programs/card-karma-programs.component';
 import { CardKarmaProgramsV2Component } from './card-karma-programs-v2/card-karma-programs-v2.component';
+import { CardPortraitExtComponent } from './card-portrait-ext/card-portrait-ext.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CardKarmaProgramsV2Component } from './card-karma-programs-v2/card-karm
     CardMDOChannelComponent,
     CardWideV2Component,
     CardKarmaProgramsComponent,
-    CardKarmaProgramsV2Component
+    CardKarmaProgramsV2Component,
+    CardPortraitExtComponent
   ],
   imports: [
     CommonModule,
