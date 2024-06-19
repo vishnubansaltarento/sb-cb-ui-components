@@ -15,6 +15,7 @@ export class CardKarmaProgramsComponent implements OnInit {
   @Input() widgetData!: NsContent.IContent;
   @Input() randomColorApply: boolean = false
   @Output() userData = new EventEmitter<any>()
+  @Input() isCardLoading: boolean = false
   defaultThumbnail: any
   sourceLogos: any
   defaultSLogo: any

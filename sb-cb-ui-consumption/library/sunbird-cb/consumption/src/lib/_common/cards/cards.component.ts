@@ -59,7 +59,7 @@ implements OnInit, NsWidgetResolver.IWidgetData<NsCardContent.ICard>  {
       //   this.router.createUrlTree([extUrl])
       // );
       this.router.navigate(
-        [`app/toc/${content.contentId}/overview`])
+        [`app/toc/ext/${content.contentId}`])
       
       // window.open(extUrl, '_blank');
       // window.open(content.redirectUrl)

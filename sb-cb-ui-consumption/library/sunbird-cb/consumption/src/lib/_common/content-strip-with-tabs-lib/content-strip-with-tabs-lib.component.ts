@@ -1322,6 +1322,7 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
     return new Promise<any>((resolve, reject) => {
       if (request && request) {
         this.contentSvc.postApiMethod(apiUrl,request).subscribe(results => {
+          debugger
         if(results.result && results.result.content) {
           const showViewMore = Boolean(
             results.result.content && results.result.content.length > 5 && strip.stripConfig && strip.stripConfig.postCardForSearch,
@@ -1340,6 +1341,20 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
         } else if(results && results.data){
           const showViewMore = Boolean(
             results.data && results.data.length > 5 && strip.stripConfig && strip.stripConfig.postCardForSearch,
+            );
+            const viewMoreUrl = showViewMore? {
+            path: strip.viewMoreUrl && strip.viewMoreUrl.path || '',
+            queryParams: {
+            tab: 'Learn',
+            q: strip.viewMoreUrl && strip.viewMoreUrl.queryParams,
+            f: {},
+            },
+            }
+            : null;
+            resolve({ results, viewMoreUrl });
+        } else if(results.result && results.result.data){
+          const showViewMore = Boolean(
+            results.data && results.result.data && results.result.data.length > 5 && strip.stripConfig && strip.stripConfig.postCardForSearch,
             );
             const viewMoreUrl = showViewMore? {
             path: strip.viewMoreUrl && strip.viewMoreUrl.path || '',
@@ -1371,7 +1386,6 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
     return new Promise<any>((resolve, reject) => {
       if (request && request) {
         this.contentSvc.getApiMethod(apiUrl).subscribe(results => {
-          console.log(results,'results=========')
         const showViewMore = Boolean(
         results.result.data && results.result.data.orgList.length > 5 && strip.stripConfig && strip.stripConfig.postCardForSearch,
         );
@@ -1427,7 +1441,6 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
       }
       try {
         const response = await this.getRequestMethod(strip, strip.request.bookmarkRead, strip.request.apiUrl, calculateParentStatus);
-        console.log('calling  after - response, ', response)
         let content  = response.results.result.data.orgList
         if (response) {
           this.processStrip(
@@ -1539,7 +1552,6 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
       }
       try {
         const response = await this.getRequestMethod(strip, strip.request.playlistRead, strip.request.apiUrl, calculateParentStatus);
-        console.log('calling  after - response, ', response)
       
         if (response && response.results.result.content) {  
           let content  = response.results.result.content
