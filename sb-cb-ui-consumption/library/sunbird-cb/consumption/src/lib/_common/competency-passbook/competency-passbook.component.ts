@@ -61,7 +61,7 @@ export class CompetencyPassbookComponent implements OnInit {
   async getCompetencyArea(){let addfilter: any = {}
   if(this.providerId) {
     addfilter = {
-      "channel": [
+      "createdFor": [
         this.providerId
      ],
     }
@@ -98,7 +98,7 @@ export class CompetencyPassbookComponent implements OnInit {
           this.competencyStrength = this.competencyArea.reduce((partialSum: any, data: any) => partialSum +  data.count, 0) 
           this.selectedValue  = this.competencyArea[0].name.toLowerCase()
           let addFilter = {
-            "channel": [
+            "createdFor": [
               this.providerId
            ]
           }
@@ -132,7 +132,7 @@ export class CompetencyPassbookComponent implements OnInit {
     let addfilter: any = {}
     if(this.providerId) {
       addfilter = {
-        "channel": [
+        "createdFor": [
           this.providerId
        ],
       }
