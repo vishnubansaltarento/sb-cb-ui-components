@@ -90,8 +90,8 @@ export class CalenderComponent implements OnInit {
           if (this.trainings[resp.startDate]) {
             let prevData = this.trainings[resp.startDate]
             let location = resp.eventType
-            if (resp.venue && location !== "Online") {
-              const jsonResp = JSON.parse(resp.venue)
+            if (resp.location && location !== "Online") {
+              const jsonResp = JSON.parse(resp.location)
               location = jsonResp['address']
             }
             const formatObject = {
@@ -130,7 +130,7 @@ export class CalenderComponent implements OnInit {
     hours = hours ? hours : 12
     const strHours = hours < 10 ? '0' + hours : hours.toString()
     const strMinutes = minutes < 10 ? '0' + minutes : minutes.toString()
-    return `${strHours}:${strMinutes}: ${ampm}`
+    return `${strHours}:${strMinutes} ${ampm}`
   }
 
   getDays(cDate: any, counter: number) {
