@@ -17,7 +17,7 @@
  
 ::ng-deep .custom-month .mat-form-field-wrapper {
    padding-bottom: 0!important;
-   width: 110px;
+   width: 145px;
 }
 ::ng-deep .custom-month .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
    color: black!important;
@@ -26,6 +26,10 @@
 
 ::ng-deep .custom-month .mat-select-value {
    width: 89%;
+}
+
+::ng-deep .mat-select-arrow {
+   color: #000 !important;
 }
 
  ::ng-deep .custom-month .mat-select-value-text {
