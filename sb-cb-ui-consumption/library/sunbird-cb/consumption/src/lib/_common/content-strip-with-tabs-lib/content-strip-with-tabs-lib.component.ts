@@ -710,9 +710,7 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
                 }
               })
             }
-            if (proccesedResult.length) {
-              results = {response: {certifications: proccesedResult}}
-            }
+            results = {response: {certifications: proccesedResult}}
           resolve({ results, viewMoreUrl });
         },                                                                      (error: any) => {
           if (error.error && error.error.status === 400) {
