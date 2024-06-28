@@ -19,6 +19,7 @@ import { CardKarmaProgramsComponent } from './card-karma-programs/card-karma-pro
 import { CardKarmaProgramsV2Component } from './card-karma-programs-v2/card-karma-programs-v2.component';
 import { CardPortraitExtComponent } from './card-portrait-ext/card-portrait-ext.component';
 import { CardMdoChannelV1Component } from './card-mdo-channel-v1/card-mdo-channel-v1.component';
+import { AvatarPhotoLibModule } from '../avatar-photo-lib/avatar-photo-lib.module';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { CardMdoChannelV1Component } from './card-mdo-channel-v1/card-mdo-channe
     DisplayContentTypeLibModule,
     DefaultThumbnailModule,
     PipeDurationTransformModule,
-    SkeletonLoaderLibModule
+    SkeletonLoaderLibModule,
+    AvatarPhotoLibModule
   ],
   entryComponents:[CardsComponent],
   exports: [
