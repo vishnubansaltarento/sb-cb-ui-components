@@ -7,23 +7,15 @@
                         <mat-card-content class="min-top">
                             <div class="flex flex-col h-full">
                                 <div class="image-container">
-                                    <ng-container *ngIf="widgetData?.content?.posterImage">
-                                        <img mat-card-image [src]="widgetData?.content?.posterImage | pipePublicURL" loading="lazy"
-                                        class="card-img ws-mat-primary-lite-background margin-remove" [wsUtilsDefaultThumbnail]="defaultThumbnail"
+                                    <ng-container *ngIf="widgetData?.content?.imgSource && widgetData?.content?.imgSource?.length ; else defaultImg">
+                                        <img mat-card-image [src]="widgetData?.content?.imgSource[0]" loading="lazy"
+                                        class="card-img ws-mat-primary-lite-background margin-remove"  [wsUtilsDefaultThumbnail]="defaultThumbnail"
                                         [alt]="widgetData?.content?.title" />
-                                      </ng-container>
-                                      <ng-container *ngIf="!widgetData?.content?.posterImage">
-                                        <ng-container *ngIf="widgetData?.content?.imgSource && widgetData?.content?.imgSource?.length; else defaultImg">
-                                          <img mat-card-image [src]="widgetData?.content?.imgSource[0] | pipePublicURL" loading="lazy"
-                                          class="card-img ws-mat-primary-lite-background margin-remove"  [wsUtilsDefaultThumbnail]="defaultThumbnail"
-                                          [alt]="widgetData?.content?.title" />
-                                        </ng-container>
-                                        <ng-template #defaultImg>
-                                          <img mat-card-image [src]="defaultThumbnail" loading="lazy"
-                                          class="card-img ws-mat-primary-lite-background margin-remove"
-                                          [alt]="widgetData?.content?.title" />
-                                        </ng-template>
-                                      </ng-container>
+                                    </ng-container>
+                                    <ng-template #defaultImg>
+                                        <sb-uic-avatar-photo [randomColor]="true" [name]="widgetData?.content?.title"  size="m-side-rating">
+                                        </sb-uic-avatar-photo>
+                                    </ng-template>
                                 </div>
                                 <div class="title-container">
                                     <div class="flex   px-2">
