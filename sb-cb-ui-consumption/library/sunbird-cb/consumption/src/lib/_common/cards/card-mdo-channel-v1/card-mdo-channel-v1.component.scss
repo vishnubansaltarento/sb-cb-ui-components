@@ -83,7 +83,6 @@
       display: -webkit-box;
       -webkit-line-clamp: $title-line-count;
       -webkit-box-orient: vertical;
-      min-height: $title-line-count * $title-line-height;
     }
   
     $description-line-count: 3;
