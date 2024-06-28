@@ -243,6 +243,7 @@ export class HorizontalScrollerV2Component implements OnInit, OnChanges, OnDestr
         }
       } else {
         setTimeout(() => {
+          this.bottomDotsArray = []
           arrLength = document.getElementsByClassName(this.cardSubType).length;
           for (let i = 0; i < arrLength; i += 1) {
             this.bottomDotsArray.push(i);
