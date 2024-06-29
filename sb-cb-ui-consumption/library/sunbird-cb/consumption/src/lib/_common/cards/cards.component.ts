@@ -18,6 +18,8 @@ implements OnInit, NsWidgetResolver.IWidgetData<NsCardContent.ICard>  {
   isIntranetAllowedSettings = false
   cbPlanMapData: any
   cbPlanInterval: any
+  enrollInterval: any
+  enrollmentMapData: any
   constructor(private utilitySvc: UtilityService,
     private configSvc: ConfigurationsService,
     private contSvc: WidgetContentService,
@@ -31,6 +33,10 @@ implements OnInit, NsWidgetResolver.IWidgetData<NsCardContent.ICard>  {
       this.getCbPlanData()
     },                                1000)
     
+    this.enrollInterval = setInterval(() => {
+      this.getEnrollmentData()
+    // tslint:disable-next-line
+    }, 1000)
   }
 
   get isLiveOrMarkForDeletion() {
@@ -85,6 +91,13 @@ implements OnInit, NsWidgetResolver.IWidgetData<NsCardContent.ICard>  {
       this.cbPlanMapData = cbpList
       // this.karmaPointLoading = false
       clearInterval(this.cbPlanInterval)
+    }
+  }
+
+  getEnrollmentData() {
+    if (localStorage.getItem('enrollmentMapData')) {
+       this.enrollmentMapData = JSON.parse(localStorage.getItem('enrollmentMapData') || '{}')
+      clearInterval(this.enrollInterval)
     }
   }
 

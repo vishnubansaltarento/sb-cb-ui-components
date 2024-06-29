@@ -128,7 +128,6 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
   ngOnInit() {
     // const url = window.location.href
     this.initData();
-
     this.contentSvc.telemetryData$.subscribe((data: any) => {
       this.telemtryResponse.emit(data)
     })
@@ -1322,7 +1321,6 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
     return new Promise<any>((resolve, reject) => {
       if (request && request) {
         this.contentSvc.postApiMethod(apiUrl,request).subscribe(results => {
-          debugger
         if(results.result && results.result.content) {
           const showViewMore = Boolean(
             results.result.content && results.result.content.length > 5 && strip.stripConfig && strip.stripConfig.postCardForSearch,
