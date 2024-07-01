@@ -26,6 +26,7 @@ import { ContentProgressModule } from './../content-progress/content-progress.mo
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
 import { HttpLoaderFactory } from '../content-strip-with-tabs-lib/content-strip-with-tabs-lib.module';
 import { HttpClient } from '@angular/common/http';
+import { DialogComponentsModule } from '../dialog-components/dialog-components.module';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { HttpClient } from '@angular/common/http';
     SkeletonLoaderLibModule,
     MatProgressSpinnerModule,
     ContentProgressModule,
+    DialogComponentsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

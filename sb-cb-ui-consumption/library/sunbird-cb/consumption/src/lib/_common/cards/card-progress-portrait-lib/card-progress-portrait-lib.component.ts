@@ -1,11 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NsCardContent } from '../../../_models/card-content.model';
-import { MatSnackBar } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material'
 import { TranslateService } from '@ngx-translate/core';
 import { MultilingualTranslationsService } from '../../../_services/multilingual-translations.service';
 import { WidgetContentService } from '../../../_services/widget-content.service';
-import { ConfigurationsService, EventService } from '@sunbird-cb/utils-v2';
+import { ConfigurationsService, EventService, WsEvents } from '@sunbird-cb/utils-v2';
 import * as _ from "lodash";
+import { CertificateService } from '../../../_services/certificate.service';
+import { CertificateDialogComponent } from '../../dialog-components/certificate-dialog/certificate-dialog.component';
 
 @Component({
   selector: 'sb-uic-card-progress-portrait-lib',
@@ -38,7 +40,8 @@ export class CardProgressPortraitLibComponent implements OnInit {
     private langtranslations: MultilingualTranslationsService,
     private configSvc: ConfigurationsService,
     private contSvc: WidgetContentService,
-    // private certificateService: CertificateService,
+    private certificateService: CertificateService,
+    private dialog: MatDialog,
     ) { 
       this.langtranslations.languageSelectedObservable.subscribe(() => {
         if (localStorage.getItem('websiteLanguage')) {
@@ -102,30 +105,30 @@ export class CardProgressPortraitLibComponent implements OnInit {
   }
 
   downloadCertificate(certificateData: any) {
-    // this.events.raiseInteractTelemetry(
-    //   {
-    //     type: WsEvents.EnumInteractTypes.CLICK,
-    //     id: 'view-certificate',
-    //     subType: WsEvents.EnumInteractSubTypes.CERTIFICATE,
-    //   },
-    //   {
-    //     id: certificateData.issuedCertificates[0].identifier,   // id of the certificate
-    //     type: WsEvents.EnumInteractSubTypes.CERTIFICATE,
-    //   })
-    // if(certificateData.issuedCertificates.length > 0) {
-    //   this.downloadCertificateLoading = true
-    //   let certData: any = certificateData.issuedCertificates[0]
-    //   this.certificateService.downloadCertificate_v2(certData.identifier).subscribe((res: any)=>{
-    //     this.downloadCertificateLoading = false
-    //     const cet = res.result.printUri
-    //     this.dialog.open(CertificateDialogComponent, {
-    //       width: '1300px',
-    //       data: { cet, certId: certData.identifier },
-    //     })
-    //   })
-    // } else {
-    //   this.downloadCertificateLoading = false
-    // }
+    this.events.raiseInteractTelemetry(
+      {
+        type: WsEvents.EnumInteractTypes.CLICK,
+        id: 'view-certificate',
+        subType: WsEvents.EnumInteractSubTypes.CERTIFICATE,
+      },
+      {
+        id: certificateData.issuedCertificates[0].identifier,   // id of the certificate
+        type: WsEvents.EnumInteractSubTypes.CERTIFICATE,
+      })
+    if(certificateData.issuedCertificates.length > 0) {
+      this.downloadCertificateLoading = true
+      let certData: any = certificateData.issuedCertificates[0]
+      this.certificateService.downloadCertificate_v2(certData.identifier).subscribe((res: any)=>{
+        this.downloadCertificateLoading = false
+        const cet = res.result.printUri
+        this.dialog.open(CertificateDialogComponent, {
+          width: '1300px',
+          data: { cet, certId: certData.identifier },
+        })
+      })
+    } else {
+      this.downloadCertificateLoading = false
+    }
   }
 
 }
