@@ -2,6 +2,7 @@
 	width: 100%;
 	min-height: 190px;
 	box-sizing: border-box;
+	min-width: 338px;
 }
 
 .image-container {
@@ -13,7 +14,7 @@
 }
 
 .title-container {
-	width: 160px;
+	/* width: 160px; */
 	margin-left: 12px;
 }
 
@@ -97,4 +98,7 @@ span.start-span {
 	border-radius: 25px;
 	text-align: center;
 	padding:4px 12px;
+ }
+ .dots-container {
+	display: none;
  }

@@ -91,7 +91,7 @@
   <sb-uic-card-assessment [widgetData]="widgetData" [isCardLoading]="true"></sb-uic-card-assessment>
 </ng-template>
 <ng-template #cardScheduledAssessment>
-  <sb-uic-card-assessment [widgetData]="widgetData" [isCardLoading]="false" [enrollmentMapData]="enrollmentMapData"></sb-uic-card-assessment>
+  <sb-uic-card-assessment [widgetData]="widgetData" (contentData)="getRedirectUrlData($event)" [isCardLoading]="false" [enrollmentMapData]="enrollmentMapData"></sb-uic-card-assessment>
 </ng-template>
 <ng-template #cardProgressLibSkeleton>
   <sb-uic-card-progress-portrait-lib 

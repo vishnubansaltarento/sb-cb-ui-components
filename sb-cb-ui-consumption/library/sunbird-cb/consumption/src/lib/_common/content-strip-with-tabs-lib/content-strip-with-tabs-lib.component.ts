@@ -62,6 +62,7 @@ interface IStripUnitContentData {
   secondaryHeading?: any;
   viewMoreUrl: any;
   request?: any
+  
 }
 
 @Component({
@@ -99,6 +100,7 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
   defaultMaxWidgets = 12;
   enrollInterval: any;
   todaysEvents: any = [];
+  enrollmentMapData: any
 
   constructor(
     // private contentStripSvc: ContentStripNewMultipleService,
@@ -131,6 +133,8 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
     this.contentSvc.telemetryData$.subscribe((data: any) => {
       this.telemtryResponse.emit(data)
     })
+
+   
   }
 
   ngOnDestroy() {
@@ -519,13 +523,24 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
           if (response && response.results) {
             // console.log('calling  after-- ')
             if (response.results.result.content) {
-              this.processStrip(
-                strip,
-                this.transformContentsToWidgets(response.results.result.content, strip),
-                'done',
-                calculateParentStatus,
-                response.viewMoreUrl,
-              );
+              if(strip.key === 'scheduledAssessment') {
+                this.enrollInterval = setInterval(() => {
+                  this.checkInvitOnlyAssessments(response.results.result.content, strip, calculateParentStatus, response.viewMoreUrl)
+
+                // tslint:disable-next-line
+                }, 1000)
+           
+             
+              } else {
+                this.processStrip(
+                  strip,
+                  this.transformContentsToWidgets(response.results.result.content, strip),
+                  'done',
+                  calculateParentStatus,
+                  response.viewMoreUrl,
+                );
+              }
+             
             } else if (response.results.result.Event) {
               this.processStrip(
                 strip,
@@ -547,6 +562,25 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
         }
       }
     }
+  }
+
+  checkInvitOnlyAssessments(content:any, strip:any, calculateParentStatus:any, viewMoreUrl:any) {
+    console.log('apiii call fata=========')
+    if (localStorage.getItem('enrollmentMapData')) {
+      this.enrollmentMapData = JSON.parse(localStorage.getItem('enrollmentMapData') || '{}')
+      let filteredArray = content.filter((data:any)=> this.enrollmentMapData[data.identifier]) 
+      console.log( filteredArray, "let filteredArray========")
+      this.processStrip(
+        strip,
+        this.transformContentsToWidgets(filteredArray, strip),
+        'done',
+        calculateParentStatus,
+        viewMoreUrl,
+      );
+     clearInterval(this.enrollInterval)
+   }
+   
+    
   }
 
   async searchV6Request(strip: NsContentStripWithTabs.IContentStripUnit,
@@ -964,6 +998,7 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
       }
     }
   }
+
 
   async getTabDataByNewReqSearchV6(
     strip: NsContentStripWithTabs.IContentStripUnit,
