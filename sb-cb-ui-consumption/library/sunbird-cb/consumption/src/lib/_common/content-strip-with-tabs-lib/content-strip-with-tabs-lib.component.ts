@@ -1615,6 +1615,7 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
 
   async fetchCiosContentData(strip: NsContentStripWithTabs.IContentStripUnit, calculateParentStatus = true) {
     if (strip.request && strip.request.ciosContent && Object.keys(strip.request.ciosContent).length) {
+      debugger
       let originalFilters: any = [];
       if (strip.request &&
         strip.request.ciosContent &&
