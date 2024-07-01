@@ -46,7 +46,6 @@ export class CardAssessmentComponent implements OnInit {
   }
 
    startCountdown(date:any): void {
-    console.log(date, "date--=+++")
     // Update the countdown immediately on start
     this.updateCountdown(date);
 
