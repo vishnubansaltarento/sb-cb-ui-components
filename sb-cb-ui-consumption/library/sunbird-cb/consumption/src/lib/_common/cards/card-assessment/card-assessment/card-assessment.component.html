@@ -39,18 +39,18 @@
 							</div>
 						</div>
 						<span class="start-span">Assessment starts in </span>
-						<!-- <mat-card-footer class="assessment-card-footer  padding-m">
+						<mat-card-footer class="assessment-card-footer  padding-m">
 							<div class="flex flex-1 items-center justify-center col-row margin-top-m">
 								<div class="flex margin-right-m">
-									<span *ngIf="daysPending"> {{ startCountdown(widgetData?.batch?.startDate) }}<div id="demo"></div> </span>
+									<span *ngIf="daysPending"> {{ startCountdown(widgetData?.content?.batch?.startDate) }}<div id="demo"></div> </span>
 									<span *ngIf="!daysPending" class="start-btn"> Start Assessment
 									</span>
 								</div>
 								<div class="flex">
-									<span class="time-span flex items-center justify-center">{{item?.batch?.startDate | date: 'd MMM, y' }}</span>
+									<span class="time-span flex items-center justify-center">{{widgetData?.content?.batch?.startDate | date: 'd MMM, y' }}</span>
 								</div>
 							</div>
-						</mat-card-footer> -->
+						</mat-card-footer>
 					</div>
 				</mat-card-content>
 			</ng-container>

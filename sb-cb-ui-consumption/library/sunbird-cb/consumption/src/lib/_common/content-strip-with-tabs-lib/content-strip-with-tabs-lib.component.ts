@@ -565,11 +565,16 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
   }
 
   checkInvitOnlyAssessments(content:any, strip:any, calculateParentStatus:any, viewMoreUrl:any) {
-    console.log('apiii call fata=========')
     if (localStorage.getItem('enrollmentMapData')) {
       this.enrollmentMapData = JSON.parse(localStorage.getItem('enrollmentMapData') || '{}')
-      let filteredArray = content.filter((data:any)=> this.enrollmentMapData[data.identifier]) 
-      console.log( filteredArray, "let filteredArray========")
+      let filteredArray: any = []
+        content.forEach((data:any)=> {
+          if(this.enrollmentMapData[data.identifier]){
+            data['batch'] = this.enrollmentMapData[data.identifier].batch
+            data['completionPercentage'] = this.enrollmentMapData[data.identifier].completionPercentage
+            filteredArray.push(data)
+          }
+        }) 
       this.processStrip(
         strip,
         this.transformContentsToWidgets(filteredArray, strip),
