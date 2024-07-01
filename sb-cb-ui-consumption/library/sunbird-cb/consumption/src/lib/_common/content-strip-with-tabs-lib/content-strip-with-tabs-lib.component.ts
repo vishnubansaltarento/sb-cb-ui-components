@@ -81,6 +81,7 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
   @Output() telemtryResponse = new EventEmitter<any>()
   @Input() providerId : any = ''
   @Input() emitViewAll : boolean = false
+  @Input() channnelName: any = ''
   @HostBinding('id')
   public id = `ws-strip-miltiple_${Math.random()}`;
   stripsResultDataMap: { [key: string]: IStripUnitContentData } = {};
@@ -739,6 +740,15 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
               },
             }
             : null;
+            let proccesedResult: any = []
+            if (results && results.response && results.response.certifications) {
+              results.response.certifications.map((result: any) => {
+                if (result.source === this.channnelName) {
+                  proccesedResult.push(result)
+                }
+              })
+            }
+            results = {response: {certifications: proccesedResult}}
           resolve({ results, viewMoreUrl });
         },                                                                      (error: any) => {
           if (error.error && error.error.status === 400) {

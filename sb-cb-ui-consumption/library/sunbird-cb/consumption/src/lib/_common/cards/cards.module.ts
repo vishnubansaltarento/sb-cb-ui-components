@@ -27,6 +27,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
 import { HttpLoaderFactory } from '../content-strip-with-tabs-lib/content-strip-with-tabs-lib.module';
 import { HttpClient } from '@angular/common/http';
 import { DialogComponentsModule } from '../dialog-components/dialog-components.module';
+import { CardMdoChannelV1Component } from './card-mdo-channel-v1/card-mdo-channel-v1.component';
+import { AvatarPhotoLibModule } from '../avatar-photo-lib/avatar-photo-lib.module';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { DialogComponentsModule } from '../dialog-components/dialog-components.m
     CardPortraitExtComponent,
     CardAssessmentComponent,
     CardProgressPortraitLibComponent,
+    CardMdoChannelV1Component
   ],
   imports: [
     CommonModule,
@@ -67,6 +70,7 @@ import { DialogComponentsModule } from '../dialog-components/dialog-components.m
         deps: [HttpClient],
       },
     }),
+    AvatarPhotoLibModule
   ],
   entryComponents:[CardsComponent],
   exports: [

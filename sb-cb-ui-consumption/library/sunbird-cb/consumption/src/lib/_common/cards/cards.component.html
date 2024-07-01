@@ -14,6 +14,7 @@
       <ng-container *ngSwitchCase="'card-wide-v2'" [ngTemplateOutlet]="cardWideV2"></ng-container>
       <ng-container *ngSwitchCase="'card-wide-v2-skeleton'" [ngTemplateOutlet]="cardWideV2Skeleton"></ng-container>
       <ng-container *ngSwitchCase="'card-mdo-lib'" [ngTemplateOutlet]="cardMdo"></ng-container>
+      <ng-container *ngSwitchCase="'card-mdo-home-lib'" [ngTemplateOutlet]="cardMdoHome"></ng-container>
       <ng-container *ngSwitchCase="'card-mdo-lib-skeleton'" [ngTemplateOutlet]="cardMdoSkeleton"></ng-container>
       <ng-container *ngSwitchCase="'card-scheduled-assessment'" [ngTemplateOutlet]="cardScheduledAssessment"></ng-container>
       <ng-container *ngSwitchCase="'card-scheduled-assessment-skeleton'" [ngTemplateOutlet]="cardScheduledAssessmentSkelton"></ng-container>
@@ -72,6 +73,9 @@
 
 <ng-template #cardUser>
   <sb-uic-card-user [widgetData]="widgetData"></sb-uic-card-user>
+</ng-template>
+<ng-template #cardMdoHome>
+  <sb-uic-card-mdo-channel-v1 [widgetData]="widgetData"></sb-uic-card-mdo-channel-v1>
 </ng-template>
 <ng-template #cardMdo>
   <sb-uic-card-mdo-channel [widgetData]="widgetData"></sb-uic-card-mdo-channel>

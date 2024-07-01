@@ -426,9 +426,9 @@ export class WidgetContentService {
     return this.http.get<any>(`${API_END_POINTS.CERT_DOWNLOAD(certId)}`);
   }
 
-  trendingContentSearch(req: any): Observable<NsContent.IContent> {
+  trendingContentSearch(req: any): Observable<any> {
     req.query = req.query || '';
-    return this.http.post<NsContent.IContent>(API_END_POINTS.TRENDING_CONTENT_SEARCH, req);
+    return this.http.post<any>(API_END_POINTS.TRENDING_CONTENT_SEARCH, req);
   }
 
   getKarmaPoitns(limit: number, offset: any) {
