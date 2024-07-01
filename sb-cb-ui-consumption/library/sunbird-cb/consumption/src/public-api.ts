@@ -17,6 +17,7 @@ export * from './lib/_common/competency-passbook/competency-passbook.module'
 export * from './lib/_common/calender/calender.module'
 export * from './lib/_common/user-content-rating/user-content-rating-lib.module'
 export * from './lib/_common/announcements/announcements.module'
+export * from './lib/_common/content-progress/content-progress.module'
 
 
 export * from './lib/_services/widget-content.service'
