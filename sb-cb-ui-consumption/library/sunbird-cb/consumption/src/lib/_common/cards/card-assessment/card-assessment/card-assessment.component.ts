@@ -81,7 +81,6 @@ export class CardAssessmentComponent implements OnInit {
   }
 
   getRedirectUrlData(contentData: any){
-    console.log(contentData, "contentData========---------------")
     // for telemetry
     if (this.widgetData && this.widgetData.context && this.widgetData.context.pageSection) {
       contentData['typeOfTelemetry'] = this.widgetData.context.pageSection
