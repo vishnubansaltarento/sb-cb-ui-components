@@ -4,27 +4,37 @@ import { Component, HostBinding, Input, OnChanges } from '@angular/core'
   selector: 'sb-uic-content-progress',
   templateUrl: './content-progress.component.html',
   styleUrls: ['./content-progress.component.scss'],
-    /* tslint:disable */
-    host: {
-      role: 'progressbar',
-      // Sets the minimum and maximum values for the progressbar role.
-      'aria-valuemin': '0',
-      'aria-valuemax': '100',
-      'title': 'progres',
-      // Binding that updates the current value of the progressbar.
-      '[attr.aria-valuenow]': 'progress',
-    },
-    /* tslint:enable */
+  /* tslint:disable */
+  host: {
+    // Sets the role for this component to "progressbar"
+    role: 'progressbar',
+    // Sets the minimum and maximum values for the progressbar role.
+    'aria-valuemin': '0',
+    'aria-valuemax': '100',
+    'title': 'progres',
+    // Binding that updates the current value of the progressbar.
+    '[attr.aria-valuenow]': 'progress',
+  },
+  /* tslint:enable */
 })
 export class ContentProgressComponent implements OnChanges {
-  @Input()contentId = ''
-  @Input()progress = 0
-  @Input()progressType = ''
-  @Input()forPreview = false
+  @Input()
+  contentId = ''
+
+  @Input()
+  progress = 0
+
+  @Input()
+  progressType = ''
+
+  @Input()
+  forPreview = false
+
   @Input()
   className = ''
   @Input()
   customClassName: any = 'accent-progress'
+
   rendom = Math.random()
   @HostBinding('id')
   public id = `progress_${Math.random()}`
@@ -54,5 +64,4 @@ export class ContentProgressComponent implements OnChanges {
       }
     }
   }
-
 }

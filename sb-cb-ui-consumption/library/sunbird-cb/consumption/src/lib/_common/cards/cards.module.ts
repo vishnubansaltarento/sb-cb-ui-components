@@ -22,7 +22,7 @@ import { CardPortraitExtComponent } from './card-portrait-ext/card-portrait-ext.
 import { CardAssessmentComponent } from './card-assessment/card-assessment/card-assessment.component';
 import { CardProgressPortraitLibComponent } from './card-progress-portrait-lib/card-progress-portrait-lib.component';
 // import { ContentProgressComponent } from './content-progress/content-progress.component';
-import { ContentProgressModule } from './content-progress/content-progress.module';
+import { ContentProgressModule } from './../content-progress/content-progress.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core'
 import { HttpLoaderFactory } from '../content-strip-with-tabs-lib/content-strip-with-tabs-lib.module';
 import { HttpClient } from '@angular/common/http';
@@ -46,6 +46,7 @@ import { HttpClient } from '@angular/common/http';
     CommonModule,
     MatCardModule,
     MatButtonModule,
+    MatTooltipModule,
     MatIconModule,
     MatTooltipModule,
     RouterModule,
