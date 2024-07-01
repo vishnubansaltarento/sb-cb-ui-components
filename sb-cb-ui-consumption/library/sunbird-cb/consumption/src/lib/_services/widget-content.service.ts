@@ -573,7 +573,6 @@ export class WidgetContentService {
     } return true;
   }
   postApiMethod(apiUrl: any, req: any): Observable<NsContent.IContent> {
-    req.query = req.query || '';
     return this.http.post<NsContent.IContent>(apiUrl, req);
   }
   getApiMethod(apiUrl: any): Observable<NsContent.IContent> {
