@@ -81,6 +81,9 @@ export * from './lib/pipes/pipe-certificate-image-URL/pipe-certimage-URL.pipe'
 export * from './lib/pipes/pipe-nic-relative/pipe-nic-relative.module'
 export * from './lib/pipes/pipe-nic-relative/pipe-nic-relative.pipe'
 
+export * from './lib/pipes/pipe-coursename/PipeCourseNameModule'
+export * from './lib/pipes/pipe-coursename/pipe-coursename.pipe'
+
 export * from './lib/resolvers/explore-detail.resolver'
 export * from './lib/resolvers/marketing-offering.resolve'
 export * from './lib/resolvers/page.model'
