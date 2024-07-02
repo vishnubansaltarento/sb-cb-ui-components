@@ -18,6 +18,7 @@ export * from './lib/_common/competency-passbook-mdo/competency-passbook-mdo.mod
 export * from './lib/_common/calender/calender.module'
 export * from './lib/_common/user-content-rating/user-content-rating-lib.module'
 export * from './lib/_common/announcements/announcements.module'
+export * from './lib/_common/content-progress/content-progress.module'
 
 
 export * from './lib/_services/widget-content.service'
