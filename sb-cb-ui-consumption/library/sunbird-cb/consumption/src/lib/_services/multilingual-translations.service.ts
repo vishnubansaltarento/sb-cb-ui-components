@@ -62,8 +62,11 @@ export class MultilingualTranslationsService {
     }
 
     translateLabel(label: string, type: any, subtype: any) {
-        let nlabel = label;
-        nlabel = nlabel.toLowerCase();
+        if(label) {
+            let nlabel = label;
+      
+        
+        nlabel = nlabel && nlabel.toLowerCase() ;
         const sl = nlabel.split(' ');
         sl.forEach((w: any, index: any) => {
             if (index !== 0) {
@@ -80,6 +83,8 @@ export class MultilingualTranslationsService {
         // tslint:disable-next-line: prefer-template
         const translationKeyn = type + '.' +  nlabel;
         return this.translate.instant(translationKeyn);
+    } 
+        return label
     }
 
     translateActualLabel(label: string, type: any, subtype: any) {

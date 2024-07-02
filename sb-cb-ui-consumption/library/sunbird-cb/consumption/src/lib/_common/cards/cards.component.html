@@ -16,8 +16,12 @@
       <ng-container *ngSwitchCase="'card-mdo-lib'" [ngTemplateOutlet]="cardMdo"></ng-container>
       <ng-container *ngSwitchCase="'card-mdo-home-lib'" [ngTemplateOutlet]="cardMdoHome"></ng-container>
       <ng-container *ngSwitchCase="'card-mdo-lib-skeleton'" [ngTemplateOutlet]="cardMdoSkeleton"></ng-container>
+      <ng-container *ngSwitchCase="'card-scheduled-assessment'" [ngTemplateOutlet]="cardScheduledAssessment"></ng-container>
+      <ng-container *ngSwitchCase="'card-scheduled-assessment-skeleton'" [ngTemplateOutlet]="cardScheduledAssessmentSkelton"></ng-container>
       <ng-container *ngSwitchCase="'card-karma-program-lib'" [ngTemplateOutlet]="cardKarmaProgram"></ng-container>
       <ng-container *ngSwitchCase="'card-karma-program-lib-skeleton'" [ngTemplateOutlet]="cardKarmaProgramSkeleton"></ng-container>
+      <ng-container *ngSwitchCase="'card-progress-portrait-lib'" [ngTemplateOutlet]="cardProgressLib"></ng-container>
+      <ng-container *ngSwitchCase="'card-progress-portrait-lib-skeleton'" [ngTemplateOutlet]="cardProgressLibSkeleton"></ng-container>
       <ng-container *ngSwitchCase="'card-karma-program-lib-v2'" [ngTemplateOutlet]="cardKarmaProgramV2"></ng-container>
       <ng-container *ngSwitchCase="'card-karma-program-lib-v2-skeleton'" [ngTemplateOutlet]="cardKarmaProgramV2"></ng-container>
       <ng-container *ngSwitchCase="'card-portrait-ext-lib-skeleton'" [ngTemplateOutlet]="cardPortraitExtLibSkeleton"></ng-container>
@@ -86,6 +90,20 @@
 <ng-template #cardKarmaProgram>
   <sb-uic-card-karma-programs [randomColorApply]="true" 
   [isCardLoading]="false" [widgetData]="widgetData"></sb-uic-card-karma-programs>
+</ng-template>
+<ng-template #cardScheduledAssessmentSkelton>
+  <sb-uic-card-assessment [widgetData]="widgetData" [isCardLoading]="true"></sb-uic-card-assessment>
+</ng-template>
+<ng-template #cardScheduledAssessment>
+  <sb-uic-card-assessment [widgetData]="widgetData" (contentData)="getRedirectUrlData($event)" [isCardLoading]="false" [enrollmentMapData]="enrollmentMapData"></sb-uic-card-assessment>
+</ng-template>
+<ng-template #cardProgressLibSkeleton>
+  <sb-uic-card-progress-portrait-lib 
+  [isCardLoading]="true" [widgetData]="widgetData"></sb-uic-card-progress-portrait-lib>
+</ng-template>
+<ng-template #cardProgressLib>
+  <sb-uic-card-progress-portrait-lib 
+  [isCardLoading]="false" [widgetData]="widgetData"></sb-uic-card-progress-portrait-lib>
 </ng-template>
 <ng-template #cardKarmaProgramV2>
   <!-- <sb-uic-card-karma-programs-v2 [widgetData]="widgetData"><sb-uic-card-karma-programs-v2> -->
