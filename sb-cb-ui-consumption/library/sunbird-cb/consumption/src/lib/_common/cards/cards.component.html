@@ -19,6 +19,7 @@
       <ng-container *ngSwitchCase="'card-karma-program-lib-skeleton'" [ngTemplateOutlet]="cardKarmaProgram"></ng-container>
       <ng-container *ngSwitchCase="'card-karma-program-lib-v2'" [ngTemplateOutlet]="cardKarmaProgramV2"></ng-container>
       <ng-container *ngSwitchCase="'card-karma-program-lib-v2-skeleton'" [ngTemplateOutlet]="cardKarmaProgramV2"></ng-container>
+      <ng-container *ngSwitchCase="'card-providers-lib'" [ngTemplateOutlet]="cardProvider"></ng-container>
     </ng-container>
 </div>
 
@@ -78,4 +79,7 @@
 </ng-template>
 <ng-template #cardKarmaProgramV2>
   <!-- <sb-uic-card-karma-programs-v2 [widgetData]="widgetData"><sb-uic-card-karma-programs-v2> -->
+</ng-template>
+<ng-template #cardProvider>
+  <sb-uic-provider-card ></sb-uic-provider-card>
 </ng-template>
