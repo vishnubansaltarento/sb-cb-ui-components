@@ -24,8 +24,10 @@
       <ng-container *ngSwitchCase="'card-progress-portrait-lib-skeleton'" [ngTemplateOutlet]="cardProgressLibSkeleton"></ng-container>
       <ng-container *ngSwitchCase="'card-karma-program-lib-v2'" [ngTemplateOutlet]="cardKarmaProgramV2"></ng-container>
       <ng-container *ngSwitchCase="'card-karma-program-lib-v2-skeleton'" [ngTemplateOutlet]="cardKarmaProgramV2"></ng-container>
+      <ng-container *ngSwitchCase="'card-providers-lib'" [ngTemplateOutlet]="cardProvider"></ng-container>
       <ng-container *ngSwitchCase="'card-portrait-ext-lib-skeleton'" [ngTemplateOutlet]="cardPortraitExtLibSkeleton"></ng-container>
       <ng-container *ngSwitchCase="'card-portrait-ext-lib'" [ngTemplateOutlet]="cardPortraitExtLib"></ng-container>
+
     </ng-container>
 </div>
 
@@ -103,10 +105,13 @@
 </ng-template>
 <ng-template #cardProgressLib>
   <sb-uic-card-progress-portrait-lib 
-  [isCardLoading]="false" [widgetData]="widgetData"></sb-uic-card-progress-portrait-lib>
+  [isCardLoading]="false" (contentData)="getRedirectUrlData($event)" [widgetData]="widgetData"></sb-uic-card-progress-portrait-lib>
 </ng-template>
 <ng-template #cardKarmaProgramV2>
   <!-- <sb-uic-card-karma-programs-v2 [widgetData]="widgetData"><sb-uic-card-karma-programs-v2> -->
+</ng-template>
+<ng-template #cardProvider>
+  <sb-uic-provider-card ></sb-uic-provider-card>
 </ng-template>
 
 <!-- cios card -->

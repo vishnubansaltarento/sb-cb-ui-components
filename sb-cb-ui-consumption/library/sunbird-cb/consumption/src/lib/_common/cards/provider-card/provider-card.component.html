@@ -1,0 +1,16 @@
+<div class="providers-container">
+    <div class="provider-card" *ngFor="let provider of providers; let i = index" [ngStyle]="{'border-top': '72px solid ' + colors[i % colors.length]}">
+      <div class="circle-wrapper">
+        <div class="circle">
+          <div class="background-circle">
+            <img [src]="provider.logo" alt="{{ provider.name }}">
+          </div>
+        </div>
+      </div>
+      <div class="provider-content">
+        <p>{{ provider.name }}</p>
+        <div class="view-provider-button" (click)="redirectTo(provider)">View Provider ></div>
+      </div>
+    </div>
+  </div>
+  
