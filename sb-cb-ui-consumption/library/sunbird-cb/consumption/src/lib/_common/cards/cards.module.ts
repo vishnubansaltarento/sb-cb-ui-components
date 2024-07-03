@@ -18,6 +18,7 @@ import { CardMDOChannelComponent } from './card-mdo-channel/card-mdo-channel.com
 import { CardWideV2Component } from './card-wide-v2/card-wide-v2.component';
 import { CardKarmaProgramsComponent } from './card-karma-programs/card-karma-programs.component';
 import { CardKarmaProgramsV2Component } from './card-karma-programs-v2/card-karma-programs-v2.component';
+import { ProviderCardComponent } from './provider-card/provider-card.component';
 import { CardPortraitExtComponent } from './card-portrait-ext/card-portrait-ext.component';
 import { CardAssessmentComponent } from './card-assessment/card-assessment/card-assessment.component';
 import { CardProgressPortraitLibComponent } from './card-progress-portrait-lib/card-progress-portrait-lib.component';
@@ -30,6 +31,7 @@ import { DialogComponentsModule } from '../dialog-components/dialog-components.m
 import { CardMdoChannelV1Component } from './card-mdo-channel-v1/card-mdo-channel-v1.component';
 import { AvatarPhotoLibModule } from '../avatar-photo-lib/avatar-photo-lib.module';
 
+
 @NgModule({
   declarations: [
     CardResourceComponent,
@@ -41,6 +43,7 @@ import { AvatarPhotoLibModule } from '../avatar-photo-lib/avatar-photo-lib.modul
     CardWideV2Component,
     CardKarmaProgramsComponent,
     CardKarmaProgramsV2Component,
+    ProviderCardComponent,
     CardPortraitExtComponent,
     CardAssessmentComponent,
     CardProgressPortraitLibComponent,
