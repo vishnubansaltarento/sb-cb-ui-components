@@ -6,7 +6,7 @@ import moment from 'moment'
 })
 export class PipeDurationTransformPipe implements PipeTransform {
 
-  transform(data: number, type: 'time24' | 'hms' | 'hour' | 'hms2H' | 'hms2M' | 'day' | 'DAYS'): any {
+  transform(data: number, type?: 'time24' | 'hms' | 'hour' | 'hms2H' | 'hms2M' | 'day' | 'DAYS'): any {
     if (data <= 0) {
       return ''
     }
