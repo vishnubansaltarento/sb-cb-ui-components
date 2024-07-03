@@ -103,7 +103,7 @@
 </ng-template>
 <ng-template #cardProgressLib>
   <sb-uic-card-progress-portrait-lib 
-  [isCardLoading]="false" [widgetData]="widgetData"></sb-uic-card-progress-portrait-lib>
+  [isCardLoading]="false" (contentData)="getRedirectUrlData($event)" [widgetData]="widgetData"></sb-uic-card-progress-portrait-lib>
 </ng-template>
 <ng-template #cardKarmaProgramV2>
   <!-- <sb-uic-card-karma-programs-v2 [widgetData]="widgetData"><sb-uic-card-karma-programs-v2> -->
