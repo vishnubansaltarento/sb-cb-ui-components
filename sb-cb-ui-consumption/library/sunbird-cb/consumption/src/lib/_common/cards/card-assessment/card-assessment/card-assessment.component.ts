@@ -32,11 +32,8 @@ export class CardAssessmentComponent implements OnInit {
     const instanceConfig = this.configSvc.instanceConfig
     if (instanceConfig) {
       this.defaultThumbnail = instanceConfig.logos.defaultContent || ''
-      this.defaultSLogo = instanceConfig.logos.defaultSourceLogo || '/assets/instances/eagle/app_logos/KarmayogiBharat_Logo.svg'
-    } else {
-      this.defaultThumbnail = '/assets/instances/eagle/app_logos/default.png'
-      this.defaultSLogo =  '/assets/instances/eagle/app_logos/KarmayogiBharat_Logo.svg'
-    }
+      this.defaultSLogo = instanceConfig.logos.defaultSourceLogo || ''
+    } 
 
   }
 
