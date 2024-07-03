@@ -1,47 +1,74 @@
-<mat-card class="channels-card card-channels-container mr-5 padding-remove cursor-pointer" [ngStyle]="{'background': widgetData?.content?.bgColor}">
-    <div class="display-contents">
-        <ng-container *ngIf="widgetData?.content">
-            <a (click)="redirectTo(widgetData?.content);$event.stopPropagation();">
-                <ng-container>
-                    <mat-card-content class="min-top">
-                        <div class="flex flex-col h-full">
-                            <div class="image-container">
-                                <ng-container *ngIf="widgetData?.content?.posterImage">
-                                    <img mat-card-image [src]="widgetData?.content?.posterImage | pipePublicURL" loading="lazy"
-                                    class="card-img ws-mat-primary-lite-background margin-remove" [wsUtilsDefaultThumbnail]="defaultThumbnail"
-                                    [alt]="widgetData?.content?.title" />
-                                  </ng-container>
-                                  <ng-container *ngIf="!widgetData?.content?.posterImage">
-                                    <ng-container *ngIf="widgetData?.content?.imgSource && widgetData?.content?.imgSource?.length; else defaultImg">
-                                      <img mat-card-image [src]="widgetData?.content?.imgSource[0] | pipePublicURL" loading="lazy"
-                                      class="card-img ws-mat-primary-lite-background margin-remove"  [wsUtilsDefaultThumbnail]="defaultThumbnail"
-                                      [alt]="widgetData?.content?.title" />
+<ng-container *ngIf="!isCardLoading">
+    <mat-card class="channels-card card-channels-container mr-5 padding-remove cursor-pointer" [ngStyle]="{'background': widgetData?.content?.bgColor}">
+        <div class="display-contents">
+            <ng-container *ngIf="widgetData?.content">
+                <a (click)="redirectTo(widgetData?.content);$event.stopPropagation();">
+                    <ng-container>
+                        <mat-card-content class="min-top">
+                            <div class="flex flex-col h-full">
+                                <div class="image-container">
+                                    <ng-container *ngIf="widgetData?.content?.imgSource && widgetData?.content?.imgSource?.length ; else defaultImg">
+                                        <img mat-card-image [src]="widgetData?.content?.imgSource[0]" loading="lazy"
+                                        class="card-img ws-mat-primary-lite-background margin-remove"  [wsUtilsDefaultThumbnail]="defaultThumbnail"
+                                        [alt]="widgetData?.content?.title" />
                                     </ng-container>
                                     <ng-template #defaultImg>
-                                      <img mat-card-image [src]="defaultThumbnail" loading="lazy"
-                                      class="card-img ws-mat-primary-lite-background margin-remove"
-                                      [alt]="widgetData?.content?.title" />
+                                        <sb-uic-avatar-photo [randomColor]="true" [name]="widgetData?.content?.title"  size="m-side-rating">
+                                        </sb-uic-avatar-photo>
                                     </ng-template>
-                                  </ng-container>
-                            </div>
-                            <div class="title-container">
-                                <div class="flex   px-2">
-                                    <div [id]="'m-c-'+ widgetData?.content?.identifier"
-                                        class="flex-1 text-start  mat-subheading-2 title-text ws-mat-white-text">
-                                        {{ widgetData?.content?.title }}
+                                </div>
+                                <div class="title-container">
+                                    <div class="flex   px-2">
+                                        <div [id]="'m-c-'+ widgetData?.content?.identifier"
+                                            class="flex-1 text-start  mat-subheading-2 title-text ws-mat-white-text">
+                                            {{ widgetData?.content?.title }}
+                                        </div>
+                                    </div>
+                                    <div class="flex  px-2">
+                                        <div [id]="'m-c-'+ widgetData?.content?.identifier"
+                                            class="flex-1 text-start margin-remove  margin-top-xxs mat-subheading-2 title-text ws-mat-white-text">
+                                            {{ widgetData?.content?.children?.length}} Programs
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="flex  px-2">
-                                    <div [id]="'m-c-'+ widgetData?.content?.identifier"
-                                        class="flex-1 text-start margin-remove  margin-top-xxs mat-subheading-2 title-text ws-mat-white-text">
-                                        {{ widgetData?.content?.children?.length}} Programs
+                            </div>
+                        </mat-card-content>
+                    </ng-container>
+                </a>
+            </ng-container>
+        </div>
+    </mat-card>
+</ng-container>
+<ng-container *ngIf="isCardLoading">
+    <mat-card class="channels-card card-channels-container mr-5 padding-remove cursor-pointer" >
+        <div class="display-contents">
+            <ng-container >
+                <a >
+                    <ng-container>
+                        <mat-card-content class="min-top">
+                            <div class="flex flex-col h-full">
+                                <div class="image-container">
+                                    <ng-container >
+                                        <sb-uic-skeleton-loader [width]="'100%'" [height]="'100%'" class="w-full h-full" [bindingClass]="'flex rounded'"></sb-uic-skeleton-loader>
+                                    </ng-container>
+                                </div>
+                                <div class="title-container">
+                                    <div class="flex   px-2">
+                                        <div class="flex-1 text-start  mat-subheading-2 title-text ws-mat-white-text">
+                                            <sb-uic-skeleton-loader [width]="'100%'" [height]="'100%'" class="w-full h-full" [bindingClass]="'flex rounded'"></sb-uic-skeleton-loader>
+                                        </div>
+                                    </div>
+                                    <div class="flex  px-2">
+                                        <div class="flex-1 text-start margin-remove  margin-top-xxs mat-subheading-2 title-text ws-mat-white-text">
+                                              <sb-uic-skeleton-loader [width]="'120px'" [height]="'100%'" class="w-full h-full" [bindingClass]="'flex rounded'"></sb-uic-skeleton-loader>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </mat-card-content>
-                </ng-container>
-            </a>
-        </ng-container>
-    </div>
-</mat-card>
+                        </mat-card-content>
+                    </ng-container>
+                </a>
+            </ng-container>
+        </div>
+    </mat-card>
+</ng-container>

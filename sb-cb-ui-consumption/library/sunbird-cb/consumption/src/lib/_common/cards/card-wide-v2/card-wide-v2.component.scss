@@ -105,8 +105,8 @@ $secondary-color: #EF951E;
     }
   
     .course_logo_box {
-      width: 30px;
-      height: 30px;
+      width: 38px;
+      height: 38px;
       background: #fff;
       border-radius: 4px;
       box-sizing: border-box;
@@ -115,7 +115,7 @@ $secondary-color: #EF951E;
       img {
         height: 28px;
         width: 28px;
-        // padding: 5px;
+        padding: 5px;
         display: inline-block;
         object-fit: cover;
       }
@@ -184,6 +184,7 @@ $secondary-color: #EF951E;
    }
    .mat-text-box {
        padding: 12px;
+       padding-bottom: 11px;
        box-sizing: border-box;
        width: calc(100% - 315px);
   
@@ -399,4 +400,8 @@ $secondary-color: #EF951E;
   .min-width-763 {
     min-width: 763px;
     background-color: white;
+  }
+
+  .mb-0 {
+    margin-bottom: 0 !important;
   }

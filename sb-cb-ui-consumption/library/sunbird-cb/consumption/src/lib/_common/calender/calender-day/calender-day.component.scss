@@ -41,6 +41,9 @@
 .aliginCenter {
     align-items: center;
 }
+.range-width {
+    min-width: 234px;
+}
 .visit-link {
     cursor: pointer;
     align-items: center;
@@ -80,4 +83,5 @@
 .no-data {
     display: flex;
     align-items: center;
+    border-radius: 10px;
 }

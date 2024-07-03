@@ -1,0 +1,117 @@
+<ng-container *ngIf="!isCardLoading">
+<ng-container >
+	<mat-card class="card-assessment card-scheduled-assessment card-users-container  padding-remove cursor-pointer mr-4">
+	<a (click)="getRedirectUrlData(widgetData?.content); $event.stopPropagation()">
+		<div class="display-contents">
+			<ng-container *ngIf="widgetData">
+				<mat-card-content>
+					<div class="flex flex-col h-full">
+						<div class="flex flex-1 flex-row padding-s">
+							<div class="flex image-container">
+								<ng-container *ngIf="widgetData?.content?.posterImage">
+									<img mat-card-image class="margin-remove assess-img" [src]="widgetData?.content?.posterImage | pipePublicURL"
+										[alt]="widgetData?.content?.name">
+								</ng-container>
+								<ng-container *ngIf="!widgetData?.content?.posterImage">
+									<ng-template #defaultImg>
+										<img mat-card-image [src]="defaultThumbnail" loading="lazy"
+											class="card-wide-img ws-mat-primary-lite-background margin-remove assess-img"
+											[alt]="widgetData?.content?.name" />
+									</ng-template>
+								</ng-container>
+
+							</div>
+							<div class="flex title-container flex-col">
+								<div class="flex title-text mat-subheading-1">
+									{{ widgetData?.content?.name }}
+								</div>
+								<div class="flex margin-remove margin-top-s font-normal mat-caption sub-title-text">
+									<div class="course_logo_box">
+										<img [src]="widgetData?.content?.creatorLogo | pipePublicURL " class="source-icon"
+											[wsUtilsDefaultThumbnail]="defaultSLogo"
+											[alt]="(widgetData?.content?.sourceName + '_' + widgetData?.content?.identifier)" />
+									</div>
+									<span class="sub-title-text">
+										{{ (widgetData?.content?.organisation && widgetData?.content?.organisation[0]) ?
+										widgetData?.content?.organisation[0] : 'Karmayogi Bharat' }}
+									</span>
+								</div>
+							</div>
+						</div>
+						<span class="start-span">Assessment starts in </span>
+						<mat-card-footer class="assessment-card-footer  padding-m">
+							<div class="flex flex-1 items-center justify-center col-row margin-top-m">
+								<div class="flex margin-right-m">
+									<span *ngIf="daysPending"> {{ startCountdown(widgetData?.content?.batch?.startDate) }}<div id="demo"></div> </span>
+									<span *ngIf="!daysPending" class="start-btn"> Start Assessment
+									</span>
+								</div>
+								<div class="flex">
+									<span class="time-span flex items-center justify-center">{{widgetData?.content?.batch?.startDate | date: 'd MMM, y' }}</span>
+								</div>
+							</div>
+						</mat-card-footer>
+					</div>
+				</mat-card-content>
+			</ng-container>
+		</div>
+	</a>
+</mat-card>
+</ng-container>
+</ng-container>
+
+
+
+<ng-container *ngIf="isCardLoading">
+	<ng-container  [ngTemplateOutlet]="skeltonLoader"></ng-container>
+</ng-container>
+
+<ng-template #skeltonLoader>
+
+	<mat-card class="card-assessment card-scheduled-assessment card-users-container  padding-remove cursor-pointer mr-4">
+		<a>
+			<div class="display-contents">
+				<ng-container>
+					<mat-card-content>
+						<div class="flex flex-col h-full">
+							<div class="flex flex-1 flex-row padding-s">
+								<div class="flex image-container">
+									<ng-container>
+										<sb-uic-skeleton-loader [width]="'300px'" [height]="'155px'"
+											></sb-uic-skeleton-loader>
+									</ng-container>
+
+								</div>
+								<div class="flex title-container flex-col">
+									<div class="flex">
+										<sb-uic-skeleton-loader [width]="'100px'" [height]="'16px'"
+											[bindingClass]="'flex rounded br-8'"></sb-uic-skeleton-loader>
+									</div>
+									<div class="flex margin-remove margin-top-l font-normal">
+										<sb-uic-skeleton-loader [width]="'100px'" [height]="'16px'"
+											[bindingClass]="'flex rounded br-8'"></sb-uic-skeleton-loader>
+									</div>
+								</div>
+							</div>
+							<!-- <span class="text-center"><sb-uic-skeleton-loader [width]="'90px'" [height]="'16px'"
+									[bindingClass]="'flex rounded br-8'"></sb-uic-skeleton-loader> </span> -->
+							<mat-card-footer
+								class="assessment-card-footer col-row padding-l">
+								<div class="flex flex-1 items-center justify-center col-row margin-top-m">
+								<div class="flex margin-right-m">
+									<sb-uic-skeleton-loader [width]="'100px'" [height]="'16px'"
+										[bindingClass]="'flex rounded br-8'"></sb-uic-skeleton-loader>
+								</div>
+								<div class="flex">
+									<sb-uic-skeleton-loader [width]="'100px'" [height]="'16px'"
+										[bindingClass]="'flex rounded br-8'"></sb-uic-skeleton-loader>
+								</div>
+								</div>
+							</mat-card-footer>
+						</div>
+					</mat-card-content>
+				</ng-container>
+			</div>
+		</a>
+	</mat-card>
+</ng-template>

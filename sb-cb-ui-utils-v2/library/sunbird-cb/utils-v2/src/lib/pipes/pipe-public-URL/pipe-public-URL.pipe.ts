@@ -9,6 +9,7 @@ export class PipePublicURL implements PipeTransform {
     this.environment = environment
   }
   transform(value: string): any {
+    debugger
     const mainUrl = value && value.split('/content').pop() || ''
     const finalURL = `${this.environment.contentHost}/${this.environment.contentBucket}/content${mainUrl}`
     return value ? finalURL : ''

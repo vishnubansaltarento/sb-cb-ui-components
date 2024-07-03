@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { WidgetBaseComponent, NsWidgetResolver } from '@sunbird-cb/resolver-v2';
 import { NsCardContent } from '../../_models/card-content.model';
 import { UtilityService } from '@sunbird-cb/utils-v2';
-import { ConfigurationsService } from '../../_services/configurations.service';
 import { WidgetContentService } from '../../_services/widget-content.service';
 import { Router } from '@angular/router';
 
@@ -19,8 +18,9 @@ implements OnInit, NsWidgetResolver.IWidgetData<NsCardContent.ICard>  {
   isIntranetAllowedSettings = false
   cbPlanMapData: any
   cbPlanInterval: any
+  enrollInterval: any
+  enrollmentMapData: any
   constructor(private utilitySvc: UtilityService,
-    private configSvc: ConfigurationsService,
     private contSvc: WidgetContentService,
     public router: Router
   ) {
@@ -31,6 +31,11 @@ implements OnInit, NsWidgetResolver.IWidgetData<NsCardContent.ICard>  {
     this.cbPlanInterval = setInterval(() => {
       this.getCbPlanData()
     },                                1000)
+    
+    this.enrollInterval = setInterval(() => {
+      this.getEnrollmentData()
+    // tslint:disable-next-line
+    }, 1000)
   }
 
   get isLiveOrMarkForDeletion() {
@@ -51,12 +56,18 @@ implements OnInit, NsWidgetResolver.IWidgetData<NsCardContent.ICard>  {
     return false
   }
   async getRedirectUrlData(content: any){
-    let urlData = await this.contSvc.getResourseLink(content)
-    this.router.navigate(
-      [urlData.url],
-      {
-        queryParams: urlData.queryParams
-      })
+    if(content.externalId) {
+      this.router.navigate(
+        [`app/toc/ext/${content.contentId}`])
+    } else {
+      let urlData = await this.contSvc.getResourseLink(content)
+      this.router.navigate(
+        [urlData.url],
+        {
+          queryParams: urlData.queryParams
+        })
+    }
+    
   }
   getCbPlanData() {
     let cbpList: any={}
@@ -70,6 +81,13 @@ implements OnInit, NsWidgetResolver.IWidgetData<NsCardContent.ICard>  {
       this.cbPlanMapData = cbpList
       // this.karmaPointLoading = false
       clearInterval(this.cbPlanInterval)
+    }
+  }
+
+  getEnrollmentData() {
+    if (localStorage.getItem('enrollmentMapData')) {
+       this.enrollmentMapData = JSON.parse(localStorage.getItem('enrollmentMapData') || '{}')
+      clearInterval(this.enrollInterval)
     }
   }
 
