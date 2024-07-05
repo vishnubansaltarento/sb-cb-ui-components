@@ -87,3 +87,19 @@
   font: 700 14px/20px Lato-Bold;
   text-align: center;
 }
+
+
+
+.active {
+  .pill-name {
+      color: white !important;
+  }
+  background: #1B4CA1 !important;
+}
+
+::ng-deep .content-pill .mat-chip-selected{
+  background-color: #1B4CA1 !important;
+  .pill-name {
+    color: white !important;
+}
+}
