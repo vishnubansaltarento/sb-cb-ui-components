@@ -24,7 +24,9 @@ export class CardAssessmentComponent implements OnInit {
   defaultSLogo: any
   daysRemaining: number = 0;
   startDate:any
+  endDate:any
   daysPending:boolean = false
+  daysFinish:boolean = false
   private intervalId: any;
   constructor(private configSvc: ConfigurationsService, private contSvc: WidgetContentService,) { }
 
@@ -32,34 +34,34 @@ export class CardAssessmentComponent implements OnInit {
     const instanceConfig = this.configSvc.instanceConfig
     if (instanceConfig) {
       this.defaultThumbnail = instanceConfig.logos.defaultContent || ''
-      this.defaultSLogo = instanceConfig.logos.defaultSourceLogo || '/assets/instances/eagle/app_logos/KarmayogiBharat_Logo.svg'
-    } else {
-      this.defaultThumbnail = '/assets/instances/eagle/app_logos/default.png'
-      this.defaultSLogo =  '/assets/instances/eagle/app_logos/KarmayogiBharat_Logo.svg'
-    }
+      this.defaultSLogo = instanceConfig.logos.defaultSourceLogo || ''
+    } 
+
+    // console.log( this.daysPending, " this.daysPending===")
 
   }
 
-  updateStartDate(startDate: string | null):void {
-    this.startDate = startDate;     
-    this.startCountdown(this.startDate)
-  }
+  // updateStartDate(data: any ):void {
+  //   // this.startDate = startDate;     
+  //   this.startCountdown(data)
+  // }
 
-   startCountdown(date:any): void {
-    // Update the countdown immediately on start
-    this.updateCountdown(date);
+   startCountdown(data:any): void {
+    this.updateCountdown(data.startDate, data.endDate);
 
     // Update the countdown every second
     this.intervalId = setInterval(() => {
-      this.updateCountdown(date);
+      this.updateCountdown(data.startDate, data.endDate);
     }, 1000);
   }
 
   // Method to update the countdown values
-   updateCountdown(targetDate:any): void {
+   updateCountdown(startDate:any, endDate:any): void {
     const now = new Date().getTime(); // Current time in milliseconds
-    const targetTime = new Date(targetDate).getTime();
+    const targetTime = new Date(startDate).getTime();
+    const targetEndDate = new Date(endDate).getTime();
     const distance = targetTime - now; // Distance in milliseconds
+    const endDistance = now - targetEndDate
     if (distance > 0) {
       this.daysRemaining = Math.ceil(distance / (1000 * 60 * 60 * 24));
       this.daysPending = true
@@ -67,6 +69,13 @@ export class CardAssessmentComponent implements OnInit {
       this.daysRemaining = 0;
       this.daysPending = false
       this.clearTimer();
+    }
+
+    if(endDistance > 0) {
+      this.daysFinish =  true
+      this.clearTimer();
+    } else {
+      this.daysFinish = false
     }
   }
 
