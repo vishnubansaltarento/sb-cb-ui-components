@@ -52,7 +52,7 @@
                 <span>{{widgetData?.content?.cbPlanEndDate | date: 'd MMM, y'}}</span>
               </div>
             </ng-container>
-            <ng-container *ngIf="cbPlanMapData && cbPlanMapData[widgetData?.content?.contentId]">
+            <ng-container *ngIf="cbPlanMapData && cbPlanMapData[widgetData?.content?.contentId] &&  cbPlanMapData[widgetData?.content?.identifier]?.contentStatus < 2 ">
               <ng-container [ngTemplateOutlet]="cbpPlan" [ngTemplateOutletContext]="{data: {
                 cbpData: cbPlanMapData[widgetData?.content?.contentId]
               }}"></ng-container>

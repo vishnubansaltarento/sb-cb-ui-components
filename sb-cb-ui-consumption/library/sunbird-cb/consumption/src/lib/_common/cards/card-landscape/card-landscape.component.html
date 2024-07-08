@@ -31,7 +31,7 @@
                     {{widgetData?.content?.programDuration}} {{widgetData?.content?.programDuration === 1 ? 'day' : 'days'}}
                     </span>
                  </div>
-                <ng-container *ngIf="cbPlanMapData && cbPlanMapData[widgetData?.content?.identifier]">
+                <ng-container *ngIf="cbPlanMapData && cbPlanMapData[widgetData?.content?.identifier] &&  cbPlanMapData[widgetData?.content?.identifier]?.contentStatus < 2">
                   <ng-container [ngTemplateOutlet]="cbpPlan" [ngTemplateOutletContext]="{data: {
                     cbpData: cbPlanMapData[widgetData?.content?.identifier]
                   }}"></ng-container>
