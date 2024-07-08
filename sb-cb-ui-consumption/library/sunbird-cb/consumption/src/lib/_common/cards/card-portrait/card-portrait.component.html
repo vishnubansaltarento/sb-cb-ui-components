@@ -59,7 +59,7 @@
               <p *ngIf="widgetData?.content?.planDuration === acbpConstants?.OVERDUE" class="cbp-danger">Over due</p>
             </div>
           </ng-container> -->
-          <ng-container *ngIf="cbPlanMapData && cbPlanMapData[widgetData?.content?.identifier]">
+          <ng-container *ngIf="cbPlanMapData && cbPlanMapData[widgetData?.content?.identifier]  &&  cbPlanMapData[widgetData?.content?.identifier]?.contentStatus < 2">
             <ng-container [ngTemplateOutlet]="cbpPlan" [ngTemplateOutletContext]="{data: {
               cbpData: cbPlanMapData[widgetData?.content?.identifier]
             }}"></ng-container>

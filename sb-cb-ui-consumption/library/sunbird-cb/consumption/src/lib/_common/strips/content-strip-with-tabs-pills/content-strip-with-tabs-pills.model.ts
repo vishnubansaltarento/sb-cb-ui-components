@@ -3,7 +3,7 @@ import { NSSearch } from '../../../_models/widget-search.model';
 import { NsContent } from '../../../_models/widget-content.model';
 import { NsCardContent } from '../../../_models/card-content.model';
 
-export namespace NsContentStripWithTabs {
+export namespace NsContentStripWithTabsAndPills {
   export interface IContentStripMultiple {
     errorWidget?: NsWidgetResolver.IRenderConfigWithAnyData;
     loader?: boolean;
@@ -39,7 +39,7 @@ export namespace NsContentStripWithTabs {
         arrowsPlacement?: "bottom-right" | "bottom-center" | "bottom-left" | "middle-inline",
       };
     };
-    tabs?: NsContentStripWithTabs.IContentStripTab[] | undefined;
+    tabs?: NsContentStripWithTabsAndPills.IContentStripTab[] | undefined;
     titleDescription?: string;
     name?: string;
     mode?: string |'accordion';
