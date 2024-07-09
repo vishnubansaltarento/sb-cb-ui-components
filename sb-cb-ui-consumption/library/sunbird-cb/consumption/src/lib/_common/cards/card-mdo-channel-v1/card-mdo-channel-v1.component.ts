@@ -15,6 +15,7 @@ export class CardMdoChannelV1Component implements OnInit {
   @Input() widgetData!: NsContent.IContent;
   @Output() channelData = new EventEmitter<any>()
   @Output() emitTelemetry = new EventEmitter<any>()
+  @Input() isCardLoading: boolean = false
   defaultThumbnail: any
   sourceLogos: any
   defaultSLogo: any

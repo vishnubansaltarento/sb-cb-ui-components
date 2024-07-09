@@ -1481,18 +1481,26 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
     return new Promise<any>((resolve, reject) => {
       if (request && request) {
         this.contentSvc.getApiMethod(apiUrl).subscribe(results => {
-          const showViewMore = Boolean(
-            results.result.data && results.result.data.orgList.length > 5 && strip.stripConfig && strip.stripConfig.postCardForSearch,
-          );
-          const viewMoreUrl = showViewMore
-            ? {
-              path: strip.viewMoreUrl && strip.viewMoreUrl.path || '',
-            }
-            : null;
-          resolve({ results, viewMoreUrl });
-        }, (error: any) => {
-          this.processStrip(strip, [], 'error', calculateParentStatus, null);
-          reject(error);
+        let showViewMore: any
+        if(results.result.data){
+            showViewMore = Boolean(
+              results.result.data && results.result.data.orgList.length > 5 && strip.stripConfig && strip.stripConfig.postCardForSearch,
+              );
+        } else if(results.result.content){
+          let featuredProvider = JSON.parse(results.result.content.featuredProviders || '[]')
+          showViewMore = Boolean(
+            featuredProvider && featuredProvider.length > 5 && strip.stripConfig && strip.stripConfig.postCardForSearch,
+            );
+        }
+        const viewMoreUrl = showViewMore
+        ? {
+        path: strip.viewMoreUrl && strip.viewMoreUrl.path || '',
+        }
+        : null;
+        resolve({ results, viewMoreUrl });
+        },                                                   (error: any) => {
+        this.processStrip(strip, [], 'error', calculateParentStatus, null);
+        reject(error);
         },
         );
       }
@@ -1512,8 +1520,10 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
     if (apiUrl.indexOf('<bookmarkId>') >= 0) {
       formedUrl = apiUrl.replace('<bookmarkId>', this.environment.mdoChannelsBookmarkId)
     } else if (apiUrl.indexOf('<playlistKey>') >= 0 && apiUrl.indexOf('<orgID>') >= 0) {
-      formedUrl = apiUrl.replace('<playlistKey>', this.providerId + id)
-      formedUrl = formedUrl.replace('<orgID>', this.providerId)
+      formedUrl = apiUrl.replace('<playlistKey>', this.providerId + id) 
+      formedUrl = formedUrl.replace('<orgID>', this.providerId) 
+    } else if(apiUrl.indexOf('<doId>') >= 0) {
+      formedUrl = apiUrl.replace('<doId>', this.environment.providerDataKey) 
     }
     return formedUrl
   }
@@ -1647,17 +1657,27 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
       }
       try {
         const response = await this.getRequestMethod(strip, strip.request.playlistRead, strip.request.apiUrl, calculateParentStatus);
-
-        if (response && response.results.result.content) {
-          let content = response.results.result.content
-          this.processStrip(
-            strip,
-            this.transformAllContentsToWidgets(content, strip),
-            'done',
-            calculateParentStatus,
-            response,
-          );
-
+      
+        if (response && response.results.result.content) {  
+          let content  = response.results.result.content
+          if(strip.key === 'providers'){
+            let featuredProviders : any = JSON.parse(content.featuredProviders|| '[]')
+            this.processStrip(
+              strip,
+              this.transformAllContentsToWidgets(featuredProviders, strip),
+              'done',
+              calculateParentStatus,
+              response,
+            );
+          } else {
+            this.processStrip(
+              strip,
+              this.transformAllContentsToWidgets(content, strip),
+              'done',
+              calculateParentStatus,
+              response,
+            );
+          }
         } else {
           this.processStrip(strip, [], 'error', calculateParentStatus, null);
           this.emptyResponse.emit(true)
