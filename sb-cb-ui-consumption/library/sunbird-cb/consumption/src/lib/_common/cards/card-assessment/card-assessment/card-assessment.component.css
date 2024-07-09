@@ -124,3 +124,10 @@ span.start-span {
     height: 120px;
     display: flex;
  } */
+.big-text {
+	font-size: 14px;
+}
+.small-text {
+	font-size: 12px!important;
+	vertical-align: top;
+}

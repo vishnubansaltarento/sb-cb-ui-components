@@ -19,15 +19,18 @@ export class CardAssessmentComponent implements OnInit {
   @Input() isCardLoading: boolean = false
   stripData: any = []
   enrollList: any = []
-  activeResource: any =[]
+  activeResource: any = []
   defaultThumbnail: any
   defaultSLogo: any
   daysRemaining: number = 0;
-  startDate:any
-  endDate:any
-  daysPending:boolean = false
-  daysFinish:boolean = false
+  startDate: any
+  endDate: any
+  daysPending: boolean = false
+  daysFinish: boolean = false
   private intervalId: any;
+  days: number;
+  hours: number;
+  minutes: number;
   constructor(private configSvc: ConfigurationsService, private contSvc: WidgetContentService,) { }
 
   ngOnInit(): void {
@@ -35,7 +38,7 @@ export class CardAssessmentComponent implements OnInit {
     if (instanceConfig) {
       this.defaultThumbnail = instanceConfig.logos.defaultContent || ''
       this.defaultSLogo = instanceConfig.logos.defaultSourceLogo || ''
-    } 
+    }
 
     // console.log( this.daysPending, " this.daysPending===")
 
@@ -46,40 +49,38 @@ export class CardAssessmentComponent implements OnInit {
   //   this.startCountdown(data)
   // }
 
-   startCountdown(data:any): void {
-    this.updateCountdown(data.startDate, data.endDate);
+  startCountdown(data: any): void {
+    let startDate = data.startDate
+    let startTime = data.startTime
+    this.updateCountdown(startDate, startTime);
 
-    // Update the countdown every second
     this.intervalId = setInterval(() => {
-      this.updateCountdown(data.startDate, data.endDate);
+      this.updateCountdown(startDate, startTime);
     }, 1000);
   }
 
   // Method to update the countdown values
-   updateCountdown(startDate:any, endDate:any): void {
-    const now = new Date().getTime(); // Current time in milliseconds
-    const targetTime = new Date(startDate).getTime();
-    const targetEndDate = new Date(endDate).getTime();
-    const distance = targetTime - now; // Distance in milliseconds
-    const endDistance = now - targetEndDate
+  updateCountdown(startDate: any,  startTime:any): void {
+    const now = new Date().getTime(); 
+    const startDateTime = new Date(`${startDate}T${startTime}`)
+    const distance = startDateTime.getTime() - now; 
     if (distance > 0) {
-      this.daysRemaining = Math.ceil(distance / (1000 * 60 * 60 * 24));
       this.daysPending = true
+      // this.days = Math.ceil(distance / (1000 * 60 * 60 * 24));
+      // this.hours = Math.ceil(distance / (1000 * 60 * 60));
+      // this.minutes = Math.ceil((distance % (1000 * 60 * 60)) / (1000 * 60));
+      this.days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      this.hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      this.minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     } else {
       this.daysRemaining = 0;
       this.daysPending = false
       this.clearTimer();
     }
 
-    if(endDistance > 0) {
-      this.daysFinish =  true
-      this.clearTimer();
-    } else {
-      this.daysFinish = false
-    }
   }
 
-  // Method to clear the interval
+
   clearTimer(): void {
     clearInterval(this.intervalId);
   }
@@ -88,7 +89,7 @@ export class CardAssessmentComponent implements OnInit {
     this.clearTimer();
   }
 
-  getRedirectUrlData(contentData: any){
+  getRedirectUrlData(contentData: any) {
     // for telemetry
     if (this.widgetData && this.widgetData.context && this.widgetData.context.pageSection) {
       contentData['typeOfTelemetry'] = this.widgetData.context.pageSection
