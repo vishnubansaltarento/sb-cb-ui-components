@@ -125,9 +125,10 @@ span.start-span {
     display: flex;
  } */
 .big-text {
-	font-size: 14px;
+	font-size: 16px;
 }
 .small-text {
 	font-size: 12px!important;
 	vertical-align: top;
+	margin-left: 4px;
 }

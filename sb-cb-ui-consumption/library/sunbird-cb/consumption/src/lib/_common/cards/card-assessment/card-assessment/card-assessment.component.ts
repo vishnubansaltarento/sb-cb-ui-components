@@ -40,30 +40,22 @@ export class CardAssessmentComponent implements OnInit {
       this.defaultSLogo = instanceConfig.logos.defaultSourceLogo || ''
     }
 
-    // console.log( this.daysPending, " this.daysPending===")
-
   }
-
-  // updateStartDate(data: any ):void {
-  //   // this.startDate = startDate;     
-  //   this.startCountdown(data)
-  // }
 
   startCountdown(data: any): void {
     let startDate = data.startDate
-    let startTime = data.startTime
-    this.updateCountdown(startDate, startTime);
+    this.updateCountdown(startDate);
 
     this.intervalId = setInterval(() => {
-      this.updateCountdown(startDate, startTime);
+      this.updateCountdown(startDate);
     }, 1000);
   }
 
   // Method to update the countdown values
-  updateCountdown(startDate: any,  startTime:any): void {
+  updateCountdown(startDate: any): void {
     const now = new Date().getTime(); 
-    const startDateTime = new Date(`${startDate}T${startTime}`)
-    const distance = startDateTime.getTime() - now; 
+    let startingDate = new Date(startDate).getTime()
+    const distance = startingDate - now; 
     if (distance > 0) {
       this.daysPending = true
       // this.days = Math.ceil(distance / (1000 * 60 * 60 * 24));
@@ -79,7 +71,6 @@ export class CardAssessmentComponent implements OnInit {
     }
 
   }
-
 
   clearTimer(): void {
     clearInterval(this.intervalId);
