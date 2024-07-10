@@ -607,10 +607,11 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
       let now = new Date().getTime()
       content.forEach((data: any) => {
         if (this.enrollmentMapData[data.identifier]) {
-          if(this.enrollmentMapData[data.identifier].batch) {
+          if(this.enrollmentMapData[data.identifier].status !== 2 && this.enrollmentMapData[data.identifier].batch) {
             const enrollData = this.enrollmentMapData[data.identifier].batch
-            let endDateTime = new Date(`${(enrollData.endDate)}T${enrollData.endTime}`)
-            let timeDuration = endDateTime.getTime() - now
+            let endDate:any = new Date(enrollData.endDate).getTime()
+            // let endDate:any = '2024-07-7T00:00:00.000Z'
+            let timeDuration = endDate - now
             if(timeDuration > 0 ) {
               data['batch'] = this.enrollmentMapData[data.identifier].batch
               data['completionPercentage'] = this.enrollmentMapData[data.identifier].completionPercentage
