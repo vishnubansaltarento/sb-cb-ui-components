@@ -9,7 +9,6 @@ import { AnnouncementsModule } from './_common/announcements/announcements.modul
 
 
 
-
 @NgModule({
   declarations: [ConsumptionComponent],
   imports: [

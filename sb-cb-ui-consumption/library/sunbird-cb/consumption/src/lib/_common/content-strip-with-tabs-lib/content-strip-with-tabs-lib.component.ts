@@ -1045,6 +1045,8 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
           this.getTabDataByNewReqSearchV6(currentStrip, tabEvent.index, currentTabFromMap, true);
         } else if (currentTabFromMap.request.trendingSearch) {
           this.getTabDataByNewReqTrending(currentStrip, tabEvent.index, currentTabFromMap, true);
+        } else if (currentTabFromMap.request.topContent) {
+          this.getTabDataByNewReqTopContent(currentStrip, tabEvent.index, currentTabFromMap, true);
         }
         if (stripMap && stripMap.tabs && stripMap.tabs[tabEvent.index]) {
           stripMap.tabs[tabEvent.index].tabLoading = false;
@@ -1338,31 +1340,47 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
         originalFilters = strip.request.topContent.request.filters;
         strip.request.topContent.request.filters = this.postMethodFilters(strip.request.topContent.request.filters);
       }
-      try {
-        const response = await this.postRequestMethod(strip, strip.request.topContent, strip.request.apiUrl, calculateParentStatus);
-        // console.log('calling  after - response, ', response)
-        if (response && response.results) {
-          // console.log('calling  after-- ')
-          if (response.results.result.content && response.results.result.content.length) {
-            this.processStrip(
-              strip,
-              this.transformContentsToWidgets(response.results.result.content, strip),
-              'done',
-              calculateParentStatus,
-              response.viewMoreUrl,
-            );
+      debugger
+      if (strip.tabs && strip.tabs.length) {
+        // TODO: Have to extract requestRequired to outer level of tabs config
+        const firstTab = strip.tabs[0];
+        if (firstTab.requestRequired) {
+          if (this.stripsResultDataMap[strip.key] && this.stripsResultDataMap[strip.key].tabs) {
+            const allTabs = this.stripsResultDataMap[strip.key].tabs;
+            const currentTabFromMap = (allTabs && allTabs.length && allTabs[0]) as NsContentStripWithTabs.IContentStripTab;
+
+            this.getTabDataByNewReqTopContent(strip, 0, currentTabFromMap, calculateParentStatus);
+          }
+        }
+
+      } else {
+        try {
+          debugger
+          const response = await this.postRequestMethod(strip, strip.request.topContent, strip.request.apiUrl, calculateParentStatus);
+          // console.log('calling  after - response, ', response)
+          if (response && response.results) {
+            // console.log('calling  after-- ')
+            if (response.results.result.content && response.results.result.content.length) {
+              this.processStrip(
+                strip,
+                this.transformContentsToWidgets(response.results.result.content, strip),
+                'done',
+                calculateParentStatus,
+                response.viewMoreUrl,
+              );
+            } else {
+              this.processStrip(strip, [], 'error', calculateParentStatus, null);
+              this.emptyResponse.emit(true)
+            }
+
           } else {
             this.processStrip(strip, [], 'error', calculateParentStatus, null);
             this.emptyResponse.emit(true)
           }
-
-        } else {
-          this.processStrip(strip, [], 'error', calculateParentStatus, null);
-          this.emptyResponse.emit(true)
+        } catch (error) {
+          // Handle errors
+          // console.error('Error:', error);
         }
-      } catch (error) {
-        // Handle errors
-        // console.error('Error:', error);
       }
     }
   }
@@ -1404,6 +1422,53 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
         // Handle errors
         // console.error('Error:', error);
       }
+    }
+  }
+
+
+  async getTabDataByNewReqTopContent(
+    strip: NsContentStripWithTabs.IContentStripUnit,
+    tabIndex: number,
+    currentTab: NsContentStripWithTabs.IContentStripTab,
+    calculateParentStatus: boolean
+  ) {
+    if (currentTab.request &&
+      currentTab.request.topContent &&
+      currentTab.request.topContent.request &&
+      currentTab.request.topContent.request.filters) {
+        currentTab.request.topContent.request.filters = this.postMethodFilters(currentTab.request.topContent.request.filters);
+    }
+    try {
+      // const response = await this.searchV6Request(strip, currentTab.request, calculateParentStatus);
+      const response = await this.postRequestMethod(strip, currentTab.request.topContent, currentTab.request.apiUrl, calculateParentStatus);
+      if (response.results && response.results.result) {
+        const widgets = this.transformContentsToWidgets(response.results.result.content, strip);
+        let tabResults: any[] = [];
+        if (this.stripsResultDataMap[strip.key] && this.stripsResultDataMap[strip.key].tabs) {
+          const allTabs = this.stripsResultDataMap[strip.key].tabs;
+          if (allTabs && allTabs.length && allTabs[tabIndex]) {
+            allTabs[tabIndex] = {
+              ...allTabs[tabIndex],
+              widgets,
+              fetchTabStatus: 'done',
+            };
+            tabResults = allTabs;
+          }
+        }
+        this.processStrip(
+          strip,
+          widgets,
+          'done',
+          calculateParentStatus,
+          response.viewMoreUrl,
+          tabResults // tabResults as widgets
+        );
+      } else {
+        this.processStrip(strip, [], 'error', calculateParentStatus, null);
+      }
+    } catch (error) {
+      // Handle errors
+      // console.error('Error:', error);
     }
   }
 
@@ -1512,7 +1577,7 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
     if (filters.organisation &&
       filters.organisation.indexOf('<orgID>') >= 0
     ) {
-      filters.organisation = this.providerId
+      filters.organisation = filters.organisation.replace('<orgID>', this.providerId)
     }
     return filters
   }

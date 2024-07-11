@@ -17,7 +17,7 @@
                   " [id]="key" [ngClass]="!widgetData?.isChannelStrip ? margin-bottom-custom : margin-bottom-xs">
           <div [ngClass]="{ pad: stripsResultDataMap[key]?.stripBackground }"
             [ngStyle]="{ 'background-color': stripsResultDataMap[key]?.stripBackground }">
-            <div class="flex flex-col pl-4 pr-4 md:pr-0 md:pl-0 " [ngClass]="
+            <div class="flex flex-col pl-4 pr-4 md:pr-0 md:pl-0 min-height-40 " [ngClass]="
                         !widgetData?.isChannelStrip
                           ? ''
                           : stripsResultDataMap[key]?.stripTitle
@@ -77,7 +77,7 @@
             <!-- IF no errors then proceed to show tabs or non tabs strip -->
             <ng-container *ngIf="!stripsResultDataMap[key]?.showOnNoData && !stripsResultDataMap[key]?.showOnError">
               <ng-container *ngIf="stripsResultDataMap[key].tabs && stripsResultDataMap[key].tabs.length">
-                <mat-tab-group animationDuration="0ms" [selectedIndex]="getSelectedIndex(stripsResultDataMap[key], key)"
+                <mat-tab-group  animationDuration="0ms" [selectedIndex]="getSelectedIndex(stripsResultDataMap[key], key)"
                 class="mat-tab-labels w-full strips-tabgroup" dynamicHeight
                   (selectedTabChange)="tabClicked($event, stripsResultDataMap[key], key)">
                   <mat-tab label="{{tab?.label}}" *ngFor="let tab of stripsResultDataMap[key].tabs; let last = last;">

@@ -87,3 +87,39 @@
   font: 700 14px/20px Lato-Bold;
   text-align: center;
 }
+
+
+::ng-deep {
+  .parent-tab-group-1 {
+    .mat-tab-header {
+      border-bottom: unset !important;
+    }
+    .mat-tab-label {
+      border: 1px solid #0000003D !important;
+      padding: 2px 8px;
+      margin-right: 8px !important;
+      min-width: unset !important;
+      border-radius: 12px;
+      height: unset !important;
+    }
+     .mat-ink-bar {
+      background-color: transparent !important;
+      visibility: hidden !important;
+    }
+    .mat-tab-label-active{
+      // border: 1px solid #0000003D;
+      // padding: 12px 8px;
+      // gap: 8px;
+      // border-radius: 12px;
+      color: white !important;
+      background-color: #1b4ca1!important;
+    }
+    .mat-tab-body {
+      padding: 0 !important;
+    }
+  } 
+}
+
+.min-height-40{
+  min-height: 40px;
+}
