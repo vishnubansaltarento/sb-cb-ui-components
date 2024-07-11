@@ -46,38 +46,34 @@ export class CardAssessmentComponent implements OnInit {
     let startDate = data.startDate
     this.updateCountdown(startDate);
 
-    this.intervalId = setInterval(() => {
-      this.updateCountdown(startDate);
-    }, 1000);
+    // this.intervalId = setInterval(() => {
+    //   this.updateCountdown(startDate);
+    // }, 1000);
   }
 
   // Method to update the countdown values
   updateCountdown(startDate: any): void {
-    const now = new Date().getTime(); 
-    let startingDate = new Date(startDate).getTime()
+    let now = new Date().getTime()
+    let startingDate: any = new Date(startDate)
+    startingDate.setHours(startingDate.getHours() - 5);
+    startingDate.setMinutes(startingDate.getMinutes() - 30);
+    startingDate = startingDate.getTime()
+
     const distance = startingDate - now; 
     if (distance > 0) {
       this.daysPending = true
-      // this.days = Math.ceil(distance / (1000 * 60 * 60 * 24));
-      // this.hours = Math.ceil(distance / (1000 * 60 * 60));
-      // this.minutes = Math.ceil((distance % (1000 * 60 * 60)) / (1000 * 60));
       this.days = Math.floor(distance / (1000 * 60 * 60 * 24));
       this.hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       this.minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     } else {
       this.daysRemaining = 0;
       this.daysPending = false
-      this.clearTimer();
     }
 
   }
 
-  clearTimer(): void {
-    clearInterval(this.intervalId);
-  }
 
   ngOnDestroy(): void {
-    this.clearTimer();
   }
 
   getRedirectUrlData(contentData: any) {

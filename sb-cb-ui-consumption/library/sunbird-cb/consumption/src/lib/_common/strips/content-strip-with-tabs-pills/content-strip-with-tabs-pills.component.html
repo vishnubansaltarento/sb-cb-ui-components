@@ -47,14 +47,16 @@
                 </a>
                 <span class="spacer"></span>
                 <!-- viewAll start-->
-                <!-- <div *ngIf="checkCondition(widgetData , stripsResultDataMap[key])"
-                  class="ml-4 pl-2 view-more ws-mat-default-text">
-                  <a class="flex ws-mat-default-text items-center justify-center mat-body-1 cursor-pointer" 
-                    (click)="raiseTelemetry(stripsResultDataMap[key]);redirectViewAll(stripsResultDataMap[key], stripsResultDataMap[key]?.viewMoreUrl?.path, stripsResultDataMap[key]?.viewMoreUrl?.queryParams )">
-                    <span i18n class="ws-mat-default-text">{{translateLabels(widgetData.strips[0].viewMoreUrl.viewMoreText,'home')  || 'See all'}}</span>
-                    <mat-icon class="ws-mat-default-text mat-icon notranslate material-icons mat-icon-no-color" color="accent">navigate_next</mat-icon>
-                  </a>
-                </div> -->
+                <div *ngIf="checkCondition(widgetData , stripsResultDataMap[key])" class="block md:hidden">
+                  <div 
+                    class="ml-4 pl-2 view-more ws-mat-default-text  ">
+                    <a class="flex ws-mat-default-text items-center justify-center mat-body-1 cursor-pointer" 
+                      (click)="raiseTelemetry(stripsResultDataMap[key]);redirectViewAll(stripsResultDataMap[key], stripsResultDataMap[key]?.viewMoreUrl?.path, stripsResultDataMap[key]?.viewMoreUrl?.queryParams )">
+                      <span i18n class="ws-mat-default-text">{{translateLabels(widgetData.strips[0].viewMoreUrl.viewMoreText,'home')  || 'See all'}}</span>
+                      <mat-icon class="ws-mat-default-text mat-icon notranslate material-icons mat-icon-no-color" color="accent">navigate_next</mat-icon>
+                    </a>
+                  </div>
+                </div>
                 <!-- viewAll end-->
               </div>
               <button mat-icon-button (click)="setHiddenForStrip(key)" *ngIf="stripsResultDataMap[key]?.canHideStrip">
@@ -86,7 +88,7 @@
                     </ng-template>
 
                     <div class="wfull" *ngIf="tab?.pillsData && tab?.pillsData?.length">
-                      <div class="flex justify-between">
+                      <div class="flex justify-between item-center">
                         <div>
                           <ng-container >
                             <mat-chip-list  class="content-pill" aria-label="Fish selection">
@@ -98,14 +100,16 @@
                           </ng-container>
                         </div>
                          <!-- viewAll start-->
-                            <div *ngIf="checkCondition(widgetData , stripsResultDataMap[key])"
-                              class="ml-4 pl-2 view-more ws-mat-default-text">
+                          <div *ngIf="checkCondition(widgetData , stripsResultDataMap[key])" class=" hidden md:block">
+                            <div  class="ml-4 pl-2 view-more ws-mat-default-text">
                               <a class="flex ws-mat-default-text items-center justify-center mat-body-1 cursor-pointer" 
                                 (click)="raiseTelemetry(stripsResultDataMap[key]);redirectViewAll(stripsResultDataMap[key], stripsResultDataMap[key]?.viewMoreUrl?.path, stripsResultDataMap[key]?.viewMoreUrl?.queryParams )">
                                 <span i18n class="ws-mat-default-text">{{translateLabels(widgetData.strips[0].viewMoreUrl.viewMoreText,'home')  || 'See all'}}</span>
                                 <mat-icon class="ws-mat-default-text mat-icon notranslate material-icons mat-icon-no-color" color="accent">navigate_next</mat-icon>
                               </a>
                             </div>
+                          </div>
+                            
                           <!-- viewAll end-->
                       </div>
                       <div *ngIf="stripsResultDataMap && stripsResultDataMap[key]?.showOnLoader ||
