@@ -49,6 +49,7 @@ export class ConfigurationsService {
   userProfileV2: NsUser.IUserProfile | null = null
   // created to store complete user details sent by pid
   unMappedUser: any
+  orgReadData: any
   isAuthenticated = false
   isNewUser = false
   isActive = true
@@ -80,4 +81,11 @@ export class ConfigurationsService {
     color: 'primary',
   }
   primaryNavBarConfig: NsInstanceConfig.IPrimaryNavbarConfig | null = null
+
+  private updateOrgReadData: BehaviorSubject<string> = new BehaviorSubject('')
+  updateOrgReadDataObservable = this.updateOrgReadData.asObservable()
+
+  updateOrgData(id: string) {
+      this.updateOrgReadData.next(id)
+  }
 }
