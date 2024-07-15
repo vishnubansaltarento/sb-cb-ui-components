@@ -17,6 +17,37 @@
     </div>
 </div>
 
+<div class="w-full" *ngIf="layoutType === 'multipleRows-V2' && !isDataLoading">
+    <div *ngFor="let obj of objectData; let i = index">
+        <div class="flex flex-row gap-4 {{(i+1 === objectData.length ? '' : 'pb-5')}}">
+            <div class="v2-icons-div">
+                <div class="v2-icon-contaier"
+                    [style.background]="obj?.iconBackgroupColor"
+                    [style.borderColor]="obj?.valueColor">
+                    <img class="v2-objIcon" [src]="obj.icon" />
+                </div>
+            </div>
+            <div class="v2-content-div">
+                <div class="flex flex-col">
+                    <div class="v2-value" [style.color]="obj?.valueColor" *ngIf="!(obj && obj.value)">0</div>
+                    <div class="v2-value" [style.color]="obj?.valueColor">
+                        {{obj.value | number: obj.value % 1 === 0 ? '1.0-0' : '1.1-2'}}
+                    </div>
+                    <div class="v2-label" [style.color]="obj?.labelColor">
+                        {{obj?.label}}
+                    </div>
+                    <div class="flex flex-row dot-container" *ngIf="i+1 !== objectData.length">
+                        <div class="v2-dot"
+                            [style.background]="obj?.valueColor"
+                            [style.borderColor]="obj?.labelColor"></div>
+                        <div class="v2-border" [style.background]="obj?.labelColor"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="w-full" *ngIf="layoutType === 'singleRow' && !isDataLoading">
     <div class="flex gap-4">
         <div *ngFor="let obj of objectData" class="flex-container">
@@ -83,6 +114,33 @@
 </div>
 
 <!-- skeleton  loaders -->
+
+<ng-container>
+    <div class="w-full metrics-web" *ngIf="layoutType === 'multipleRows-V2' && isDataLoading">
+        <div *ngFor="let obj of [1,2,3,4]l let i = index">
+            <div class="flex flex-row gap-4 {{(i+1 === objectData.length ? '' : 'pb-5')}}">
+                <div class="v2-icons-div">
+                    <div class="v2-icon-contaier">
+                        <sb-uic-skeleton-loader [bindingClass]="'flex rounded objIcon'" [width]="'55px'"
+                        [height]="'55px'"></sb-uic-skeleton-loader>
+                    </div>
+                </div>
+                <div class="v2-content-div">
+                    <div class="flex flex-col">
+                        <div class="v2-value" [style.color]="obj?.valueColor">
+                            <sb-uic-skeleton-loader [bindingClass]="'flex rounded mb-1'" [width]="'100px'"
+                        [height]="'24px'"></sb-uic-skeleton-loader>
+                        </div>
+                        <div class="v2-label" [style.color]="obj?.labelColor">
+                            <sb-uic-skeleton-loader [bindingClass]="'flex rounded mb-1'" [width]="'100px'"
+                        [height]="'16px'"></sb-uic-skeleton-loader>
+                        </div>
+                    </div>
+                </div>
+            </div>        
+        </div>
+    </div>
+</ng-container>
 
 <ng-container>
     <div class="w-full metrics-web" *ngIf="layoutType === 'multipleRows' && isDataLoading">

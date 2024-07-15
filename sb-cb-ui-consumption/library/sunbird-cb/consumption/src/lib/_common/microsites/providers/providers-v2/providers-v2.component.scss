@@ -146,6 +146,25 @@
 .infra-box-review {
     width: 100%;
 }
+
+.infra-title-v2 {
+    font-family: Montserrat;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 29.26px;
+    text-align: left;
+    color: white;
+}
+
+.infra-title2-v2 {
+    font-family: Montserrat;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 29.26px;
+    text-align: left;
+    color: #EF951E;
+}
+
 .infra-title {
     font-family: Montserrat;
     font-size: 24px;
@@ -274,6 +293,29 @@
     }
     .infra-sec-desc {
         padding-top: 0;
+    }
+
+    .mob-container {
+        background-image: url('https://portal.karmayogiqa.nic.in/content-store/orgStore/0135071359030722569/1720693634596_MDOChannel_RightGraphic%202.svg');
+        background-position: bottom 0px right 0px;;
+        background-repeat: no-repeat;
+    }
+
+
+
+    .infra-title-v2 {
+        font-family: Montserrat;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 19.5px;
+        text-align: left;
+    }
+    .infra-title2-v2 {
+        font-family: Montserrat;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 19.5px;
+        text-align: left;
     }
 
     .infra-title {

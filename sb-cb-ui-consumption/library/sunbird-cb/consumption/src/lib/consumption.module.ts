@@ -23,7 +23,7 @@ import { TopLearnersModule } from './_common/top-learners/top-learners.module';
     CalenderModule,
     CommonStripModule,
     AnnouncementsModule,
-    TopLearnersModule
+    TopLearnersModule,
   ],
 })
 export class ConsumptionModule { }
