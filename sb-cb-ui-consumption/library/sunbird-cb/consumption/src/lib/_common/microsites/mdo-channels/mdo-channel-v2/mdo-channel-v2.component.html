@@ -12,6 +12,8 @@
                                 <ng-container *ngIf="column?.enabled" [ngSwitch]="column?.key">
                                     <ng-container *ngSwitchCase="'topSection'" [ngTemplateOutlet]="topSection"
                                         [ngTemplateOutletContext]="{data: column?.data}"></ng-container>
+                                    <ng-container *ngSwitchCase="'topLearners'" [ngTemplateOutlet]="topLearners"
+                                        [ngTemplateOutletContext]="{data: column?.data}"></ng-container>
                                     <ng-container *ngSwitchCase="'mainContent'" [ngTemplateOutlet]="mainContent"
                                         [ngTemplateOutletContext]="{data: column?.data}"></ng-container>
                                 </ng-container>
@@ -28,31 +30,37 @@
 <ng-template #topSection let-data="data">
     <!-- top section desktop layout -->
     <div class="hidden md:block">
-        <div class="flex  items-center justify-center" [ngStyle]="{'background': data.background}">
-            <div class="container">
-                <div class="grid grid-cols-12 gap-4 padding-top-l mb-6">
-                    <div class="col-span-12 md:col-span-6">
-                        <div class="flex-1 flex flex-col mr-4 ws-mat-black-text">
-                            <div class="flex items-center logo-square ">
-                                <img alt="Application Logo" class="logo-img" [src]="data?.logo">
-                            </div>
-                            <div class="mt-6 pt-6">
-                                <h1  class=" txt-ellipsis-2 break-words">{{data.title || channnelName}}</h1>
-                                <p class="mat-body-1">
-                                    {{data?.description | slice:0:descriptionMaxLength}}
-                                    <span *ngIf="data?.description?.length > descriptionMaxLength">...</span>
-                                </p>
+        <div class="web-banner-background">
+            <div class="flex sticky-logo-square">
+            </div>
+            <div class="flex  items-center justify-center">
+                <div class="container">
+                    <div class="grid grid-cols-12 gap-4 padding-top-l mb-10">
+                        <div class="col-span-12 md:col-span-6">
+                            <div class="flex-1 flex flex-col mr-4 ws-mat-black-text">
+                                <div class="">
+                                    <div class="flex items-center logo-square ">
+                                        <img alt="Application Logo" class="logo-img" [src]="data?.logo">
+                                    </div>
+                                    <h1  class=" txt-ellipsis-2 break-words pt-10"
+                                        [style.color]="data.titleColor">{{data.title || channnelName}}</h1>
+                                    <p class="mat-body-1" [style.color]="data.descriptionColor">
+                                        {{data?.description | slice:0:descriptionMaxLength}}
+                                        <span *ngIf="data?.description?.length > descriptionMaxLength">...</span>
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-span-12 md:col-span-6">
-                        <div class="slider slider-box" *ngIf="data.sliderData && data.sliderData.sliders">
-                            <sb-uic-sliders [widgetData]="data.sliderData.sliders" [styleData]="data.sliderData.styleData" ></sb-uic-sliders>
+                        <div class="col-span-12 md:col-span-6">
+                            <div class="slider slider-box" *ngIf="data.sliderData && data.sliderData.sliders">
+                                <sb-uic-sliders [widgetData]="data.sliderData.sliders" [styleData]="data.sliderData.styleData" ></sb-uic-sliders>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
     </div>
     <!-- top section m-site layout -->
     <div class="block md:hidden">
@@ -61,7 +69,7 @@
                 <sb-uic-sliders [widgetData]="data.sliderData.sliders" [styleData]="data.sliderData.styleData" ></sb-uic-sliders>
             </div>
         </div>
-        <div class="container px-4 flex flex-col">
+        <div class="container px-4 flex flex-col mob-container">
             <div class="mr-4 logo-box-container">
                 <div class="flex logo-box-square top mr-4">
                     <img alt="Application Logo" class="logo-img" [src]="data?.logo">
@@ -75,11 +83,6 @@
                 </p>
             </div>
         </div>
-    </div>
-    <div class="hidden md:block">
-        <ng-container>
-            <div class="flex items-center justify-center empty-div" [ngStyle]="{'background': data.background}"></div>    
-        </ng-container>
     </div>
     <div class="flex items-center justify-center">
         <div class="container metrics-section" >
@@ -145,7 +148,7 @@
                         [selectedIndex]="selectedIndex" (selectedTabChange)="selectedIndex = $event.index; tabClicked($event)">
                         <mat-tab label="Content" >
                             <ng-template mat-tab-label i18n>
-                                Content
+                                Learn
                             </ng-template>
                             <ng-container *ngIf="data.tabSection.contentTab.length === contentTabEmptyResponseCount">
                                 <div class="flex justify-center w-full">
@@ -163,7 +166,7 @@
                         </mat-tab>
                         <mat-tab label="Core Areas">
                             <ng-template mat-tab-label i18n>
-                                Core Areas
+                                Competency
                             </ng-template>
                             <div>
                                 <ng-container [ngTemplateOutlet]="columnSectionDisplay"
@@ -277,4 +280,16 @@
                 <h2 class="mat-h2" i18n="search route no result">{{'learnsearch.noResults' | translate}}</h2>
             </div>
         </div>
+</ng-template>
+
+<ng-template #topLearners let-data="data">
+    <div class="flex items-center justify-center">
+        <div class="container top-learners margin-bottom-l margin-top-l">
+            <sb-uic-top-learners
+                [objectData]="data"
+                [channnelName]="channnelName"
+                [channelId]="orgId">
+            </sb-uic-top-learners>
+        </div>
+    </div>
 </ng-template>
