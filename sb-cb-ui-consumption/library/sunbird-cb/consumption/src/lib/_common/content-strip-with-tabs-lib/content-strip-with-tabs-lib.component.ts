@@ -47,6 +47,7 @@ interface IStripUnitContentData {
     cerificateCardMargin?: boolean
   };
   stripConfig: any;
+  tabsType?: string;
   tabs?: NsContentStripWithTabs.IContentStripTab[] | undefined;
   stripName?: string;
   stripLogo?: string;
@@ -1340,7 +1341,6 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
         originalFilters = strip.request.topContent.request.filters;
         strip.request.topContent.request.filters = this.postMethodFilters(strip.request.topContent.request.filters);
       }
-      debugger
       if (strip.tabs && strip.tabs.length) {
         // TODO: Have to extract requestRequired to outer level of tabs config
         const firstTab = strip.tabs[0];
@@ -1355,7 +1355,6 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
 
       } else {
         try {
-          debugger
           const response = await this.postRequestMethod(strip, strip.request.topContent, strip.request.apiUrl, calculateParentStatus);
           // console.log('calling  after - response, ', response)
           if (response && response.results) {
@@ -1721,38 +1720,121 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
         strip.request.playlistRead.type) {
         strip.request.apiUrl = this.getFullUrl(strip.request.apiUrl, strip.request.playlistRead.type);
       }
-      try {
-        const response = await this.getRequestMethod(strip, strip.request.playlistRead, strip.request.apiUrl, calculateParentStatus);
-      
-        if (response && response.results.result.content) {  
-          let content  = response.results.result.content
-          if(strip.key === 'providers'){
-            let featuredProviders : any = JSON.parse(content.featuredProviders|| '[]')
-            this.processStrip(
-              strip,
-              this.transformAllContentsToWidgets(featuredProviders, strip),
-              'done',
-              calculateParentStatus,
-              response,
-            );
-          } else {
-            this.processStrip(
-              strip,
-              this.transformAllContentsToWidgets(content, strip),
-              'done',
-              calculateParentStatus,
-              response,
-            );
+      if (strip.tabs && strip.tabs.length) {
+        // TODO: Have to extract requestRequired to outer level of tabs config
+        const firstTab = strip.tabs[0];
+        if (firstTab.requestRequired) {
+          if (this.stripsResultDataMap[strip.key] && this.stripsResultDataMap[strip.key].tabs) {
+            const allTabs = this.stripsResultDataMap[strip.key].tabs;
+            const currentTabFromMap = (allTabs && allTabs.length && allTabs[0]) as NsContentStripWithTabs.IContentStripTab;
+
+            this.getTabDataByNewReqPlaylistReadContent(strip, 0, currentTabFromMap, calculateParentStatus);
           }
-        } else {
-          this.processStrip(strip, [], 'error', calculateParentStatus, null);
-          this.emptyResponse.emit(true)
         }
-      } catch (error) {
-        this.emptyResponse.emit(true)
-        // Handle errors
-        // console.error('Error:', error);
+
+      } else {
+        try {
+          const response = await this.getRequestMethod(strip, strip.request.playlistRead, strip.request.apiUrl, calculateParentStatus);
+        
+          if (response && response.results.result.content) {  
+            let content  = response.results.result.content
+            if(strip.key === 'providers'){
+              let featuredProviders : any = JSON.parse(content.featuredProviders|| '[]')
+              this.processStrip(
+                strip,
+                this.transformAllContentsToWidgets(featuredProviders, strip),
+                'done',
+                calculateParentStatus,
+                response,
+              );
+            } else {
+              this.processStrip(
+                strip,
+                this.transformAllContentsToWidgets(content, strip),
+                'done',
+                calculateParentStatus,
+                response,
+              );
+            }
+          } else {
+            this.processStrip(strip, [], 'error', calculateParentStatus, null);
+            this.emptyResponse.emit(true)
+          }
+        } catch (error) {
+          this.emptyResponse.emit(true)
+          // Handle errors
+          // console.error('Error:', error);
+        }
       }
+    }
+  }
+  async getTabDataByNewReqPlaylistReadContent(
+    strip: NsContentStripWithTabs.IContentStripUnit,
+    tabIndex: number,
+    currentTab: NsContentStripWithTabs.IContentStripTab,
+    calculateParentStatus: boolean
+  ) {
+    if (currentTab.request &&
+      strip.request.playlistRead &&
+      strip.request.playlistRead.type) {
+        currentTab.request.apiUrl = this.getFullUrl(currentTab.request.apiUrl, currentTab.request.playlistRead.type);
+    }
+    try {
+      const response = await this.getRequestMethod(strip, currentTab.request.playlistRead, currentTab.request.apiUrl, calculateParentStatus);
+    
+      // if (response && response.results.result.content) {  
+      //   let content  = response.results.result.content
+      //   if(strip.key === 'providers'){
+      //     let featuredProviders : any = JSON.parse(content.featuredProviders|| '[]')
+      //     this.processStrip(
+      //       strip,
+      //       this.transformAllContentsToWidgets(featuredProviders, strip),
+      //       'done',
+      //       calculateParentStatus,
+      //       response,
+      //     );
+      //   } else {
+      //     this.processStrip(
+      //       strip,
+      //       this.transformAllContentsToWidgets(content, strip),
+      //       'done',
+      //       calculateParentStatus,
+      //       response,
+      //     );
+      //   }
+      // } else {
+      //   this.processStrip(strip, [], 'error', calculateParentStatus, null);
+      //   this.emptyResponse.emit(true)
+      // }
+      if (response.results && response.results.result) {
+        debugger
+        const widgets = this.transformContentsToWidgets(response.results.result.content, strip);
+        let tabResults: any[] = [];
+        if (this.stripsResultDataMap[strip.key] && this.stripsResultDataMap[strip.key].tabs) {
+          const allTabs = this.stripsResultDataMap[strip.key].tabs;
+          if (allTabs && allTabs.length && allTabs[tabIndex]) {
+            allTabs[tabIndex] = {
+              ...allTabs[tabIndex],
+              widgets,
+              fetchTabStatus: 'done',
+            };
+            tabResults = allTabs;
+          }
+        }
+        this.processStrip(
+          strip,
+          widgets,
+          'done',
+          calculateParentStatus,
+          response.viewMoreUrl,
+          tabResults // tabResults as widgets
+        );
+      } else {
+        this.processStrip(strip, [], 'error', calculateParentStatus, null);
+      }
+    } catch (error) {
+      // Handle errors
+      // console.error('Error:', error);
     }
   }
 
