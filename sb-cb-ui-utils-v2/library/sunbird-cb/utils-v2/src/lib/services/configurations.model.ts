@@ -66,7 +66,8 @@ export namespace NsInstanceConfig {
     portalUrls: IPortalUrls | undefined
     positions: any
     websitelanguages: any[]
-    profileTimelyNudges: any
+    profileTimelyNudges: any,
+    npsCategory?: string
   }
   export interface IPortalUrls {
     igot: string,
