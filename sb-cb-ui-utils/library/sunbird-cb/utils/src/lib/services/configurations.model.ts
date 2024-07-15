@@ -60,7 +60,8 @@ export namespace NsInstanceConfig {
     sourceFieldsUserAutocomplete?: string[]
     forgotPasswordConfig?: IForgotPassword
     hubs: IHubs[]
-    courseContentPath?: string
+    courseContentPath?: string,
+    npsCategory?: string
   }
 
   export interface IForgotPassword {
