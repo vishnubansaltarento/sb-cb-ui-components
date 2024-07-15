@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { WidgetBaseComponent, NsWidgetResolver } from '@sunbird-cb/resolver-v2';
 import { NsCardContent } from '../../_models/card-content.model';
-import { UtilityService, ConfigurationsService } from '@sunbird-cb/utils-v2';
+import { UtilityService } from '@sunbird-cb/utils-v2';
 import { WidgetContentService } from '../../_services/widget-content.service';
 import { Router } from '@angular/router';
 
@@ -18,8 +18,9 @@ implements OnInit, NsWidgetResolver.IWidgetData<NsCardContent.ICard>  {
   isIntranetAllowedSettings = false
   cbPlanMapData: any
   cbPlanInterval: any
+  enrollInterval: any
+  enrollmentMapData: any
   constructor(private utilitySvc: UtilityService,
-    private configSvc: ConfigurationsService,
     private contSvc: WidgetContentService,
     public router: Router
   ) {
@@ -31,6 +32,10 @@ implements OnInit, NsWidgetResolver.IWidgetData<NsCardContent.ICard>  {
       this.getCbPlanData()
     },                                1000)
     
+    this.enrollInterval = setInterval(() => {
+      this.getEnrollmentData()
+    // tslint:disable-next-line
+    }, 1000)
   }
 
   get isLiveOrMarkForDeletion() {
@@ -51,18 +56,9 @@ implements OnInit, NsWidgetResolver.IWidgetData<NsCardContent.ICard>  {
     return false
   }
   async getRedirectUrlData(content: any){
-
-    const userProfile = this.configSvc.userProfile
     if(content.externalId) {
-      let extUrl: string = content.redirectUrl.replace('<username>',userProfile.userId)
-      // const url = this.router.serializeUrl(
-      //   this.router.createUrlTree([extUrl])
-      // );
       this.router.navigate(
         [`app/toc/ext/${content.contentId}`])
-      
-      // window.open(extUrl, '_blank');
-      // window.open(content.redirectUrl)
     } else {
       let urlData = await this.contSvc.getResourseLink(content)
       this.router.navigate(
@@ -85,6 +81,13 @@ implements OnInit, NsWidgetResolver.IWidgetData<NsCardContent.ICard>  {
       this.cbPlanMapData = cbpList
       // this.karmaPointLoading = false
       clearInterval(this.cbPlanInterval)
+    }
+  }
+
+  getEnrollmentData() {
+    if (localStorage.getItem('enrollmentMapData')) {
+       this.enrollmentMapData = JSON.parse(localStorage.getItem('enrollmentMapData') || '{}')
+      clearInterval(this.enrollInterval)
     }
   }
 

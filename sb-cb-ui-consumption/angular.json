@@ -37,11 +37,15 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "consumption",
   "schematics": {
     "@schematics/angular:component": {
       "styleext": "scss"
     }
+  },
+  "cli": {
+    "analytics": "ed11d5a4-411f-49e8-b228-59596e35616e"
   }
 }

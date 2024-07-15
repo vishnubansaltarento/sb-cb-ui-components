@@ -297,7 +297,8 @@ export namespace NsUser {
     profileUpdateCompletion?: number
     profileImageUrl?: string
     professionalDetails?: any
-    webPortalLang?: any
+    webPortalLang?: any,
+    departmentImg?: any
   }
 
   export interface INodebbUserProfile {

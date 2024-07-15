@@ -6,7 +6,7 @@ import moment from 'moment'
 })
 export class PipeDurationTransformPipe implements PipeTransform {
 
-  transform(data: number, type: 'time24' | 'hms' | 'hour' | 'hms2H' | 'hms2M'| 'day'): any {
+  transform(data: number, type?: 'time24' | 'hms' | 'hour' | 'hms2H' | 'hms2M' | 'day' | 'DAYS'): any {
     if (data <= 0) {
       return ''
     }
@@ -46,7 +46,8 @@ export class PipeDurationTransformPipe implements PipeTransform {
           return `${duration3.days()} day(s)`
         }
         return this.hmsCalculation(h, m, s, duration, type)
-
+      case 'DAYS': duration = `${data}d`
+        return duration
       default:
         return this.defaultDuration(h, m, s)
     }
