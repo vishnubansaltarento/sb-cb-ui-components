@@ -26,3 +26,4 @@ export * from './lib/_common/microsites/providers/providers.module'
 export * from './lib/_services/widget-content.service'
 
 export * from './lib/_services/common-methods.service'
+export * from './lib/_common/top-learners/top-learners.module'
