@@ -1,3 +1,54 @@
+@font-face {
+    font-family: 'poppins';
+    /* src: url('../../../assets/fonts/poppins/Poppins-Regular.ttf'); */
+    src: url(https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-400-normal.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-400-normal.woff) format('woff');
+  }
+.v2-icon-contaier {
+    height: 50px;
+    width: 50px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.v2-value {
+    font-family: "poppins";
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 24px;
+    text-align: left;
+    padding-bottom: 5px;
+    padding-left: 10px;
+}
+
+.v2-label {
+    font-family: "poppins";
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+    text-align: left;
+    padding-bottom: 5px;
+    padding-left: 10px
+}
+
+.dot-container {
+    align-items: center;
+}
+
+.v2-dot {
+    width: 9px;
+    height: 9px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+}
+
+.v2-border {
+    height: 1px;
+    width: 182px;
+}
+
 .white {
     color: white;
 }

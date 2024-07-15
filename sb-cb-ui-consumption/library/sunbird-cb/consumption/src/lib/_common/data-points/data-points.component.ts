@@ -15,6 +15,53 @@ export class DataPointsComponent implements OnInit {
   customArray: any[][] = []
   isDataLoading: boolean = false
 
+  data: any =  [
+      {
+          "linebreak": "true",
+          "background": "banner-metrics",
+          "icon": "https://portal.karmayogiqa.nic.in/content-store/orgStore/0135071359030722569/1721025178767_Group%202.svg",
+          "iconColor": "#FFFFFF",
+          "iconBackgroupColor": "#FFFFFF",
+          "label": "Courses Available",
+          "value": 32,
+          "labelColor": "#FFFFFF",
+          "valueColor": "#F3962F"
+      },
+      {
+          "linebreak": "true",
+          "background": "banner-metrics",
+          "icon": "https://portal.karmayogiqa.nic.in/content-store/orgStore/0135071359030722569/1721022370202_Group.png",
+          "iconColor": "#FFFFFF",
+          "iconBackgroupColor": "#FFFFFF",
+          "label": "Course Enrolments",
+          "value": 2300,
+          "labelColor": "#FFFFFF",
+          "valueColor": "#F3962F"
+      },
+      {
+          "linebreak": "true",
+          "background": "banner-metrics",
+          "icon": "https://portal.karmayogiqa.nic.in/content-store/orgStore/0135071359030722569/1721025050947_Group%201.svg",
+          "iconColor": "#FFFFFF",
+          "iconBackgroupColor": "#FFFFFF",
+          "label": "Course Completions",
+          "value": 1300,
+          "labelColor": "#FFFFFF",
+          "valueColor": "#F3962F"
+      },
+      {
+          "linebreak": "true",
+          "background": "banner-metrics",
+          "icon": "https://portal.karmayogiqa.nic.in/content-store/orgStore/0135071359030722569/1721024266897_Group.svg",
+          "iconColor": "#FFFFFF",
+          "iconBackgroupColor": "#FFFFFF",
+          "label": "Average Course Rating",
+          "value": 4.1,
+          "labelColor": "#FFFFFF",
+          "valueColor": "#F3962F"
+      }
+  ]
+
   constructor(public insightSvc: InsiteDataService) {    
   }
 
@@ -64,6 +111,7 @@ export class DataPointsComponent implements OnInit {
         res.result.response.nudges.forEach((nudgeData: any) => {
           if(this.providerId && this.providerId === nudgeData.orgId) {
             this.objectData = nudgeData.data
+            this.objectData = this.data
           }
         })
       }
