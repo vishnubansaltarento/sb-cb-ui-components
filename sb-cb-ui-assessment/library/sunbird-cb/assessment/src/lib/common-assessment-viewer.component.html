@@ -1,0 +1,22 @@
+<!-- <router-outlet (activate)="getContentData($event)"></router-outlet> -->
+<div class="assessment-preview-dialog">
+  <button mat-icon-button class="close-button cursor-pointer" [mat-dialog-close]="true">
+    <mat-icon class="close-icon">close</mat-icon>
+  </button>
+  <div class="margin-m" *ngIf="!isFetchingDataComplete || !testData">
+    <div class="flex flex-center">
+      <mat-spinner></mat-spinner>
+    </div>
+  </div>
+  <ng-container *ngIf="testData && isFetchingDataComplete">
+    <!-- <viewer-practice-container *ngIf="isFetchingDataComplete" [isFetchingDataComplete]="isFetchingDataComplete"
+      [isErrorOccured]="isErrorOccured" [quizData]="testData" [forPreview]="forPreview" [quizJson]="quizJson"
+      [fromCreation]="true">
+    </viewer-practice-container> -->
+    <viewer-plugin-practice [identifier]="testData?.identifier" [artifactUrl]="testData?.artifactUrl"
+      [name]="testData?.name" [learningObjective]="testData?.name" [primaryCategory]="testData?.primaryCategory"
+      [complexityLevel]="testData?.difficultyLevel" [duration]="testData?.expectedDuration || 1" [quizJson]="quizJson"
+      [collectionId]="collectionId" [fromCreation]="fromCreation" [quizData]="testData">
+    </viewer-plugin-practice>
+  </ng-container>
+</div>
