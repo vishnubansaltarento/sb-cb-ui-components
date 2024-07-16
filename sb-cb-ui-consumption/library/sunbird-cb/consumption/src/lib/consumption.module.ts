@@ -7,11 +7,12 @@ import { CalenderModule } from './_common/calender/calender.module';
 import { CommonStripModule } from './_common/common-strip/common-strip.module';
 import { AnnouncementsModule } from './_common/announcements/announcements.module';
 import { TopLearnersModule } from './_common/top-learners/top-learners.module';
+import { CbpPlanModule } from './_common/cbp-plan/cbp-plan.module';
 
 
 
 @NgModule({
-  declarations: [ConsumptionComponent],
+  declarations: [ConsumptionComponent,],
   imports: [
     ContentStripWithTabsLibModule,
     SlidersLibModule
@@ -24,6 +25,7 @@ import { TopLearnersModule } from './_common/top-learners/top-learners.module';
     CommonStripModule,
     AnnouncementsModule,
     TopLearnersModule,
+    CbpPlanModule,
   ],
 })
 export class ConsumptionModule { }

@@ -1,0 +1,59 @@
+.cbp-logo {
+    align-items: center;
+    justify-content: center;
+}
+
+.cbp-heading {
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19.5px;
+    text-align: center;
+    padding: 10px 50px;
+    border-radius: 20px;
+    margin-top: -3px;
+}
+
+.cbp-list-container {
+    border: 1px solid #ccc;
+    padding: 40px 15px 15px 15px;
+    border-radius: 12px;
+    margin-top: -20px;
+}
+
+.cbp-list-item {
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    margin-bottom: 5px;
+}
+
+.cbp-item-title {
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+}
+.cbp-mob-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.download-sec {
+    align-items: center;
+    justify-content: end;
+
+}
+
+.cbp-download {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: white;
+    padding: 6px 8px;
+    border-radius: 47%;
+    border-radius: 20px;
+    cursor: pointer;
+}
