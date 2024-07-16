@@ -74,7 +74,7 @@
                         <span *ngIf="data?.description?.length > descriptionMaxLength">...</span>
                     </p>
                     <div class="block md:hidden overflow-y-auto mb-3">
-                        <sb-uic-data-points [providerId]="providerId" [fetchDataFromApi]="true"  [objectData]="data?.metrics?.data" [layoutType]="'singleRow'"></sb-uic-data-points>
+                        <sb-uic-data-points [providerId]="providerId" [fetchDataFromApi]="true"  [objectData]="data?.metrics?.data" [layoutType]="'singleRow-v2'"></sb-uic-data-points>
                     </div>
                     <button
                         (click)="raiseTelemetry(data?.contentButton?.title)"

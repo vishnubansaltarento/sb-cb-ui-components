@@ -1,7 +1,22 @@
 @font-face {
-    font-family: 'poppins';
-    /* src: url('../../../assets/fonts/poppins/Poppins-Regular.ttf'); */
-    src: url(https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-400-normal.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-400-normal.woff) format('woff');
+    font-family: 'Poppins';
+    /* src: url('../../../assets/fonts/poppins/Poppins-Regular.ttf'); */    
+    src: url('https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-400-normal.woff2') format('woff2'), url('https://cdn.jsdelivr.net/fontsource/fonts/poppins@latest/latin-400-normal.woff') format('woff');
+  }
+
+  .mob-image-container-v2 {
+    height: 28px;
+    width: 28px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid #FFFFFF;
+  }
+  .mobjIcon-v2 {
+    width: 18px;
+    height: 18px;
   }
 .v2-icon-contaier {
     height: 50px;
@@ -14,7 +29,7 @@
 }
 
 .v2-value {
-    font-family: "poppins";
+    font-family: "Poppins";
     font-size: 24px;
     font-weight: 600;
     line-height: 24px;
@@ -24,7 +39,7 @@
 }
 
 .v2-label {
-    font-family: "poppins";
+    font-family: "Poppins";
     font-size: 12px;
     font-weight: 400;
     line-height: 18px;
