@@ -917,6 +917,7 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
       disableTranslate: strip.disableTranslate,
       sliderConfig: strip.sliderConfig,
       tabs: tabsResults ? tabsResults : strip.tabs,
+      tabsType: strip.tabsType ? strip.tabsType : '',
       stripName: strip.name,
       mode: strip.mode,
       stripConfig: strip.stripConfig,
@@ -1048,6 +1049,8 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
           this.getTabDataByNewReqTrending(currentStrip, tabEvent.index, currentTabFromMap, true);
         } else if (currentTabFromMap.request.topContent) {
           this.getTabDataByNewReqTopContent(currentStrip, tabEvent.index, currentTabFromMap, true);
+        } else if (currentTabFromMap.request.playlistRead) {
+          this.getTabDataByNewReqPlaylistReadContent(currentStrip, tabEvent.index, currentTabFromMap, true);
         }
         if (stripMap && stripMap.tabs && stripMap.tabs[tabEvent.index]) {
           stripMap.tabs[tabEvent.index].tabLoading = false;
