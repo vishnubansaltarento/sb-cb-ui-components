@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { CbpPlanComponent } from './cbp-plan.component';
 import { SkeletonLoaderLibModule } from '../skeleton-loader-lib/skeleton-loader-lib.module';
 import { MatIconModule } from '@angular/material';
+import { SlidersNgContentLibModule } from '../sliders-ng-content/sliders-ng-content.module';
+import { ScrollableItemModule } from '../../_directives/scrollable-item/scrollable-item.module';
 
 
 
@@ -12,6 +14,8 @@ import { MatIconModule } from '@angular/material';
     CommonModule,
     SkeletonLoaderLibModule,
     MatIconModule,
+    ScrollableItemModule,
+    SlidersNgContentLibModule,
   ],
   exports: [CbpPlanComponent]
 })

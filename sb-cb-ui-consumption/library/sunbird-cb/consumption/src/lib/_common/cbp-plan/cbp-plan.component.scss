@@ -16,7 +16,7 @@
 
 .cbp-list-container {
     border: 1px solid #ccc;
-    padding: 40px 15px 15px 15px;
+    padding: 40px 25px 0px 25px;
     border-radius: 12px;
     margin-top: -20px;
 }
@@ -34,6 +34,8 @@
     font-weight: 400;
     line-height: 20px;
     text-align: left;
+    height: 48px;
+    padding-bottom: 10px;
 }
 .cbp-mob-icon {
     font-size: 20px;
@@ -56,4 +58,36 @@
     border-radius: 47%;
     border-radius: 20px;
     cursor: pointer;
+    font-family: Lato;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 20px;
+    text-align: left;
+
 }
+[hidden] {
+    display: none !important;
+}
+
+.cbp-list-container {
+    ::ng-deep.cbp-card{
+        min-height: 115px !important;
+        padding-bottom: 30px !important;
+    }
+    ::ng-deep.banner-title {
+        display: none;
+    }
+    ::ng-deep.prev {
+        font-size: 10px;
+        height: 20px !important;
+        width: 20px !important;
+        margin-left: -11px;
+    }
+    ::ng-deep.next {
+        font-size: 10px;
+        height: 20px !important;
+        width: 20px !important;
+        margin-right: -11px;
+    }
+}
+

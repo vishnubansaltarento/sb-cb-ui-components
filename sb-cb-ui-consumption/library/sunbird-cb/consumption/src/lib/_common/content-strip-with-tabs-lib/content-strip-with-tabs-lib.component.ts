@@ -1584,7 +1584,7 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
     return filters
   }
   getFullUrl(apiUrl: any, id: string) {
-    let formedUrl: string = ''
+    let formedUrl: string = apiUrl
     if (apiUrl.indexOf('<bookmarkId>') >= 0) {
       formedUrl = apiUrl.replace('<bookmarkId>', this.environment.mdoChannelsBookmarkId)
     } else if (apiUrl.indexOf('<playlistKey>') >= 0 && apiUrl.indexOf('<orgID>') >= 0) {
@@ -1784,7 +1784,6 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
     }
     try {
       const response = await this.getRequestMethod(strip, currentTab.request.playlistRead, currentTab.request.apiUrl, calculateParentStatus);
-    
       // if (response && response.results.result.content) {  
       //   let content  = response.results.result.content
       //   if(strip.key === 'providers'){
@@ -1810,7 +1809,6 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
       //   this.emptyResponse.emit(true)
       // }
       if (response.results && response.results.result) {
-        debugger
         const widgets = this.transformContentsToWidgets(response.results.result.content, strip);
         let tabResults: any[] = [];
         if (this.stripsResultDataMap[strip.key] && this.stripsResultDataMap[strip.key].tabs) {
@@ -1833,11 +1831,35 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
           tabResults // tabResults as widgets
         );
       } else {
-        this.processStrip(strip, [], 'error', calculateParentStatus, null);
+        let tabResults: any[] = [];
+        if (this.stripsResultDataMap[strip.key] && this.stripsResultDataMap[strip.key].tabs) {
+          const allTabs = this.stripsResultDataMap[strip.key].tabs;
+          if (allTabs && allTabs.length && allTabs[tabIndex]) {
+            allTabs[tabIndex] = {
+              ...allTabs[tabIndex],
+              fetchTabStatus: 'done',
+            };
+            tabResults = allTabs;
+          }
+        }
+        this.processStrip(strip, [], 'error', calculateParentStatus, null, tabResults);
       }
     } catch (error) {
-      // Handle errors
-      // console.error('Error:', error);
+      console.error('Error:', error)
+      let tabResults: any[] = [];
+        if (this.stripsResultDataMap[strip.key] && this.stripsResultDataMap[strip.key].tabs && this.stripsResultDataMap[strip.key].tabs.length) {
+          const allTabs = this.stripsResultDataMap[strip.key].tabs;
+          if (allTabs && allTabs.length && allTabs[tabIndex]) {
+            allTabs[tabIndex] = {
+              ...allTabs[tabIndex],
+              fetchTabStatus: 'done',
+            };
+            tabResults = allTabs;
+          }
+          this.processStrip(strip, [], 'error', calculateParentStatus, null, tabResults)
+        } else {
+          this.processStrip(strip, [], 'error', calculateParentStatus, null);
+        }
     }
   }
 

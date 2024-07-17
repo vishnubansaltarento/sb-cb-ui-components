@@ -115,8 +115,17 @@
 </ng-template>
 
 <ng-template #mainContent let-data="data">
-    <div class="flex  items-center justify-center" [ngStyle]="{'background': data.background}">
+    <div class="flex items-center justify-center" [ngStyle]="{'background': data.background}">
         <div class="container">
+            <div class="block md:hidden col-span-12 padding-left-m padding-right-m padding-top-m padding-bottom-m">
+                <sb-uic-cbp-plan
+                    [layoutType]="'web'"
+                    [mobileHeight]="false"
+                    [fetchDataFromApi]="true"
+                    [channelId]="orgId"
+                    [objectData]="data?.cbpPlanSection?.data">
+                </sb-uic-cbp-plan>
+            </div>
             <div class="block md:hidden col-span-12 mt-6">
                 <sb-uic-announcements
                     [layoutType]="'mobile'"
@@ -176,7 +185,7 @@
                     </mat-tab-group>
                 </div>
                 <div class="col-span-12 md:col-span-4">
-                    <div class="hidden md:block" 
+                    <div class="hidden md:block padding-top-xl padding-bottom-m"
                         *ngIf="data?.cbpPlanSection?.data">
                         <div class="pt-4">
                             <sb-uic-cbp-plan
