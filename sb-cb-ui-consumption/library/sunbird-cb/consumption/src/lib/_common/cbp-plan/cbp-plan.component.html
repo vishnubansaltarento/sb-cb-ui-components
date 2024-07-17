@@ -1,0 +1,33 @@
+<div class="w-full">
+    <div class="flex item-center cbp-logo">
+        <div class="cbp-heading"
+            [style.backgroundColor]="objectData?.header?.background"
+            [style.color]="objectData?.header?.color">
+            {{objectData?.title}}
+        </div>
+    </div>
+    <div class="cbp-list-container"
+        [style.borderColor]="objectData?.panelborder"
+        [style.backgroundColor]="objectData?.panelBackground">
+        <div *ngFor="let item of objectData?.list; let i = index">
+            <div class="cbp-list-item"
+                [style.borderColor]="objectData?.listItem?.border"
+                [style.color]="objectData?.listItem?.border"
+                [style.backgroundColor]="objectData?.listItem?.background">
+                <div class="cbp-item-title">{{item?.title}}</div>
+                <div class="flex download-sec">
+                    
+                    <div class="flex gap-2 cbp-download" (click)="downloadCBPPlan(item)">
+                        <mat-icon class="cbp-mob-icon">file_download</mat-icon>Download
+                    </div>
+                    <!-- <div class="flex gap-2 cbp-download">
+                        <a download="ss.pdf" target="_blank" [href]="item?.downloaUrl">
+                            Download pdf
+                          </a>
+                    </div> -->
+                    
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>

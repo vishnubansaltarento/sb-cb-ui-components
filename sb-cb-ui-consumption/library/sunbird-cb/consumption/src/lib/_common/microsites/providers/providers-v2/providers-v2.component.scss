@@ -49,7 +49,7 @@
 }
 
 .view-btn {
-    width: 150px;
+    width: 160px;
     background: #fff;
     padding: 0px 16px;
     border-radius: 49px;
@@ -58,6 +58,7 @@
     font-size: 14px;
     margin-top: 4px;
     margin-bottom: 4px;
+    line-height: 36px;
     @include breakpoint-xs {
         margin-top: 12px;
         margin-bottom: 16px;

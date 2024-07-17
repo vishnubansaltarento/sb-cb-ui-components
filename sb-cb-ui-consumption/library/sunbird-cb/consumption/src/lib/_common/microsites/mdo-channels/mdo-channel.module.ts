@@ -16,6 +16,7 @@ import {
   SlidersLibModule,
   HttpLoaderFactory,
   TopLearnersModule,
+  CbpPlanModule,
 } from './../../../../public-api'
 import { MdoChannelV2Component } from './mdo-channel-v2/mdo-channel-v2.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -31,6 +32,7 @@ import { HttpClient } from '@angular/common/http';
     SkeletonLoaderLibModule,
     AnnouncementsModule,
     TopLearnersModule,
+    CbpPlanModule,
     CardsModule,
     CommonStripModule,
     CompetencyPassbookModule,

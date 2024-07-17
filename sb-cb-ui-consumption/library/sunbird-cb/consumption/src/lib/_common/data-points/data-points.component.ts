@@ -14,7 +14,7 @@ export class DataPointsComponent implements OnInit {
   @Input() pageLayout: any = ''
   customArray: any[][] = []
   isDataLoading: boolean = false
-
+  
   constructor(public insightSvc: InsiteDataService) {    
   }
 

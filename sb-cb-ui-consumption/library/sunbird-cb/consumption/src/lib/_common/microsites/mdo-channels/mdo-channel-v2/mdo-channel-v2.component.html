@@ -175,7 +175,20 @@
                         </mat-tab>
                     </mat-tab-group>
                 </div>
-                <div class="hidden md:block col-span-12 md:col-span-{{data.announcementSection.colspan}}" 
+                <div class="col-span-12 md:col-span-4">
+                    <div class="hidden md:block" 
+                        *ngIf="data?.cbpPlanSection?.data">
+                        <div class="pt-4">
+                            <sb-uic-cbp-plan
+                                [layoutType]="'web'"
+                                [mobileHeight]="false"
+                                [fetchDataFromApi]="true"
+                                [channelId]="orgId"
+                                [objectData]="data?.cbpPlanSection?.data">
+                            </sb-uic-cbp-plan>
+                        </div>                    
+                    </div>
+                    <div class="hidden md:block" 
                     *ngIf="data?.announcementSection?.data">
                     <div class="pt-4">
                         <sb-uic-announcements
@@ -187,6 +200,7 @@
                         </sb-uic-announcements>
                     </div>                    
                 </div>
+                </div>               
             </div>
         </div>
     </div>
