@@ -10,6 +10,10 @@
     max-width: 1200px;
 }
 
+.padding-top-xxxl {
+    padding-top: 47px;
+}
+
 .banner-container {
     align-items: center;
     background: #eee;
@@ -21,6 +25,7 @@
 .web-banner-background {
     background-image: url('https://portal.karmayogiqa.nic.in/content-store/orgStore/0135071359030722569/1720698778795_MDO-channel-banner.png');
     background-size: cover;
+    min-height: 464px;
 }
 
 .mob-container {
@@ -31,7 +36,7 @@
 
 .sticky-logo-square {
     position: absolute;
-    top: 192px;
+    top: 215px;
     justify-content: end;
     width: 20.5%;
     border-bottom-right-radius: 12px;

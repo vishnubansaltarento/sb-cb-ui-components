@@ -62,10 +62,58 @@
 .users-block {
     overflow-x: auto;
     padding: 16px;
-    padding-bottom: 24px !important;
+    padding-bottom: 10px !important;
     width: 100%;
 }
-hr.divider {
-  border: 1px solid #f3972e;
-  width: 185px;
+.title-border-v2 {
+    margin: 10px;
+    width: 300px;
+    height: 3px;
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(239, 149, 30) 20%, rgb(239, 149, 30) 80%, rgba(255,255,255,0) 100%);
 }
+
+.user-ratting-wrapper {
+    border: 2px solid #f3962f;
+    border-radius: 15px;
+    padding: 30px 0px;
+    background: linear-gradient(111.16deg, rgba(243, 150, 47, 0.24) 9.09%, rgba(255, 255, 255, 0) 74.81%);
+}
+
+.user-rating-section {
+    ::ng-deep.prev {
+        margin-left: -40px;
+        top: 59%;
+    }
+    ::ng-deep.next {
+        margin-right: -40px;
+        top: 59%;
+    }
+    ::ng-deep.dots-container {
+        display: none !important
+    }
+
+    @media screen and (max-width: 768px) {
+        ::ng-deep.next {
+            margin-right: -16px;
+            top: 59%;
+        }
+
+        .users-block {
+            width: 90%;
+        }
+
+        ::ng-deep.widget-card-content-new {
+            margin: 0 15px;
+        }
+        .user-ratting-wrapper {
+            padding: 15px 0px;
+        }
+        ::ng-deep.dots-container {
+            display: block !important
+        }
+        ::ng-deep.banner-meta {
+            bottom: -12px;
+        }
+    }
+}
+
