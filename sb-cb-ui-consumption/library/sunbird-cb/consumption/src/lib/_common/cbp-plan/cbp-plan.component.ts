@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { ScrollableItemDirective } from '../../_directives/scrollable-item/scrollable-item.directive';
+import { TranslateService } from '@ngx-translate/core';
+import { MultilingualTranslationsService } from '../../_services/multilingual-translations.service';
 
 @Component({
   selector: 'sb-uic-cbp-plan',
@@ -21,7 +23,8 @@ export class CbpPlanComponent implements OnInit {
   contentdata: any = []
 
   @ViewChildren(ScrollableItemDirective) scrollableItems: QueryList<ScrollableItemDirective>
-  constructor() { }
+  constructor(private translate: TranslateService,
+    private langtranslations: MultilingualTranslationsService) { }
 
   ngOnInit() {
     this.styleData = this.objectData && this.objectData.sliderData && this.objectData.sliderData.styleData
@@ -44,6 +47,10 @@ export class CbpPlanComponent implements OnInit {
   getFileName(item: any) {
     console.log(item.downloadUrl)
     return item.downloadUrl.split("/").at(-1)
+  }
+
+  translateLabels(label: string, type: any) {
+    return this.langtranslations.translateActualLabel(label, type, '');
   }
 
   downloadCBPPlan(item: any) {
