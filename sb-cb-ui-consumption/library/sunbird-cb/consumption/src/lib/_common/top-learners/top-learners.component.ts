@@ -42,8 +42,8 @@ export class TopLearnersComponent implements OnInit {
       if (res && res.result && res.result.result) {
         this.results =  res.result.result
         this.month = moment().month(Number(res.result.result[0].month) - 1).format('MMMM')
-        this.loading = false
       }
+      this.loading = false
     }, (_error: any) => {
       // tslint:disable-next-line: align
       this.loading = false
