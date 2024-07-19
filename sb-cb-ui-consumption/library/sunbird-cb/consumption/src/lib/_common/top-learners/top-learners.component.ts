@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-
+import * as moment_ from 'moment';
+import { InsiteDataService } from '../../_services/insite-data.service';
+const moment = moment_;
 @Component({
   selector: 'sb-uic-top-learners',
   templateUrl: './top-learners.component.html',
@@ -12,6 +14,7 @@ export class TopLearnersComponent implements OnInit {
   @Input() channnelName: any
   loading: boolean = false
   month: string = ''
+  results: any = []
 
   colors: any = [
     '#EB7181', // red
@@ -26,16 +29,25 @@ export class TopLearnersComponent implements OnInit {
     '#3670B2', // blue
   ]
 
-  constructor() { }
+  constructor(public insightSvc: InsiteDataService,) { }
 
   ngOnInit() {
-    console.log("objectData ", this.objectData)
+    this.getData()
     this.month = new Date().toLocaleString('default', { month: 'long' })
-    this.loading = true
-    setTimeout(() => {
-      this.loading = false
-    }, 5000);
+  }
 
+  getData() {
+    this.loading = true
+    this.insightSvc.fetchLearner().subscribe((res: any)=> {
+      if (res && res.result && res.result.result) {
+        this.results =  res.result.result
+        this.month = moment().month(Number(res.result.result[0].month) - 1).format('MMMM')
+        this.loading = false
+      }
+    }, (_error: any) => {
+      // tslint:disable-next-line: align
+      this.loading = false
+    })
   }
 
   getRank(rank: number) {

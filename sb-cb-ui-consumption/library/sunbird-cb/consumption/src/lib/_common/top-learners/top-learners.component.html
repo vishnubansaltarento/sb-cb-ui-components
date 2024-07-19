@@ -5,22 +5,22 @@
         <div class="title-border"></div>
     </div>    
 </div>
-<div class="top-learners-container" *ngIf="!loading && objectData?.learners">
+<div class="top-learners-container" *ngIf="!loading && results.length">
     <div class="w-full margin-bottom-l margin-top-l">
         <div class="flex gap-3">
-            <div *ngFor="let obj of objectData?.learners; let i=index" class="flex-container">
+            <div *ngFor="let obj of results; let i=index" class="flex-container">
                 <div class="flex-item user-box">
                     <div class="flex gap-3 img-name-sec">
                         <div class="flex gap-3">
-                            <div class="profile-pic" *ngIf="obj?.imageUrl">
-                                <img [src]="obj?.imageUrl" class="user-image"/>
+                            <div class="profile-pic" *ngIf="obj?.profile_image">
+                                <img [src]="obj?.profile_image" class="user-image"/>
                             </div>
-                            <div class="initial" *ngIf="!obj?.imageUrl"
+                            <div class="initial" *ngIf="!obj?.profile_image"
                                 [style.backgroundColor]="colors[i]">
-                                {{createInititals(obj?.name)}}
+                                {{createInititals(obj?.fullname)}}
                             </div>
                             <div class="flex flex-col gap-1">
-                                <div class="name-sec">{{obj?.name}}</div>
+                                <div class="name-sec">{{obj?.fullname}}</div>
                                 <div class="designation-sec">{{obj?.designation}}</div>
                                 <div class="designation-sec">{{channnelName}}</div>
                             </div>
@@ -31,11 +31,17 @@
                     </div>
                     <div class="flex gap-2 kp-section">
                         <div class="kp-icon"><img [src]="objectData?.kpIcon" class="kp-image"/></div>
-                        <div class="points">{{obj?.points || 0}}</div>
+                        <div class="points">{{obj?.total_points || 0}}</div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="top-learners-container" *ngIf="!loading && results.length === 0">
+    <div class="margin-top-l noData">
+        No data
     </div>
 </div>
 
