@@ -38,6 +38,7 @@ export namespace NsContentStripWithTabs {
         arrowsPlacement?: "bottom-right" | "bottom-center" | "bottom-left" | "middle-inline",
       };
     };
+    tabsType?:string;
     tabs?: NsContentStripWithTabs.IContentStripTab[] | undefined;
     titleDescription?: string;
     name?: string;
