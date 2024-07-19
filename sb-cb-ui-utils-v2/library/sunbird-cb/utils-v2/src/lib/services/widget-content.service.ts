@@ -29,6 +29,8 @@ const API_END_POINTS = {
     `${PROTECTED_SLAG_V8}/content/collection/${type}/${id}`,
   REGISTRATION_STATUS: `${PROTECTED_SLAG_V8}/admin/userRegistration/checkUserRegistrationContent`,
   MARK_AS_COMPLETE_META: (contentId: string) => `${PROTECTED_SLAG_V8}/user/progress/${contentId}`,
+  EXT_USER_COURSE_ENROLL : (contentId: any) => `/apis/proxies/v8/cios-enroll/v1/readby/useridcourseid/${contentId}`,
+  EXT_CONTENT_EROLL: `/apis/proxies/v8/cios-enroll/v1/create`,
 }
 
 @Injectable({
@@ -233,5 +235,13 @@ export class WidgetContentService {
 
   fetchConfig(url: string) {
     return this.http.get<any>(url)
+  }
+
+  fetchExtUserContentEnroll(contentId: string) {
+    return this.http.get<any>(API_END_POINTS.EXT_USER_COURSE_ENROLL(contentId))
+  }
+
+  extContentEnroll (requestBody: any) {
+    return this.http.post<any>(`${API_END_POINTS.EXT_CONTENT_EROLL}`, requestBody)
   }
 }
