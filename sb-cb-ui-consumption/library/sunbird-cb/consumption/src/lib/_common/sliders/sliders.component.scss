@@ -6,6 +6,7 @@ $banner-min-height: 243px;
 .banner-container {
   // max-height: 442px;
   min-height: $banner-min-height;
+  height: 380px !important;
   // overflow-y: hidden;
   position: relative;
   margin: auto;

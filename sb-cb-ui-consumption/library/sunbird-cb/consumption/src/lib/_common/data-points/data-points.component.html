@@ -17,9 +17,9 @@
     </div>
 </div>
 
-<div class="w-full" *ngIf="layoutType === 'multipleRows-V2' && !isDataLoading">
+<div class="w-full customdiv" *ngIf="layoutType === 'multipleRows-V2' && !isDataLoading">
     <div *ngFor="let obj of objectData; let i = index">
-        <div class="flex flex-row gap-4 {{(i+1 === objectData.length ? '' : 'pb-5')}}">
+        <div class="flex flex-row gap-3 {{(i+1 === objectData.length ? '' : 'pb-5')}}">
             <div class="v2-icons-div">
                 <div class="v2-icon-contaier"
                     [style.background]="obj?.iconBackgroupColorV2"

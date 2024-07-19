@@ -87,8 +87,8 @@
         }
     }
     &.top{
-        position: absolute;
-        top: -110px
+        // position: absolute;
+        // top: -110px;
     }
 }
 
@@ -390,5 +390,28 @@
     font-weight: 600;
 }
 
+.custombgsection {
+    background: url('https://portal.karmayogiqa.nic.in/content-store/orgStore/0135071359030722569/1721377495600_test%2011.svg');
+    width: 34em;
+    position: absolute;
+    z-index: 99;
+    left: 0;
+    height: 21.3em;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
-
+::ng-deep.prev {
+    left: 10em !important
+}
+// .custombgsection:after {
+//     content: "";
+//     display: block;
+//     position: absolute;
+//     top: 0;
+//     width: 0;
+//     height: 0;
+//     right: -80px;
+//     border-top: 26.5em solid #0754AC;
+//     border-right: 5em solid transparent;
+//   }
