@@ -392,7 +392,7 @@
 
 .custombgsection {
     background: url('https://portal.karmayogiqa.nic.in/content-store/orgStore/0135071359030722569/1721377495600_test%2011.svg');
-    width: 34em;
+    width: 40%;
     position: absolute;
     z-index: 99;
     left: 0;
@@ -401,8 +401,19 @@
     background-size: cover;
 }
 
-::ng-deep.prev {
-    left: 10em !important
+@media screen and (min-width: 769px) {
+    ::ng-deep.prev {
+        left: 20% !important
+    }
+
+    .custombgsection {
+        width: 30%;
+    }
+}
+@media screen and (min-width: 1280px) { 
+    .custombgsection {
+        width: 38%;
+    }
 }
 // .custombgsection:after {
 //     content: "";
