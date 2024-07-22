@@ -16,6 +16,8 @@ export class AnnouncementsComponent implements OnInit {
   @Output() openDialog = new EventEmitter<any>()
   isLoading: boolean = false
   announcements: any = []
+  expand = false
+  expanded: boolean = false
 
   constructor(public insightSvc: InsiteDataService) {
   }
@@ -56,6 +58,9 @@ export class AnnouncementsComponent implements OnInit {
           })
         })
       }
+      if (this.announcements.length > 3) {
+        this.expand = true
+      }
       this.objectData.list = this.announcements
       this.isLoading = false
     }, error => {
@@ -73,6 +78,10 @@ export class AnnouncementsComponent implements OnInit {
 
   openAnnouncements() {
     this.openDialog.emit(true)
+  }
+
+  showMoreOrLess() {
+    this.expanded = !this.expanded
   }
 
 }

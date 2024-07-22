@@ -1,36 +1,35 @@
 <ng-container *ngIf="contentdata.length">
-    <sb-uic-sliders-ng-content [title]="'providerName'"  [currentIndex]="currentIndex" (currentIndexValue)="getCurrentIndex($event)" [loadNgContentData]="true" [widgetData]="contentdata" [styleData]="styleData">
-        <div sliderbody>
-            <div class="flex justify-start md:justify-center users-block mb-4 ">
-                <ng-container *ngFor="let userData of contentdata; let j = index">
-                    <div class="avatar-block mr-1" [sbUicScrollableItem]="j"
-                    [ngClass]="{'user-active': j === currentIndex}" (click)="handleScrollClick(currentIndex);currentIndex = j">
-                        <sb-uic-avatar-photo [defaulfColor]="'#1B2133'" [datalen]="1" [randomColor]="true" [name]="userData?.userDetails?.firstName" [photoUrl]="userData?.userDetails?.profileImageUrl" size="m-side-rating">
-                        </sb-uic-avatar-photo>
-                    </div>
-                </ng-container>
-            </div>
-            <div *ngFor="let ratingData of contentdata; let i = index" [hidden]="i !== currentIndex">
-                <div class="user-ratting-wrapper flex flex-wrap justify-center">
-                    <p class="userName w-full mb-4">{{ratingData?.userDetails?.firstName}}</p>
-        
-                    <div class="flex w-full flex-row justify-center gap-2 mb-4">
-                        <mat-icon class="mat-icon material-icons rating-icon ws-mat-black16-text"
-                            [ngClass]="{'ws-mat-orange-text': getRatingIconClass(rating, ratingData?.rating)}"
-                            *ngFor="let rating of [1, 2, 3, 4, 5]">
-                            {{ getRatingIcon(rating, ratingData?.rating) }}
-                        </mat-icon>
-                    </div>
-                    <p class="content-feedback w-full mb-4 pl-0 pr-0 md:pl-12 md:pr-12 ">{{ratingData?.review}}</p>
-    
-                    <hr class="divider mb-4">
-                    <p class="content-info w-full mb-4">For The Content</p>
-                    <div class="w-full mr-0 md:mr-8 ml-0 md:ml-8">
-                        <sb-uic-cards [widgetData]="ratingData"></sb-uic-cards>
+    <div class="user-rating-section">
+        <sb-uic-sliders-ng-content [title]="'providerName'"  [currentIndex]="currentIndex" (currentIndexValue)="getCurrentIndex($event)" [loadNgContentData]="true" [widgetData]="contentdata" [styleData]="styleData">
+            <div sliderbody>
+                <div class="flex justify-start md:justify-center users-block">
+                    <ng-container *ngFor="let userData of contentdata; let j = index">
+                        <div class="avatar-block mr-1" [sbUicScrollableItem]="j"
+                        [ngClass]="{'user-active': j === currentIndex}" (click)="handleScrollClick(currentIndex);currentIndex = j">
+                            <sb-uic-avatar-photo [defaulfColor]="'#1B2133'" [datalen]="1" [randomColor]="true" [name]="userData?.userDetails?.firstName" [photoUrl]="userData?.userDetails?.profileImageUrl" size="m-side-rating">
+                            </sb-uic-avatar-photo>
+                        </div>
+                    </ng-container>
+                </div>
+                <div *ngFor="let ratingData of contentdata; let i = index" [hidden]="i !== currentIndex">
+                    <div class="user-ratting-wrapper flex flex-wrap justify-center">
+                        <div class="w-full mr-0 md:mr-8 ml-0 md:ml-8 pb-5">
+                            <sb-uic-cards [widgetData]="ratingData"></sb-uic-cards>
+                        </div>
+                        <div class="title-border-v2"></div>
+                        <p class="userName w-full mb-4 pt-6">{{ratingData?.userDetails?.firstName}}</p>
+                        <div class="flex w-full flex-row justify-center gap-2 mb-4">
+                            <mat-icon class="mat-icon material-icons rating-icon ws-mat-black16-text"
+                                [ngClass]="{'ws-mat-orange-text': getRatingIconClass(rating, ratingData?.rating)}"
+                                *ngFor="let rating of [1, 2, 3, 4, 5]">
+                                {{ getRatingIcon(rating, ratingData?.rating) }}
+                            </mat-icon>
+                        </div>
+                        <p class="content-feedback w-full mb-4 px-4 md:px-8">{{ratingData?.review}}</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </sb-uic-sliders-ng-content>
+        </sb-uic-sliders-ng-content>
+    </div>
 </ng-container>
 

@@ -6,12 +6,13 @@ import { DataPointsModule } from './_common/data-points/data-points.module';
 import { CalenderModule } from './_common/calender/calender.module';
 import { CommonStripModule } from './_common/common-strip/common-strip.module';
 import { AnnouncementsModule } from './_common/announcements/announcements.module';
-
+import { TopLearnersModule } from './_common/top-learners/top-learners.module';
+import { CbpPlanModule } from './_common/cbp-plan/cbp-plan.module';
 
 
 
 @NgModule({
-  declarations: [ConsumptionComponent],
+  declarations: [ConsumptionComponent,],
   imports: [
     ContentStripWithTabsLibModule,
     SlidersLibModule
@@ -22,7 +23,9 @@ import { AnnouncementsModule } from './_common/announcements/announcements.modul
     DataPointsModule,
     CalenderModule,
     CommonStripModule,
-    AnnouncementsModule
+    AnnouncementsModule,
+    TopLearnersModule,
+    CbpPlanModule,
   ],
 })
 export class ConsumptionModule { }

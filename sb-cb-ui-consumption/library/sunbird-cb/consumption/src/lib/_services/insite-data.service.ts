@@ -5,7 +5,8 @@ import { Observable } from 'rxjs';
 const API_END_POINTS = {
   PROVIDER_INSIGHTS: `/apis/proxies/v8/microsite/read/insights`,
   TRAINING_DETAILS: `apis/proxies/v8/sunbirdigot/search`,
-  ANNOUNCEMENTS_DETAILS: `apis/proxies/v8/announcements/v1/search`
+  ANNOUNCEMENTS_DETAILS: `apis/proxies/v8/announcements/v1/search`,
+  LEARNERS: `apis/proxies/v8/halloffame/top/learners`
 }
 
 @Injectable({
@@ -28,4 +29,9 @@ export class InsiteDataService {
   fetchTrainingDetails(request: any): Observable<any> {
     return this.http.post<any>(API_END_POINTS.TRAINING_DETAILS, request)
   }
+
+  fetchLearner(): Observable<any> {
+    return this.http.get(API_END_POINTS.LEARNERS)
+  }
+
 }

@@ -39,13 +39,11 @@ export class CardAssessmentComponent implements OnInit {
       this.defaultThumbnail = instanceConfig.logos.defaultContent || ''
       this.defaultSLogo = instanceConfig.logos.defaultSourceLogo || ''
     }
-
   }
 
   startCountdown(data: any): void {
     let startDate = data.startDate
     this.updateCountdown(startDate);
-
     // this.intervalId = setInterval(() => {
     //   this.updateCountdown(startDate);
     // }, 1000);
@@ -54,11 +52,10 @@ export class CardAssessmentComponent implements OnInit {
   // Method to update the countdown values
   updateCountdown(startDate: any): void {
     let now = new Date().getTime()
-    let startingDate: any = new Date(startDate)
-    startingDate.setHours(startingDate.getHours() - 5);
-    startingDate.setMinutes(startingDate.getMinutes() - 30);
-    startingDate = startingDate.getTime()
-
+    let startingDate: any = new Date(startDate).getTime()
+    // startingDate.setHours(startingDate.getHours() - 5);
+    // startingDate.setMinutes(startingDate.getMinutes() - 30);
+    // startingDate = startingDate.getTime()
     const distance = startingDate - now; 
     if (distance > 0) {
       this.daysPending = true
@@ -71,7 +68,6 @@ export class CardAssessmentComponent implements OnInit {
     }
 
   }
-
 
   ngOnDestroy(): void {
   }
