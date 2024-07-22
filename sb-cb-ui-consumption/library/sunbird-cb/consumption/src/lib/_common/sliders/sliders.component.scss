@@ -26,8 +26,11 @@ $banner-min-height: 243px;
   }
 }
 
-
-
+@media screen and (min-width: 769px) {
+  .banner-container  {
+    height: 380px !important;
+  }
+}
 
 .banner-overlay {
   // position: absolute;
