@@ -17,9 +17,12 @@
     </div>
 </div>
 
-<div class="w-full" *ngIf="layoutType === 'multipleRows-V2' && !isDataLoading">
+<div class="w-full customdiv" *ngIf="layoutType === 'multipleRows-V2' && !isDataLoading">
+    <div class="logodiv margin-bottom-s">
+        <img alt="Application Logo" class="logoimg" src="/assets/instances/eagle/app_logos/KarmayogiBharat_Logo_Horizontal.svg">
+    </div>
     <div *ngFor="let obj of objectData; let i = index">
-        <div class="flex flex-row gap-4 {{(i+1 === objectData.length ? '' : 'pb-5')}}">
+        <div class="flex flex-row gap-3 {{(i+1 === objectData.length ? '' : 'pb-5')}}">
             <div class="v2-icons-div">
                 <div class="v2-icon-contaier"
                     [style.background]="obj?.iconBackgroupColorV2"
@@ -137,7 +140,7 @@
 <!-- skeleton  loaders -->
 
 <ng-container>
-    <div class="w-full metrics-web" *ngIf="layoutType === 'multipleRows-V2' && isDataLoading">
+    <div class="w-full metrics-web customdiv" *ngIf="layoutType === 'multipleRows-V2' && isDataLoading">
         <div *ngFor="let obj of [1,2,3,4]l let i = index">
             <div class="flex flex-row gap-4 {{(i+1 === objectData.length ? '' : 'pb-5')}}">
                 <div class="v2-icons-div">
@@ -164,7 +167,7 @@
 </ng-container>
 
 <ng-container>
-    <div class="w-full metrics-web" *ngIf="layoutType === 'multipleRows' && isDataLoading">
+    <div class="w-full metrics-web customdiv" *ngIf="layoutType === 'multipleRows' && isDataLoading">
         <div *ngFor="let obj of [0,1,2,3]" class="">
             <div class="element-div linebreak" >
                 <div class="flex flex-row gap-3 items-top">
