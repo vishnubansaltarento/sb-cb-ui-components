@@ -125,9 +125,9 @@
 
       </div>
       <div class="right-container">
-        <div class="question-list">
+        <div class="question-list-container">
           <div class="ques_stats_container">
-            <div class="flex flex-row justify-between ques_stats_container_box">
+            <div class="flex flex-row justify-evenly ques_stats_container_box">
               <div class="flex flex-row">
                 <div>
                   <p class="mat-subheading-1">
@@ -188,7 +188,7 @@
             </div>
             <div class="seperator"></div>
             <div class="mb-24">
-              <div class="flex flex-row justify-around">
+              <div class="flex flex-row justify-evenly">
                 <div class="flex flex-col align-center">
                   <div class="ques-count">{{totalQCount - questionAttemptedCount}}</div>
                   <div class="stats-label">Not Answered</div>
@@ -747,7 +747,7 @@
     </div>
   </div>
   <!-- Desktop Skeleton UI -->
-  <div class="flex flex-row quiz-container" *ngIf="!isMobile && fetchingQuestionsStatus !== 'done' && viewState !== 'initial'
+  <div class="flex flex-row quiz-container-skeleton" *ngIf="!isMobile && fetchingQuestionsStatus !== 'done' && viewState !== 'initial'
   && !(viewState === 'answer') && !isSubmitted">
     <div class="left-container">
       <div class="flex flex-row margin-m justify-between">
@@ -829,7 +829,7 @@
       </mat-card>
     </div>
     <div class="right-container">
-      <div class="question-list">
+      <div class="question-list-container">
         <div class="ques_stats_container">
           <div class="flex flex-row justify-around ques_stats_container_box">
             <h3 class="mat-subheading-2">
@@ -945,7 +945,7 @@
           </div>
         </div>
         <div class="flex flex-column justify-between align-center assessment-header">
-          <div class="question-list">
+          <div class="question-list-container">
             <div class="ques_stats_container">
               <div class="mb-24">
                 <div class="flex flex-row justify-around">
