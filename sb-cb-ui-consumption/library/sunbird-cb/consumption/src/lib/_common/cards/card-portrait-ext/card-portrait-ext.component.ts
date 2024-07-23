@@ -44,6 +44,9 @@ export class CardPortraitExtComponent implements OnInit {
     }
 
   ngOnInit() {
+    if (this.widgetData && this.widgetData.content) {
+      this.widgetData.content.duration = this.widgetData.content.duration * 60
+    }
     const instanceConfig = this.configSvc.instanceConfig
     if (instanceConfig) {
       this.defaultThumbnail = instanceConfig.logos.defaultContent || ''
