@@ -17,7 +17,7 @@
                             <sb-uic-cards [widgetData]="ratingData"></sb-uic-cards>
                         </div>
                         <div class="title-border-v2"></div>
-                        <p class="userName w-full mb-4 pt-6">{{ratingData?.userDetails?.firstName}}</p>
+                        <p class="userName w-full mb-4 pt-2">{{ratingData?.userDetails?.firstName}}</p>
                         <div class="flex w-full flex-row justify-center gap-2 mb-4">
                             <mat-icon class="mat-icon material-icons rating-icon ws-mat-black16-text"
                                 [ngClass]="{'ws-mat-orange-text': getRatingIconClass(rating, ratingData?.rating)}"

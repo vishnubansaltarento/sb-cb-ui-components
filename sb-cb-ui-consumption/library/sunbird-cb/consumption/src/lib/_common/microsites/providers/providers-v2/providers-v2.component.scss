@@ -59,6 +59,7 @@
     margin-top: 4px;
     margin-bottom: 4px;
     line-height: 36px;
+    cursor: pointer;
     @include breakpoint-xs {
         margin-top: 12px;
         margin-bottom: 16px;
@@ -402,10 +403,6 @@
 }
 
 @media screen and (min-width: 769px) {
-    ::ng-deep.prev {
-        left: 20% !important
-    }
-
     .custombgsection {
         width: 30%;
     }
