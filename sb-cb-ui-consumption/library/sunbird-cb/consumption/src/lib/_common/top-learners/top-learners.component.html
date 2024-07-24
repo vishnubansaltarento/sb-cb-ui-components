@@ -31,7 +31,7 @@
                                 <div class="name-sec" *ngIf="obj?.fullname?.length < 24">
                                     {{obj?.fullname}}
                                 </div>
-                                <div class="designation-sec" *ngIf="obj?.fullname?.length >= 32"
+                                <div class="designation-sec" *ngIf="obj?.designation?.length >= 32"
                                     #tooltip="matTooltip"
                                     [matTooltipClass]="'below'"
                                     matTooltip="{{obj?.designation}}"

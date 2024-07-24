@@ -405,3 +405,39 @@ $secondary-color: #EF951E;
   .mb-0 {
     margin-bottom: 0 !important;
   }
+
+  @media screen and (min-width: 357px) and (max-width: 667px) { 
+    .min-width-763 {
+      min-width: 340px;
+      overflow: hidden;
+    }
+  }
+  @media screen and (min-width: 360px) and (max-width: 740px) { 
+    .min-width-763 {
+      min-width: 325px;
+      overflow: hidden;
+    }
+  }
+
+
+@media screen and (min-width: 390px) and (max-width: 844px) { 
+  .min-width-763 {
+    min-width: 358px;
+    overflow: hidden;
+  }
+}
+
+@media screen and (min-width: 414px) and (max-width: 896px) { 
+  .min-width-763 {
+    min-width: 380px;
+    overflow: hidden;
+  }
+} 
+
+
+@media screen and (min-width: 430px) and (max-width: 932px) { 
+  .min-width-763 {
+    min-width: 395px;
+    overflow: hidden;
+  }
+}
