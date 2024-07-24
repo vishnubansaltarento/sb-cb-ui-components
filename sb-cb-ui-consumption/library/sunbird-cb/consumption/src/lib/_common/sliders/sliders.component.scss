@@ -27,7 +27,7 @@ $banner-min-height: 243px;
 }
 
 @media screen and (min-width: 769px) {
-  .banner-container  {
+  .banner-container, .banner-container-solo  {
     height: 380px !important;
   }
 }
@@ -64,11 +64,11 @@ $banner-min-height: 243px;
 
   .banner-image {
     width: 100%;
-    min-height: $banner-min-height;
+    min-height: 380px;
     display: block;
     // height: 350px;
     border-radius: inherit;
-    height: inherit;
+    // height: inherit;
   }
 }
 
@@ -297,6 +297,18 @@ $banner-min-height: 243px;
     width: 100%;
     .default-title {
       width: unset !important;
+    }
+  }
+}
+@media screen and (min-width: 769px) {
+  .navigation {
+    &.middle-inline {
+      .prev {
+        left: 18% !important;
+      }
+      .next {
+        right: 6% !important;
+      }
     }
   }
 }
