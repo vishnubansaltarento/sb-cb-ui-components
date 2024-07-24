@@ -4,7 +4,7 @@ import { Observable, throwError, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { IUserGroupDetails } from '../_models/widget-user.model';
 import { NsContent } from '../_models/widget-content.model';
-// import 'rxjs/add/observable/of'
+import 'rxjs/add/observable/of'
 import * as dayjs_ from 'dayjs';
 const dayjs = dayjs_
 // import { environment } from 'src/environments/environment'
@@ -40,63 +40,81 @@ export class WidgetUserService {
     this.environment = environment;
    }
 
-  handleError(error: ErrorEvent) {
-    let errorMessage = '';
+   handleError(error: ErrorEvent) {
+    let errorMessage = ''
     if (error.error instanceof ErrorEvent) {
-      errorMessage = `Error: ${error.error.message}`;
+      errorMessage = `Error: ${error.error.message}`
     }
-    return throwError(errorMessage);
+    return throwError(errorMessage)
   }
 
   fetchUserGroupDetails(userId: string): Observable<IUserGroupDetails[]> {
     return this.http
       .get<IUserGroupDetails[]>(API_END_POINTS.FETCH_USER_GROUPS(userId))
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(this.handleError))
   }
  // tslint:disable-next-line: max-line-length
   fetchUserBatchList(userId: string | undefined, queryParams?: { orgdetails: any, licenseDetails: any, fields: any, batchDetails: any }): Observable<NsContent.ICourse[]> {
-    let path = '';
+    let path = ''
     if (queryParams) {
        // tslint:disable-next-line: max-line-length
-      path = API_END_POINTS.FETCH_USER_ENROLLMENT_LIST_V2(userId, queryParams.orgdetails, queryParams.licenseDetails, queryParams.fields, queryParams.batchDetails);
+      path = API_END_POINTS.FETCH_USER_ENROLLMENT_LIST_V2(userId, queryParams.orgdetails, queryParams.licenseDetails, queryParams.fields, queryParams.batchDetails)
     } else {
-      path = API_END_POINTS.FETCH_USER_ENROLLMENT_LIST(userId);
+      path = API_END_POINTS.FETCH_USER_ENROLLMENT_LIST(userId)
     }
     const headers = new HttpHeaders({
       'Cache-Control':  'no-cache, no-store, must-revalidate, post-check=0, pre-check=0',
       Pragma: 'no-cache',
       Expires: '0',
-    });
+    })
     if (this.checkStorageData('enrollmentService', 'enrollmentData')) {
       const result: any =  this.http.get(path, { headers }).pipe(catchError(this.handleError), map(
           (data: any) => {
-            localStorage.setItem('enrollmentData', JSON.stringify(data.result));
-            this.mapEnrollmentData(data.result);
-            return data.result;
+
+            const coursesData: any = []
+            if (data && data.result && data.result.courses) {
+              data.result.courses.forEach((content: any) => {
+                if (content.contentStatus) {
+                  delete content.contentStatus
+                }
+                coursesData.push(content)
+              })
+              this.storeUserEnrollmentInfo(data.result.userCourseEnrolmentInfo,
+                                           data.result.courses.length)
+              data.result.courses = coursesData
+              if (data.result.courses.length < 200) {
+                localStorage.removeItem('enrollmentData')
+                this.setTime('enrollmentService')
+                localStorage.setItem('enrollmentData', JSON.stringify(data.result))
+                this.mapEnrollmentData(data.result)
+                return data.result
+              }
+            }
+            this.mapEnrollmentData(data.result)
+            return data.result
           }
         )
-      );
-      this.setTime('enrollmentService');
-      return result;
+      )
+      return result
     }
-    return this.getData('enrollmentData');
+    return this.getData('enrollmentData')
 
   }
 
    // tslint:disable-next-line: max-line-length
   fetchProfileUserBatchList(userId: string | undefined, queryParams?: { orgdetails: any, licenseDetails: any, fields: any, batchDetails: any }): Observable<NsContent.ICourse[]> {
-    let path = '';
+    let path = ''
     if (queryParams) {
        // tslint:disable-next-line: max-line-length
-      path = API_END_POINTS.FETCH_USER_ENROLLMENT_LIST_V2(userId, queryParams.orgdetails, queryParams.licenseDetails, queryParams.fields, queryParams.batchDetails);
+      path = API_END_POINTS.FETCH_USER_ENROLLMENT_LIST_V2(userId, queryParams.orgdetails, queryParams.licenseDetails, queryParams.fields, queryParams.batchDetails)
     } else {
-      path = API_END_POINTS.FETCH_USER_ENROLLMENT_LIST_PROFILE(userId);
+      path = API_END_POINTS.FETCH_USER_ENROLLMENT_LIST_PROFILE(userId)
     }
     const headers = new HttpHeaders({
       'Cache-Control':  'no-cache, no-store, must-revalidate, post-check=0, pre-check=0',
       Pragma: 'no-cache',
       Expires: '0',
-    });
+    })
     return this.http
       .get(path, { headers })
       .pipe(
@@ -104,7 +122,7 @@ export class WidgetUserService {
         map(
           (data: any) => data.result
         )
-      );
+      )
     // if (this.checkStorageData('enrollmentService')) {
     //   const result: any =  this.http.get(path, { headers }).pipe(catchError(this.handleError), map(
     //       (data: any) => {
@@ -121,50 +139,50 @@ export class WidgetUserService {
   }
 
   checkStorageData(key: any, dataKey: any) {
-    const checkTime = localStorage.getItem('timeCheck');
+    const checkTime = localStorage.getItem('timeCheck')
     if (checkTime) {
-      const parsedData = JSON.parse(checkTime);
+      const parsedData = JSON.parse(checkTime)
       if (parsedData[key]) {
-        const date = dayjs();
-        const diffMin = date.diff(parsedData[key], 'minute');
-        const timeCheck = this.environment.apiCache || 0;
+        const date = dayjs()
+        const diffMin = date.diff(parsedData[key], 'minute')
+        const timeCheck = this.environment.apiCache || 0
         if (diffMin >= timeCheck) {
-          return true;
+          return true
         }
-        return localStorage.getItem(dataKey) ? false : true;
+        return localStorage.getItem(dataKey) ? false : true
       }
-      return true;
+      return true
     }
-    return true;
+    return true
   }
 
   getData(key: any): Observable<any> {
-    return of(JSON.parse(localStorage.getItem(key) || '{}'));
+    return Observable.of(JSON.parse(localStorage.getItem(key) || '{}'))
   }
   getSavedData(key: any): Observable<any> {
-    return JSON.parse(localStorage.getItem(key) || '');
+    return JSON.parse(localStorage.getItem(key) || '')
   }
 
   setTime(key: any) {
-    const checkTime = localStorage.getItem('timeCheck');
+    const checkTime = localStorage.getItem('timeCheck')
     if (checkTime) {
-      const parsedData = JSON.parse(checkTime);
-      parsedData[key] = new Date().getTime();
-      localStorage.setItem('timeCheck', JSON.stringify(parsedData));
+      const parsedData = JSON.parse(checkTime)
+      parsedData[key] = new Date().getTime()
+      localStorage.setItem('timeCheck', JSON.stringify(parsedData))
     } else {
-      const data: any = {};
-      data[key] = new Date().getTime();
-      localStorage.setItem('timeCheck', JSON.stringify(data));
+      const data: any = {}
+      data[key] = new Date().getTime()
+      localStorage.setItem('timeCheck', JSON.stringify(data))
     }
   }
 
   resetTime(key: any) {
-    const checkTime = localStorage.getItem('timeCheck');
+    const checkTime = localStorage.getItem('timeCheck')
     if (checkTime) {
-      const parsedData = JSON.parse(checkTime);
+      const parsedData = JSON.parse(checkTime)
       if (parsedData[key]) {
-       delete parsedData[key];
-       localStorage.setItem('timeCheck', JSON.stringify(parsedData));
+       delete parsedData[key]
+       localStorage.setItem('timeCheck', JSON.stringify(parsedData))
       }
     }
   }
@@ -187,108 +205,117 @@ export class WidgetUserService {
      if (this.checkStorageData('cbpService', 'cbpData')) {
         const result: any = this.http.get(API_END_POINTS.FETCH_CPB_PLANS).pipe(catchError(this.handleError), map(
           async (data: any) => {
-            return await this.mapData(data.result);
+            return await this.mapData(data.result)
           }
         )
-      );
-        this.setTime('cbpService');
-        return result;
+      )
+      this.setTime('cbpService')
+      return result
     }
-     return this.getData('cbpData');
+    return this.getData('cbpData')
   }
 
   async mapData(data: any) {
-    const contentNew: any = [];
-    const todayDate = dayjs().format('YYYY-MM-DD');
+    const contentNew: any = []
+    const todayDate = dayjs().format('YYYY-MM-DD')
 
-    const enrollList: any = JSON.parse(localStorage.getItem('enrollmentMapData') || '{}');
+    const enrollList: any = JSON.parse(localStorage.getItem('enrollmentMapData') || '{}')
 
     if (data && data.count) {
       data.content.forEach((c: any) => {
         c.contentList.forEach((childData: any) => {
-          const childEnrollData = enrollList[childData.identifier];
-          const endDate = dayjs(c.endDate).format('YYYY-MM-DD');
-          const daysCount = dayjs(endDate).diff(todayDate, 'day');
-          childData.planDuration =  daysCount < 0 ? NsCardContent.ACBPConst.OVERDUE : daysCount > 29
-          ? NsCardContent.ACBPConst.SUCCESS : NsCardContent.ACBPConst.UPCOMING;
-          childData.endDate = c.endDate;
-          childData.parentId = c.id;
-          childData.planType = 'cbPlan';
+          const childEnrollData = enrollList[childData.identifier]
+          const endDate = dayjs(c.endDate).format('YYYY-MM-DD')
+          const daysCount = dayjs(endDate).diff(todayDate, 'day')
+          childData['planDuration'] =  daysCount < 0 ? NsCardContent.ACBPConst.OVERDUE : daysCount > 29
+          ? NsCardContent.ACBPConst.SUCCESS : NsCardContent.ACBPConst.UPCOMING
+          childData['endDate'] = c.endDate
+          childData['parentId'] = c.id
+          childData['planType'] = 'cbPlan'
           if (childData.status !== NsCardContent.IGOTConst.RETIRED) {
-            contentNew.push(childData);
+            contentNew.push(childData)
           } else {
             if (childEnrollData && childEnrollData.status === 2) {
-              contentNew.push(childData);
+              contentNew.push(childData)
             }
           }
 
-          const competencyArea: any = [];
-          const competencyTheme: any = [];
-          const competencyThemeType: any = [];
-          const competencySubTheme: any = [];
-          const competencyAreaId: any = [];
-          const competencyThemeId: any = [];
-          const competencySubThemeId: any = [];
-          childData.contentStatus = 0;
+          const competencyArea: any = []
+          const competencyTheme: any = []
+          const competencyThemeType: any = []
+          const competencySubTheme: any = []
+          const competencyAreaId: any = []
+          const competencyThemeId: any = []
+          const competencySubThemeId: any = []
+          childData['contentStatus'] = 0
           if (childEnrollData) {
-            childData.contentStatus = childEnrollData.status;
+            childData['contentStatus'] = childEnrollData.status
           }
-          if (childData.competencies_v5) {
+         if (childData.competencies_v5) {
           childData.competencies_v5.forEach((element: any) => {
             if (!competencyArea.includes(element.competencyArea)) {
-              competencyArea.push(element.competencyArea);
-              competencyAreaId.push(element.competencyAreaId);
+              competencyArea.push(element.competencyArea)
+              competencyAreaId.push(element.competencyAreaId)
             }
             if (!competencyTheme.includes(element.competencyTheme)) {
-              competencyTheme.push(element.competencyTheme);
-              competencyThemeId.push(element.competencyThemeId);
+              competencyTheme.push(element.competencyTheme)
+              competencyThemeId.push(element.competencyThemeId)
             }
             if (!competencyThemeType.includes(element.competencyThemeType)) {
-              competencyThemeType.push(element.competencyThemeType);
+              competencyThemeType.push(element.competencyThemeType)
             }
             if (!competencySubTheme.includes(element.competencySubTheme)) {
-              competencySubTheme.push(element.competencySubTheme);
-              competencySubThemeId.push(element.competencySubThemeId);
+              competencySubTheme.push(element.competencySubTheme)
+              competencySubThemeId.push(element.competencySubThemeId)
             }
-          });
+          })
          }
 
-          childData.competencyArea = competencyArea;
-          childData.competencyTheme = competencyTheme;
-          childData.competencyThemeType = competencyThemeType;
-          childData.competencySubTheme = competencySubTheme;
-          childData.competencyAreaId = competencyAreaId;
-          childData.competencyThemeId = competencyThemeId;
-          childData.competencySubThemeId = competencySubThemeId;
-        });
-      });
-      if (contentNew.length > 1) {
+          childData['competencyArea'] = competencyArea
+          childData['competencyTheme'] = competencyTheme
+          childData['competencyThemeType'] = competencyThemeType
+          childData['competencySubTheme'] = competencySubTheme
+          childData['competencyAreaId'] = competencyAreaId
+          childData['competencyThemeId'] = competencyThemeId
+          childData['competencySubThemeId'] = competencySubThemeId
+        })
+      })
+     if (contentNew.length > 1) {
         const sortedData: any = contentNew.sort((a: any, b: any) => {
-          const firstDate: any = new Date(a.endDate);
-          const secondDate: any = new Date(b.endDate);
+          const firstDate: any = new Date(a.endDate)
+          const secondDate: any = new Date(b.endDate)
 
-          return  secondDate > firstDate  ? 1 : -1;
-        });
-        const uniqueUsersByID = lodash.uniqBy(sortedData, 'identifier');
-        const sortedByEndDate =  lodash.orderBy(uniqueUsersByID, ['endDate'], ['asc']);
-        const sortedByStatus =  lodash.orderBy(sortedByEndDate, ['contentStatus'], ['asc']);
-        localStorage.setItem('cbpData', JSON.stringify(sortedByStatus));
-        return sortedByStatus;
+          return  secondDate > firstDate  ? 1 : -1
+        })
+        const uniqueUsersByID = lodash.uniqBy(sortedData, 'identifier')
+        const sortedByEndDate =  lodash.orderBy(uniqueUsersByID, ['endDate'], ['asc'])
+        const sortedByStatus =  lodash.orderBy(sortedByEndDate, ['contentStatus'], ['asc'])
+        localStorage.setItem('cbpData', JSON.stringify(sortedByStatus))
+        return sortedByStatus
      }
-      localStorage.setItem('cbpData', JSON.stringify(contentNew));
-      return contentNew;
+     localStorage.setItem('cbpData', JSON.stringify(contentNew))
+     return contentNew
     }
-    localStorage.setItem('cbpData', JSON.stringify([]));
-    return [];
+    localStorage.setItem('cbpData', JSON.stringify([]))
+    return []
   }
 
   mapEnrollmentData(courseData: any) {
-    const enrollData: any = {};
+    const enrollData: any = {}
     if (courseData && courseData.courses.length) {
       courseData.courses.forEach((data: any) => {
-          enrollData[data.collectionId] = data;
-      });
+          enrollData[data.collectionId] = data
+      })
     }
-    localStorage.setItem('enrollmentMapData', JSON.stringify(enrollData));
+    localStorage.removeItem('enrollmentMapData')
+    localStorage.setItem('enrollmentMapData', JSON.stringify(enrollData))
+  }
+  storeUserEnrollmentInfo(enrollmentData: any, enrolledCourseCount: number) {
+    const userData = {
+      enrolledCourseCount,
+      userCourseEnrolmentInfo: enrollmentData,
+    }
+    localStorage.removeItem('userEnrollmentCount')
+    localStorage.setItem('userEnrollmentCount', JSON.stringify(userData))
   }
 }
