@@ -87,7 +87,7 @@ import { AvatarPhotoLibModule } from '../avatar-photo-lib/avatar-photo-lib.modul
     CardWideV2Component,
     CardKarmaProgramsComponent,
     CardKarmaProgramsV2Component,
-    
+    CardPortraitExtComponent,
   ],
 })
 export class CardsModule { }

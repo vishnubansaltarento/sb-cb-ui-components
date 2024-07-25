@@ -625,7 +625,7 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
       filteredArray = filteredArray.sort((a: any, b: any) => {
         const dateA: any = new Date(a.batch.startDate || 0)
         const dateB: any = new Date(b.batch.startDate || 0)
-        return dateB - dateA
+        return dateA - dateB
       })
       this.processStrip(
         strip,

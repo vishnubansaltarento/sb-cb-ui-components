@@ -1,5 +1,6 @@
 <ng-container *ngIf="!isCardLoading">
-	<mat-card class="card-assessment card-scheduled-assessment card-users-container  padding-remove cursor-pointer mr-4">
+	<mat-card
+		class="card-assessment card-scheduled-assessment card-users-container  padding-remove cursor-pointer mr-4">
 		<a (click)="getRedirectUrlData(widgetData?.content); $event.stopPropagation()">
 			<div class="display-contents">
 				<ng-container *ngIf="widgetData">
@@ -9,7 +10,8 @@
 								<div class="flex image-container">
 									<ng-container *ngIf="widgetData?.content?.posterImage">
 										<img mat-card-image class="margin-remove assess-img"
-											[src]="widgetData?.content?.posterImage | pipePublicURL" [alt]="widgetData?.content?.name">
+											[src]="widgetData?.content?.posterImage | pipePublicURL"
+											[alt]="widgetData?.content?.name">
 									</ng-container>
 									<ng-container *ngIf="!widgetData?.content?.posterImage">
 										<ng-template #defaultImg>
@@ -26,8 +28,8 @@
 									</div>
 									<div class="flex margin-remove margin-top-s font-normal mat-caption sub-title-text">
 										<div class="course_logo_box">
-											<img [src]="widgetData?.content?.creatorLogo | pipePublicURL " class="source-icon"
-												[wsUtilsDefaultThumbnail]="defaultSLogo"
+											<img [src]="widgetData?.content?.creatorLogo | pipePublicURL "
+												class="source-icon" [wsUtilsDefaultThumbnail]="defaultSLogo"
 												[alt]="(widgetData?.content?.sourceName + '_' + widgetData?.content?.identifier)" />
 										</div>
 										<span class="sub-title-text">
@@ -38,23 +40,41 @@
 									</div>
 								</div>
 							</div>
-							<span class="start-span">Assessment starts in </span>
+							
 							<mat-card-footer class="assessment-card-footer  padding-m">
 								<div class="flex flex-1 items-center justify-center col-row margin-top-m">
 									<div class="flex margin-right-m">
-										<span >{{ startCountdown(widgetData?.content?.batch) }}</span>
-										<span *ngIf="daysPending">
-											<span class="big-text"><b>{{ days }}</b> <span class="small-text">days</span> </span> : <span
-												class="big-text"><b>{{ hours }} </b><span class="small-text">hours</span>
-											</span> : <span class="big-text"> <b>{{ minutes }}</b> <span class="small-text">minutes</span>
-											</span>
-										</span>
-										<span *ngIf="!daysPending" class="start-btn"> Start Assessment </span>
+										<span>{{ startCountdown(widgetData?.content?.batch) }}</span>
+										<div class="flex  flex-row" *ngIf="daysPending">
+											<span class="start-span">Assessment starts in</span>
+											<div class="flex margin-right-s">
+												<span class="big-text"><b>{{ days }}</b> <span
+														class="small-text">days</span> </span> &nbsp; : &nbsp; <span
+													class="big-text"><b>{{ hours }} </b><span
+														class="small-text">hours</span>
+												</span> &nbsp; : &nbsp; <span class="big-text"> <b>{{ minutes }}</b> <span
+														class="small-text">minutes</span>
+												</span>
+											</div>
+											<div class="flex">
+												<span
+													class="time-span flex items-center justify-center">{{widgetData?.content?.batch?.startDate
+													| date: 'dd MMM yyy HH:mm' }}</span>
+											</div>
+										</div>
+										<div *ngIf="!daysPending" class="flex flex-row"> 
+											<span class="start-span">Assessment ends on </span>
+											<div class="flex margin-right-s">
+												<span class="start-btn">Start Assessment</span> 
+											</div>
+											<div class="flex">
+												<span
+													class="time-span flex items-center justify-center">{{widgetData?.content?.batch?.endDate
+													| date: 'dd MMM yyy HH:mm' }}</span>
+											</div>
+										</div>
 									</div>
-									<div class="flex">
-										<span class="time-span flex items-center justify-center">{{widgetData?.content?.batch?.startDate
-											| date: 'd MMM, y' }}</span>
-									</div>
+									
 								</div>
 							</mat-card-footer>
 						</div>
@@ -70,7 +90,8 @@
 </ng-container>
 
 <ng-template #skeltonLoader>
-	<mat-card class="card-assessment card-scheduled-assessment card-users-container  padding-remove cursor-pointer mr-4">
+	<mat-card
+		class="card-assessment card-scheduled-assessment card-users-container  padding-remove cursor-pointer mr-4">
 		<a>
 			<div class="display-contents">
 				<ng-container>
@@ -79,7 +100,8 @@
 							<div class="flex flex-1 flex-row padding-s">
 								<div class="flex image-container">
 									<ng-container>
-										<sb-uic-skeleton-loader [width]="'300px'" [height]="'155px'"></sb-uic-skeleton-loader>
+										<sb-uic-skeleton-loader [width]="'300px'"
+											[height]="'155px'"></sb-uic-skeleton-loader>
 									</ng-container>
 
 								</div>
