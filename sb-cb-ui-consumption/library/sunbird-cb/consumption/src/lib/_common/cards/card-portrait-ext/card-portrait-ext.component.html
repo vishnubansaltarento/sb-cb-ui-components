@@ -44,7 +44,7 @@
               </ng-template>
             </ng-container>
             <div class="source-div" style="display: none;">
-              <img [src]="widgetData?.content.contentPartner.link" class="source-icon" [wsUtilsDefaultThumbnail]="defaultSLogo"
+              <img [src]="widgetData?.content?.contentPartner?.link" class="source-icon" [wsUtilsDefaultThumbnail]="defaultSLogo"
                 [alt]="(widgetData?.content?.sourceName + '_' + widgetData.content?.contentId)" />
             </div>
             <ng-container *ngIf="widgetData?.content?.cbPlanEndDate">
