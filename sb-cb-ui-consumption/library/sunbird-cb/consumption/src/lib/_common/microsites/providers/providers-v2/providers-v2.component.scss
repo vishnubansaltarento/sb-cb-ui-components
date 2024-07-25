@@ -402,10 +402,22 @@
     background-size: cover;
 }
 
+@media screen and (max-width: 768px) {
+    ::ng-deep.featuredContents .mat-tab-header {
+        padding-left: 20px;
+    }
+    ::ng-deep.topContents .mat-tab-header {
+        padding-left: 20px;
+    }
+    
+}
+
 @media screen and (min-width: 769px) {
     .custombgsection {
         width: 30%;
     }
+
+    
 }
 @media screen and (min-width: 1280px) { 
     .custombgsection {

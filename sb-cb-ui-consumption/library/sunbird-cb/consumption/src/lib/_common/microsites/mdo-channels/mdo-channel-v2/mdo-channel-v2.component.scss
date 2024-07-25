@@ -137,8 +137,15 @@
     right: 15px;
 }
 
-@media screen and (max-width: 768px) { 
+@media screen and (max-width: 768px) {
 
+    ::ng-deep.recommendedProgram .mat-tab-header {
+        padding-left: 20px;
+    }
+    ::ng-deep.featuredCourses .mat-tab-header {
+        padding-left: 20px;
+    }
+    
     .metrics-section {
         margin-top: 0px;
     }
