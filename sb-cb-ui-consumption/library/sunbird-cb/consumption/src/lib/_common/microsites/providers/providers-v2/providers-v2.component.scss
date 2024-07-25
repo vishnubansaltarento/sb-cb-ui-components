@@ -120,7 +120,7 @@
 }
 
 .infra-sec {
-    padding: 25px 0px;
+    // padding: 25px 0px;
 }
 .infra-sec-desc {
     padding-top: 32px
@@ -216,8 +216,9 @@
 
 .info-slider{
     position: absolute; 
-    top: -180px; 
-    padding: 25px;
+    top:-12em;
+    left: 50%;
+    transform:translateX(-50%);
 }
 
 //Sticky navigator section
@@ -303,8 +304,6 @@
         background-repeat: no-repeat;
     }
 
-
-
     .infra-title-v2 {
         font-family: Montserrat;
         font-size: 16px;
@@ -343,6 +342,7 @@
     .info-slider{
         position: absolute; 
         top: -155px; 
+        width: 94%;
     }
     .sticky-navigator {
         align-items: center;
@@ -365,8 +365,6 @@
 .competencies-backgroud {
     background-color: #1B2133;
 }
-
-
 
 .txt-ellipsis-2 {
     overflow: hidden;
@@ -419,9 +417,19 @@
 
     
 }
+@media screen and (min-width: 1014px) { 
+    .info-slider {
+        width: 1014px !important;
+    }
+}
 @media screen and (min-width: 1280px) { 
     .custombgsection {
         width: 38%;
+    }
+    .infobanner {
+        &.banner-container {
+          width: 1014px !important;
+        }
     }
 }
 // .custombgsection:after {
