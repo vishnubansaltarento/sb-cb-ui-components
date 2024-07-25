@@ -70,16 +70,13 @@
     }
   
     .card-img {
-      min-width: 245px;
-    //   max-width: 250px;
-      max-height: 140px;
-      min-height: 140px;
+      width: 282px;
+      height: 158px;
       display: block;
-      object-fit: fill;
-      /* border-top: 1px solid red; */
+      -o-object-fit: cover;
+      object-fit: cover;
       border-top-left-radius: 8px;
       border-top-right-radius: 8px;
-      width: 100%;
     }
     .mat-subheading-1 {
       font: 600 14px/24px Montserrat;

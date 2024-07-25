@@ -14,6 +14,7 @@ export class SlidersLibComponent extends WidgetBaseComponent
   @Input() widgetData!: ICarousel[]
   @Input() styleData!: ICarouselStyle
   @Input() title: any = ''
+  @Input() type: any
   @HostBinding('id')
   public id = `banner_${Math.random()}`
   private defaultMenuSubscribe: Subscription | null = null
