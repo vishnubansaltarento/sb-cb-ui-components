@@ -149,5 +149,7 @@ export namespace NsContentStripWithTabs {
     fetchTabStatus?: string;
     nodataMsg?: string;
     tabLoading?: boolean;
+    stripConfig?: IStripConfig;
+    customeClass?: string;
   }
 }
