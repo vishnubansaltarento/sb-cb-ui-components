@@ -87,7 +87,7 @@
             <div class="flex w-full flex-wrap flex-middle">
               <div class="course_logo_box">
                 <img [src]="widgetData?.content?.contentPartner?.link  " class="source-icon" [wsUtilsDefaultThumbnail]="defaultSLogo"
-                [alt]="(widgetData?.content.sourceName + '_' + widgetData.content.contentId)" />
+                [alt]="(widgetData?.content?.sourceName + '_' + widgetData?.content?.contentId)" />
               </div>
               <!-- <span class="org-text">{{'cardcontentv2.by' | translate}} -->
                 <span class="org-text">By&nbsp; {{ (widgetData?.content?.contentPartner?.contentPartnerName) ? widgetData?.content?.contentPartner?.contentPartnerName : 'Karmayogi Bharat' }}</span>
