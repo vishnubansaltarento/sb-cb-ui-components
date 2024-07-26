@@ -1905,7 +1905,7 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
       if (strip.tabs && strip.tabs.length) {
         // TODO: Have to extract requestRequired to outer level of tabs config
         const firstTab = strip.tabs[0];
-        if (firstTab.requestRequired && firstTab.value === 'trainingInstitutions') {
+        if (firstTab.requestRequired && firstTab.value === 'extCourse') {
           if (this.stripsResultDataMap[strip.key] && this.stripsResultDataMap[strip.key].tabs) {
             const allTabs = this.stripsResultDataMap[strip.key].tabs;
             const currentTabFromMap = (allTabs && allTabs.length && allTabs[0]) as NsContentStripWithTabs.IContentStripTab;
