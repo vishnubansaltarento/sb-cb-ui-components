@@ -282,7 +282,7 @@
     }
 }
 
-@media screen and (max-width: 768px) { 
+@media screen and (max-width: 767px) { 
     .infra-sec {
         padding: 0;
     }
@@ -400,7 +400,14 @@
     background-size: cover;
 }
 
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 768px) and (max-width: 878px){
+    .custombgsection {
+        height: 16em !important;
+        width: 28%;
+        padding: 0.75rem 1rem !important;
+    }
+}
+@media screen and (min-width: 879px) { 
     .custombgsection {
         width: 30%;
     }
