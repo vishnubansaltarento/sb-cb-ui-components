@@ -30,8 +30,8 @@ export class InsiteDataService {
     return this.http.post<any>(API_END_POINTS.TRAINING_DETAILS, request)
   }
 
-  fetchLearner(): Observable<any> {
-    return this.http.get(API_END_POINTS.LEARNERS)
+  fetchLearner(channelId: any): Observable<any> {
+    return this.http.get(`${API_END_POINTS.LEARNERS}/${channelId}`)
   }
 
 }
