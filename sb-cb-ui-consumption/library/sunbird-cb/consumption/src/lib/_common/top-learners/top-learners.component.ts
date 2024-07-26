@@ -38,7 +38,7 @@ export class TopLearnersComponent implements OnInit {
 
   getData() {
     this.loading = true
-    this.insightSvc.fetchLearner().subscribe((res: any)=> {
+    this.insightSvc.fetchLearner(this.channelId).subscribe((res: any)=> {
       if (res && res.result && res.result.result && res.result.result.length) {
         this.results =  res.result.result
         this.month = moment().month(Number(res.result.result[0].month) - 1).format('MMMM')
