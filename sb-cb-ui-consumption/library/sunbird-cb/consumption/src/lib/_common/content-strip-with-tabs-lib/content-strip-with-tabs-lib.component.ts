@@ -1051,6 +1051,8 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
           this.getTabDataByNewReqTopContent(currentStrip, tabEvent.index, currentTabFromMap, true);
         } else if (currentTabFromMap.request.playlistRead) {
           this.getTabDataByNewReqPlaylistReadContent(currentStrip, tabEvent.index, currentTabFromMap, true);
+        } else if (currentTabFromMap.request.ciosContent) {
+          this.getTabDataByCiosSearch(currentStrip, tabEvent.index, currentTabFromMap, true)
         }
         if (stripMap && stripMap.tabs && stripMap.tabs[tabEvent.index]) {
           stripMap.tabs[tabEvent.index].tabLoading = false;
@@ -1592,7 +1594,7 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
       formedUrl = formedUrl.replace('<orgID>', this.providerId) 
     } else if(apiUrl.indexOf('<doId>') >= 0) {
       formedUrl = apiUrl.replace('<doId>', this.environment.providerDataKey) 
-    }
+    } 
     return formedUrl
   }
 
@@ -1654,6 +1656,34 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
           intranetMode: strip.stripConfig && strip.stripConfig.intranetMode,
           deletedMode: strip.stripConfig && strip.stripConfig.deletedMode,
           contentTags: strip.stripConfig && strip.stripConfig.contentTags,
+        },
+      } : {
+        widgetType: 'card',
+        widgetSubType: 'cardContent',
+        widgetHostClass: 'mb-2',
+        widgetData: {},
+      }
+    ));
+  }
+
+  private transformAllTabContentsToWidgets(
+    contents: any,
+    currentTab: NsContentStripWithTabs.IContentStripTab,
+  ) {
+    return (contents || []).map((content, idx) => (
+      content ? {
+        widgetType: 'cardLib',
+        widgetSubType: 'cardContentLib',
+        widgetHostClass: 'mb-2',
+        widgetData: {
+          content,
+          ...(content.batch && { batch: content.batch }),
+          cardSubType: currentTab.stripConfig && currentTab.stripConfig.cardSubType,
+          cardCustomeClass: currentTab.customeClass ? currentTab.customeClass : '',
+          context: { pageSection: currentTab.value, position: idx },
+          intranetMode: currentTab.stripConfig && currentTab.stripConfig.intranetMode,
+          deletedMode: currentTab.stripConfig && currentTab.stripConfig.deletedMode,
+          contentTags: currentTab.stripConfig && currentTab.stripConfig.contentTags,
         },
       } : {
         widgetType: 'card',
@@ -1778,8 +1808,8 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
     calculateParentStatus: boolean
   ) {
     if (currentTab.request &&
-      strip.request.playlistRead &&
-      strip.request.playlistRead.type) {
+      currentTab.request.playlistRead &&
+      currentTab.request.playlistRead.type) {
         currentTab.request.apiUrl = this.getFullUrl(currentTab.request.apiUrl, currentTab.request.playlistRead.type);
     }
     try {
@@ -1809,7 +1839,14 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
       //   this.emptyResponse.emit(true)
       // }
       if (response.results && response.results.result) {
-        const widgets = this.transformContentsToWidgets(response.results.result.content, strip);
+        let content  = response.results.result.content
+        let widgets = []
+        if(currentTab.value === 'providers'){
+          let featuredProviders : any = JSON.parse(content.featuredProviders|| '[]')
+          widgets = this.transformAllTabContentsToWidgets(featuredProviders, currentTab)
+        } else {
+          widgets = this.transformAllTabContentsToWidgets(content, currentTab)
+        }
         let tabResults: any[] = [];
         if (this.stripsResultDataMap[strip.key] && this.stripsResultDataMap[strip.key].tabs) {
           const allTabs = this.stripsResultDataMap[strip.key].tabs;
@@ -1864,46 +1901,121 @@ export class ContentStripWithTabsLibComponent extends WidgetBaseComponent
   }
 
   async fetchCiosContentData(strip: NsContentStripWithTabs.IContentStripUnit, calculateParentStatus = true) {
-    if (strip.request && strip.request.ciosContent && Object.keys(strip.request.ciosContent).length) {
-      let originalFilters: any = [];
-      if (strip.request &&
-        strip.request.ciosContent &&
-        strip.request.ciosContent.filterCriteriaMap) {
-        originalFilters = strip.request.ciosContent.filterCriteriaMap;
-        strip.request.ciosContent.filterCriteriaMap = this.postMethodFilters(strip.request.ciosContent.filterCriteriaMap);
-      }
-      try {
-        const response = await this.postRequestMethod(strip, strip.request.ciosContent, strip.request.apiUrl, calculateParentStatus);
-        // console.log('calling  after - response, ', response)
-        if (response && response.results) {
-          // console.log('calling  after-- ')
-          if (response.results.data && response.results.data.length) {
-            let extContentData: any = response.results.data
-            if (extContentData.length) {
-              this.processStrip(
-                strip,
-                this.transformContentsToWidgets(extContentData, strip),
-                'done',
-                calculateParentStatus,
-                response.viewMoreUrl,
-              );
+    if (strip && strip.request.ciosContent && Object.keys(strip.request.ciosContent).length) {
+      if (strip.tabs && strip.tabs.length) {
+        // TODO: Have to extract requestRequired to outer level of tabs config
+        const firstTab = strip.tabs[0];
+        if (firstTab.requestRequired && firstTab.value === 'extCourse') {
+          if (this.stripsResultDataMap[strip.key] && this.stripsResultDataMap[strip.key].tabs) {
+            const allTabs = this.stripsResultDataMap[strip.key].tabs;
+            const currentTabFromMap = (allTabs && allTabs.length && allTabs[0]) as NsContentStripWithTabs.IContentStripTab;
+            this.getTabDataByCiosSearch(strip, 0, currentTabFromMap, calculateParentStatus);
+          }
+        }
+        if (firstTab.requestRequired && firstTab.value === 'providers') {
+          if (this.stripsResultDataMap[strip.key] && this.stripsResultDataMap[strip.key].tabs) {
+            const allTabs = this.stripsResultDataMap[strip.key].tabs;
+            const currentTabFromMap = (allTabs && allTabs.length && allTabs[0]) as NsContentStripWithTabs.IContentStripTab;
+            this.getTabDataByNewReqPlaylistReadContent(strip, 0, currentTabFromMap, calculateParentStatus);
+          }
+        }
+      } else {
+        try {
+          const response = await this.postRequestMethod(strip, strip.request.ciosContent, strip.request.apiUrl, calculateParentStatus);
+          // console.log('calling  after - response, ', response)
+          if (response && response.results) {
+            // console.log('calling  after-- ')
+            if (response.results.data && response.results.data.length) {
+              let extContentData: any = response.results.data
+              if (extContentData.length) {
+                this.processStrip(
+                  strip,
+                  this.transformContentsToWidgets(extContentData, strip),
+                  'done',
+                  calculateParentStatus,
+                  response.viewMoreUrl,
+                );
+              } else {
+                this.emptyResponse.emit(true)
+              }
             } else {
+              this.processStrip(strip, [], 'error', calculateParentStatus, null);
               this.emptyResponse.emit(true)
             }
+  
           } else {
             this.processStrip(strip, [], 'error', calculateParentStatus, null);
             this.emptyResponse.emit(true)
           }
+        } catch (error) {
+          this.emptyResponse.emit(true)
+          // Handle errors
+          // console.error('Error:', error);
+        }
+      }
+    }
+  }
 
+  async getTabDataByCiosSearch(
+    strip: NsContentStripWithTabs.IContentStripUnit,
+    tabIndex: number,
+    _currentTab: NsContentStripWithTabs.IContentStripTab,
+    calculateParentStatus: boolean
+  ) {
+    try {
+      const response = await this.contentSvc.postApiMethod(strip.request.apiUrl,strip.request.ciosContent).toPromise();;
+      if (response && response.data && response.data.length) {
+        const widgets = this.transformContentsToWidgets(response.data, strip);
+        let tabResults: any[] = [];
+        if (this.stripsResultDataMap[strip.key] && this.stripsResultDataMap[strip.key].tabs) {
+          const allTabs = this.stripsResultDataMap[strip.key].tabs;
+          if (allTabs && allTabs.length && allTabs[tabIndex]) {
+            allTabs[tabIndex] = {
+              ...allTabs[tabIndex],
+              widgets,
+              fetchTabStatus: 'done',
+            };
+            tabResults = allTabs;
+          }
+        }
+        this.processStrip(
+          strip,
+          widgets,
+          'done',
+          calculateParentStatus,
+          response.viewMoreUrl,
+          tabResults // tabResults as widgets
+        );
+      } else {
+        let tabResults: any[] = [];
+        if (this.stripsResultDataMap[strip.key] && this.stripsResultDataMap[strip.key].tabs) {
+          const allTabs = this.stripsResultDataMap[strip.key].tabs;
+          if (allTabs && allTabs.length && allTabs[tabIndex]) {
+            allTabs[tabIndex] = {
+              ...allTabs[tabIndex],
+              fetchTabStatus: 'done',
+            };
+            tabResults = allTabs;
+          }
+        }
+        this.processStrip(strip, [], 'error', calculateParentStatus, null, tabResults);
+      }
+    } catch (error) {
+      console.error('Error:', error)
+      let tabResults: any[] = [];
+        if (this.stripsResultDataMap[strip.key] && this.stripsResultDataMap[strip.key].tabs && this.stripsResultDataMap[strip.key].tabs.length) {
+          const allTabs = this.stripsResultDataMap[strip.key].tabs;
+          if (allTabs && allTabs.length && allTabs[tabIndex]) {
+            allTabs[tabIndex] = {
+              ...allTabs[tabIndex],
+              fetchTabStatus: 'done',
+            };
+            tabResults = allTabs;
+          }
+          this.processStrip(strip, [], 'error', calculateParentStatus, null, tabResults)
         } else {
           this.processStrip(strip, [], 'error', calculateParentStatus, null);
-          this.emptyResponse.emit(true)
         }
-      } catch (error) {
-        this.emptyResponse.emit(true)
-        // Handle errors
-        // console.error('Error:', error);
-      }
     }
   }
 

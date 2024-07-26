@@ -27,13 +27,13 @@
         <mat-card-content class="min-top">
           <div style="position: relative; z-index: 1;">
             <ng-container *ngIf="widgetData?.content?.posterImage">
-              <img mat-card-image [src]="widgetData.content.posterImage | pipePublicURL" loading="lazy"
+              <img mat-card-image [src]="widgetData?.content?.posterImage | pipePublicURL" loading="lazy"
               class="card-img ws-mat-primary-lite-background margin-remove" [wsUtilsDefaultThumbnail]="defaultThumbnail"
-              [alt]="widgetData.content.name" />
+              [alt]="widgetData?.content?.name" />
             </ng-container>
             <ng-container *ngIf="!widgetData.content.posterImage">
-              <ng-container *ngIf="widgetData.content.appIcon; else defaultImg">
-                <img mat-card-image [src]="widgetData.content.appIcon " loading="lazy"
+              <ng-container *ngIf="widgetData?.content?.appIcon; else defaultImg">
+                <img mat-card-image [src]="widgetData?.content?.appIcon " loading="lazy"
                 class="card-img ws-mat-primary-lite-background margin-remove"  [wsUtilsDefaultThumbnail]="defaultThumbnail"
                 [alt]="widgetData?.content?.name" />
               </ng-container>
@@ -45,7 +45,7 @@
             </ng-container>
             <div class="source-div" style="display: none;">
               <img [src]="widgetData?.content?.contentPartner?.link" class="source-icon" [wsUtilsDefaultThumbnail]="defaultSLogo"
-                [alt]="(widgetData?.content?.sourceName + '_' + widgetData.content?.contentId)" />
+                [alt]="(widgetData?.content?.sourceName + '_' + widgetData?.content?.contentId)" />
             </div>
             <ng-container *ngIf="widgetData?.content?.cbPlanEndDate">
               <div class="cbp-mark">
@@ -72,22 +72,22 @@
           </div>
           <div class="padding-m">
             <div class="course_widget flex margin-remove">
-              <div class="flex flex-end course_v2">
+              <!-- <div class="flex flex-end course_v2">
                 <mat-icon class="mat-icon main_icon ws-mat-default-text margin-right-xs">video_library</mat-icon>
                 <sb-uic-display-content-type [useTranslation]="false" i18n-title title="Content Type" *ngIf="widgetData.content?.topic"
                   class="ws-mat-black60-text font-normal mat-caption " [displayContentType]="'External Course'">
   
                 </sb-uic-display-content-type>
-              </div>
+              </div> -->
             </div>
-            <div [id]="'m-c-'+ widgetData.content?.contentId"
-              class="mat-subheading-1 title-text ws-mat-text-block-fade-gradient" [matTooltip]="widgetData.content.name">
-              {{ widgetData.content.name }}
+            <div [id]="'m-c-'+ widgetData?.content?.contentId"
+              class="mat-subheading-1 title-text ws-mat-text-block-fade-gradient" [matTooltip]="widgetData?.content?.name">
+              {{ widgetData?.content?.name }}
             </div>
             <div class="flex w-full flex-wrap flex-middle">
               <div class="course_logo_box">
-                <img [src]="widgetData.content.contentPartner.link  " class="source-icon" [wsUtilsDefaultThumbnail]="defaultSLogo"
-                [alt]="(widgetData.content.sourceName + '_' + widgetData.content.contentId)" />
+                <img [src]="widgetData?.content?.contentPartner?.link  " class="source-icon" [wsUtilsDefaultThumbnail]="defaultSLogo"
+                [alt]="(widgetData?.content?.sourceName + '_' + widgetData?.content?.contentId)" />
               </div>
               <!-- <span class="org-text">{{'cardcontentv2.by' | translate}} -->
                 <span class="org-text">By&nbsp; {{ (widgetData?.content?.contentPartner?.contentPartnerName) ? widgetData?.content?.contentPartner?.contentPartnerName : 'Karmayogi Bharat' }}</span>
@@ -95,7 +95,7 @@
             <div class="flex flex-middle rating-session margin-top-m">
               <div class="flex flex-middle" *ngIf="widgetData?.content?.avgRating">
                 <mat-icon class="mr-1">star</mat-icon>
-                <span>{{widgetData.content.avgRating}}</span>
+                <span>{{widgetData?.content?.avgRating}}</span>
               </div>
               <!-- <span class="most-enrolled-text margin-left-m">{{ 'cardcontentv2.mostEnrolled' | translate }}</span> -->
               <ng-container *ngIf="widgetData?.content?.additionalTags && widgetData?.content?.additionalTags.includes('mostEnrolled')">
@@ -120,7 +120,7 @@
           </button>
         </div>
         <p class="text-justify mat-body-1">
-          {{ widgetData.content.reason }}
+          {{ widgetData?.content?.reason }}
         </p>
       </ng-container>
         </a>

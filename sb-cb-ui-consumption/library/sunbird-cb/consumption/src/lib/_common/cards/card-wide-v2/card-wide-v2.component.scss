@@ -406,6 +406,13 @@ $secondary-color: #EF951E;
     margin-bottom: 0 !important;
   }
 
+  @media screen and (min-width: 344px) and (max-width: 882px) { 
+    .min-width-763 {
+      min-width: 300px;
+      overflow: hidden;
+    }
+  }
+
   @media screen and (min-width: 357px) and (max-width: 667px) { 
     .min-width-763 {
       min-width: 340px;
