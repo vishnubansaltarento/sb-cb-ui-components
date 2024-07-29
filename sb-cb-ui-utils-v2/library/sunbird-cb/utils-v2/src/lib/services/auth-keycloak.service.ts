@@ -180,6 +180,7 @@ export class AuthKeycloakService {
       // window.location.href = '/public/home'
       storage.removeItem(storageKey)
       await this.http.get('/apis/reset').toPromise()
+      await this.http.get('https://admin-test.ecornell.com/saml/logout.do').toPromise()
     }
     try {
       sessionStorage.clear()
@@ -189,6 +190,7 @@ export class AuthKeycloakService {
     }
     storage.removeItem(storageKey)
     await this.http.get('/apis/reset').toPromise()
+    await this.http.get('https://admin-test.ecornell.com/saml/logout.do').toPromise()
   }
   private addKeycloakEventListener() {
     this.keycloakSvc.keycloakEvents$.subscribe((event: KeycloakEvent) => {
