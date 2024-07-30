@@ -13,7 +13,7 @@ export class PipePublicURL implements PipeTransform {
 
     // https://portal.karmayogi.nic.in/content-store/content/do_113918818243969024137/artifact/
     // do_113918818243969024137_1699074493067_effectivecommunication1699074492860.jpg
-    if (value.includes('karmayogi')) {
+    if (value && value.includes('karmayogi')) {
       const mainUrl = value && value.split('/content').pop() || ''
       const finalURL = `${this.environment.contentHost}/${this.environment.contentBucket}/content${mainUrl}`
       return value ? finalURL : ''
