@@ -363,7 +363,10 @@ export class PracticeComponent implements OnInit, OnChanges, OnDestroy {
           this.instructionAssessment = activeResource.description
           this.getInstructionAssessmentPagination(activeResource.description)
         }
-        this.canAttend()
+        if (!this.fromCreation) {
+          this.canAttend()
+        }
+
       })
     } else {
       // console.log(window.location.href)
@@ -396,7 +399,9 @@ export class PracticeComponent implements OnInit, OnChanges, OnDestroy {
         this.instructionAssessment = activeResource.description
         this.getInstructionAssessmentPagination(activeResource.description)
       }
-      this.canAttend()
+      if (!this.fromCreation) {
+        this.canAttend()
+      }
     }
 
     // console.log('this.widgetContentService.currentMetaData', this.widgetContentService)
