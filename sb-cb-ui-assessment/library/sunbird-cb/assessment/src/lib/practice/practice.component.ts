@@ -298,7 +298,7 @@ export class PracticeComponent implements OnInit, OnChanges, OnDestroy {
     //   this.updateVisivility()
     // } else {
     if (this.selectedAssessmentCompatibilityLevel) {
-      if (this.selectedAssessmentCompatibilityLevel < 6) {
+      if (this.selectedAssessmentCompatibilityLevel < 7) {
         this.quizSvc.canAttend(this.identifier).subscribe(response => {
           if (response) {
             this.canAttempt = response
@@ -476,7 +476,7 @@ export class PracticeComponent implements OnInit, OnChanges, OnDestroy {
       this.viewState = 'detail'
       this.startIfonlySection()
     } else {
-      if (this.selectedAssessmentCompatibilityLevel < 6) {
+      if (this.selectedAssessmentCompatibilityLevel < 7) {
         this.quizSvc.getSectionV4(this.identifier).subscribe((section: NSPractice.ISectionResponse) => {
           // console.log(section)
           this.fetchingSectionsStatus = 'done'
@@ -604,7 +604,7 @@ export class PracticeComponent implements OnInit, OnChanges, OnDestroy {
     const setStartIndex = this.noOfQuestionsPerSet * this.currentSetNumber
     const setEndIndex = setStartIndex + this.noOfQuestionsPerSet
     const secQuestions = qq.slice(setStartIndex, setEndIndex)
-    return this.selectedAssessmentCompatibilityLevel < 6 ? qq : secQuestions
+    return this.selectedAssessmentCompatibilityLevel < 7 ? qq : secQuestions
   }
 
   get hasNextSet(): boolean {
@@ -708,7 +708,7 @@ export class PracticeComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
   getMultiQuestions(ids: string[]) {
-    if (this.selectedAssessmentCompatibilityLevel < 6) {
+    if (this.selectedAssessmentCompatibilityLevel < 7) {
       return this.quizSvc.getQuestionsV4(ids, this.identifier).toPromise()
     }
     return this.quizSvc.getQuestions(ids, this.identifier).toPromise()
@@ -1001,7 +1001,7 @@ export class PracticeComponent implements OnInit, OnChanges, OnDestroy {
     // status = 1 indicates started
     // status = 2 indicates completed
     const resData = this.viewerSvc.getBatchIdAndCourseId(this.activatedRoute.snapshot.queryParams.collectionId,
-                                                         this.activatedRoute.snapshot.queryParams.batchId, this.identifier)
+      this.activatedRoute.snapshot.queryParams.batchId, this.identifier)
     const collectionId = (resData && resData.courseId) ? resData.courseId : ''
     const batchId = (resData && resData.batchId) ? resData.batchId : ''
     // const collectionId = this.activatedRoute.snapshot.queryParams.collectionId ?
@@ -1182,7 +1182,7 @@ export class PracticeComponent implements OnInit, OnChanges, OnDestroy {
   proceedToSubmit() {
     // if (this.timeLeft || this.primaryCategory === this.ePrimaryCategory.PRACTICE_RESOURCE) {
     // if (this.coursePrimaryCategory === 'Standalone Assessment') {
-    if (this.selectedAssessmentCompatibilityLevel >= 6) {
+    if (this.selectedAssessmentCompatibilityLevel >= 7) {
       const submitAssessment = true
       this.openSectionPopup(submitAssessment)
     } else {
@@ -1464,7 +1464,7 @@ export class PracticeComponent implements OnInit, OnChanges, OnDestroy {
     } else {
       this.viewState = 'answer'
     }
-    if (this.selectedAssessmentCompatibilityLevel < 6) {
+    if (this.selectedAssessmentCompatibilityLevel < 7) {
       const quizV4Res: any = await this.quizSvc.submitQuizV4(this.generateRequest).toPromise().catch(_error => { })
       if (quizV4Res && quizV4Res.params && quizV4Res.params.status.toLowerCase() === 'success') {
         if (quizV4Res.result.primaryCategory === 'Course Assessment') {
@@ -1694,7 +1694,7 @@ export class PracticeComponent implements OnInit, OnChanges, OnDestroy {
         this.retake = true
 
         // this.init()
-        if (this.selectedAssessmentCompatibilityLevel < 6) {
+        if (this.selectedAssessmentCompatibilityLevel < 7) {
           this.init()
         } else {
           if (this.ePrimaryCategory.FINAL_ASSESSMENT == this.primaryCategory) {
@@ -1818,7 +1818,7 @@ export class PracticeComponent implements OnInit, OnChanges, OnDestroy {
         courseId: this.generateRequest.courseId,
       },
     }
-    if (this.selectedAssessmentCompatibilityLevel < 6) {
+    if (this.selectedAssessmentCompatibilityLevel < 7) {
       const resultRes: any = await this.quizSvc.quizResult(req).toPromise().catch(_error => { })
       if (resultRes && resultRes.params && resultRes.params.status.toLowerCase() === 'success') {
         if (resultRes.result) {
