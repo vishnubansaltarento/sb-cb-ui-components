@@ -59,10 +59,10 @@ export class MdoChannelV2Component  implements OnInit {
 
   @HostListener('window:resize')
   onResize() {
-    this.setBackgroundImage()
+    this.setWidth()
   }
 
-  setBackgroundImage() {
+  setWidth() {
     this.stripWidth = `${(window.innerWidth - 1200 + 135)/2}px`
 
   }
@@ -75,7 +75,7 @@ export class MdoChannelV2Component  implements OnInit {
         title: this.channnelName, icon: '', url: 'none', disableTranslate: true,
       })
     })
-    this.setBackgroundImage()
+    this.setWidth()
   }
 
   public tabClicked(tabEvent: MatTabChangeEvent) {
