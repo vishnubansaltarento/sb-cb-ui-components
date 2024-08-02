@@ -329,6 +329,18 @@ $banner-min-height: 243px;
     }
   }
 }
+@media screen and (min-width: 320px) and (max-width: 769px) {
+  .navigation {
+    &.middle-inline {
+      .prev {
+        left: 6% !important;
+      }
+    }
+  }
+
+}
+
+
 @media screen and (min-width: 769px) {
   .navigation {
     &.middle-inline {
@@ -340,4 +352,15 @@ $banner-min-height: 243px;
       }
     }
   }
+}
+
+@media screen and (min-width: 820px) and (max-width: 1023px) {
+  .navigation {
+    &.middle-inline {
+      .prev {
+        left: 6% !important;
+      }
+    }
+  }
+
 }
