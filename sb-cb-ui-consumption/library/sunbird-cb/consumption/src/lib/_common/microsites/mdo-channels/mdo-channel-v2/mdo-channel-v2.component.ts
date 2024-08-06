@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core'
+import { Component, HostListener, Input, OnInit } from '@angular/core'
 import { MatTabChangeEvent } from '@angular/material'
 import { ActivatedRoute, Router } from '@angular/router'
 import { EventService, WsEvents } from '@sunbird-cb/utils-v2'
@@ -30,6 +30,7 @@ export class MdoChannelV2Component  implements OnInit {
   showModal: boolean = false
   descriptionMaxLength = 500
   isTelemetryRaised: boolean = false
+  stripWidth: any
 
   constructor(
     private route: ActivatedRoute,
@@ -56,6 +57,16 @@ export class MdoChannelV2Component  implements OnInit {
     })
   }
 
+  @HostListener('window:resize')
+  onResize() {
+    this.setWidth()
+  }
+
+  setWidth() {
+    this.stripWidth = `${(window.innerWidth - 1200 + 135)/2}px`
+
+  }
+
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.channnelName = params['channel']
@@ -64,6 +75,7 @@ export class MdoChannelV2Component  implements OnInit {
         title: this.channnelName, icon: '', url: 'none', disableTranslate: true,
       })
     })
+    this.setWidth()
   }
 
   public tabClicked(tabEvent: MatTabChangeEvent) {
